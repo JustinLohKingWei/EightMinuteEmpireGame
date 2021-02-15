@@ -1,14 +1,16 @@
 #pragma once
 #include <string>
-
+#include "../Map/Map.h"
 using namespace std;
 
 class MapLoader {
 
 public:
-
+	game_map mapFromFile;
+	string inputFileName;
+	string* readFile();
 	MapLoader(string fileWithMap);
-
+	~MapLoader();
 
 	/*
 	Syntax of map file is:
