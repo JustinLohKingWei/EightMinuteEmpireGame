@@ -2,20 +2,23 @@
 #define PLAYER_CPP
 
 #include "Player.h";
-#include <iostream>
-using namespace std;
+
 
 	Player::Player() {
 		
 	}
 	/*
-	* Player::Player(vector<Territory>* listOfTerritories, Hand* aHand, BidingFacility* aBidingFacility){
+	* Player::Player(string f, string l, vector<Territory>* listOfTerritories, Hand* aHand, BidingFacility* aBidingFacility){
+	*	firstName = f;
+	*	lastName = l;
 	*	listOfTerritories = &listOfTerritories;
 	*	myHand = &aHand;
 	*	myBidingFacility = &aBidingFacility;
 	* }
 	* 
 	* Player::Player(Player &b){
+	*	firstName = b.firstName;
+	*	lastName = b.lastName;
 	*	listOfTerritories = b.listOfTerritories;
 	*	myHand = b.myHand;
 	*	myBidingFacility = b.myBidingFacility;
@@ -24,7 +27,7 @@ using namespace std;
 	
 	//Add assignment operator and stream insertion operator
 	void Player::PayCoin() {
-		cout << " executing PayCoin()..."<<endl;
+		cout << " executing PayCoin()..." << endl;
 	}
 
 	void Player::PlaceNewArmies() {

@@ -1,6 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include <vector>
+#include <iostream>
+using namespace std;
 
 class Player {
 public:
@@ -22,7 +24,8 @@ public:
 	//vector<Territory> getListOfTerritories();
 private:
 	//vector<Territory> listOfTerritories;
-	//Hand myHand;
-	//BidingFacility myBidingFacility;
+	//Hand* myHand;
+	//BidingFacility* myBidingFacility;
+	string firstName, lastName;
 };
 #endif
