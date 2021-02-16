@@ -1,8 +1,8 @@
-#define _DEBUG // uncomment for memory leak dectetion
+#define MY_DEBUG // uncomment for memory leak dectetion
 
 // partially from microsoft docs-> compile by using: cl /EHsc /W4 /D_DEBUG /MDd source.cpp
 // mostly from TA's extra slides and adapted to assignment for memory debug
-#ifdef _DEBUG
+#ifdef MY_DEBUG
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>
@@ -19,7 +19,7 @@ using namespace std;
 
 int main()
 {
-#ifdef _DEBUG
+#ifdef MY_DEBUG
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
@@ -86,7 +86,6 @@ int main()
     tile3->add_route("Stone Pillars Island Region 3", "Stone Pillars Island Region 4");
     tile3->add_route("Stone Pillars Island Region 3", "Stone Pillars Island Region 5");
     tile3->add_route("Stone Pillars Island Region 4", "Stone Pillars Island Region 2");
-    tile3->add_route("Stone Pillars Island Region 4", "Stone Pillars Island Region 4");
     tile3->add_route("Stone Pillars Island Region 4", "Stone Pillars Island Region 5");
     tile3->add_route("Stone Pillars Island Region 5", "Stone Pillars Island Region 3");
     tile3->add_route("Stone Pillars Island Region 5", "Stone Pillars Island Region 4");
@@ -130,6 +129,11 @@ int main()
     world_map->add_route("Valcano Island Region 4", "C Shape Island Region 4");
     world_map->add_route("C Shape Island Region 3", "Stone Pillars Island Region 3");
     world_map->add_route("Stone Pillars Island Region 3", "C Shape Island Region 3");
+
+    world_map->print_map();
+    world_map->print_map_adjacency();
+
+    game_map::vaildate_map(world_map);
 
     delete world_map;
     delete tile4;

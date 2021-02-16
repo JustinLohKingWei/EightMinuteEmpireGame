@@ -4,11 +4,11 @@ using namespace std;
 
 game_map::game_map(string s) : map_name(s) {}
 
-game_map::game_map(game_map* copy)
+game_map::game_map(game_map* copy) // TODO
 {
-	if (tile1 == nullptr) // true, sub map copy
+	if (!map_name.compare("World Map") || !map_name.compare("Copy of World Map")) // true, sub map copy
 	{ 
-		map_name = string(copy->map_name);
+		map_name = string("Copy of " + copy->map_name);
 		for (auto& x : copy->m_map)
 		{
 			m_map.emplace(x); // emplace is a deep copy
@@ -17,29 +17,76 @@ game_map::game_map(game_map* copy)
 	}
 	else // world map copy, only top level copies, bottom level links to original sub graphes, copy sub graphs with above!
 	{
-		map_name = string(copy->map_name);
+		if (!map_name.compare("Copy of World Map"))
+		{
+			map_name = string("Copy of " + copy->map_name);
+		}
+		// esle keep name of "Copy of World Map"
+
 		for (auto& x : copy->m_map)
 		{
 			m_map.emplace(x); // emplace is a deep copy
 		}
-		tile1 = copy->tile1;
-		tile2 = copy->tile2;
-		tile3 = copy->tile3;
-		tile4 = copy->tile4;
 		cout << "\n" << "Map named : " << map_name << " copied!" << endl;
 	}
 }
 
-game_map::game_map(game_map* tile1_, game_map* tile2_, game_map* tile3_, game_map* tile4_) : // create world map
-	map_name("World Map"), tile1(tile1_), tile2(tile2_), tile3(tile3_), tile4(tile4_) {}
-
-game_map::~game_map() // destruct all types maps
+game_map::game_map(game_map* tile1_, game_map* tile2_, game_map* tile3_) : // create world map
+	map_name("World Map")
 {
-	if (tile1 == nullptr) // true, sub map destruct
+	for (auto& x : tile1_->m_map)
+	{
+		m_map.insert(x); // emplace is a deep copy
+	}
+
+	for (auto& x : tile2_->m_map)
+	{
+		m_map.insert(x); // emplace is a deep copy
+	}
+
+	for (auto& x : tile3_->m_map)
+	{
+		m_map.insert(x); // emplace is a deep copy
+	}
+
+	cout << "\n" << "Map named : " << map_name << " created" << endl;
+}
+
+game_map::game_map(game_map* tile1_, game_map* tile2_, game_map* tile3_, game_map* tile4_) : // create world map
+	map_name("World Map")
+{
+	for (auto& x : tile1_->m_map)
+	{
+		m_map.insert(x); // emplace is a deep copy
+	}
+
+	for (auto& x : tile2_->m_map)
+	{
+		m_map.insert(x); // emplace is a deep copy
+	}
+
+	for (auto& x : tile3_->m_map)
+	{
+		m_map.insert(x); // emplace is a deep copy
+	}
+
+	for (auto& x : tile4_->m_map)
+	{
+		m_map.insert(x); // emplace is a deep copy
+	}
+	cout << "\n" << "Map named : " << map_name << " created" << endl;
+}
+
+game_map::~game_map() // destruct all types maps // TODO
+{
+	if (!map_name.compare("World Map")) // true, sub map destruct
 	{
 		for (auto& x : m_map)
 		{
-			delete x.second;
+			if (x.second != nullptr)
+			{
+				delete x.second;
+			}
 		}
 		cout << "\n" << "Map named : " << map_name << " deleted!" << endl;
 	}
@@ -47,12 +94,8 @@ game_map::~game_map() // destruct all types maps
 	{
 		for (auto& x : m_map)
 		{
-			delete x.second;
+				x.second = nullptr;
 		}
-		tile1 = nullptr;
-		tile2 = nullptr;
-		tile3 = nullptr;
-		tile4 = nullptr;
 		cout << "\n" << "Map named : " << map_name << " deleted!" << endl;
 	}
 }
@@ -92,11 +135,11 @@ void game_map::add_route(const string& start, const string& end)
 
 		if (itrS == m_map[start]->adj.end())
 		{
-			m_map[start]->adj.emplace(pair<string,region*>(end,m_map[end]));
+			m_map[start]->adj.insert(pair<string,region*>(end,m_map[end]));
 		}
 		if (itrE == m_map[end]->adj.end())
 		{
-			m_map[end]->adj.emplace(pair<string, region*>(start, m_map[start]));
+			m_map[end]->adj.insert(pair<string, region*>(start, m_map[start]));
 		}
 	}
 }
@@ -122,7 +165,23 @@ void game_map::print_map_adjacency()
 	}
 }
 
-void game_map::vaildate_map()
+void game_map::vaildate_map(game_map* my_map)
 {
-	//TODO Check for doubles and anything else I can think of... make sure all regions are connected?
+	// check that regional to and from connections are present in both regions
+	// this will also finds connections from a region to itself
+
+	cout << "\nStarting map Validation ...";
+
+	for (auto& x : my_map->m_map)
+	{
+		for (auto& y : x.second->adj)
+		{
+			if (!x.first.compare(y.first))
+			{
+				cout << "\nERROR: The regions " << x.first << " and " << y.first << " do not appear to have mutual connections!";
+				cout << "\nThe map is invalid!" << endl;
+			}
+		}
+	}
+	cout << "\nIf no errors are printed, consider the regional listings of the map to be valid!" << endl << endl;
 }
