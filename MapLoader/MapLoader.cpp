@@ -1,75 +1,73 @@
-#include "MapLoader.h"
 #include <fstream>
 #include <iostream>
 #include <string>
 using namespace std;
 
+#include "MapLoader.h"
 
 
-MapLoader::MapLoader(string fileWithMap)
+MapLoader::MapLoader(string* fileWithMap)
 {
-	
 	inputFileName = fileWithMap;
-	string * tilesArray;
+	string ** tilesArray;
 	tilesArray = this->readFile();
-	
-
 }
 
 MapLoader::~MapLoader() {};
 
-string* MapLoader::readFile() {
+game_map* MapLoader::createMap(string* arrayOfTiles) {
+	game_map* aMap;
+	aMap = new game_map(arrayOfTiles);
+}
+
+
+// Input: object's text file name
+// Output: array of strings representing the tiles
+string** MapLoader::readFile() {
 	ifstream fileWithMap;
-	fileWithMap.open(this->inputFileName);
-	string textLine;
+	fileWithMap.open(*(this->inputFileName));
+	
 
 	if (fileWithMap.is_open()) {
-		cout << "File is open" << endl;
+		cout << "\n\nFile is open" << endl;
 		int lineNumber = 0;
 		string shape;
-		string tiles[4];
+		string* tiles[4];
+		string lineOfText;
 
-		while (getline(fileWithMap, textLine)) {
+		while (getline(fileWithMap, lineOfText)) {
 			// Checks if first word is an accepted shape
 			if (lineNumber == 0) {
-				if (!textLine.find("Rectangle")) {
-					cout << "Found rectangle" << endl;
+				if (!lineOfText.find("Rectangle")) {
+					shape = lineOfText;
 				}
 
-				else if (!textLine.find("LShape")) {
-					cout << "Found LShape" << endl;
+				else if (!lineOfText.find("LShape")) {
+					shape = lineOfText;
 				}
 
-				else if (!textLine.find("Long Rectangle")) {
-					cout << "Found Long Rectangle" << endl;
+				else if (!lineOfText.find("Long Rectangle")) {
+					shape = lineOfText;
 				}
 
 				else {
-					cout << "No shape found" << endl;
-					return;
+					cout << "Not a valid map file" << endl;
+					return NULL;
 				}
+				cout << "Shape of Island: " << shape << endl;
+									
 
 			}
 			// Adds subsequent words to the tiles array
 			else {
-				tiles[lineNumber - 1] = textLine;
+				tiles[lineNumber - 1] = new string(lineOfText);
 			}
-			cout << textLine << endl;
+			cout << lineOfText << endl;
 			lineNumber++;
 		}
-
 		return tiles;
-
-		/*	for (int i = 0; i < 4; i++) {
-				cout << "Tile #" << i << " " << tiles[i] << endl;
-			}*/
-
-
 		fileWithMap.close();
 	}
-
 	else cout << "Couldn't open file";
-
-
 }
 
