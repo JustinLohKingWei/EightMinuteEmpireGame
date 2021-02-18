@@ -6,10 +6,9 @@
 #include <vector>
 #include <deque>
 
-Card(std::string theGood, std::string theAction, int theCost) {
+Card::Card(std::string theGood, std::string theAction) {
     good = theGood;
     action = theAction;
-    cost = theCost;
 }
 
 void Card::action() {
@@ -29,7 +28,7 @@ std::string Card::getGood() {
 }
 
 
-Deck(deque<Card*> cardList) {
+Deck::Deck(deque<Card*> cardList) {
     listOfCards = cardList;
 }
 
@@ -70,14 +69,53 @@ void Deck::draw(Hand *hand) {
             }
         }while(incorrect);
 
-        hand.setCard(this.getTopCard());
+        hand.setCard(this.getTopCard(), position);
     }
 }
 
-Hand(array<Card*, 6> newCardsInHand){
+Hand::Hand(array<Card*, 6> newCardsInHand){
     cardsInHand = newCardsInHand;
 }
 
-void exchange()
+
+void Hand::details(int index){
+    cout << this.cardsInHand[index].action() >> "\n";
+    cout << this.cardsInHand[index].good() >> "\n";
+}
+void Hand::viewHand(){
+    for (int i = 0; i<5; i++){
+        if (this.getCard(i) != null){
+            this.details(i);
+        }
+        else{
+            cout << "Space " >> i >> "is empty";
+        }
+    }
+}
+
+void Hand::exchange(int index){
+    cout << "You've used the following card: \n"
+    this.details(index);
+    this.setCard(nullptr_t, index);
+}
+
+int Hand::getCost(int index){
+    if (index == 0){
+        return 0;
+    }
+    else if (index == 1 || index == 2){
+        return 1;
+    }
+    else if (index == 3 || index == 4){
+        return 2;
+    }
+    else if (index == 5){
+        return 3;
+    }
+}
+
+void Hand::setCard(Card* newCard, int index){
+    cardsInHand[index] = newCard;
+}
 
 #endif CARD_CPP

@@ -7,7 +7,6 @@
 class Card {
     public:
         Card(std::string theGood, std::string theAction);
-        Card( );
         void action();
         void good();
         std::string getGood();
@@ -36,8 +35,7 @@ class Hand {
         void viewHand();
         void exchange(int index);
         void details(int index);
-        void setCard(Card* newCard);
-        Card* getCard(int index);
+        void setCard(Card* newCard, int index);
         int getCost(int index);
     private:
         array<Card*, 6> cardsInHand;
