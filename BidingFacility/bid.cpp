@@ -36,37 +36,63 @@ Bid::Bid(string FirstName, string LastName)
     cout << "Player Name: " << Bid::playerFirstName << endl;
 }
 
+Bid::Bid(const Bid &b1)
+{
+    //TODO ADD ALL ATTRIBUTES TO COPY CONSTRUCTOR
+}
+
 void Bid::pickUpCoins()
 { //TODO : IMPLEMENT CHECK THAT PLAYERS ARE CHOOSING CORRECT AMOUNT OF COINS
     cout << Bid::playerFirstName << " is picking up coins :" << endl;
     if (numberOfPlayers == 2)
     {
-        cout << "Each Player selects 12 coins" << endl;
-        cout << "Enter amount of Silver coins   :" << Bid::silverPile << " remaining" << endl;
-        cin >> silverCoins;
+        while ((silverCoins + copperCoins) != 12)
+        {
+            cout << "Each Player selects 12 coins" << endl;
+            cout << "Enter amount of Silver coins   :" << Bid::silverPile << " remaining" << endl;
+            cin >> silverCoins;
+            cout << "Enter amount of Copper coins   :" << Bid::copperPile << " remaining" << endl;
+            cin >> copperCoins;
+            if ((silverCoins + copperCoins) != 12)
+            {
+                cout << "You must select 12 coins! Try again." << endl;
+            }
+        }
         silverPile = silverPile - silverCoins;
-        cout << "Enter amount of Copper coins   :" << Bid::copperPile << " remaining" << endl;
-        cin >> copperCoins;
         copperPile = copperPile - copperCoins;
     }
     else if (numberOfPlayers == 3)
     {
-        cout << "Each Player selects 11 coins" << endl;
-        cout << "Enter amount of Silver coins   :" << Bid::silverPile << " remaining" << endl;
-        cin >> silverCoins;
+        while ((silverCoins + copperCoins) != 11)
+        {
+            cout << "Each Player selects 11 coins" << endl;
+            cout << "Enter amount of Silver coins   :" << Bid::silverPile << " remaining" << endl;
+            cin >> silverCoins;
+            cout << "Enter amount of Copper coins   :" << Bid::copperPile << " remaining" << endl;
+            cin >> copperCoins;
+            if ((silverCoins + copperCoins) != 11)
+            {
+                cout << "You must select 11 coins! Try again." << endl;
+            }
+        }
         silverPile = silverPile - silverCoins;
-        cout << "Enter amount of Copper coins   :" << Bid::copperPile << " remaining" << endl;
-        cin >> copperCoins;
         copperPile = copperPile - copperCoins;
     }
     else if (numberOfPlayers == 4)
     {
-        cout << "Each Player selects 9 coins" << endl;
-        cout << "Enter amount of Silver coins   :" << Bid::silverPile << " remaining" << endl;
-        cin >> silverCoins;
+        while ((silverCoins + copperCoins) != 9)
+        {
+            cout << "Each Player selects 9 coins" << endl;
+            cout << "Enter amount of Silver coins   :" << Bid::silverPile << " remaining" << endl;
+            cin >> silverCoins;
+            cout << "Enter amount of Copper coins   :" << Bid::copperPile << " remaining" << endl;
+            cin >> copperCoins;
+            if ((silverCoins + copperCoins) != 9)
+            {
+                cout << "You must select 9 coins! Try again." << endl;
+            }
+        }
         silverPile = silverPile - silverCoins;
-        cout << "Enter amount of Copper coins   :" << Bid::copperPile << " remaining" << endl;
-        cin >> copperCoins;
         copperPile = copperPile - copperCoins;
     }
     else
@@ -96,30 +122,6 @@ void Bid::putCoins()
 }
 
 #endif
-
-// Bid::Bid(vector<Player> playerInput)
-// {
-//     // cout << "Players who have joined the bidding are : \n"
-//     //      << endl;
-
-//     // for (int i = 0; i < playerInput.size(); i++)
-//     // {
-//     //     players.push_back(playerInput.at(i));
-//     //     cout << " Initlializing bidding for :" << players.at(i) << endl;
-//     // }
-// }
-
-// Bid::Bid(vector<string> *playerInput)
-// {
-//     cout << "Players who have joined the bidding are : \n"
-//          << endl;
-
-//     for (int i = 0; i < playerInput.size(); i++)
-//     {
-//         players.push_back(playerInput.at(i));
-//         cout << " Initlializing bidding for :" << players.at(i) << endl;
-//     }
-// }
 
 //Function returns name with largest alphabetical order
 // Player Bid::findLastNameOrder(vector<string> playerInput)
