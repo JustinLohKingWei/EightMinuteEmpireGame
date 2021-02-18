@@ -1,0 +1,4 @@
+﻿  MapLoader.cpp
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\MapLoader\MapLoader.cpp(81): warning C4715: 'MapLoader::readFile': not all control paths return a value
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\MapLoader\MapLoader.cpp(73): warning C4172: returning address of local variable or temporary: tiles
+  MapLoader.vcxproj -> C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\MapLoader\Debug\MapLoader.exe
