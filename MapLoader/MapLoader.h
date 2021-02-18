@@ -9,6 +9,7 @@ public:
 	string* inputFileName;
 	string* tilesArray;
 	string* mapShape;
+	game_map* world_map;
 	void createMap(string*);
 	MapLoader(string*);
 	MapLoader();

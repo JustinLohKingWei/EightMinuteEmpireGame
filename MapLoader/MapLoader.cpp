@@ -4,7 +4,7 @@ using namespace std;
 
 #include "MapLoader.h"
 
-MapLoader::MapLoader() : inputFileName(new string()), tilesArray(new string()), mapShape(new string())
+MapLoader::MapLoader() : inputFileName(new string()), tilesArray(new string()), mapShape(new string()), world_map(new game_map())
 {
 
 }
@@ -44,6 +44,10 @@ void MapLoader::createMap(string* arrayOfTiles) {
 		tiles[i] = new game_map(arrayOfTiles[i]);
 	}
 
+	if (*mapShape == string("Rectangle")) {
+		world_map = new game_map(&tiles[0], &tiles[1], &tiles[2], &tiles[3]);
+	}
+
 	delete[] tiles;
 	tiles = NULL;
 }
@@ -79,7 +83,7 @@ string* MapLoader::readFile() {
 					fileWithMap.close();
 					return NULL;
 				}
-				cout << "Shape of Island: " << mapShape << endl;
+				cout << "Shape of Island: " << *mapShape << endl;
 			}
 
 			// Checks if subsequent words are valid regions
