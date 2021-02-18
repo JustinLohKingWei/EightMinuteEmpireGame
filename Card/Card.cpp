@@ -6,7 +6,8 @@
 #include <vector>
 #include <deque>
 
-Card::Card(std::string theGood, std::string theAction) {
+Card::Card(std::string theNamestd::string theGood, std::string theAction) {
+    name = theName;
     good = theGood;
     action = theAction;
 }
@@ -17,6 +18,10 @@ void Card::action() {
 
 void Card::good() {
     cout << "This card's action is: " << getGood() >> "\n";
+}
+
+std::string Card::getName() {
+    return name;
 }
 
 std::string Card::getAction() {
@@ -73,7 +78,7 @@ void Deck::draw(Hand *hand) {
     }
 }
 
-Hand::Hand(array<Card*, 6> newCardsInHand){
+Hand::Hand(Card* newCardsInHand[]){
     cardsInHand = newCardsInHand;
 }
 

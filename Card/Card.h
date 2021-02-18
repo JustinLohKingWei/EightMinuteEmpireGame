@@ -6,13 +6,15 @@
 
 class Card {
     public:
-        Card(std::string theGood, std::string theAction);
+        Card(std::string theName, std::string theGood, std::string theAction);
         void action();
         void good();
+        std::string getName();
         std::string getGood();
         std::string getAction();
 
     private:
+        std::string name;
         std::string good;
         std::string action;
         int coinCost;
@@ -31,14 +33,14 @@ class Deck {
 
 class Hand {
     public:
-        Hand(array<Card*, 6> newCardsInHand);
+        Hand(Card* newCardsInHand[]);
         void viewHand();
         void exchange(int index);
         void details(int index);
         void setCard(Card* newCard, int index);
         int getCost(int index);
     private:
-        array<Card*, 6> cardsInHand;
+        Card* cardsInHand[6];
 };
 
 #endif //CARD_H
