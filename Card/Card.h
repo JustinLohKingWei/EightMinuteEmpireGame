@@ -2,18 +2,16 @@
 #define CARD_H
 #include <string>
 #include <iostream>
-#include <vector>
+#include <deque>
 
 class Card {
     public:
-        Card(std::string theGood, std::string theAction, std::string theCost);
+        Card(std::string theGood, std::string theAction);
         Card( );
         void action();
         void good();
-        void cost();
         std::string getGood();
         std::string getAction();
-        int getCost();
 
     private:
         std::string good;
@@ -22,20 +20,27 @@ class Card {
 };
 
 class Deck {
-public:
-    Deck(vector<Card> listOfCards)
-    void draw(Hand *hand)
+    public:
+        Deck(deque<Card*> listOfCards);
+        void draw(Hand *hand)
+        Card* getTopCard();
+        deque<Card*> getListOfCards();
 
-private:
-    vector<Card> *listOfCards;
+    private:
+        deque<Card*> listOfCards;
 };
 
 class Hand {
-public:
-    void exchange(int index);
-    void details(int index);
-private:
-    Card[6] *cards;
+    public:
+        Hand(array<Card*, 6> newCardsInHand);
+        void viewHand();
+        void exchange(int index);
+        void details(int index);
+        void setCard(Card* newCard);
+        Card* getCard(int index);
+        int getCost(int index);
+    private:
+        array<Card*, 6> cardsInHand;
 };
 
 #endif //CARD_H
