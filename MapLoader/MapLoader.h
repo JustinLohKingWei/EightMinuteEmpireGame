@@ -8,9 +8,13 @@ class MapLoader {
 public:
 	string* inputFileName;
 	string* tilesArray;
+	string* mapShape;
 	void createMap(string*);
 	MapLoader(string*);
+	MapLoader();
 	~MapLoader();
 private:
 	string* readFile();
+	bool validateInputTile(string);
+	bool validateTilesArray();
 };
