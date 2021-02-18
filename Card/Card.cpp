@@ -115,7 +115,7 @@ int Hand::getCost(int index){
 }
 
 void Hand::setCard(Card* newCard, int index){
-    cardsInHand[index] = newCard;
+    this.cardsInHand[index] = newCard;
 }
 
 #endif CARD_CPP
