@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <crtdbg.h>
 
-#define new new( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+#define new new (_NORMAL_BLOCK, __FILE__, __LINE__)
 // Replace _NORMAL_BLOCK with _CLIENT_BLOCK if you want the
 // allocations to be of _CLIENT_BLOCK type
 #endif
@@ -23,7 +23,7 @@ int main()
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
-    game_map* tile1 = new game_map("C Shape Island");
+    game_map *tile1 = new game_map("C Shape Island");
     cout << "\nC Shape Island map tile has been created." << endl;
 
     // initialize "tile1" the center tile as depected on the first page of the rules
@@ -47,7 +47,7 @@ int main()
     tile1->add_route("C Shape Island Region 5", "C Shape Island Region 4");
     tile1->add_route("C Shape Island Region 5", "C Shape Island Region 2");
 
-    game_map* tile2 = new game_map("Three Islands");
+    game_map *tile2 = new game_map("Three Islands");
     cout << "\n\nThree Islands map tile has been created." << endl;
 
     // initialize "tile2" the right tile as depected on the first page of the rules
@@ -65,7 +65,7 @@ int main()
     tile2->add_route("Three Islands Region 2", "Three Islands Region 3");
     tile2->add_route("Three Islands Region 3", "Three Islands Region 2");
 
-    game_map* tile3 = new game_map("Stone Pillars Island");
+    game_map *tile3 = new game_map("Stone Pillars Island");
     cout << "\n\nStone Pillars Island map tile has been created." << endl;
 
     // initialize "tile3" the left tile as depected on the first page of the rules
@@ -90,7 +90,7 @@ int main()
     tile3->add_route("Stone Pillars Island Region 5", "Stone Pillars Island Region 3");
     tile3->add_route("Stone Pillars Island Region 5", "Stone Pillars Island Region 4");
 
-    game_map* tile4 = new game_map("Valcano Island");
+    game_map *tile4 = new game_map("Valcano Island");
     cout << "\n\nValcano Island Island map tile has been created." << endl;
 
     // initialize "tile4" the top tile as depected on the first page of the rules
@@ -100,7 +100,7 @@ int main()
         tile4->add_region(s);
         cout << "\n Added a new area has been added: " << s << "." << endl;
     }
-    
+
     // edges are initilized left to right, top to bottom, but they can be done in any way
     // edges added in both directions so that they appear in single reagion adjacency lists
     tile4->add_route("Valcano Island Region 1", "Valcano Island Region 2");
@@ -120,7 +120,7 @@ int main()
 
     // This is how I would normally like to construct the game map once all tiles are loaded from files and then selected and positioned
     // they could easily be combinded into a "World Map" for game play with little effort and adding the last fewconnections between the Islands
-    game_map* world_map = new game_map(tile1, tile2, tile3, tile4);
+    game_map *world_map = new game_map(tile1, tile2, tile3, tile4);
 
     // connect the Islands
     world_map->add_route("C Shape Island Region 2", "Three Islands Region 2");
