@@ -1,4 +1,4 @@
-LShape
+Rectangle
 C Shape Island
-Three Islands
+Two Islands
 Stone Pillars Island

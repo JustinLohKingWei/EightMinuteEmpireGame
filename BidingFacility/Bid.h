@@ -3,7 +3,6 @@
 #define BID_H
 #include <vector>
 #include <string>
-// #include "../Player/Player.h"
 #include <iostream>
 using namespace std;
 
@@ -17,14 +16,16 @@ private:
     int copperCoins;
     int silverCoins;
     int bidAmount; // amount in a bid object which will be assignned to a player
-    string playerFirstName;
-    string playerLastName;
+    string* playerFirstName;
+    string* playerLastName;
 
 public:
     Bid();
-    Bid(string FirstName, string LastName);
+    Bid(string* FirstName, string* LastName);
+    Bid(const Bid &b1);
     void pickUpCoins();
-    void bidCoins() void putCoins();
+    void bidCoins();
+    void putCoins();
     // bool comparator(string *a, string *b)
     // {
     //     return a > b;
