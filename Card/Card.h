@@ -7,8 +7,8 @@
 class Card {
     public:
         Card(std::string theName, std::string theGood, std::string theAction);
-        void action();
-        void good();
+        void showAction();
+        void showGood();
         std::string getName();
         std::string getGood();
         std::string getAction();
@@ -20,17 +20,6 @@ class Card {
         int coinCost;
 };
 
-class Deck {
-    public:
-        Deck(deque<Card*> listOfCards);
-        void draw(Hand *hand)
-        Card* getTopCard();
-        deque<Card*> getListOfCards();
-
-    private:
-        deque<Card*> listOfCards;
-};
-
 class Hand {
     public:
         Hand(Card* newCardsInHand[]);
@@ -38,9 +27,21 @@ class Hand {
         void exchange(int index);
         void details(int index);
         void setCard(Card* newCard, int index);
+        Card* getCard(int index);
         int getCost(int index);
     private:
         Card* cardsInHand[6];
+};
+
+class Deck {
+public:
+    Deck(std::deque<Card*> listOfCards);
+    void draw(Hand* aHand);
+    Card* getTopCard();
+    std::deque<Card*> getListOfCards();
+
+private:
+    std::deque<Card*> listOfCards;
 };
 
 #endif //CARD_H

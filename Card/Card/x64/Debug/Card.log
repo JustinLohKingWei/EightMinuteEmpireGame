@@ -1,0 +1,5 @@
+﻿  Card.cpp
+  CardDriver.cpp
+  Generating Code...
+C:\Users\Igiari\Documents\GitHub\EightMinuteEmpireGame\Card\Card.cpp(78): warning C4715: 'Hand::getCost': not all control paths return a value
+  Card.vcxproj -> C:\Users\Igiari\Documents\GitHub\EightMinuteEmpireGame\Card\x64\Debug\Card.exe
