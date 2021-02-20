@@ -3,12 +3,13 @@
 #include <vector>
 #include <iostream>
 #include "../Map/Map.h";
+#include "../BidingFacility/Bid.h"
 using namespace std;
 
 class Player {
 public:
 	Player();
-	Player(string* f, string* l);
+	Player(string f, string l);
 	Player(const Player &b);
 	Player& operator =(const Player& e);
 	void PayCoin();
@@ -19,13 +20,13 @@ public:
 	void DestroyArmy();
 
 	//void setHand(Hand* aHand);
-	//void setBidingFacility(Bid* aBidingFacility);
+	void setBidingFacility(Bid* aBidingFacility);
 	void setListOfTerritories(vector<region>* list);
-	void setFirstName(string* f);
-	void setLastName(string* l);
+	void setFirstName(string f);
+	void setLastName(string l);
 	void setCoins(int* c);
 	//Hand getHand();
-	//Bid getBidingFacility();
+	Bid getBidingFacility();
 	vector<region> getListOfTerritories();
 	string getFirstName();
 	string getLastName();
@@ -34,8 +35,8 @@ public:
 private:
 	vector<region>* listOfTerritories;
 	//Hand* myHand;
-	//Bid* myBidingFacility;
-	string *firstName, *lastName;
+	Bid* myBidingFacility;
+	string firstName, lastName;
 	int* coins;
 	//Tokens and armies
 };

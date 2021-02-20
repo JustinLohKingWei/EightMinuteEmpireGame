@@ -24,7 +24,7 @@ Bid::Bid()
     cout << "A new player is created!" << endl;
 }
 
-Bid::Bid(string FirstName, string LastName)
+Bid::Bid(string* FirstName, string* LastName)
 {
     copperCoins = 0;
     silverCoins = 0;
@@ -33,7 +33,7 @@ Bid::Bid(string FirstName, string LastName)
     playerLastName = LastName;
     numberOfPlayers++;
     cout << "A new player is created!" << endl;
-    cout << "Player Name: " << Bid::playerFirstName << endl;
+    cout << "Player Name: " << *playerFirstName << endl;
 }
 
 Bid::Bid(const Bid &b1)
@@ -43,7 +43,7 @@ Bid::Bid(const Bid &b1)
 
 void Bid::pickUpCoins()
 { //TODO : IMPLEMENT CHECK THAT PLAYERS ARE CHOOSING CORRECT AMOUNT OF COINS
-    cout << Bid::playerFirstName << " is picking up coins :" << endl;
+    cout << playerFirstName << " is picking up coins :" << endl;
     if (numberOfPlayers == 2)
     {
         while ((silverCoins + copperCoins) != 12)

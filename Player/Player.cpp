@@ -7,11 +7,11 @@
 	Player::Player() {
 		
 	}
-	Player::Player(string* f, string* l) {
+	Player::Player(string f, string l) {
 		this->firstName = f;
 		this->lastName = l;
 		//vector of regions already initialized
-		//this->myBidingFacility = new Bid( insert parameters );
+		this->myBidingFacility = new Bid(&f,&l);
 		//this->myHand = new Hand( insert parameters );
 		//initialize coins, tokens and armies
 	}
@@ -20,6 +20,7 @@
 		this->lastName = b.lastName;
 		this->listOfTerritories = b.listOfTerritories;
 		this->coins = b.coins;
+		this->myBidingFacility = b.myBidingFacility;
 		//this->myHand = b.myHand;
 		//Tokens and armies
 	}
@@ -28,6 +29,7 @@
 		this->lastName = b.lastName;
 		this->listOfTerritories = b.listOfTerritories;
 		this->coins = b.coins;
+		this->myBidingFacility = b.myBidingFacility;
 		//this->myHand = b.myHand;
 		//Tokens and armies
 		return *this;
@@ -61,18 +63,18 @@
 	 void Player::setHand(Hand* aHand){
 		myHand = &aHand;
 	 }
-	 
-	 void Player::setBid(Bid* aBidingFacilty){
-		myBidingFacility = &aBidingFacilty;
-	 }*/
+	 */
+	 void Player::setBidingFacility(Bid* aBidingFacilty){
+		this->myBidingFacility = aBidingFacilty;
+	 }
 	 
 	 void Player::setListOfTerritories(vector<region>* list){
 		this->listOfTerritories = list;
 	 }
-	 void Player::setFirstName(string* f) {
+	 void Player::setFirstName(string f) {
 		 this->firstName = f;
 	 }
-	 void Player::setLastName(string* l) {
+	 void Player::setLastName(string l) {
 		 this->lastName = l;
 	 }
 
@@ -84,20 +86,20 @@
 		//return myHand;//A pointer or raw value or a copy?
 	 //}
 	 //
-	 //Bid Player::getBidingFacility(){
-		//return myBidingFacility;
-	 //}
+	 Bid Player::getBidingFacility(){
+		return *myBidingFacility;
+	 }
 	 
 	 vector<region> Player::getListOfTerritories(){
 		return *listOfTerritories;
 	 }
 
 	 string Player::getFirstName() {
-		 return *firstName;
+		 return firstName;
 	 }
 
 	 string Player::getLastName() {
-		 return *lastName;
+		 return lastName;
 	 }
 
 	 int Player::getCoins() {
