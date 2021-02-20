@@ -1,17 +1,21 @@
 #pragma once
 #include <string>
-#include "../Map/Map.h"
 using namespace std;
+#include "../Map/Map.h"
 
 class MapLoader {
 
 public:
 	string* inputFileName;
-	game_map* createMap(string*);
+	string* tilesArray;
+	string* mapShape;
+	game_map* world_map;
+	void createMap(string*);
 	MapLoader(string*);
 	MapLoader();
 	~MapLoader();
-
 private:
-	string** readFile();
+	string* readFile();
+	bool validateInputTile(string);
+	bool validateTilesArray();
 };

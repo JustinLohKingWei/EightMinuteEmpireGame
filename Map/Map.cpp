@@ -2,7 +2,13 @@
 
 using namespace std;
 
-game_map::game_map(string s) : map_name(s) {}
+game_map::game_map() {
+
+}
+
+game_map::game_map(string s) : map_name(s) {
+	cout << s << endl;
+}
 
 game_map::game_map(game_map* copy) // TODO
 {

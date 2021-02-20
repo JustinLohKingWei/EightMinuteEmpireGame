@@ -47,6 +47,7 @@ public:
 	void print_map();
 	void print_map_adjacency();
 	static void vaildate_map(game_map* my_map);
+	game_map();
 	game_map(string s);
 	game_map(game_map *copy); // copy a map
 	game_map(game_map* tile1_, game_map* tile2_, game_map* tile3_); // create world map with 3 submaps
