@@ -24,7 +24,11 @@ Bid::Bid()
     cout << "A new player is created!" << endl;
 }
 
+<<<<<<< Updated upstream
 Bid::Bid(string FirstName, string LastName)
+=======
+Bid::Bid(string *FirstName, string *LastName)
+>>>>>>> Stashed changes
 {
     copperCoins = 0;
     silverCoins = 0;
@@ -43,7 +47,11 @@ Bid::Bid(const Bid &b1)
 
 void Bid::pickUpCoins()
 { //TODO : IMPLEMENT CHECK THAT PLAYERS ARE CHOOSING CORRECT AMOUNT OF COINS
+<<<<<<< Updated upstream
     cout << Bid::playerFirstName << " is picking up coins :" << endl;
+=======
+    cout << *playerFirstName << " is picking up coins :" << endl;
+>>>>>>> Stashed changes
     if (numberOfPlayers == 2)
     {
         while ((silverCoins + copperCoins) != 12)
