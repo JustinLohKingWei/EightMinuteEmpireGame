@@ -61,7 +61,7 @@ void Bid::pickUpCoins()
                 }
                 if (silverCoins > silverPile || copperCoins > copperPile)
                 {
-                    cout << "Not enough coins in pile" << endl;
+                    cout << "Not enough coins in pile. Try again." << endl;
                 }
             }
         } while (silverCoins > silverPile || copperCoins > copperPile);
@@ -84,6 +84,10 @@ void Bid::pickUpCoins()
                 {
                     cout << "You must select 11 coins! Try again." << endl;
                 }
+                if (silverCoins > silverPile || copperCoins > copperPile)
+                {
+                    cout << "Not enough coins in pile. Try again." << endl;
+                }
             }
         } while (silverCoins > silverPile || copperCoins > copperPile);
         silverPile = silverPile - silverCoins;
@@ -103,6 +107,10 @@ void Bid::pickUpCoins()
                 if ((silverCoins + copperCoins) != 9)
                 {
                     cout << "You must select 9 coins! Try again." << endl;
+                }
+                if (silverCoins > silverPile || copperCoins > copperPile)
+                {
+                    cout << "Not enough coins in pile. Try again." << endl;
                 }
             }
         } while (silverCoins > silverPile || copperCoins > copperPile);
