@@ -7,11 +7,11 @@
 	Player::Player() {
 		
 	}
-	Player::Player(string f, string l) {
-		this->firstName = f;
-		this->lastName = l;
-		//vector of regions already initialized
-		this->myBidingFacility = new Bid(&f,&l);
+	Player::Player(string f, string l) : firstName(f), lastName(l), myBidingFacility(new Bid(f, l)) {
+		//this->firstName = f;
+		//this->lastName = l;
+		////vector of regions already initialized
+		//this->myBidingFacility = new Bid(f,l);
 		//this->myHand = new Hand( insert parameters );
 		//initialize coins, tokens and armies
 	}
@@ -86,8 +86,8 @@
 		//return myHand;//A pointer or raw value or a copy?
 	 //}
 	 //
-	 Bid Player::getBidingFacility(){
-		return *myBidingFacility;
+	 Bid* Player::getBidingFacility(){
+		return myBidingFacility;
 	 }
 	 
 	 vector<region> Player::getListOfTerritories(){

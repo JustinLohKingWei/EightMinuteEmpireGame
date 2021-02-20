@@ -26,7 +26,7 @@ public:
 	void setLastName(string l);
 	void setCoins(int* c);
 	//Hand getHand();
-	Bid getBidingFacility();
+	Bid* getBidingFacility();
 	vector<region> getListOfTerritories();
 	string getFirstName();
 	string getLastName();
