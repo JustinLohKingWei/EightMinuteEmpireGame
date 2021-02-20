@@ -56,4 +56,6 @@ int main() {
 	MapLoader ml9 = MapLoader(map9);
 	delete map9;
 	map9 = NULL;
+
+	return 0;
 }
