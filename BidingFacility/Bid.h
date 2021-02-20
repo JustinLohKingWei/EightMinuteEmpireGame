@@ -16,12 +16,12 @@ private:
     int copperCoins;
     int silverCoins;
     int bidAmount; // amount in a bid object which will be assignned to a player
-    string playerFirstName;
-    string playerLastName;
+    string* playerFirstName;
+    string* playerLastName;
 
 public:
     Bid();
-    Bid(string FirstName, string LastName);
+    Bid(string* FirstName, string* LastName);
     Bid(const Bid &b1);
     void pickUpCoins();
     void bidCoins();
