@@ -2,13 +2,16 @@
 #define PLAYER_H
 #include <vector>
 #include <iostream>
+#include "../Map/Map.h";
+#include "../BidingFacility/Bid.h"
 using namespace std;
 
 class Player {
 public:
 	Player();
-	//Player(vector<Territory>* listOfTerritories, Hand* aHand, BidingFacility* aBidingFacility);
-	//Player(Player &b);
+	Player(string f, string l);
+	Player(const Player &b);
+	Player& operator =(const Player& e);
 	void PayCoin();
 	void PlaceNewArmies();
 	void MoveArmies();
@@ -17,15 +20,24 @@ public:
 	void DestroyArmy();
 
 	//void setHand(Hand* aHand);
-	//void setBidingFacility(BidingFacility* aBidingFacility);
-	//void setListOfTerritories(vector<Territory>* list);
+	void setBidingFacility(Bid* aBidingFacility);
+	void setListOfTerritories(vector<region>* list);
+	void setFirstName(string f);
+	void setLastName(string l);
+	void setCoins(int* c);
 	//Hand getHand();
-	//BidingFacility getBidingFacility();
-	//vector<Territory> getListOfTerritories();
+	Bid getBidingFacility();
+	vector<region> getListOfTerritories();
+	string getFirstName();
+	string getLastName();
+	int getCoins();
+	//Tokens and armies
 private:
-	//vector<Territory> listOfTerritories;
+	vector<region>* listOfTerritories;
 	//Hand* myHand;
-	//BidingFacility* myBidingFacility;
+	Bid* myBidingFacility;
 	string firstName, lastName;
+	int* coins;
+	//Tokens and armies
 };
 #endif
