@@ -1,7 +1,22 @@
+#define MY_DEBUG // uncomment for memory leak dectetion
 
+// partially from microsoft docs-> compile by using: cl /EHsc /W4 /D_DEBUG /MDd source.cpp
+// mostly from TA's extra slides and adapted to assignment for memory debug
+#ifdef MY_DEBUG
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
+#define new new (_NORMAL_BLOCK, __FILE__, __LINE__)
+// Replace _NORMAL_BLOCK with _CLIENT_BLOCK if you want the
+// allocations to be of _CLIENT_BLOCK type
+#endif
 #include "MapLoader.h"
 
 int main() {
+#ifdef MY_DEBUG
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#endif
 	cout << "Map1 : ValidRectangle.txt" << endl;
 	string * map1 = new string("UserMaps/ValidRectangle.txt");
 	MapLoader ml1 = MapLoader(map1);
@@ -45,17 +60,19 @@ int main() {
 	delete map7;
 	map7 = NULL;
 
-	cout << "Map8 : DuplicateIslands.txt" << endl;
-	string* map8 = new string("UserMaps/DuplicateIslands.txt");
-	MapLoader ml8 = MapLoader(map8);
-	delete map8;
-	map8 = NULL;
-
 	cout << "Map9 : EmptyLine.txt" << endl;
 	string* map9 = new string("UserMaps/EmptyLine.txt");
 	MapLoader ml9 = MapLoader(map9);
 	delete map9;
 	map9 = NULL;
 
+	cout << "Map8 : DuplicateIslands.txt" << endl;
+	string* map8 = new string("UserMaps/DuplicateIslands.txt");
+	MapLoader ml8 = MapLoader(map8);
+	delete map8;
+	map8 = NULL;
+
+	
+	_CrtDumpMemoryLeaks(); // call before exit if debug is enabled
 	return 0;
 }

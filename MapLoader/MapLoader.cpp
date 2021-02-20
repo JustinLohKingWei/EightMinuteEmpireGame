@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 
+
+
 #include "MapLoader.h"
 
 MapLoader::MapLoader() : inputFileName(new string()), tilesArray(new string()), mapShape(new string()), world_map(new game_map()), numOfTiles(new int())
@@ -9,9 +11,8 @@ MapLoader::MapLoader() : inputFileName(new string()), tilesArray(new string()), 
 
 }
 
-MapLoader::MapLoader(string* fileWithMap) : inputFileName(new string()), tilesArray(new string()), mapShape(new string()), numOfTiles(new int())
+MapLoader::MapLoader(string* fileWithMap) : inputFileName(fileWithMap), tilesArray(new string()), mapShape(new string()), numOfTiles(new int())
 {
-	inputFileName = fileWithMap;
 	tilesArray = this->readFile();
 	if (tilesArray == NULL) {
 		cout << "\n****************************\nCould NOT load a valid map.\n****************************" << endl;
@@ -137,8 +138,11 @@ string* MapLoader::readFile() {
 
 		return tiles;
 	}
-	else cout << "Couldn't open file";
-	return NULL;
+	else {
+		cout << "Couldn't open file";
+		fileWithMap.close();
+		return NULL;
+	}
 }
 
 bool MapLoader::validateInputTile(string inputTileName) {
