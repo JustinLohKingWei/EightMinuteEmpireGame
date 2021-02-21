@@ -56,9 +56,10 @@ void Hand::viewHand(){
     }
 }
 
-void Hand::exchange(int index){
-    cout << "You've used the following card: \n";
+Card* Hand::exchange(int index){
+    cout << "You've used the following card for " << getCost(index) << ": \n";
     details(index);
+    return cardsInHand[index];
     setCard(NULL, index);
 }
 

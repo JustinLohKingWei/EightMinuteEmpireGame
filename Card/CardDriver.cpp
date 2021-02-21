@@ -24,7 +24,7 @@ int main()
         hand->Hand::details(i);
     }
     cout << "Exchanging card 0...  \n";
-    hand->Hand::exchange(0);
+    Card* newCard = hand->Hand::exchange(0);
 
     deque<Card*> cardList = { card7, card8 };
     Deck* deck = new Deck(cardList);

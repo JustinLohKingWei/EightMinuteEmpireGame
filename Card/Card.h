@@ -24,7 +24,7 @@ class Hand {
     public:
         Hand(Card* newCardsInHand[]);
         void viewHand();
-        void exchange(int index);
+        Card* exchange(int index);
         void details(int index);
         void setCard(Card* newCard, int index);
         Card* getCard(int index);
