@@ -7,11 +7,19 @@
 	Player::Player() {
 		
 	}
+<<<<<<< Updated upstream
 	Player::Player(string f, string l) {
 		this->firstName = f;
 		this->lastName = l;
 		//vector of regions already initialized
 		this->myBidingFacility = new Bid(&f,&l);
+=======
+	Player::Player(string f, string l, vector<Card*> aHand) : firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myHand(aHand) {
+		//this->firstName = f;
+		//this->lastName = l;
+		////vector of regions already initialized
+		//this->myBidingFacility = new Bid(f,l);
+>>>>>>> Stashed changes
 		//this->myHand = new Hand( insert parameters );
 		//initialize coins, tokens and armies
 	}
@@ -21,7 +29,7 @@
 		this->listOfTerritories = b.listOfTerritories;
 		this->coins = b.coins;
 		this->myBidingFacility = b.myBidingFacility;
-		//this->myHand = b.myHand;
+		this->myHand = b.myHand;
 		//Tokens and armies
 	}
 	Player& Player::operator=(const Player& b) {
@@ -30,7 +38,7 @@
 		this->listOfTerritories = b.listOfTerritories;
 		this->coins = b.coins;
 		this->myBidingFacility = b.myBidingFacility;
-		//this->myHand = b.myHand;
+		this->myHand = b.myHand;
 		//Tokens and armies
 		return *this;
 	}
@@ -59,16 +67,16 @@
 		cout << " executing DestroyArmy()..." << endl;
 	}
 
-	/*
-	 void Player::setHand(Hand* aHand){
-		myHand = &aHand;
+	
+	 void Player::setHand(vector<Card*> aHand){
+		this->myHand = aHand;
 	 }
-	 */
+	 
 	 void Player::setBidingFacility(Bid* aBidingFacilty){
 		this->myBidingFacility = aBidingFacilty;
 	 }
 	 
-	 void Player::setListOfTerritories(vector<region>* list){
+	 void Player::setListOfTerritories(vector<region*> list){
 		this->listOfTerritories = list;
 	 }
 	 void Player::setFirstName(string f) {
@@ -82,16 +90,25 @@
 		 this->coins = c;
 	 }
 	 //Set tokens and armies
+<<<<<<< Updated upstream
 	 //Hand Player::getHand(){
 		//return myHand;//A pointer or raw value or a copy?
 	 //}
 	 //
 	 Bid Player::getBidingFacility(){
 		return *myBidingFacility;
+=======
+	 vector<Card*> Player::getHand(){
+		return myHand;
 	 }
 	 
-	 vector<region> Player::getListOfTerritories(){
-		return *listOfTerritories;
+	 Bid* Player::getBidingFacility(){
+		return myBidingFacility;
+>>>>>>> Stashed changes
+	 }
+	 
+	 vector<region*> Player::getListOfTerritories(){
+		return listOfTerritories;
 	 }
 
 	 string Player::getFirstName() {
