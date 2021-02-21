@@ -142,10 +142,13 @@ void Bid::bidCoins()
 
 void Bid::putCoins()
 {
+    cout << playerFirstName << " has returned all their coins" << endl;
     silverPile = silverPile + silverCoins;
     copperPile = copperPile + copperCoins;
     silverCoins = 0;
     copperCoins = 0;
+    cout <<  "Remaining silver coins in supply : "<<silverPile << " Remaining copper coins in supply : " << copperPile << endl;
+
 }
 
 void Bid::displayBid()

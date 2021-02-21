@@ -60,6 +60,7 @@ int main()
     }
 
     cout << "Winner is "<< winner.getFirstName()<<" With Bidding Amount :"<< winnerAmount << endl;
+    winner.getBidingFacility()->putCoins();
 
     ////card init
     //// xxxx
