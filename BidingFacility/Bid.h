@@ -10,12 +10,12 @@ class Bid
 {
 
 private:
-    static int numberOfPlayers;
-    static int copperPile;
-    static int silverPile;
-    int copperCoins;
-    int silverCoins;
-    int bidAmount; // amount in a bid object which will be assignned to a player
+    static int numberOfPlayers;                  
+    static int copperPile;                       //shared copper coin supply among all players
+    static int silverPile;                       //shared silver coin supply among all players
+    int copperCoins;                             // amount of copper coins that a player has
+    int silverCoins;                             //amount of silver coins that a player has/
+    int bidAmount;                               // point weightage of all the coins a player has , silver coin is 3 points ,copper is 1
     string playerFirstName;
     string playerLastName;
 
@@ -23,6 +23,9 @@ public:
     Bid();
     Bid(string FirstName, string LastName);
     Bid(const Bid &b1);
+    Bid& operator = (const Bid &bid);
+    friend ostream& operator << (ostream& out, const Bid& b);
+    friend istream& operator >> (istream& in, Bid& b);
     void pickUpCoins();
     void bidCoins();
     void putCoins();
