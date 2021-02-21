@@ -38,6 +38,11 @@ int main()
         hand->Hand::details(i);
     }
 
+    Card* brandNewCard = new Card("Ancient Phoenix", "Flight", "Move Armies: 5");
+    cout << "Testing Card Insertion: :\n";
+    cin >> *brandNewCard;
+    cout << *brandNewCard;
+
     cout << "End:" << endl;
     return 0;
 }
