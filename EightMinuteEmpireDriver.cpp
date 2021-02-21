@@ -39,11 +39,28 @@ int main()
         (*(*players.at(i)).getBidingFacility()).bidCoins();
     }
 
-    /*for (int i = 0; i < players.size(); i++) {
+    Player winner;
+    int winnerAmount = 0;
+    for (int i = 0; i < players.size(); i++) {
+        (*(*players.at(i)).getBidingFacility()).displayBid();
+        if (winnerAmount< (*(*players.at(i)).getBidingFacility()).getBidAmount()) {
+            winner = *players.at(i);
+            winnerAmount = (*(*players.at(i)).getBidingFacility()).getBidAmount();
+        }
 
-    }*/
+        if (winnerAmount == (*(*players.at(i)).getBidingFacility()).getBidAmount()) {
+            string a = winner.getLastName();
+            string b = (*players.at(i)).getLastName();
+            if (a>b) {
+                winner = *players.at(i);
+            }
+        }
 
 
+    }
+
+    cout << "Winner is "<< winner.getFirstName()<<" With Bidding Amount :"<< winnerAmount << endl;
+    winner.getBidingFacility()->putCoins();
 
     ////card init
     //// xxxx

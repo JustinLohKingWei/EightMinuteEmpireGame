@@ -26,11 +26,7 @@ public:
     void pickUpCoins();
     void bidCoins();
     void putCoins();
-    // bool comparator(string *a, string *b)
-    // {
-    //     return a > b;
-    // };
-    // vector<string> getPlayers() { return players; };
-    // string findLastNameOrder();
+    void displayBid();
+    int getBidAmount();
 };
 #endif
