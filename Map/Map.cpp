@@ -295,25 +295,3 @@ void game_map::populateTile(string tileName) {
 
 
 }
-
-
-// Populates connectable_regions with North, East, South, and West regions
-void defineConnectableRegions() {
-	if (this.map_name.compare("Valcano Island")) {
-
-	}
-	else if (this.map_name.compare("C Shape Island")) {
-
-	}
-	else if (this.map_name.compare("Three Islands")) {
-
-	}
-	else if (this.map_name.compare("Stone Pillars Island")) {
-
-	}
-}
-
-// Acts on World Map to connect tiles according to the shape
-void connectTiles() {
-
-}
