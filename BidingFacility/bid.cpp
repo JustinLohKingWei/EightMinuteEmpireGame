@@ -124,13 +124,20 @@ void Bid::pickUpCoins()
 
 void Bid::bidCoins()
 {
+    cout << playerFirstName << " is bidding coins :" << endl;
     int x, y;
-    cout << "Please enter amount of silver coins to bid :" << Bid::silverCoins << " remaining" << endl;
-    cin >> x;
-    cout << "Please enter amount of copper coins to bid :" << Bid::copperCoins << " remaining" << endl;
-    cin >> y;
+    do
+    {
+        cout << "Please enter amount of silver coins to bid :" << Bid::silverCoins << " remaining" << endl;
+        cin >> x;
+        cout << "Please enter amount of copper coins to bid :" << Bid::copperCoins << " remaining" << endl;
+        cin >> y;
+        if (x > silverCoins || y > copperCoins)
+        {
+            cout << "You do not have that many coins!" << endl;
+        }
+    } while (x > silverCoins || y > copperCoins);
     bidAmount = (3 * x) + y;
-    cout << Bid::playerFirstName << " has bidded :" << Bid::bidAmount << " coin points" << endl;
 }
 
 void Bid::putCoins()
@@ -139,21 +146,16 @@ void Bid::putCoins()
     copperPile = copperPile + copperCoins;
     silverCoins = 0;
     copperCoins = 0;
-    cout << Bid::playerFirstName << " has returned ALL his coins" << endl;
 }
 
-#endif
+void Bid::displayBid()
+{
+    cout << Bid::playerFirstName << " has bidded :" << Bid::bidAmount << " coin points" << endl;
+}
 
-//Function returns name with largest alphabetical order
-// Player Bid::findLastNameOrder(vector<string> playerInput)
-// {
-//     Player winner = playerInput.at(0);
-//     for (int i = 1; i < playerInput.size(); i++)
-//     {
-//         if (comparator(winner.getName(), playerInput.at(i).getName()))
-//         {
-//             winner = playerInput.at(i);
-//         }
-//     }
-//     return winner;
-// }
+
+int Bid::getBidAmount()
+{
+    return  bidAmount;
+}
+#endif
