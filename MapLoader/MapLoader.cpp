@@ -6,10 +6,12 @@ using namespace std;
 
 #include "MapLoader.h"
 
-MapLoader::MapLoader() : inputFileName(string()), tilesArray(vector<string>()), mapShape(string()), world_map(new game_map(string("World Map"))), numOfTiles(int())
+MapLoader::MapLoader() : inputFileName(string()), tilesArray(vector<string>()), mapShape(string()), 
+	world_map(new game_map(string("World Map"))), numOfTiles(int()), validity(false)
 {
 
 }
+
 
 MapLoader& MapLoader::operator=(const MapLoader &mapLoader)
 {
@@ -23,15 +25,13 @@ MapLoader& MapLoader::operator=(const MapLoader &mapLoader)
 }
 
 MapLoader::MapLoader(string fileWithMap) : inputFileName(fileWithMap), tilesArray(vector<string>()), 
-	mapShape(string()), numOfTiles(int()), world_map(new game_map(string("World Map")))
+	mapShape(string()), numOfTiles(int()), world_map(new game_map(string("World Map"))), validity(false)
 {
 	bool validFile = this->readFile();
 	if (!validFile) {
-		cout << "\n****************************\nCould NOT load a valid map.\n****************************" << endl;
 	}
 	else {
 		this->createMap();
-		cout << "\n****************************\nLoaded a valid map.\n****************************" << endl;
 	}
 
 }
@@ -56,10 +56,12 @@ void MapLoader::createMap() {
 	vector<game_map*> tiles= vector<game_map*>();
 	// was initialized at construction, want to delete and replace with proper map
 	delete this->world_map;
+	// populates tiles vector
 	for (int i = 0; i < numOfTiles; i++) {
 		tiles.push_back(new game_map(tilesArray.at(i)));
 	}
 
+	// constructs the world map object
 	if (mapShape == string("Rectangle")) {
 		this->world_map = new game_map(tiles[0], tiles[1], tiles[2], tiles[3]);
 	}
@@ -90,7 +92,7 @@ bool MapLoader::readFile() {
 	fileWithMap.open((this->inputFileName));
 
 	if (fileWithMap.is_open()) {
-		cout << "\n\nFile is open" << endl;
+		//cout << "\n\nFile is open\nReading you its content.\n" << endl;
 		int lineNumber = 0;
 		string lineOfText;
 
@@ -106,7 +108,7 @@ bool MapLoader::readFile() {
 					fileWithMap.close();
 					return false;
 				}
-				cout << "Shape of Island: " << mapShape << endl;
+				//cout << "Shape of Island: " << mapShape << endl;
 			}
 
 			// Checks if subsequent words are valid regions
@@ -116,12 +118,11 @@ bool MapLoader::readFile() {
 				}
 				else {
 					fileWithMap.close();
-					cout << "Invalid region name" << endl;
 					return false;
 				}
 
 			}
-			cout << "Line #" << lineNumber+1 << ": " << lineOfText << endl;
+			//cout << "Line #" << lineNumber+1 << ": " << lineOfText << endl;
 			lineNumber++;
 		}
 		fileWithMap.close();
@@ -130,7 +131,7 @@ bool MapLoader::readFile() {
 		return(validateTilesArray());
 	}
 	else {
-		cout << "Couldn't open file";
+		//cout << "Couldn't open file" << endl;
 		fileWithMap.close();
 		return false;
 	}
@@ -167,11 +168,33 @@ bool MapLoader::validateTilesArray() {
 
 		for (int j = i + 1; j <  numOfTiles; j++) {
 			if (this->tilesArray[i] == this->tilesArray[j] || this->tilesArray[i].empty() || this->tilesArray.empty()) {
-				validArray = false;
+				
+				return false;
 			}
 		}
 	}
+	this->validity = true;
 	return validArray;
 
 }
 
+ostream& operator<<(ostream& outstream, const MapLoader& ml)
+{
+
+	if (ml.validity) {
+		outstream << 
+			"******************************\n\n" <<
+			"You have loaded a valid map.\n\n" <<
+			"******************************" <<
+			endl;
+	}
+	else {
+		outstream <<
+			"******************************\n\n" <<
+			"You have NOT loaded a valid map.\n\n" <<
+			"******************************" <<
+			endl;
+	}
+
+	return outstream;
+}
