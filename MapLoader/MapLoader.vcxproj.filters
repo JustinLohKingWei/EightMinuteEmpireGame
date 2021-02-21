@@ -21,7 +21,7 @@
     <ClCompile Include="..\Map\Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Map\MapDriver.cpp">
+    <ClCompile Include="MapLoaderDriver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -140,8 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Map\Map.cpp" />
-    <ClCompile Include="..\Map\MapDriver.cpp" />
     <ClCompile Include="MapLoader.cpp" />
+    <ClCompile Include="MapLoaderDriver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Map\Map.h" />

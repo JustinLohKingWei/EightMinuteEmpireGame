@@ -7,7 +7,7 @@ game_map::game_map() {
 }
 
 game_map::game_map(string s) : map_name(s) {
-	cout << s << endl;
+	/*cout << s << endl;*/
 }
 
 game_map::game_map(game_map* copy) // TODO
@@ -91,6 +91,7 @@ game_map::~game_map() // destruct all types maps // TODO
 		{
 			if (x.second != nullptr)
 			{
+				cout << "Not world map" << endl;
 				delete x.second;
 			}
 		}
