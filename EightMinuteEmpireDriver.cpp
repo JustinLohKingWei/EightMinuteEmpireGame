@@ -49,10 +49,9 @@ int main()
         //// xxxx
         ////card init
 
-        ////Map init//
-        //string *map1 = new string("UserMaps/ValidRectangle.txt");
-        //MapLoader ml1 = MapLoader(map1);
-        //delete map1;
-        //map1 = NULL;
-        ////map init
+    // Map Initialization
+
+    MapLoader ml1(new MapLoader("/MapLoader/UserMaps/ValidRectangle.txt"));
+    delete ml1;
+
 }

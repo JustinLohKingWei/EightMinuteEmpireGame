@@ -42,6 +42,7 @@ public:
 	typedef map<string, region*> v_map;
 	v_map m_map;
 	string map_name;
+	vector<string, region*> connectable_regions;
 	void add_region(const string& string); // add an vertex
 	void add_route(const string& start, const string& end); // add an edge
 	void print_map();
@@ -53,5 +54,9 @@ public:
 	game_map(game_map* tile1_, game_map* tile2_, game_map* tile3_); // create world map with 3 submaps
 	game_map(game_map* tile1_, game_map* tile2_, game_map* tile3_, game_map* tile4_); // create world map with 4 submaps
 	~game_map();
+
+private:
 	void populateTile(string);
+	void defineConnectableRegions();
+	void connectTiles();
 };
