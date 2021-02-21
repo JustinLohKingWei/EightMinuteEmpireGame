@@ -10,11 +10,11 @@ public:
 	string* tilesArray;
 	string* mapShape;
 	game_map* world_map;
-	int* numOfTiles;
+	int numOfTiles;
 	void createMap(string*);
 	MapLoader(string*);
 	MapLoader(const MapLoader &oldObject);
-	MapLoader& operator =(const MapLoader& mapLoader);
+	MapLoader& operator=(const MapLoader&);
 	MapLoader();
 	~MapLoader();
 private:

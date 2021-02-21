@@ -6,12 +6,24 @@ using namespace std;
 
 #include "MapLoader.h"
 
-MapLoader::MapLoader() : inputFileName(new string()), tilesArray(new string()), mapShape(new string()), world_map(new game_map()), numOfTiles(new int())
+MapLoader::MapLoader() : inputFileName(new string()), tilesArray(new string()), mapShape(new string()), world_map(new game_map()), numOfTiles(int())
 {
 
 }
 
-MapLoader::MapLoader(string* fileWithMap) : inputFileName(fileWithMap), tilesArray(new string()), mapShape(new string()), numOfTiles(new int())
+MapLoader& MapLoader::operator=(const MapLoader &mapLoader)
+{
+	this->inputFileName = mapLoader.inputFileName;
+	this->tilesArray = mapLoader.tilesArray;
+	this->mapShape = mapLoader.mapShape;
+	this->world_map = mapLoader.world_map;
+	this->numOfTiles = mapLoader.numOfTiles;
+
+	return *this;
+}
+
+MapLoader::MapLoader(string* fileWithMap) : inputFileName(new string(*fileWithMap)), tilesArray(new string()), 
+	mapShape(new string()), numOfTiles(int()), world_map(new game_map())
 {
 	tilesArray = this->readFile();
 	if (tilesArray == NULL) {
@@ -31,38 +43,31 @@ MapLoader::MapLoader(const MapLoader& oldObject) {
 	this->numOfTiles = oldObject.numOfTiles;
 }
 
-MapLoader& MapLoader::operator =(const MapLoader& mapLoader) {
-	this->inputFileName = mapLoader.inputFileName;
-	this->tilesArray = mapLoader.tilesArray;
-	this->mapShape = mapLoader.mapShape;
-	this->world_map = mapLoader.world_map;
-	this->numOfTiles = mapLoader.numOfTiles;
 
-	return *this;
-}
 
 MapLoader::~MapLoader() {
-	delete world_map;
-	world_map = NULL;
+	
 
 	delete inputFileName;
 	inputFileName = NULL;
 
-	delete tilesArray;
+
+	delete[] tilesArray;
 	tilesArray = NULL;
 
 	delete mapShape;
 	mapShape = NULL;
 
-	delete numOfTiles;
-	numOfTiles = NULL;
+	
+
+	(*world_map).~game_map();
 };
 
 // Instantiates a tile 
 void MapLoader::createMap(string* arrayOfTiles) {
-	game_map* tiles = new game_map[*numOfTiles];
+	game_map* tiles = new game_map[numOfTiles];
 
-	for (int i = 0; i < *numOfTiles; i++) {
+	for (int i = 0; i < numOfTiles; i++) {
 		tiles[i] = new game_map(arrayOfTiles[i]);
 	}
 
@@ -160,17 +165,17 @@ bool MapLoader::validateTilesArray() {
 	// depends on shape, 3 for LShape and LongRectangle, 4 for Rectangle
 	bool validArray = true;
 	if (*mapShape == string("Rectangle")) {
-		*numOfTiles = 4;
+		numOfTiles = 4;
 	}
 	else if (*mapShape == string("Long Rectangle") ||
 		*mapShape == string("LShape")) {
-		*numOfTiles = 3;
+		numOfTiles = 3;
 	}
 	
 	// Checks for duplicates
-	for (int i = 0; i < *numOfTiles; i++) {
+	for (int i = 0; i < numOfTiles; i++) {
 
-		for (int j = i + 1; j < *numOfTiles; j++) {
+		for (int j = i + 1; j <  numOfTiles; j++) {
 			if (this->tilesArray[i] == this->tilesArray[j] || tilesArray[i].empty() || tilesArray[j].empty()) {
 				validArray = false;
 			}
