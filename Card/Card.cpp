@@ -56,22 +56,27 @@ istream& operator >> (istream& in, Card& c)
     return in;
 }
 
+// Displays the action of a card.
 void Card::showAction() {
     cout << "This card's action is: " << getAction() << "\n";
 }
 
+// Displays the good of a card.
 void Card::showGood() {
     cout << "This card's action is: " << getGood() << "\n";
 }
 
+// Returns the name of a card.
 std::string Card::getName() {
     return name;
 }
 
+// Returns the action of a card.
 std::string Card::getAction() {
     return action;
 }
 
+// Returns the good of card.
 std::string Card::getGood() {
     return good;
 }
@@ -116,10 +121,12 @@ ostream& operator <<(ostream& out, const Hand& h)
     return out;
 }
 
-
+// Displays the details of an index of a card.
 void Hand::details(int index){
     cout << *cardsInHand[index];
 }
+
+// Displays current hand.
 void Hand::viewHand(){
     for (int i = 0; i<5; i++){
         if (getCard(i) != NULL){
@@ -131,6 +138,7 @@ void Hand::viewHand(){
     }
 }
 
+// Returns a card with a given index.
 Card* Hand::exchange(int index){
     cout << "You've used the following card for " << getCost(index) << ": \n";
     details(index);
@@ -139,6 +147,7 @@ Card* Hand::exchange(int index){
     return exchangedCard;
 }
 
+// Gets the cost of a current card.
 int Hand::getCost(int index){
     if (index == 0){
         return 0;
@@ -154,10 +163,12 @@ int Hand::getCost(int index){
     }
 }
 
+// Returns a card.
 Card* Hand::getCard(int index) {
     return cardsInHand[index];
 }
 
+// Sets a card.
 void Hand::setCard(Card* newCard, int index){
     cardsInHand[index] = newCard;
 }
@@ -197,17 +208,20 @@ ostream& operator <<(ostream& out, const Deck& d)
 }
 
 
+// Returns the list of cards.
 std::vector<Card*> Deck::getListOfCards() {
     return listOfCards;
 }
 
 
+// Returns the top card of a deck.
 Card* Deck::getTopCard() {
     Card* top = listOfCards[0];
     listOfCards.erase(listOfCards.begin());
     return top;
 }
 
+// Allows users to draw card then place it in the Hand.
 void Deck::draw(Hand* aHand) {
     vector<int> indices;
     for (int i = 0; i < 6; i++) {

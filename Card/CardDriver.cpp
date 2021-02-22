@@ -7,6 +7,8 @@ int main()
 {
 
     cout << "Start:" << endl;
+
+    // Create some cards.
     Card* card1 = new Card("Ancient Phoenix", "Flight", "Move Armies: 5");
     Card* card2 = new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3");
     Card* card3 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2");
@@ -18,18 +20,24 @@ int main()
 
     Card* initialCardsInHand[6] = { card1, card2, card3, card4, card5, card6 };
 
+    // Create the hand object, which is used by all players.
     Hand* hand = new Hand(initialCardsInHand);
     cout << "Initial Hand:\n";
     for (int i = 0; i < 6; i++) {
         cout << "Details of Hand Position " << i << "\n" ;
         hand->Hand::details(i);
     }
+
+    // Exchange function from hand.
     cout << "Exchanging card 0...  \n";
     Card* newCard = hand->Hand::exchange(0);
 
+    // Create the deck object.
     vector<Card*> cardList = { card7, card8 };
     Deck* deck = new Deck(cardList);
 
+
+    // Draw function from deck.
     cout << "Drawing Card...  \n";
     deck->Deck::draw(hand);
 
@@ -39,6 +47,7 @@ int main()
         hand->Hand::details(i);
     }
 
+    // input stream for Card.
     Card* brandNewCard = new Card("Ancient Phoenix", "Flight", "Move Armies: 5");
     cout << "Testing Card Insertion: :\n";
     cin >> *brandNewCard;
