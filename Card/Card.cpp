@@ -4,13 +4,56 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include <deque>
 using namespace std;
 
+// Empty Constructor
+Card::Card() {
+    name = "Card Name";
+    good = "Card Good";
+    action = "Card Action";
+}
+
+//Constructor with Parameters
 Card::Card(std::string theName, std::string theGood, std::string theAction) {
     name = theName;
     good = theGood;
     action = theAction;
+}
+
+// Copy Constructor
+Card::Card(const Card& c) {
+    name = c.name;
+    good = c.action;
+    action = c.action;
+}
+
+// Assignment Operator
+Card& Card::operator = (const Card& card)
+{
+    Card :: operator= (card);
+    name = card.name;
+    good = card.action;
+    action = card.action;
+    return *this;
+}
+
+// Stream output Operator
+ostream& operator <<(ostream& out, const Card& c)
+{
+    out << "Card Name: " << c.name << " Card Good: " << c.good << " Card Action: " << c.action << endl;
+    return out;
+}
+
+// Stream input operator
+istream& operator >> (istream& in, Card& c)
+{
+    cout << "Enter Card Name: ";
+    in >> c.name;
+    cout << "Enter Card Good ";
+    in >> c.good;
+    cout << "Enter Card Action ";
+    in >> c.action;
+    return in;
 }
 
 void Card::showAction() {
@@ -34,16 +77,43 @@ std::string Card::getGood() {
 }
 
 
+// Empty Constructor
+Hand::Hand() {
+    for (int i = 0; i < 6; i++) {
+        cardsInHand[i] = NULL;
+    }
+}
+
+// Parameterized Constructor
 Hand::Hand(Card* newCardsInHand[]){
     for (int i = 0; i < 6; i++) {
         cardsInHand[i] = newCardsInHand[i];
     }
 }
 
+// Copy Constructor
+Hand::Hand(const Hand& h) {
+    for (int i = 0; i < 6; i++) {
+        cardsInHand[i] = h.cardsInHand[i];
+    }
+}
+
+// Stream output Operator
+ostream& operator <<(ostream& out, const Hand& h)
+{
+    int i = 0;
+    for (int j = 0; j < 6; j++) {
+        if (h.cardsInHand[j] != NULL) {
+            i++;
+        }
+    }
+    out << "There are " << i << " cards in the hand.";
+    return out;
+}
+
 
 void Hand::details(int index){
-    cardsInHand[index]->showAction();
-    cardsInHand[index]->showGood();
+    cout << *cardsInHand[index];
 }
 void Hand::viewHand(){
     for (int i = 0; i<5; i++){
@@ -87,18 +157,43 @@ void Hand::setCard(Card* newCard, int index){
     cardsInHand[index] = newCard;
 }
 
-Deck::Deck(deque<Card*> cardList) {
+// Empty Constructor
+Deck::Deck() {
+    listOfCards = vector<Card*> {new Card("Ancient Phoenix", "Flight", "Move Armies: 5")};
+}
+
+// Parameterized Constructor
+Deck::Deck(vector<Card*> cardList) {
     listOfCards = cardList;
 }
 
-std::deque<Card*> Deck::getListOfCards() {
+// Copy Constructor
+Deck::Deck(const Deck& d) {
+    listOfCards = d.listOfCards;
+}
+
+// Stream Output Operator
+ostream& operator <<(ostream& out, const Deck& d)
+{
+    int i = 0;
+    for (int j = 0; j < d.listOfCards.size(); j++) {
+        if (d.listOfCards[j] != NULL) {
+            i++;
+        }
+    }
+    out << "There are " << i << " cards in the deck.";
+    return out;
+}
+
+
+std::vector<Card*> Deck::getListOfCards() {
     return listOfCards;
 }
 
 
 Card* Deck::getTopCard() {
     Card* top = listOfCards[0];
-    listOfCards.pop_front();
+    listOfCards.erase(listOfCards.begin());
     return top;
 }
 
