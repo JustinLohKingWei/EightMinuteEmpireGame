@@ -47,7 +47,7 @@ int main()
     else {
         cardsInEachHand = 2;
     }
-    int currentIndex = 0;
+    //int currentIndex = 0;
 
     for (int i = 0; i < playernum; i++) {
         cout << "Please enter first name" << endl;
@@ -57,17 +57,18 @@ int main()
         fName = string(first);
         lName = string(last);
         vector<Card*>cardsInHand;
-        for (int j = currentIndex; j < listOfCards.size(); j++) {
-            if (j >= currentIndex + cardsInEachHand) {
-                currentIndex = j;
+        vector<region*>listOfRegions;
+        for (int j = 0; j < listOfCards.size(); j++) {
+            if (j >= cardsInEachHand) {
                 break;
             }
             cardsInHand.push_back(listOfCards.at(j));
-            listOfCards.pop_back();
+            
         }
-        Player* aPlayer = new Player(fName, lName, cardsInHand);
+        listOfCards.erase(listOfCards.begin(), listOfCards.begin() + cardsInEachHand);
+        Player* aPlayer = new Player(fName, lName, cardsInHand, listOfRegions);
         players.push_back(aPlayer);
-        cardsInHand.empty();
+        
     }
     //Testing if each player have the right amount of cards 
     for (int i = 0; i < players.size(); i++) {

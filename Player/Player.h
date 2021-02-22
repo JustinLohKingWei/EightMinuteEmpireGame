@@ -10,9 +10,11 @@ using namespace std;
 class Player {
 public:
 	Player();
-	Player(string f, string l, vector<Card*> aHand);
+	Player(string f, string l, vector<Card*> aHand, vector<region*> listOfRegions);
 	Player(const Player &b);
 	Player& operator =(const Player& e);
+	friend ostream& operator << (ostream& out, const Player& aPlayer);
+	friend istream& operator >> (istream& in, Player& aPlayer);
 	void PayCoin();
 	void PlaceNewArmies();
 	void MoveArmies();
@@ -41,4 +43,6 @@ private:
 	int* coins;
 	//Tokens and armies
 };
+
+
 #endif
