@@ -13,6 +13,7 @@ public:
 	Player(string f, string l, vector<Card*> aHand, vector<region*> listOfRegions);
 	Player(const Player &b);
 	Player& operator =(const Player& e);
+	~Player() {delete myBidingFacility;};//Destructor
 	friend ostream& operator << (ostream& out, const Player& aPlayer);
 	friend istream& operator >> (istream& in, Player& aPlayer);
 	void PayCoin();
@@ -27,22 +28,24 @@ public:
 	void setListOfTerritories(vector<region*> list);
 	void setFirstName(string f);
 	void setLastName(string l);
-	void setCoins(int* c);
+	void setCoins(int c);
 	vector<Card*> getHand();
 	Bid* getBidingFacility();
 	vector<region*> getListOfTerritories();
 	string getFirstName();
 	string getLastName();
 	int getCoins();
-	//Tokens and armies
+	
 private:
 	vector<region*> listOfTerritories;
 	vector<Card*> myHand;
 	Bid* myBidingFacility;
 	string firstName, lastName;
-	int* coins;
-	//Tokens and armies
+	int coins;
+	
 };
+
+
 
 
 #endif
