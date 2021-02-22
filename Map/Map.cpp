@@ -4,7 +4,7 @@ using namespace std;
 
 
 game_map::game_map(string s) : map_name(s) {
-	cout << s << endl;
+	/*cout << s << endl;*/
 }
 
 game_map::game_map(game_map* copy) // TODO
@@ -162,11 +162,11 @@ game_map::~game_map() // destruct all types maps // TODO
 	{
 		for (auto& x : m_map)
 		{
-			//if (x.second != nullptr)
-			//{
+			if (x.second != nullptr)
+			{
+				cout << "Not world map" << endl;
 				delete x.second;
-			//}
-		}
+		  }
 		cout << "\n" << "Map named : " << map_name << " deleted!" << endl;
 	}
 	else // world map destruct, leaves sub graphs intact
@@ -282,4 +282,107 @@ void game_map::validate_map(game_map* my_map)
 		}
 	}
 	cout << "\nIf no errors are printed, consider the regional listings of the map to be valid!" << endl << endl;
+}
+
+
+void game_map::populateTile(string tileName) {
+	if (tileName.compare("C Shape Island")) {
+		cout << "\nC Shape Island map tile has been created." << endl;
+
+		// initialize "tile1" the center tile as depected on the first page of the rules
+		for (auto i = 0; i < 5; ++i)
+		{
+			string s = "C Shape Island Region " + to_string(i + 1);
+			this->add_region(s);
+			cout << "\n Added a new area has been added: " << s << "." << endl;
+		}
+
+		// edges are initilized left to right, top to bottom, but they can be done in any way
+		// edges added in both directions so that they appear in single reagion adjacency lists
+		this->add_route("C Shape Island Region 1", "C Shape Island Region 2");
+		this->add_route("C Shape Island Region 2", "C Shape Island Region 1");
+		this->add_route("C Shape Island Region 2", "C Shape Island Region 3");
+		this->add_route("C Shape Island Region 2", "C Shape Island Region 5");
+		this->add_route("C Shape Island Region 3", "C Shape Island Region 2");
+		this->add_route("C Shape Island Region 3", "C Shape Island Region 4");
+		this->add_route("C Shape Island Region 4", "C Shape Island Region 3");
+		this->add_route("C Shape Island Region 4", "C Shape Island Region 5");
+		this->add_route("C Shape Island Region 5", "C Shape Island Region 4");
+		this->add_route("C Shape Island Region 5", "C Shape Island Region 2");
+	}
+	else if (tileName.compare("Three Islands")) {
+		cout << "\n\nThree Islands map tile has been created." << endl;
+
+		// initialize "tile2" the right tile as depected on the first page of the rules
+		for (auto i = 0; i < 3; ++i)
+		{
+			string s = "Three Islands Region " + to_string(i + 1);
+			this->add_region(s);
+			cout << "\n Added a new area has been added: " << s << "." << endl;
+		}
+
+		// edges are initilized left to right, top to bottom, but they can be done in any way
+		// edges added in both directions so that they appear in single reagion adjacency lists
+		this->add_route("Three Islands Region 1", "Three Islands Region 2");
+		this->add_route("Three Islands Region 2", "Three Islands Region 1");
+		this->add_route("Three Islands Region 2", "Three Islands Region 3");
+		this->add_route("Three Islands Region 3", "Three Islands Region 2");
+	}
+	else if (tileName.compare("Stone Pillars Islands")) {
+		cout << "\n\nStone Pillars Island map tile has been created." << endl;
+
+		// initialize "tile3" the left tile as depected on the first page of the rules
+		for (auto i = 0; i < 5; ++i)
+		{
+			string s = "Stone Pillars Island Region " + to_string(i + 1);
+			this->add_region(s);
+			cout << "\n Added a new area has been added: " << s << "." << endl;
+		}
+
+		// edges are initilized left to right, bottom to top, but they can be done in any way
+		// edges added in both directions so that they appear in single reagion adjacency lists
+		this->add_route("Stone Pillars Island Region 1", "Stone Pillars Island Region 2");
+		this->add_route("Stone Pillars Island Region 2", "Stone Pillars Island Region 1");
+		this->add_route("Stone Pillars Island Region 2", "Stone Pillars Island Region 3"); // 3 is region with houses
+		this->add_route("Stone Pillars Island Region 2", "Stone Pillars Island Region 4"); // 4 is region with the pillars
+		this->add_route("Stone Pillars Island Region 3", "Stone Pillars Island Region 2");
+		this->add_route("Stone Pillars Island Region 3", "Stone Pillars Island Region 4");
+		this->add_route("Stone Pillars Island Region 3", "Stone Pillars Island Region 5");
+		this->add_route("Stone Pillars Island Region 4", "Stone Pillars Island Region 2");
+		this->add_route("Stone Pillars Island Region 4", "Stone Pillars Island Region 5");
+		this->add_route("Stone Pillars Island Region 5", "Stone Pillars Island Region 3");
+		this->add_route("Stone Pillars Island Region 5", "Stone Pillars Island Region 4");
+	}
+	else if (tileName.compare("Valcano Island")) {
+		cout << "\n\nValcano Island Island map tile has been created." << endl;
+
+		// initialize "tile4" the top tile as depected on the first page of the rules
+		for (auto i = 0; i < 7; ++i)
+		{
+			string s = "Valcano Island Region " + to_string(i + 1);
+			this->add_region(s);
+			cout << "\n Added a new area has been added: " << s << "." << endl;
+		}
+
+		// edges are initilized left to right, top to bottom, but they can be done in any way
+		// edges added in both directions so that they appear in single reagion adjacency lists
+		this->add_route("Valcano Island Region 1", "Valcano Island Region 2");
+		this->add_route("Valcano Island Region 2", "Valcano Island Region 1");
+		this->add_route("Valcano Island Region 2", "Valcano Island Region 3");
+		this->add_route("Valcano Island Region 3", "Valcano Island Region 2");
+		this->add_route("Valcano Island Region 3", "Valcano Island Region 4");
+		this->add_route("Valcano Island Region 3", "Valcano Island Region 5");
+		this->add_route("Valcano Island Region 3", "Valcano Island Region 5");
+		this->add_route("Valcano Island Region 4", "Valcano Island Region 3"); // region 4 is the furthest east(or south as it appears in the game manual) region
+		this->add_route("Valcano Island Region 4", "Valcano Island Region 5");
+		this->add_route("Valcano Island Region 5", "Valcano Island Region 3");
+		this->add_route("Valcano Island Region 5", "Valcano Island Region 4");
+		this->add_route("Valcano Island Region 6", "Valcano Island Region 3"); // region 6 is the bottom region on the disconnected smaller island
+		this->add_route("Valcano Island Region 6", "Valcano Island Region 7");
+		this->add_route("Valcano Island Region 7", "Valcano Island Region 6");
+	}
+
+
+
+
 }

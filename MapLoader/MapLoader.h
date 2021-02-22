@@ -1,21 +1,29 @@
 #pragma once
 #include <string>
+#include <vector>
+#include <iostream>
 using namespace std;
+
 #include "../Map/Map.h"
 
 class MapLoader {
 
 public:
-	string* inputFileName;
-	string* tilesArray;
-	string* mapShape;
+	string inputFileName;
+	vector<string> tilesArray;
+	string mapShape;
 	game_map* world_map;
-	void createMap(string*);
-	MapLoader(string*);
+	bool validity;
+	int numOfTiles;
+	void createMap();
+	friend ostream& operator<<(ostream& outstream, const MapLoader& ml);
+	MapLoader& operator=(const MapLoader&);
+	MapLoader(string);
+	MapLoader(const MapLoader &oldObject);
 	MapLoader();
 	~MapLoader();
 private:
-	string* readFile();
+	bool readFile();
 	bool validateInputTile(string);
 	bool validateTilesArray();
 };

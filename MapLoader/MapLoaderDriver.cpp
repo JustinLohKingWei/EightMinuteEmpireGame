@@ -1,59 +1,68 @@
+#define MY_DEBUG // uncomment for memory leak dectetion
 
+// partially from microsoft docs-> compile by using: cl /EHsc /W4 /D_DEBUG /MDd source.cpp
+// mostly from TA's extra slides and adapted to assignment for memory debug
+#ifdef MY_DEBUG
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
+#define new new (_NORMAL_BLOCK, __FILE__, __LINE__)
+// Replace _NORMAL_BLOCK with _CLIENT_BLOCK if you want the
+// allocations to be of _CLIENT_BLOCK type
+#endif
 #include "MapLoader.h"
 
 int main() {
+#ifdef MY_DEBUG
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#endif
 	cout << "Map1 : ValidRectangle.txt" << endl;
-	string * map1 = new string("UserMaps/ValidRectangle.txt");
-	MapLoader ml1 = MapLoader(map1);
-	delete map1;
-	map1 = NULL;
+	MapLoader* ml1 (new MapLoader(string("UserMaps/ValidRectangle.txt")));
+	cout << *ml1 << endl;
+	delete ml1;
 
-	cout << "Map2 : ValidLongRectangle.txt" << endl;
-	string* map2 = new string("UserMaps/ValidLongRectangle.txt");
-	MapLoader ml2 = MapLoader(map2);
-	delete map2;
-	map2 = NULL;
 
+	MapLoader* ml2 = (new MapLoader(string("UserMaps/ValidLongRectangle.txt")));
+	cout << *ml2 << endl;
+	delete ml2;
 
 	cout << "Map3 : ValidLShape.txt" << endl;
-	string* map3 = new string("UserMaps/ValidLShape.txt");
-	MapLoader ml3 = MapLoader(map3);
-	delete map3;
-	map3 = NULL;
+	MapLoader* ml3 = (new MapLoader(string("UserMaps/ValidLShape.txt")));
+	cout << *ml3 << endl;
+	delete ml3;
 
 	cout << "Map4 : InvalidLShape.txt" << endl;
-	string* map4 = new string("UserMaps/InvalidLShape.txt");
-	MapLoader ml4 = MapLoader(map4);
-	delete map4;
-	map4 = NULL;
+	MapLoader* ml4 = (new MapLoader(string("UserMaps/InvalidLShape.txt")));
+	cout << *ml4 << endl;
+	delete ml4;
+
 
 	cout << "Map5 : InvalidLongRectangle.txt" << endl;
-	string* map5 = new string("UserMaps/InvalidLongRectangle.txt");
-	MapLoader ml5 = MapLoader(map5);
-	delete map5;
-	map5 = NULL;
+	MapLoader* ml5 = (new MapLoader(string("UserMaps/InvalidLongRectangle.txt")));
+	cout << *ml5 << endl;
+	delete ml5;
 
 	cout << "Map6 : InvalidRectangle.txt" << endl;
-	string* map6 = new string("UserMaps/InvalidRectangle.txt");
-	MapLoader ml6 = MapLoader(map6);
-	delete map6;
-	map6 = NULL;
+	MapLoader* ml6 = (new MapLoader(string("UserMaps/InvalidRectangle.txt")));
+	cout << *ml6 << endl;
+	delete ml6;
 
 	cout << "Map7 : InvalidShape.txt" << endl;
-	string* map7 = new string("UserMaps/InvalidShape.txt");
-	MapLoader ml7 = MapLoader(map7);
-	delete map7;
-	map7 = NULL;
-
-	cout << "Map8 : DuplicateIslands.txt" << endl;
-	string* map8 = new string("UserMaps/DuplicateIslands.txt");
-	MapLoader ml8 = MapLoader(map8);
-	delete map8;
-	map8 = NULL;
+	MapLoader* ml7 = (new MapLoader(string("UserMaps/InvalidShape.txt")));
+	cout << *ml7 << endl;
+	delete ml7;
 
 	cout << "Map9 : EmptyLine.txt" << endl;
-	string* map9 = new string("UserMaps/EmptyLine.txt");
-	MapLoader ml9 = MapLoader(map9);
-	delete map9;
-	map9 = NULL;
+	MapLoader* ml9 = (new MapLoader(string("UserMaps/EmptyLine.txt")));
+	cout << *ml9 << endl;
+	delete ml9;
+
+	cout << "Map8 : DuplicateIslands.txt" << endl;
+	MapLoader* ml8 = (new MapLoader(string("UserMaps/DuplicateIslands.txt")));
+	cout << *ml8 << endl;
+	delete ml8;
+	
+	_CrtDumpMemoryLeaks(); // call before exit if debug is enabled
+	return 0;
 }

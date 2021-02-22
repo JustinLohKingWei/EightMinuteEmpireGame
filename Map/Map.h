@@ -38,6 +38,7 @@ struct region // vertex
 
 class game_map // graph, island, or world map
 {
+
 public:
 	typedef map<string, region*> v_map;
 	typedef map<region_connection, region*> connection_regions;
@@ -56,4 +57,8 @@ public:
 	game_map(string, game_map*, game_map*, game_map*); // create world map with 3 submaps
 	game_map(string, game_map*, game_map*, game_map*, game_map*); // create world map with 4 submaps
 	~game_map();
+
+private:
+	void populateTile(string);
 };
+

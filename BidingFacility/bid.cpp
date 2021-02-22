@@ -12,39 +12,80 @@ using std::endl;
 using std::string;
 
 int Bid::numberOfPlayers = 0;
-int Bid::copperPile = 24;
+
+//since requirements did not specify the initial amount of silver and copper coins respectively at game start
+//we shall assume the ratio of silver to copper is 1:2 from 36 coins.
+int Bid::copperPile = 24;              
 int Bid::silverPile = 12;
 
+// Empty constructor
 Bid::Bid()
 {
     copperCoins = 0;
     silverCoins = 0;
     bidAmount = 0;
     numberOfPlayers++;
-    cout << "A new player is created!" << endl;
+    cout << "a nameless player is created!" << endl;
 }
 
 
-Bid::Bid(string *FirstName, string *LastName)
+// Parameterized constructor
+Bid::Bid(string FirstName, string LastName) : playerFirstName(FirstName), playerLastName(LastName)
 {
     copperCoins = 0;
     silverCoins = 0;
     bidAmount = 0;
-    playerFirstName = FirstName;
-    playerLastName = LastName;
     numberOfPlayers++;
     cout << "A new player is created!" << endl;
-    cout << "Player Name: " << *playerFirstName << endl;
+    cout << "Player Name: " << playerFirstName << endl;
 }
 
-Bid::Bid(const Bid &b1)
+// copy constructor
+Bid::Bid(const Bid& b1)
 {
-    //TODO ADD ALL ATTRIBUTES TO COPY CONSTRUCTOR
+    playerFirstName = b1.playerFirstName;
+    playerLastName = b1.playerLastName;
+    copperCoins = b1.copperCoins;
+    silverCoins = b1.silverCoins;
+    bidAmount = b1.bidAmount;
+    numberOfPlayers++;
+    cout << "A copied player is created!" << endl;
+    cout << "Player Name: " << playerFirstName << endl;
 }
 
+// Assignment Operator
+Bid& Bid::operator = (const Bid& bid)
+{
+    Bid :: operator= (bid);
+    playerFirstName = bid.playerFirstName;
+    playerLastName = bid.playerLastName;
+    copperCoins = bid.copperCoins;
+    silverCoins = bid.silverCoins;
+    bidAmount = bid.bidAmount;
+    return *this;
+}
+
+// Stream output Operator
+ostream& operator << (ostream& out, const Bid& b)
+{
+    out << "Player "<<b.playerFirstName<<" "<<b.playerLastName<<" has "<<b.silverCoins<<" silver coins and "<<b.copperCoins<<". They have bidded a total of "<<b.bidAmount<<". No of players:"<<b.numberOfPlayers <<endl;
+    return out;
+}
+
+// Stream input operator
+istream& operator >> (istream& in, Bid& b)
+{
+    cout << "Enter First name ";
+    in >> b.playerFirstName;
+    cout << "Enter Last name ";
+    in >> b.playerLastName;
+    return in;
+}
+
+// Method to prompt a player to pick up coins based on the amount of players playing
 void Bid::pickUpCoins()
-{ //TODO : IMPLEMENT CHECK THAT PLAYERS ARE CHOOSING CORRECT AMOUNT OF COINS
-cout << *playerFirstName << " is picking up coins :" << endl;
+{
+    cout << playerFirstName << " is picking up coins :" << endl;
     if (numberOfPlayers == 2)
     {
         do
@@ -124,38 +165,46 @@ cout << *playerFirstName << " is picking up coins :" << endl;
     }
 }
 
+//Method to allow a player to bid an amount of coins based on the coins they have 
 void Bid::bidCoins()
 {
+    cout << playerFirstName << " is bidding coins :" << endl;
     int x, y;
-    cout << "Please enter amount of silver coins to bid :" << Bid::silverCoins << " remaining" << endl;
-    cin >> x;
-    cout << "Please enter amount of copper coins to bid :" << Bid::copperCoins << " remaining" << endl;
-    cin >> y;
+    do
+    {
+        cout << "Please enter amount of silver coins to bid :" << Bid::silverCoins << " remaining" << endl;
+        cin >> x;
+        cout << "Please enter amount of copper coins to bid :" << Bid::copperCoins << " remaining" << endl;
+        cin >> y;
+        if (x > silverCoins || y > copperCoins)
+        {
+            cout << "You do not have that many coins!" << endl;
+        }
+    } while (x > silverCoins || y > copperCoins);
     bidAmount = (3 * x) + y;
-    cout << Bid::playerFirstName << " has bidded :" << Bid::bidAmount << " coin points" << endl;
 }
 
+//returns ALL the player coins to the main coin supply
 void Bid::putCoins()
 {
+    cout << playerFirstName << " has returned all their coins" << endl;
     silverPile = silverPile + silverCoins;
     copperPile = copperPile + copperCoins;
     silverCoins = 0;
     copperCoins = 0;
-    cout << Bid::playerFirstName << " has returned ALL his coins" << endl;
+    cout <<  "Remaining silver coins in supply : "<<silverPile << " Remaining copper coins in supply : " << copperPile << endl;
+
 }
 
-#endif
+//Display the amount of points a player has bidded based on the coins they have
+void Bid::displayBid()
+{
+    cout << Bid::playerFirstName << " has bidded :" << Bid::bidAmount << " coin points" << endl;
+}
 
-//Function returns name with largest alphabetical order
-// Player Bid::findLastNameOrder(vector<string> playerInput)
-// {
-//     Player winner = playerInput.at(0);
-//     for (int i = 1; i < playerInput.size(); i++)
-//     {
-//         if (comparator(winner.getName(), playerInput.at(i).getName()))
-//         {
-//             winner = playerInput.at(i);
-//         }
-//     }
-//     return winner;
-// }
+//getter for bid amount
+int Bid::getBidAmount()
+{
+    return  bidAmount;
+}
+#endif
