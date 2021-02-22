@@ -97,6 +97,11 @@ Hand::Hand(const Hand& h) {
         cardsInHand[i] = h.cardsInHand[i];
     }
 }
+Hand::~Hand() { 
+    for (int i = 0; i < 6; i++) {
+        delete cardsInHand[i];
+    }
+}
 
 // Stream output Operator
 ostream& operator <<(ostream& out, const Hand& h)
@@ -170,6 +175,12 @@ Deck::Deck(vector<Card*> cardList) {
 // Copy Constructor
 Deck::Deck(const Deck& d) {
     listOfCards = d.listOfCards;
+}
+
+Deck::~Deck() {
+    for (int i = 0; i < listOfCards.size(); i++) {
+        delete listOfCards[i];
+    }
 }
 
 // Stream Output Operator
