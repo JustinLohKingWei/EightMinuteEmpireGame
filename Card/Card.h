@@ -2,7 +2,7 @@
 #define CARD_H
 #include <string>
 #include <iostream>
-#include <deque>
+#include <vector>
 using namespace std;
 
 class Card {
@@ -44,15 +44,15 @@ class Hand {
 class Deck {
     public:
         Deck();
-        Deck(std::deque<Card*> listOfCards);
+        Deck(std::vector<Card*> listOfCards);
         Deck(const Deck& d);
         friend ostream& operator << (ostream& out, const Deck& d);
         void draw(Hand* aHand);
         Card* getTopCard();
-        std::deque<Card*> getListOfCards();
+        std::vector<Card*> getListOfCards();
 
     private:
-        std::deque<Card*> listOfCards;
+        std::vector<Card*> listOfCards;
     };
 
 #endif //CARD_H

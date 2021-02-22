@@ -4,7 +4,6 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include <deque>
 using namespace std;
 
 // Empty Constructor
@@ -160,11 +159,11 @@ void Hand::setCard(Card* newCard, int index){
 
 // Empty Constructor
 Deck::Deck() {
-    listOfCards = deque<Card*> {new Card("Ancient Phoenix", "Flight", "Move Armies: 5")};
+    listOfCards = vector<Card*> {new Card("Ancient Phoenix", "Flight", "Move Armies: 5")};
 }
 
 // Parameterized Constructor
-Deck::Deck(deque<Card*> cardList) {
+Deck::Deck(vector<Card*> cardList) {
     listOfCards = cardList;
 }
 
@@ -187,14 +186,14 @@ ostream& operator <<(ostream& out, const Deck& d)
 }
 
 
-std::deque<Card*> Deck::getListOfCards() {
+std::vector<Card*> Deck::getListOfCards() {
     return listOfCards;
 }
 
 
 Card* Deck::getTopCard() {
     Card* top = listOfCards[0];
-    listOfCards.pop_front();
+    listOfCards.erase(listOfCards.begin());
     return top;
 }
 
