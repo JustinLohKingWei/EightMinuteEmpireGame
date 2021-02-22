@@ -112,15 +112,10 @@ int main()
     cout << "Winner is "<< winner.getFirstName()<<" With Bidding Amount :"<< winnerAmount << endl;
     winner.getBidingFacility()->putCoins();
 
-    ////card init
-    //// xxxx
-    ////card init
-
-
 
     // Map Initialization
 
-    MapLoader* ml1(new MapLoader(string("UserMaps/ValidRectangle.txt")));
+    MapLoader* ml1(new MapLoader(string("../../../../Documents/GitHub/EightMinuteEmpireGame/MapLoader/UserMaps/ValidRectangle.txt")));  // may need editing per device
     cout << *ml1 << endl;
     delete ml1;
 }
