@@ -28,7 +28,6 @@ Bid::Bid()
     cout << "a nameless player is created!" << endl;
 }
 
-
 // Parameterized constructor
 Bid::Bid(string FirstName, string LastName) : playerFirstName(FirstName), playerLastName(LastName)
 {
@@ -52,7 +51,6 @@ Bid::Bid(const Bid& b1)
     cout << "A copied player is created!" << endl;
     cout << "Player Name: " << playerFirstName << endl;
 }
-
 // Assignment Operator
 Bid& Bid::operator = (const Bid& bid)
 {

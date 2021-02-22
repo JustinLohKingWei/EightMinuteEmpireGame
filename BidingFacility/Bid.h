@@ -23,6 +23,7 @@ public:
     Bid();
     Bid(string FirstName, string LastName);
     Bid(const Bid &b1);
+    ~Bid() {}                                       //destructor
     Bid& operator = (const Bid &bid);
     friend ostream& operator << (ostream& out, const Bid& b);
     friend istream& operator >> (istream& in, Bid& b);
