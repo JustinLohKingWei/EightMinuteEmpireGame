@@ -4,7 +4,6 @@
 #include "Map/Map.h"
 
 using namespace std;
-//rough sketch
 
 int main()
 {
@@ -114,11 +113,13 @@ int main()
     //// xxxx
     ////card init
 
+
+
     // Map Initialization
 
-    MapLoader ml1(new MapLoader("/MapLoader/UserMaps/ValidRectangle.txt"));
+    MapLoader* ml1(new MapLoader(string("UserMaps/ValidRectangle.txt")));
+    cout << *ml1 << endl;
     delete ml1;
-
 }
 
 };
