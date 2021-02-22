@@ -44,5 +44,10 @@ int main()
     cout << *brandNewCard;
 
     cout << "End:" << endl;
+
+    delete brandNewCard;
+    delete newCard;
+    delete deck;
+    delete hand;
     return 0;
 }

@@ -15,6 +15,7 @@ class Card {
         Card();
         Card(std::string theName, std::string theGood, std::string theAction);
         Card(const Card& c);
+        ~Card(){};
         Card& operator = (const Card& card);
         friend ostream& operator <<(ostream& out, const Card& c);
         friend istream& operator >>(istream& in, Card& c);
@@ -30,6 +31,7 @@ class Hand {
         Hand();
         Hand(Card* newCardsInHand[]);
         Hand(const Hand& h);
+        ~Hand();
         friend ostream& operator << (ostream& out, const Hand& h);
         void viewHand();
         Card* exchange(int index);
@@ -46,6 +48,7 @@ class Deck {
         Deck();
         Deck(std::vector<Card*> listOfCards);
         Deck(const Deck& d);
+        ~Deck();
         friend ostream& operator << (ostream& out, const Deck& d);
         void draw(Hand* aHand);
         Card* getTopCard();
