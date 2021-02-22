@@ -63,13 +63,13 @@ void MapLoader::createMap() {
 
 	// constructs the world map object
 	if (mapShape == string("Rectangle")) {
-		this->world_map = new game_map(tiles[0], tiles[1], tiles[2], tiles[3]);
+		this->world_map = new game_map(mapShape,tiles[0], tiles[1], tiles[2], tiles[3]);
 	}
 	else if (mapShape == string("Long Rectangle")) {
-		this->world_map = new game_map(tiles[0], tiles[1], tiles[2]);
+		this->world_map = new game_map(mapShape,tiles[0], tiles[1], tiles[2]);
 	}
 	else if (mapShape == string("LShape")) {
-		this->world_map = new game_map(tiles[0], tiles[1], tiles[2]);
+		this->world_map = new game_map(mapShape, tiles[0], tiles[1], tiles[2]);
 	}
 
 

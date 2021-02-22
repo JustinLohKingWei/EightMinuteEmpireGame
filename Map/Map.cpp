@@ -166,6 +166,7 @@ game_map::~game_map() // destruct all types maps // TODO
 			{
 				cout << "Not world map" << endl;
 				delete x.second;
+			}
 		  }
 		cout << "\n" << "Map named : " << map_name << " deleted!" << endl;
 	}
