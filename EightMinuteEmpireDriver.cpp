@@ -20,6 +20,35 @@ int main()
     string first, last;
     cin >> playernum;
     vector<Player*> players;
+    vector<Card*>listOfCards = {
+         new Card("Ancient Phoenix", "Flight", "Move Armies: 5"),
+         new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3"),
+         new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2"),
+         new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1"),
+         new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City"),
+         new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2"),
+         new Card("Ancient Phoenix", "Flight", "Move Armies: 5"),
+         new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3"),
+         new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2"),
+         new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1"),
+         new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City"),
+         new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2"),
+         new Card("Ancient Phoenix", "Flight", "Move Armies: 5"),
+         new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3"),
+         new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2"),
+         new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1"),
+         new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City"),
+         new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2")
+    };
+    int cardsInEachHand = 0;
+    if (playernum == 2) {
+        cardsInEachHand = 4;
+    }
+    else {
+        cardsInEachHand = 2;
+    }
+    //int currentIndex = 0;
+
     for (int i = 0; i < playernum; i++) {
         cout << "Please enter first name" << endl;
         cin >> first;
@@ -27,8 +56,28 @@ int main()
         cin >> last;
         fName = string(first);
         lName = string(last);
-        Player* aPlayer = new Player(fName, lName);
+        vector<Card*>cardsInHand;
+        vector<region*>listOfRegions;
+        for (int j = 0; j < listOfCards.size(); j++) {
+            if (j >= cardsInEachHand) {
+                break;
+            }
+            cardsInHand.push_back(listOfCards.at(j));
+            
+        }
+        listOfCards.erase(listOfCards.begin(), listOfCards.begin() + cardsInEachHand);
+        Player* aPlayer = new Player(fName, lName, cardsInHand, listOfRegions);
         players.push_back(aPlayer);
+        
+    }
+    //Testing if each player have the right amount of cards 
+    for (int i = 0; i < players.size(); i++) {
+        for (int j = 0; j < players.at(i)->getHand().size(); j++) {
+            cout << "============================="<< endl;
+            cout << players.at(i)->getHand().at(j)->getName() << endl;
+            players.at(i)->getHand().at(j)->showAction();
+            players.at(i)->getHand().at(j)->getGood();
+        }
     }
 
     for (int i = 0; i < players.size(); i++) {
@@ -66,10 +115,12 @@ int main()
     //// xxxx
     ////card init
 
-    ////Map init//
-    //string *map1 = new string("UserMaps/ValidRectangle.txt");
-    //MapLoader ml1 = MapLoader(map1);
-    //delete map1;
-    //map1 = NULL;
-    ////map init
+    // Map Initialization
+
+    MapLoader ml1(new MapLoader("/MapLoader/UserMaps/ValidRectangle.txt"));
+    delete ml1;
+
+}
+
 };
+
