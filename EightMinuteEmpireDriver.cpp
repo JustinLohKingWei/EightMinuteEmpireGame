@@ -69,6 +69,7 @@ int main()
         players.push_back(aPlayer);
         
     }
+    Deck* theDeck = new Deck(listOfCards); // Creating new deck
     //Testing if each player have the right amount of cards 
     for (int i = 0; i < players.size(); i++) {
         for (int j = 0; j < players.at(i)->getHand().size(); j++) {
