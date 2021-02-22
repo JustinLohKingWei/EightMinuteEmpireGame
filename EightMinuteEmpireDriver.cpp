@@ -2,6 +2,7 @@
 #include "Player/Player.h"
 #include "BidingFacility/Bid.h"
 #include "Map/Map.h"
+#include "MapLoader/MapLoader.h"
 
 using namespace std;
 
@@ -124,5 +125,4 @@ int main()
     delete ml1;
 }
 
-};
 

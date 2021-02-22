@@ -1,2 +1,16 @@
-﻿  Map.cpp
+﻿  EightMinuteEmpireDriver.cpp
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Player\Player.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\EightMinuteEmpireDriver.cpp(61,27): warning C4018: '<': signed/unsigned mismatch
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\EightMinuteEmpireDriver.cpp(74,23): warning C4018: '<': signed/unsigned mismatch
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\EightMinuteEmpireDriver.cpp(75,27): warning C4018: '<': signed/unsigned mismatch
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\EightMinuteEmpireDriver.cpp(83,23): warning C4018: '<': signed/unsigned mismatch
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\EightMinuteEmpireDriver.cpp(87,23): warning C4018: '<': signed/unsigned mismatch
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\EightMinuteEmpireDriver.cpp(93,23): warning C4018: '<': signed/unsigned mismatch
+  Player.cpp
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Player\Player.cpp(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Player\Player.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  MapLoader.cpp
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\MapLoader\MapLoader.cpp(162,30): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  LINK : C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\MapLoader\Debug\MapLoader.exe not found or not built by the last incremental link; performing full link
   MapLoader.vcxproj -> C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\MapLoader\Debug\MapLoader.exe
