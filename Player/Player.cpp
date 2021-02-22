@@ -7,21 +7,14 @@
 	Player::Player() {
 		
 	}
-	Player::Player(string f, string l) : firstName(f), lastName(l), myBidingFacility(new Bid(f, l)) {
-		//this->firstName = f;
-		//this->lastName = l;
-		////vector of regions already initialized
-		//this->myBidingFacility = new Bid(f,l);
-		//this->myHand = new Hand( insert parameters );
-		//initialize coins, tokens and armies
-	}
+	Player::Player(string f, string l, vector<Card*> aHand, vector<region*> listOfRegions) : firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myHand(aHand), listOfTerritories(listOfRegions) {}
 	Player::Player(const Player& b) {
 		this->firstName = b.firstName;
 		this->lastName = b.lastName;
 		this->listOfTerritories = b.listOfTerritories;
 		this->coins = b.coins;
 		this->myBidingFacility = b.myBidingFacility;
-		//this->myHand = b.myHand;
+		this->myHand = b.myHand;
 		//Tokens and armies
 	}
 	Player& Player::operator=(const Player& b) {
@@ -30,11 +23,22 @@
 		this->listOfTerritories = b.listOfTerritories;
 		this->coins = b.coins;
 		this->myBidingFacility = b.myBidingFacility;
-		//this->myHand = b.myHand;
+		this->myHand = b.myHand;
 		//Tokens and armies
 		return *this;
 	}
-	//Add assignment operator and stream insertion operator
+	ostream& operator << (ostream& out, const Player& aPlayer) {
+		out << "Player " << aPlayer.firstName << " " << aPlayer.lastName << " owns " << aPlayer.listOfTerritories.size() << " regions." << endl;
+		return out;
+	}
+	istream& operator >> (istream& in, Player& aPlayer) {
+		cout << "Enter first name ";
+		in >> aPlayer.firstName;
+		cout << "Enter last name ";
+		in >> aPlayer.lastName;
+		return in;
+	}
+
 	void Player::PayCoin() {
 		cout << " executing PayCoin()..." << endl;
 	}
@@ -59,16 +63,16 @@
 		cout << " executing DestroyArmy()..." << endl;
 	}
 
-	/*
-	 void Player::setHand(Hand* aHand){
-		myHand = &aHand;
+	
+	 void Player::setHand(vector<Card*> aHand){
+		myHand = aHand;
 	 }
-	 */
+	 
 	 void Player::setBidingFacility(Bid* aBidingFacilty){
 		this->myBidingFacility = aBidingFacilty;
 	 }
 	 
-	 void Player::setListOfTerritories(vector<region>* list){
+	 void Player::setListOfTerritories(vector<region*> list){
 		this->listOfTerritories = list;
 	 }
 	 void Player::setFirstName(string f) {
@@ -82,16 +86,16 @@
 		 this->coins = c;
 	 }
 	 //Set tokens and armies
-	 //Hand Player::getHand(){
-		//return myHand;//A pointer or raw value or a copy?
-	 //}
-	 //
+	 vector<Card*> Player::getHand(){
+		return myHand;
+	 }
+	 
 	 Bid* Player::getBidingFacility(){
 		return myBidingFacility;
 	 }
 	 
-	 vector<region> Player::getListOfTerritories(){
-		return *listOfTerritories;
+	 vector<region*> Player::getListOfTerritories(){
+		return listOfTerritories;
 	 }
 
 	 string Player::getFirstName() {
