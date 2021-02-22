@@ -19,8 +19,8 @@ int main()
     string lName;
     string first, last;
     cin >> playernum;
-    vector<Player*> players;
-    vector<Card*>listOfCards = {
+    vector<Player*> players;//Vector of players
+    vector<Card*>listOfCards = {//list of cards
          new Card("Ancient Phoenix", "Flight", "Move Armies: 5"),
          new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3"),
          new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2"),
@@ -47,7 +47,7 @@ int main()
     else {
         cardsInEachHand = 2;
     }
-    //int currentIndex = 0;
+    
 
     for (int i = 0; i < playernum; i++) {
         cout << "Please enter first name" << endl;
@@ -58,7 +58,7 @@ int main()
         lName = string(last);
         vector<Card*>cardsInHand;
         vector<region*>listOfRegions;
-        for (int j = 0; j < listOfCards.size(); j++) {
+        for (int j = 0; j < listOfCards.size(); j++) {//Distributing cards
             if (j >= cardsInEachHand) {
                 break;
             }
@@ -66,7 +66,7 @@ int main()
             
         }
         listOfCards.erase(listOfCards.begin(), listOfCards.begin() + cardsInEachHand);
-        Player* aPlayer = new Player(fName, lName, cardsInHand, listOfRegions);
+        Player* aPlayer = new Player(fName, lName, cardsInHand, listOfRegions);//Creating player
         players.push_back(aPlayer);
         
     }

@@ -3,11 +3,13 @@
 
 #include "Player.h";
 
-
+	//Default constructor
 	Player::Player() {
 		
 	}
+	//Parameterized constructor
 	Player::Player(string f, string l, vector<Card*> aHand, vector<region*> listOfRegions) : firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myHand(aHand), listOfTerritories(listOfRegions) {}
+	//Copy constructor
 	Player::Player(const Player& b) {
 		this->firstName = b.firstName;
 		this->lastName = b.lastName;
@@ -15,8 +17,9 @@
 		this->coins = b.coins;
 		this->myBidingFacility = b.myBidingFacility;
 		this->myHand = b.myHand;
-		//Tokens and armies
+		
 	}
+	//Assignment operator
 	Player& Player::operator=(const Player& b) {
 		this->firstName = b.firstName;
 		this->lastName = b.lastName;
@@ -24,9 +27,9 @@
 		this->coins = b.coins;
 		this->myBidingFacility = b.myBidingFacility;
 		this->myHand = b.myHand;
-		//Tokens and armies
 		return *this;
 	}
+	//Stream insertion operator
 	ostream& operator << (ostream& out, const Player& aPlayer) {
 		out << "Player " << aPlayer.firstName << " " << aPlayer.lastName << " owns " << aPlayer.listOfTerritories.size() << " regions." << endl;
 		return out;
@@ -63,7 +66,7 @@
 		cout << " executing DestroyArmy()..." << endl;
 	}
 
-	
+	//Setters and getters
 	 void Player::setHand(vector<Card*> aHand){
 		myHand = aHand;
 	 }
@@ -82,10 +85,10 @@
 		 this->lastName = l;
 	 }
 
-	 void Player::setCoins(int* c) {
+	 void Player::setCoins(int c) {
 		 this->coins = c;
 	 }
-	 //Set tokens and armies
+	
 	 vector<Card*> Player::getHand(){
 		return myHand;
 	 }
@@ -107,7 +110,7 @@
 	 }
 
 	 int Player::getCoins() {
-		 return *coins;
+		 return this->getBidingFacility()->getBidAmount();
 	 }
 	
 	 
