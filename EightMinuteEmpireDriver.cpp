@@ -2,6 +2,7 @@
 #include "Player/Player.h"
 #include "BidingFacility/Bid.h"
 #include "Map/Map.h"
+#include "MapLoader/MapLoader.h"
 
 using namespace std;
 //rough sketch
@@ -122,5 +123,4 @@ int main()
 
 }
 
-};
 
