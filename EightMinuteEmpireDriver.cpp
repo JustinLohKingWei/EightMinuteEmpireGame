@@ -2,6 +2,7 @@
 #include "Player/Player.h"
 #include "BidingFacility/Bid.h"
 #include "Map/Map.h"
+#include "MapLoader/MapLoader.h"
 
 using namespace std;
 
@@ -69,7 +70,9 @@ int main()
         players.push_back(aPlayer);
         
     }
+
     Deck* theDeck = new Deck(listOfCards);//Creating deck
+
 
     //Testing if each player have the right amount of cards 
     for (int i = 0; i < players.size(); i++) {
@@ -125,5 +128,4 @@ int main()
     delete ml1;
 }
 
-};
 
