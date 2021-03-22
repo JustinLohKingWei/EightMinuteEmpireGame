@@ -10,7 +10,8 @@ using namespace std;
 class Player {
 public:
 	Player();
-	Player(string f, string l, vector<Card*> aHand, vector<region*> listOfRegions);
+	Player(string f, string l, Card* aCard, vector<region*> listOfRegions, vector<Army*> listOfArmies, vector<City*> listOfCities) : 
+		firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myCard(aCard), listOfTerritories(listOfRegions), listOfArmy(listOfArmies), listOfCities(listOfCities) { this->coins = 0; };
 	Player(const Player &b);
 	Player& operator =(const Player& e);
 	~Player() {delete myBidingFacility;};//Destructor
@@ -23,13 +24,13 @@ public:
 	void BuildCity();
 	void DestroyArmy();
 
-	void setHand(vector<Card*> aHand);
+	void setCard(Card* aCard);
 	void setBidingFacility(Bid* aBidingFacility);
 	void setListOfTerritories(vector<region*> list);
 	void setFirstName(string f);
 	void setLastName(string l);
 	void setCoins(int c);
-	vector<Card*> getHand();
+	Card* getCard();
 	Bid* getBidingFacility();
 	vector<region*> getListOfTerritories();
 	string getFirstName();
@@ -38,14 +39,40 @@ public:
 	
 private:
 	vector<region*> listOfTerritories;
-	vector<Card*> myHand;
+	vector<City*> listOfCities;
+	vector<Army*> listOfArmy;
+	Card* myCard;
 	Bid* myBidingFacility;
 	string firstName, lastName;
 	int coins;
 	
 };
 
+class Army {
+public:
+	Army();
+	Army(const Army& b);
+	Army& operator =(const Army& e);
+	~Army();
+	friend ostream& operator << (ostream& out, const Army& anArmy);
+	void setRegion(region* aRegion);
+	region* getRegion();
+private:
+	region* aRegion;
+};
 
+class City {
+public:
+	City();
+	City(const City& b);
+	City& operator =(const City& e);
+	~City();
+	friend ostream& operator << (ostream& out, const City& aCity);
+	void setRegion(region* aRegion);
+	region* getRegion();
+private:
+	region* aRegion;
+};
 
 
 #endif
