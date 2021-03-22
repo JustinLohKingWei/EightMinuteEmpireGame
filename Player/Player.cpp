@@ -42,8 +42,38 @@
 		return in;
 	}
 
-	void Player::PayCoin() {
+	// A player pays a certain amount of coins of either copper ('c') or silver ('s') type
+	void Player::PayCoin(int payableAmount,char type) {
 		cout << " executing PayCoin()..." << endl;
+		bool isEnough = true;
+		if (type == 's' || type =='c'||payableAmount>0) {		//checks for valid input
+			string coinType;
+			if (type == 's') {
+				coinType = "silver";
+				if (payableAmount> this->getBidingFacility()->getSilverCoins()) {		//checks if there are enough coins for payment
+					isEnough = false;
+				}
+			}
+			else if (type == 'c') {
+				coinType = "copper";
+				if (payableAmount > this->getBidingFacility()->getCopperCoins()) {		//checks if there are enough coins for payment
+					isEnough = false;
+				}
+			}
+
+			cout << this->getFirstName() << " has to pay " << payableAmount << " " << coinType << "coins" << endl;
+			cout << this->getFirstName() << " has " << this->getBidingFacility()->getSilverCoins() << " silver coins, and has " << this->getBidingFacility()->getCopperCoins() << " copper coins." << endl;
+
+			if (isEnough) {														// allows payment if there are enough coins
+				this->getBidingFacility()->payCoins(payableAmount, type);
+			}
+			else {																// denies payment if inadequate
+				cout << "Not enough coins to make this purchase!";
+			}
+		}
+		else {
+			cout << "Invalid input";
+		}
 	}
 
 	void Player::PlaceNewArmies() {

@@ -31,6 +31,9 @@ public:
     void bidCoins();
     void putCoins();
     void displayBid();
+    void payCoins(int payableAmount, char type);
     int getBidAmount();
+    int getCopperCoins();
+    int getSilverCoins();
 };
 #endif

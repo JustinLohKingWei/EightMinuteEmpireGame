@@ -200,9 +200,32 @@ void Bid::displayBid()
     cout << Bid::playerFirstName << " has bidded :" << Bid::bidAmount << " coin points" << endl;
 }
 
+// simply deducts an amount from a player's coins based on type , and adds it back to the shared pile
+void Bid::payCoins(int payableAmount, char type)
+{
+    if (type=='s') {
+        silverCoins = silverCoins - payableAmount;
+        silverPile = silverPile + payableAmount;
+    }
+    else {
+        copperCoins = copperCoins - payableAmount;
+        copperPile = copperPile + payableAmount;
+    }
+}
+
 //getter for bid amount
 int Bid::getBidAmount()
 {
     return  bidAmount;
+}
+
+int Bid::getCopperCoins()
+{
+    return  copperCoins;
+}
+
+int Bid::getSilverCoins()
+{
+    return  silverCoins;
 }
 #endif
