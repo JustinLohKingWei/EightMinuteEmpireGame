@@ -10,10 +10,11 @@ class Card {
         std::string name;
         std::string good;
         std::string action;
+        int maxPlayerCount;
 
     public:
         Card();
-        Card(std::string theName, std::string theGood, std::string theAction);
+        Card(std::string theName, std::string theGood, std::string theAction, int playerCount);
         Card(const Card& c);
         ~Card(){};
         Card& operator = (const Card& card);
@@ -24,6 +25,7 @@ class Card {
         std::string getName();
         std::string getGood();
         std::string getAction();
+        int getMaxPlayerCount();
 };
 
 class Hand {
@@ -53,9 +55,11 @@ class Deck {
         void draw(Hand* aHand);
         Card* getTopCard();
         std::vector<Card*> getListOfCards();
+        void filterDeck(int playerNumber);
+        void shuffleDeck();
 
     private:
-        std::vector<Card*> listOfCards;
+        static std::vector<Card*> listOfCards;
     };
 
 #endif //CARD_H
