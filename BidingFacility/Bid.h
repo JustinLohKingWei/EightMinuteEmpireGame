@@ -28,6 +28,7 @@ public:
     friend ostream& operator << (ostream& out, const Bid& b);
     friend istream& operator >> (istream& in, Bid& b);
     void pickUpCoins();
+    void pickUpCoins(int amount);
     void bidCoins();
     void putCoins();
     void displayBid();

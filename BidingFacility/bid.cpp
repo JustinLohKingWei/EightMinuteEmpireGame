@@ -163,6 +163,35 @@ void Bid::pickUpCoins()
     }
 }
 
+//  overloading of pickupcoins() which allows a custom amount of coins to be picked up
+void Bid::pickUpCoins(int amount) 
+{
+    cout << playerFirstName << " is picking up coins :" << endl;
+        do
+        {
+            while ((silverCoins + copperCoins) != amount)
+            {
+                cout << "Two player game! Each Player selects "<< amount <<" coins" << endl;
+                cout << "Enter amount of Silver coins   :" << Bid::silverPile << " remaining" << endl;
+                cin >> silverCoins;
+                cout << "Enter amount of Copper coins   :" << Bid::copperPile << " remaining" << endl;
+                cin >> copperCoins;
+                if ((silverCoins + copperCoins) != amount)
+                {
+                    cout << "You must select "<< amount <<" coins! Try again." << endl;
+                }
+                if (silverCoins > silverPile || copperCoins > copperPile)
+                {
+                    cout << "Not enough coins in pile. Try again." << endl;
+                }
+            }
+        } while (silverCoins > silverPile || copperCoins > copperPile);
+
+        silverPile = silverPile - silverCoins;
+        copperPile = copperPile - copperCoins;
+   
+}
+
 //Method to allow a player to bid an amount of coins based on the coins they have 
 void Bid::bidCoins()
 {

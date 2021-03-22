@@ -42,7 +42,7 @@
 		return in;
 	}
 
-	// A player pays a certain amount of coins of either copper ('c') or silver ('s') type
+	// A player pays a certain amount of coins of either copper ('c') or silver ('s') type    -Justin
 	void Player::PayCoin(int payableAmount,char type) {
 		cout << " executing PayCoin()..." << endl;
 		bool isEnough = true;
@@ -70,6 +70,7 @@
 			else {																// denies payment if inadequate
 				cout << "Not enough coins to make this purchase!";
 			}
+			cout <<"After payment , "<< this->getFirstName() << " has " << this->getBidingFacility()->getSilverCoins() << " silver coins, and has " << this->getBidingFacility()->getCopperCoins() << " copper coins." << endl;
 		}
 		else {
 			cout << "Invalid input";
