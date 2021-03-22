@@ -77,7 +77,7 @@ int main() {
             cout << "Player " << i << " :" << (*players.at(i)).getFirstName() << "'s turn" << endl;
             players.at(i)->PayCoin(3,'s');
 
-            // delete this an implement main game loop here
+            // delete this and implement main game loop here
             cout << "is it time?(enter y for winner)";                                                               
             cin >> in;
 
