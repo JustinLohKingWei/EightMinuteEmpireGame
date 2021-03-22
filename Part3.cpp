@@ -69,25 +69,16 @@ int main() {
 
     cout << "Main Game Loop Begins" << endl;
 
-    Player winner;
-    bool hasWinner = false;
-    char in;
-    while (!hasWinner){                                     // loops until a winner is selected
         for (int i = 0; i < players.size(); i++) {
             cout << "Player " << i << " :" << (*players.at(i)).getFirstName() << "'s turn" << endl;
-            players.at(i)->PayCoin(3,'s');
-
-            // delete this and implement main game loop here
-            cout << "is it time?(enter y for winner)";                                                               
-            cin >> in;
-
-            if (in == 'y') {                                    // enter win condition here
-                hasWinner = true;
-                winner = *players.at(i);
-                break;
+            bool payCoin= false;
+            while (!payCoin) {                                  // checks if player can pay for the card
+                //TODO:  choose a face up card
+                payCoin = players.at(i)->PayCoin(3, 'c');       // enter card payment cost here
+              
             }
+                       
         }  
-    }
-    cout << "Winner is " << winner.getFirstName();
+    
 	return 0;
 }
