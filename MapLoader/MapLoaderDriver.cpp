@@ -18,7 +18,7 @@ int main() {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 	cout << "Map1 : ValidRectangle.txt" << endl;
-	MapLoader* ml1 (new MapLoader(string("UserMaps/ValidRectangle.txt")));
+	MapLoader* ml1 (new MapLoader(string("../UserMaps/ValidRectangle.txt")));
 	cout << *ml1 << endl;
 	delete ml1;
 

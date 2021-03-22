@@ -17,7 +17,7 @@ public:
 	~Player() {delete myBidingFacility;};//Destructor
 	friend ostream& operator << (ostream& out, const Player& aPlayer);
 	friend istream& operator >> (istream& in, Player& aPlayer);
-	void PayCoin();
+	bool PayCoin(int payableAmount, char type);
 	void PlaceNewArmies();
 	void MoveArmies();
 	void MoveOverLand();

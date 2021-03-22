@@ -1,14 +1,10 @@
 #include <iostream>
 #include "Player/Player.h"
 #include "BidingFacility/Bid.h"
-#include "Map/Map.h"
-#include "MapLoader/MapLoader.h"
+#include "Card/Card.h"
 
-using namespace std;
-
-int main()
-{
-
+int main() {
+	//TODO : Implement Driver of Part 3
     cout << "Start Game:" << endl;
 
     //section where we ask how many players
@@ -47,7 +43,7 @@ int main()
     else {
         cardsInEachHand = 2;
     }
-    
+
 
     for (int i = 0; i < playernum; i++) {
         cout << "Please enter first name" << endl;
@@ -63,64 +59,26 @@ int main()
                 break;
             }
             cardsInHand.push_back(listOfCards.at(j));
-            
+
         }
         listOfCards.erase(listOfCards.begin(), listOfCards.begin() + cardsInEachHand);
         Player* aPlayer = new Player(fName, lName, cardsInHand, listOfRegions);//Creating player
         players.push_back(aPlayer);
-        
+
     }
 
-    Deck* theDeck = new Deck(listOfCards);//Creating deck
+    cout << "Main Game Loop Begins" << endl;
 
-
-    //Testing if each player have the right amount of cards 
-    for (int i = 0; i < players.size(); i++) {
-        for (int j = 0; j < players.at(i)->getHand().size(); j++) {
-            cout << "============================="<< endl;
-            cout << players.at(i)->getHand().at(j)->getName() << endl;
-            players.at(i)->getHand().at(j)->showAction();
-            players.at(i)->getHand().at(j)->getGood();
-        }
-    }
-
-    for (int i = 0; i < players.size(); i++) {
-        (*(*players.at(i)).getBidingFacility()).pickUpCoins();
-    }
-
-    for (int i = 0; i < players.size(); i++) {
-        (*(*players.at(i)).getBidingFacility()).bidCoins();
-    }
-
-    Player winner;
-    int winnerAmount = 0;
-    for (int i = 0; i < players.size(); i++) {
-        (*(*players.at(i)).getBidingFacility()).displayBid();
-        if (winnerAmount< (*(*players.at(i)).getBidingFacility()).getBidAmount()) {
-            winner = *players.at(i);
-            winnerAmount = (*(*players.at(i)).getBidingFacility()).getBidAmount();
-        }
-
-        if (winnerAmount == (*(*players.at(i)).getBidingFacility()).getBidAmount()) {
-            string a = winner.getLastName();
-            string b = (*players.at(i)).getLastName();
-            if (a>b) {
-                winner = *players.at(i);
+        for (int i = 0; i < players.size(); i++) {
+            cout << "Player " << i << " :" << (*players.at(i)).getFirstName() << "'s turn" << endl;
+            bool payCoin= false;
+            while (!payCoin) {                                  // checks if player can pay for the card
+                //TODO:  choose a face up card
+                payCoin = players.at(i)->PayCoin(3, 'c');       // enter card payment cost here
+              
             }
-        }
-
-
-    }
-
-    cout << "Winner is "<< winner.getFirstName()<<" With Bidding Amount :"<< winnerAmount << endl;
-    winner.getBidingFacility()->putCoins();
-
-
-    // Map Initialization
-
-    MapLoader* ml1(new MapLoader(string("../../../../Documents/GitHub/EightMinuteEmpireGame/MapLoader/UserMaps/ValidRectangle.txt")));  // may need editing per device
-    cout << *ml1 << endl;
-    delete ml1;
+                       
+        }  
+    
+	return 0;
 }
-
-
