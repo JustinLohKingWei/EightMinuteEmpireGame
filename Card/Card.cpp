@@ -72,7 +72,7 @@ void Card::showAction() {
 
 // Displays the good of a card.
 void Card::showGood() {
-    cout << "This card's action is: " << getGood() << "\n";
+    cout << "This card's good is: " << getGood() << "\n";
 }
 
 // Returns the name of a card.
