@@ -128,7 +128,7 @@ void Hand::details(int index){
 
 // Displays current hand.
 void Hand::viewHand(){
-    for (int i = 0; i<5; i++){
+    for (int i = 0; i<6; i++){
         if (getCard(i) != NULL){
             details(i);
         }
@@ -166,9 +166,23 @@ int Hand::getCost(int index){
 // Re-arranges the array to push cards to the left
 void Hand::slideCardsLeft(){
     // Check if card is missing from array
-
+    int emptyIndex = -1; // -1 signifies no empty index
+    for (int i = 0; i < 5; i++) {
+        if (getCard(i) == NULL) {
+            emptyIndex = i;
+        }
+    }
     // If card is missing, take every card to the right and bring it one index lower
-
+    if (emptyIndex != -1) {
+        int indexBeingReplaced = emptyIndex;
+        while (indexBeingReplaced < 5) {
+            cardsInHand[indexBeingReplaced++] = cardsInHand[indexBeingReplaced+1];
+        }
+       setCard(NULL, indexBeingReplaced); 
+    }
+    else {
+        cout << "All spaces are occupied. No cards to slide to the left" << endl;
+    }
     
 }
 

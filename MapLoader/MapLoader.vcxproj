@@ -18,6 +18,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Card\Card.cpp" />
+    <ClCompile Include="..\Part5.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Card\Card.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -138,21 +145,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\BidingFacility\bid.cpp" />
-    <ClCompile Include="..\Card\Card.cpp" />
-    <ClCompile Include="..\EightMinuteEmpireDriver.cpp" />
-    <ClCompile Include="..\Map\Map.cpp" />
-    <ClCompile Include="..\Player\Player.cpp" />
-    <ClCompile Include="MapLoader.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\BidingFacility\Bid.h" />
-    <ClInclude Include="..\Card\Card.h" />
-    <ClInclude Include="..\Map\Map.h" />
-    <ClInclude Include="..\Player\Player.h" />
-    <ClInclude Include="MapLoader.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

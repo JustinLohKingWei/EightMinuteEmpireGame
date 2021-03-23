@@ -1,10 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\BidingFacility",
     "\\Card",
-    "\\Player"
+    "\\MapLoader"
   ],
-  "SelectedNode": "\\Card\\Card.cpp",
+  "SelectedNode": "\\Part5.cpp",
   "PreviewInSolutionExplorer": false
 }

@@ -61,7 +61,6 @@ int main()
     delete hand;
     return 0;
 }
-=======
 //#include "Card.h"
 //using namespace std;
 //// using namespace std;
