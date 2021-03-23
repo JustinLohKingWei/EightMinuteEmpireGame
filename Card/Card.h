@@ -39,6 +39,7 @@ class Hand {
         void setCard(Card* newCard, int index);
         Card* getCard(int index);
         int getCost(int index);
+        void slideCardsLeft();
     private:
         Card* cardsInHand[6];
 };

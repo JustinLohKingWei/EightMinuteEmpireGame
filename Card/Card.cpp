@@ -163,6 +163,15 @@ int Hand::getCost(int index){
     }
 }
 
+// Re-arranges the array to push cards to the left
+void Hand::slideCardsLeft(){
+    // Check if card is missing from array
+
+    // If card is missing, take every card to the right and bring it one index lower
+
+    
+}
+
 // Returns a card.
 Card* Hand::getCard(int index) {
     return cardsInHand[index];
