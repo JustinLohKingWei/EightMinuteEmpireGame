@@ -8,7 +8,7 @@
 		
 	}
 	//Parameterized constructor
-	Player::Player(string f, string l, vector<Card*> aHand, vector<region*> listOfRegions) : firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myHand(aHand), listOfTerritories(listOfRegions) {}
+	//Player::Player(string f, string l, Card* aCard, vector<region*> listOfRegions, vector<Army*> listOfArmies) : firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myCard(aCard), listOfTerritories(listOfRegions), listOfArmy(listOfArmies) { this->coins = 0; }
 	//Copy constructor
 	Player::Player(const Player& b) {
 		this->firstName = b.firstName;
@@ -16,7 +16,8 @@
 		this->listOfTerritories = b.listOfTerritories;
 		this->coins = b.coins;
 		this->myBidingFacility = b.myBidingFacility;
-		this->myHand = b.myHand;
+		this->myCard = b.myCard;
+		this->listOfArmy = b.listOfArmy;
 		
 	}
 	//Assignment operator
@@ -26,7 +27,7 @@
 		this->listOfTerritories = b.listOfTerritories;
 		this->coins = b.coins;
 		this->myBidingFacility = b.myBidingFacility;
-		this->myHand = b.myHand;
+		this->myCard = b.myCard;
 		return *this;
 	}
 	//Stream insertion operator
@@ -42,6 +43,32 @@
 		return in;
 	}
 
+	Army::Army() {}
+
+	Army::Army(const Army& b) {
+		this->aRegion = b.aRegion;
+	}
+
+	Army& Army::operator =(const Army& e) { this->aRegion = e.aRegion; return *this; }
+
+	ostream& operator << (ostream& out, const Army& anArmy) {
+		out << "Army at " << anArmy.aRegion << endl;
+		return out;
+	}
+	
+	City::City() {}
+
+	City::City(const City& b) {
+		this->aRegion = b.aRegion;
+	}
+
+	City& City::operator =(const City& e) { this->aRegion = e.aRegion; return *this; }
+
+	ostream& operator << (ostream& out, const City& aCity) {
+		out << "Army at " << aCity.aRegion << endl;
+		return out;
+	}
+	
 	// A player pays a certain amount of coins of either copper ('c') or silver ('s') type    -Justin
 	bool Player::PayCoin(int payableAmount,char type) {
 		bool success;
@@ -102,8 +129,8 @@
 	}
 
 	//Setters and getters
-	 void Player::setHand(vector<Card*> aHand){
-		myHand = aHand;
+	 void Player::setCard(Card* aCard){
+		myCard = aCard;
 	 }
 	 
 	 void Player::setBidingFacility(Bid* aBidingFacilty){
@@ -124,8 +151,8 @@
 		 this->coins = c;
 	 }
 	
-	 vector<Card*> Player::getHand(){
-		return myHand;
+	 Card* Player::getCard(){
+		return myCard;
 	 }
 	 
 	 Bid* Player::getBidingFacility(){
@@ -148,5 +175,19 @@
 		 return this->getBidingFacility()->getBidAmount();
 	 }
 	
-	 
+	 void Army::setRegion(region* aRegion) {
+		this->aRegion = aRegion;
+	 }
+
+	 region* Army::getRegion() {
+		 return aRegion;
+	 }
+
+	 void City::setRegion(region* aRegion) {
+		 this->aRegion = aRegion;
+	 }
+
+	 region* City::getRegion() {
+		 return aRegion;
+	 }
 #endif
