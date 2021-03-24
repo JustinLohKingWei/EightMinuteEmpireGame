@@ -7,18 +7,19 @@
 #include "../Card/Card.h"
 using namespace std;
 
+
 class Player {
 public:
 	Player();
 	Player(string f, string l, Card* aCard, vector<region*> listOfRegions, vector<Army*> listOfArmies, vector<City*> listOfCities) : 
-		firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myCard(aCard), listOfTerritories(listOfRegions), listOfArmy(listOfArmies), listOfCities(listOfCities) { this->coins = 0; };
+		firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myCard(aCard), listOfTerritories(listOfRegions), listOfArmy(listOfArmies), listOfCities(listOfCities) {};
 	Player(const Player &b);
 	Player& operator =(const Player& e);
 	~Player() {delete myBidingFacility;};//Destructor
 	friend ostream& operator << (ostream& out, const Player& aPlayer);
 	friend istream& operator >> (istream& in, Player& aPlayer);
 	bool PayCoin(int payableAmount, char type);
-	void PlaceNewArmies();
+	void PlaceNewArmies(int numberOfArmies, region* aRegion);
 	void MoveArmies();
 	void MoveOverLand();
 	void BuildCity();
@@ -29,13 +30,13 @@ public:
 	void setListOfTerritories(vector<region*> list);
 	void setFirstName(string f);
 	void setLastName(string l);
-	void setCoins(int c);
+	
 	Card* getCard();
 	Bid* getBidingFacility();
 	vector<region*> getListOfTerritories();
 	string getFirstName();
 	string getLastName();
-	int getCoins();
+	
 	
 private:
 	vector<region*> listOfTerritories;
@@ -44,21 +45,24 @@ private:
 	Card* myCard;
 	Bid* myBidingFacility;
 	string firstName, lastName;
-	int coins;
+	
 	
 };
 
 class Army {
 public:
-	Army();
+	Army() { this->isPlaced = false; };
 	Army(const Army& b);
 	Army& operator =(const Army& e);
 	~Army();
 	friend ostream& operator << (ostream& out, const Army& anArmy);
 	void setRegion(region* aRegion);
 	region* getRegion();
+	void setPlaced(bool placed);
+	bool getIsPlaced();
 private:
 	region* aRegion;
+	bool isPlaced;
 };
 
 class City {
