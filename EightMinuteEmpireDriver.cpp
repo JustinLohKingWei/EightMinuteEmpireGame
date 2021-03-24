@@ -108,6 +108,16 @@ int main()
 
 
     }
+    if (winnerAmount == 0) {
+        winner = *players.at(0);
+        for (int i = 1; i < players.size(); i++) {
+            string a = winner.getLastName();
+            string b = (*players.at(i)).getLastName();
+            if (a > b) {
+                winner = *players.at(i);
+            }
+        }
+    }
 
     cout << "Winner is "<< winner.getFirstName()<<" With Bidding Amount :"<< winnerAmount << endl;
     winner.getBidingFacility()->putCoins();
