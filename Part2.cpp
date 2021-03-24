@@ -11,24 +11,24 @@ int main() {
     string first, last;
 
     vector<Card*>listOfCards = {//list of cards
-      new Card("Ancient Phoenix", "Flight", "Move Armies: 5"),
-      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3"),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2"),
-      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1"),
-      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City"),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2"),
-      new Card("Ancient Phoenix", "Flight", "Move Armies: 5"),
-      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3"),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2"),
-      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1"),
-      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City"),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2"),
-      new Card("Ancient Phoenix", "Flight", "Move Armies: 5"),
-      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3"),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2"),
-      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1"),
-      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City"),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2")
+      new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 2),
+      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 2),
+      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
+      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 2),
+      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 2),
+      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
+      new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 2),
+      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 2),
+      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
+      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 3),
+      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 3),
+      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 3),
+      new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 4),
+      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 4),
+      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 4),
+      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 2),
+      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 2),
+      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2)
     };
     int cardsInEachHand = 0;
     if (playernum == 2) {
@@ -46,6 +46,8 @@ int main() {
         fName = string(first);
         lName = string(last);
         vector<Card*>cardsInHand;
+        fName = string(first);
+        lName = string(last);
         vector<region*>listOfRegions;
         for (int j = 0; j < listOfCards.size(); j++) {//Distributing cards
             if (j >= cardsInEachHand) {
@@ -88,7 +90,6 @@ int main() {
             }
         }
 
-
     }
 
     // if all players bid 0
@@ -106,8 +107,21 @@ int main() {
     cout << "Winner is " << winner.getFirstName() << " With Bidding Amount :" << winnerAmount << endl;
     winner.getBidingFacility()->putCoins();
 
-
-
+    Deck* deck = new Deck;
+    cout << "Normal Deck" << endl;
+    for (int i = 0; i < deck->getListOfCards().size(); i++) {
+        cout <<  deck->getListOfCards()[i]->getName() << endl;
+    }
+    cout << "Filtered Deck" << endl;
+    deck->filterDeck(playernum);
+    for (int i = 0; i < deck->getListOfCards().size(); i++) {
+        cout << deck->getListOfCards()[i]->getName() << endl;
+    }
+    cout << "Shhuffled Deck" << endl;
+    deck->shuffleDeck();
+    for (int i = 0; i < deck->getListOfCards().size(); i++) {
+        cout << deck->getListOfCards()[i]->getName() << endl;
+    }
 
 	return 0;
 }
