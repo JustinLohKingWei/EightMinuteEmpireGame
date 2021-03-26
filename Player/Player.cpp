@@ -14,7 +14,6 @@
 		this->firstName = b.firstName;
 		this->lastName = b.lastName;
 		this->listOfTerritories = b.listOfTerritories;
-		this->coins = b.coins;
 		this->myBidingFacility = b.myBidingFacility;
 		this->myCard = b.myCard;
 		this->listOfArmy = b.listOfArmy;
@@ -25,7 +24,6 @@
 		this->firstName = b.firstName;
 		this->lastName = b.lastName;
 		this->listOfTerritories = b.listOfTerritories;
-		this->coins = b.coins;
 		this->myBidingFacility = b.myBidingFacility;
 		this->myCard = b.myCard;
 		return *this;
@@ -43,16 +41,20 @@
 		return in;
 	}
 
-	Army::Army() {}
 
 	Army::Army(const Army& b) {
 		this->aRegion = b.aRegion;
+		this->isPlaced = b.isPlaced;
 	}
 
-	Army& Army::operator =(const Army& e) { this->aRegion = e.aRegion; return *this; }
+	Army& Army::operator =(const Army& e) { 
+		this->aRegion = e.aRegion; 
+		this->isPlaced = e.isPlaced; 
+		return *this; 
+	}
 
 	ostream& operator << (ostream& out, const Army& anArmy) {
-		out << "Army at " << anArmy.aRegion << endl;
+		out << "Army at " << anArmy.aRegion << ", isPlaced: " << anArmy.isPlaced << endl;
 		return out;
 	}
 	
@@ -108,8 +110,15 @@
 		return success;
 	}
 
-	void Player::PlaceNewArmies() {
-		cout << " executing PlaceNewArmies()..." << endl;
+	void Player::PlaceNewArmies(int numberOfArmies, region* aRegion) {
+		//cout << " executing PlaceNewArmies()..." << endl;
+		int counter = 0;
+		for (int i = 0; i < listOfArmy.size(); i++) {
+			if (!*(listOfArmy.at(i))->getIsPlaced && counter < numberOfArmies) {
+				*(listOfArmy.at(i))->setRegion(aRegion);
+				counter++;
+			}
+		}
 	}
 
 	void Player::MoveArmies() {
@@ -146,11 +155,15 @@
 	 void Player::setLastName(string l) {
 		 this->lastName = l;
 	 }
-
-	 void Player::setCoins(int c) {
-		 this->coins = c;
+	 void Army::setRegion(region* aRegion) {
+			this->aRegion = aRegion;
 	 }
-	
+	 void Army::setPlaced(bool placed) {
+		 this->isPlaced = placed;
+	 }
+	 void City::setRegion(region* aRegion) {
+		 this->aRegion = aRegion;
+	 }
 	 Card* Player::getCard(){
 		return myCard;
 	 }
@@ -171,23 +184,11 @@
 		 return lastName;
 	 }
 
-	 int Player::getCoins() {
-		 return this->getBidingFacility()->getBidAmount();
-	 }
-	
-	 void Army::setRegion(region* aRegion) {
-		this->aRegion = aRegion;
-	 }
-
 	 region* Army::getRegion() {
 		 return aRegion;
 	 }
 
-	 void City::setRegion(region* aRegion) {
-		 this->aRegion = aRegion;
-	 }
-
-	 region* City::getRegion() {
-		 return aRegion;
+	 bool Army::getIsPlaced() {
+		 return isPlaced;
 	 }
 #endif
