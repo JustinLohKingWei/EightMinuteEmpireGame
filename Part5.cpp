@@ -22,7 +22,6 @@ int main(){
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
     cout << "Start:" << endl;
-
     // Initialization of players
     vector<Player*> players;
 
@@ -77,7 +76,7 @@ int main(){
         cout << "Details of Hand Position " << i << "\n";
         hand->Hand::details(i);
     }
-    cout << "\n\n\n" << endl;
+    cout << "\n\n\n" << endl;`
 
     // Create deck object
     vector<Card*> cardList = { card7, card8, card9, card10,card11,card12,card13, card14};
@@ -103,7 +102,7 @@ int main(){
         
     }
     cout << "Taking the card in index " << chosenIndex << endl;
-    hand->exchange(chosenIndex);
+    part5Game->getCurrentPlayer()->getHand().push_back(hand->exchange(chosenIndex));
 
     cout << "\n\nBEFORE SLIDING CARDS TO THE LEFT\n\n" << endl;
 

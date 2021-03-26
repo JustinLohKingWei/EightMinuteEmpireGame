@@ -15,6 +15,10 @@ Game::Game(vector<Player*> players) : listOfPlayers(players) {
 	turnNumber = 1;
 }
 
+Player* Game::getCurrentPlayer() {
+	return listOfPlayers.at(currentPlayer);
+}
+
 void Game::nextPlayer() {
 	int currentPlayer = (++turnNumber + (numOfPlayers-1)) % numOfPlayers;
 	cout << "Play has been passed to player #" << currentPlayer+1 <<

@@ -1,7 +1,4 @@
-﻿  Card.cpp
-C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Card\Card.cpp(218,23): warning C4018: '<': signed/unsigned mismatch
-C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Card\Card.cpp(227,23): warning C4018: '<': signed/unsigned mismatch
-C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Card\Card.cpp(263,27): warning C4018: '<': signed/unsigned mismatch
-C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Card\Card.cpp(38): warning C4717: 'Card::operator=': recursive on all control paths, function will cause runtime stack overflow
-C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Card\Card.cpp(165): warning C4715: 'Hand::getCost': not all control paths return a value
+﻿  Game.cpp
+  Part5.cpp
+  Generating Code...
   MapLoader.vcxproj -> C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\MapLoader\Debug\MapLoader.exe
