@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Card",
+    "\\Game",
     "\\MapLoader"
   ],
-  "SelectedNode": "\\Part5.cpp",
+  "SelectedNode": "\\Card\\Card.cpp",
   "PreviewInSolutionExplorer": false
 }
