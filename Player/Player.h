@@ -2,7 +2,7 @@
 #define PLAYER_H
 #include <vector>
 #include <iostream>
-#include "../Map/Map.h";
+#include "../Map/Map.h"
 #include "../BidingFacility/Bid.h"
 #include "../Card/Card.h"
 using namespace std;

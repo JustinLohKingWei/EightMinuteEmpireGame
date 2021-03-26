@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+#include "../Player/Player.h"
 
 class Game {
 public:
@@ -12,4 +13,6 @@ public:
 private:
 	vector<Player*> listOfPlayers;
 	int currentPlayer;
+	int numOfPlayers;
+	int turnNumber;
 };
