@@ -116,7 +116,7 @@ int main() {
     deck->fillHand(hand);
     for (int i = 0; i < 6; i++) {
         hand->details();
-    }
+    }   
 
 
 	return 0;

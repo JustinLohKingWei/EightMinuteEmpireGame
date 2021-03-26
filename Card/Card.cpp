@@ -144,7 +144,9 @@ void Hand::details(int index){
 void Hand::viewHand(){
     for (int i = 0; i<5; i++){
         if (getCard(i) != NULL){
+            cout << "Index " << i << " ";
             details(i);
+            cout << endl;
         }
         else{
             cout << "Space " << i << "is empty";
