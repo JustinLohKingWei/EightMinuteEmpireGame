@@ -167,7 +167,7 @@ int Hand::getCost(int index){
 void Hand::slideCardsLeft(){
     // Check if card is missing from array
     int emptyIndex = -1; // -1 signifies no empty index
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i <= 5; i++) {
         if (getCard(i) == NULL) {
             emptyIndex = i;
         }
@@ -180,8 +180,10 @@ void Hand::slideCardsLeft(){
         }
        setCard(NULL, indexBeingReplaced); 
     }
+    // If no card is missing
     else {
         cout << "All spaces are occupied. No cards to slide to the left" << endl;
+        cout << emptyIndex << endl;
     }
     
 }

@@ -2,6 +2,10 @@
 
 int main()
 {
+    // Stub for passing play between players
+    for (int i = 0; i < ; i++) {
+
+    }
 
     cout << "Start:" << endl;
 
@@ -49,6 +53,11 @@ int main()
     cout << "Taking the card in index " << chosenIndex << endl;
     hand->exchange(chosenIndex);
 
+    cout << "\n\nBEFORE SLIDING CARDS TO THE LEFT\n\n" << endl;
+
+    hand->viewHand();
+
+
     cout << "\n\nSLIDING CARDS TO THE LEFT" << endl;
   
 
@@ -60,6 +69,7 @@ int main()
     // Draw a new card and place it in the right-most space
     hand->setCard(deck->getTopCard(),5);
     hand->viewHand();
+
     return 0;
 }
 
