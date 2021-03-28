@@ -6,34 +6,29 @@
 #include <regex>
 #include <string>
 #include <vector>
+#include "player.h"
 
 using namespace std;
 
 enum region_connection { TOP, BOTTOM, LEFT, RIGHT };
 
-struct region // vertex
+class region // vertex
 {
+public:
 	typedef map<string, region*> adjacency;
 	adjacency adj;
 	string name;
-	region(string s) : name(s) {}
-	/*region(region* copy) // This should be restricted and handled when creating a map copy!
-	{
-		name = string(copy->name);
-		for (auto& x: copy->adj)
-		{
-			adj.emplace(x); // emplace is a deep copy
-		}
-		cout << "\n" << "Region named : " << name << " copied!" << endl;
-	}*/
-	~region() 
-	{
-		for (auto& x : adj)
-		{
-			x.second = nullptr;
-		}
-		cout << "\n" << "Region named : " << name << " deleted!" << endl;
-	}
+	region(string);
+	~region();
+	int get_number_of_armies(Player*);
+	void set_player_with_most_armies();
+	void set_armies_to_region(Player*, int);
+	vector<Player*> get_controlling_player();
+	vector<pair<Player*, int>> get_occuping_armies();
+private:
+	vector<pair<Player*, int>> occuping_armies;
+	vector<Player*> controlling_player;
+	void add_controlling_player(Player*);
 };
 
 class game_map // graph, island, or world map
