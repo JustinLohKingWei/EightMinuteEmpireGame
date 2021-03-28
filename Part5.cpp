@@ -24,50 +24,55 @@ int main(){
     cout << "Start:" << endl;
     // Initialization of players
     vector<Player*> players;
-
     // Player1
     vector<region*> listOfRegions1;
     vector<Card*> cardsInHand1;
-    Player* aPlayer1 = new Player("Alpha", "Apple", cardsInHand1, listOfRegions1);
+    vector<Army*> listOfArmies1;
+    vector<City*> listOfCities1;
+    Player* aPlayer1 = new Player("Alpha", "Apple", cardsInHand1, listOfRegions1, listOfArmies1, listOfCities1);
 
 
     // Player2
     vector<region*> listOfRegions2;
     vector<Card*> cardsInHand2;
-    Player* aPlayer2 = new Player("Beta", "Banana", cardsInHand2, listOfRegions2);
+    vector<Army*> listOfArmies2;
+    vector<City*> listOfCities2;
+    Player* aPlayer2 = new Player("Beta", "Banana", cardsInHand2, listOfRegions2, listOfArmies2, listOfCities2);
 
-    // Player3
-    vector<region*> listOfRegions3;
-    vector<Card*> cardsInHand3;
-    Player* aPlayer3 = new Player("Charlie", "Carrot", cardsInHand3, listOfRegions3);
+    //// Player3
+    //vector<region*> listOfRegions3;
+    //vector<Card*> cardsInHand3;
+    //vector<Army*> listOfArmies3;
+    //vector<City*> listOfCities3;
+    //Player* aPlayer3 = new Player("Charlie", "Carrot", cardsInHand3, listOfRegions3, listOfArmies3, listOfCities3);
 
     players.push_back(aPlayer1);
     players.push_back(aPlayer2);
-    players.push_back(aPlayer3);
+    //players.push_back(aPlayer3);
 
     
     // Initialization of game
     Game* part5Game = new Game(players);
-
+    int numOfPlayers = part5Game->getNumOfPlayers();
 
 
     // Create some cards.
-    Card* card1 = new Card("Ancient Phoenix", "Flight", "Move Armies: 5");
-    Card* card2 = new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3");
-    Card* card3 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2");
-    Card* card4 = new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1");
-    Card* card5 = new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City");
-    Card* card6 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2");
-    Card* card7 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2");
-    Card* card8 = new Card("Ancient Phoenix", "Flight", "Move Armies: 5");
-    Card* card9 = new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3");
-    Card* card10 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2");
-    Card* card11 = new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1");
-    Card* card12 = new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City");
-    Card* card13 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2");
-    Card* card14 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2");
+    Card* card1 = new Card("Ancient Phoenix", "Flight", "Move Armies: 5",numOfPlayers);
+    Card* card2 = new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3",numOfPlayers);
+    Card* card3 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2",numOfPlayers);
+    Card* card4 = new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1",numOfPlayers);
+    Card* card5 = new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City",numOfPlayers);
+    Card* card6 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2",numOfPlayers);
+    Card* card7 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2",numOfPlayers);
+    Card* card8 = new Card("Ancient Phoenix", "Flight", "Move Armies: 5",numOfPlayers);
+    Card* card9 = new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", numOfPlayers);
+    Card* card10 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", numOfPlayers);
+    Card* card11 = new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", numOfPlayers);
+    Card* card12 = new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", numOfPlayers);
+    Card* card13 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", numOfPlayers);
+    Card* card14 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", numOfPlayers);
 
-    Card* initialCardsInHand[6] = { card1, card2, card3, card4, card5, card6 };
+    vector<Card*> initialCardsInHand { card1, card2, card3, card4, card5, card6 };
 
     // Create the hand object, which is used by all players.
     Hand* hand = new Hand(initialCardsInHand);
@@ -76,10 +81,11 @@ int main(){
         cout << "Details of Hand Position " << i << "\n";
         hand->Hand::details(i);
     }
-    cout << "\n\n\n" << endl;`
+    part5Game->setGameHand(hand);
+    cout << "\n\n\n" << endl;
 
     // Create deck object
-    vector<Card*> cardList = { card7, card8, card9, card10,card11,card12,card13, card14};
+    vector<Card*> cardList{ card7, card8, card9, card10,card11,card12,card13, card14};
     Deck* deck = new Deck(cardList);
 
 
@@ -101,8 +107,10 @@ int main(){
         }
         
     }
+
     cout << "Taking the card in index " << chosenIndex << endl;
-    part5Game->getCurrentPlayer()->getHand().push_back(hand->exchange(chosenIndex));
+    
+    (*part5Game->getGameHand()).getCardsInHand().push_back(hand->exchange(chosenIndex));
 
     cout << "\n\nBEFORE SLIDING CARDS TO THE LEFT\n\n" << endl;
 
@@ -115,7 +123,7 @@ int main(){
     hand->slideCardsLeft();
     hand->viewHand();
 
-    cout << "\n\nAFTER SLIDING\n\nDraw new card and place on top" << endl;
+    cout << "\n\n\nDRAWING CARD FROM TOP OF DECK" << endl;
 
     // Draw a new card and place it in the right-most space
     hand->setCard(deck->getTopCard(),5);
@@ -130,7 +138,7 @@ int main(){
     delete deck;
     delete hand;
     delete part5Game;
-    delete aPlayer3;
+    //delete aPlayer3;
     delete aPlayer2;
     delete aPlayer1;
  

@@ -104,9 +104,10 @@ Hand::Hand() {
 }
 
 // Parameterized Constructor
-Hand::Hand(Card* newCardsInHand[]){
+Hand::Hand(vector<Card*> newCardsInHand){
+    cardsInHand;
     for (int i = 0; i < 6; i++) {
-        cardsInHand[i] = newCardsInHand[i];
+        cardsInHand.push_back(newCardsInHand.at(i));
     }
 }
 
@@ -142,14 +143,14 @@ void Hand::details(int index){
 
 // Displays current hand.
 void Hand::viewHand(){
-    for (int i = 0; i<5; i++){
+    for (int i = 0; i<=5; i++){
         if (getCard(i) != NULL){
             cout << "Index " << i << " ";
             details(i);
             cout << endl;
         }
         else{
-            cout << "Space " << i << "is empty";
+            cout << "Space " << i << "is empty" << endl;
         }
     }
 }
@@ -187,6 +188,36 @@ Card* Hand::getCard(int index) {
 // Sets a card.
 void Hand::setCard(Card* newCard, int index){
     cardsInHand[index] = newCard;
+}
+
+// Re-arranges the array to push cards to the left
+void Hand::slideCardsLeft() {
+    // Check if card is missing from array
+    int emptyIndex = -1; // -1 signifies no empty index
+    for (int i = 0; i <= 5; i++) {
+        if (getCard(i) == NULL) {
+            emptyIndex = i;
+        }
+    }
+    // If card is missing, take every card to the right and bring it one index lower
+    if (emptyIndex != -1) {
+        int indexBeingReplaced = emptyIndex;
+        while (indexBeingReplaced < 5) {
+            cardsInHand.at(indexBeingReplaced) = cardsInHand.at(indexBeingReplaced+1);
+            indexBeingReplaced += 1;
+        }
+        setCard(NULL, indexBeingReplaced);
+    }
+    // If no card is missing
+    else {
+        cout << "All spaces are occupied. No cards to slide to the left" << endl;
+        cout << emptyIndex << endl;
+    }
+
+}
+
+vector<Card*> Hand::getCardsInHand() {
+    return cardsInHand;
 }
 
 vector<Card*> Deck::listOfCards = {//list of cards
@@ -229,6 +260,11 @@ vector<Card*> Deck::listOfCards = {//list of cards
 // Empty Constructor
 Deck::Deck() {
     
+}
+
+// Parameterized constructor
+Deck::Deck(vector<Card*> cardList) {
+    listOfCards = cardList;
 }
 
 Deck::~Deck() {

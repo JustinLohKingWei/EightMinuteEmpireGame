@@ -30,7 +30,7 @@ class Card {
 class Hand {
     public:
         Hand();
-        Hand(Card* newCardsInHand[]);
+        Hand(vector<Card*> newCardsInHand);
         Hand(const Hand& h);
         ~Hand();
         friend ostream& operator << (ostream& out, const Hand& h);
@@ -40,8 +40,10 @@ class Hand {
         void setCard(Card* newCard, int index);
         Card* getCard(int index);
         int getCost(int index);
+        void slideCardsLeft();
+        vector<Card*> getCardsInHand();
     private:
-        Card* cardsInHand[6];
+        vector<Card*> cardsInHand;
 };
 
 class Deck {
