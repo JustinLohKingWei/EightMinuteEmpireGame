@@ -63,14 +63,14 @@ int main(){
     Card* card4 = new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1",numOfPlayers);
     Card* card5 = new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City",numOfPlayers);
     Card* card6 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2",numOfPlayers);
-    Card* card7 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2",numOfPlayers);
+ /*   Card* card7 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2",numOfPlayers);
     Card* card8 = new Card("Ancient Phoenix", "Flight", "Move Armies: 5",numOfPlayers);
     Card* card9 = new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", numOfPlayers);
     Card* card10 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", numOfPlayers);
     Card* card11 = new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", numOfPlayers);
     Card* card12 = new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", numOfPlayers);
     Card* card13 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", numOfPlayers);
-    Card* card14 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", numOfPlayers);
+    Card* card14 = new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", numOfPlayers);*/
 
     vector<Card*> initialCardsInHand { card1, card2, card3, card4, card5, card6 };
 
@@ -85,8 +85,8 @@ int main(){
     cout << "\n\n\n" << endl;
 
     // Create deck object
-    vector<Card*> cardList{ card7, card8, card9, card10,card11,card12,card13, card14};
-    Deck* deck = new Deck(cardList);
+    //vector<Card*> cardList{ card7, card8, card9, card10,card11,card12,card13, card14};
+    Deck* deck = new Deck();
 
 
     // Prompt user to choose a card from the hand
@@ -133,7 +133,6 @@ int main(){
     // Passing the play to the next player
     part5Game->nextPlayer();
     part5Game->nextPlayer();
-
 
     delete deck;
     delete hand;

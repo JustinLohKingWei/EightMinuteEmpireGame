@@ -160,6 +160,7 @@ Card* Hand::exchange(int index){
     cout << "You've used the following card for " << getCost(index) << ": \n";
     details(index);
     Card* exchangedCard = cardsInHand[index];
+    delete cardsInHand[index];
     setCard(NULL, index);
     return exchangedCard;
 }
