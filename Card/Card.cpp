@@ -7,6 +7,7 @@
 #include <ranges>
 #include <algorithm>
 #include <random>
+#include <ctime>
 using namespace std;
 
 // Empty Constructor
@@ -143,7 +144,9 @@ void Hand::details(int index){
 void Hand::viewHand(){
     for (int i = 0; i<5; i++){
         if (getCard(i) != NULL){
+            cout << "Index " << i << " ";
             details(i);
+            cout << endl;
         }
         else{
             cout << "Space " << i << "is empty";
@@ -188,23 +191,39 @@ void Hand::setCard(Card* newCard, int index){
 
 vector<Card*> Deck::listOfCards = {//list of cards
       new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 2),
-      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 2),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
-      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 2),
-      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 2),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
-      new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 2),
-      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 2),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
-      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 3),
-      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 3),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 3),
-      new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 4),
-      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 4),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 4),
-      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 2),
-      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 2),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2)
+      new Card("Ancient Spirit Tree", "Flight", "Move Armies: 5", 2),
+      new Card("Cursed Banshee", "Flight", "Move Armies: 5", 2),
+      new Card("Cursed King", "Flight", "Move Armies: 5", 2),
+      new Card("Cursed Tower", "Flight", "Move Armies: 5", 2),
+      new Card("Dire Eye", "Flight", "Move Armies: 5", 2),
+      new Card("Forest Elf", "Flight", "Move Armies: 5", 2),
+      new Card("Forest Goblin", "Flight", "Move Armies: 5", 2),
+      new Card("Graveyard", "Flight", "Move Armies: 5", 2),
+      new Card("Night Hydra", "Flight", "Move Armies: 5", 2),
+      new Card("Night Wizard", "Flight", "Move Armies: 5", 2),
+      new Card("Noble Knight", "Flight", "Move Armies: 5", 2),
+      new Card("Stronghold", "Flight", "Move Armies: 5", 2),
+      new Card("Ancient Sage", "Flight", "Move Armies: 5", 2),
+      new Card("Ancient Woods", "Flight", "Move Armies: 5", 2),
+      new Card("Cursed Gargoyles", "Flight", "Move Armies: 5", 2),
+      new Card("Cursed Mausoleum", "Flight", "Move Armies: 5", 2),
+      new Card("Dire Dragon", "Flight", "Move Armies: 5", 2),
+      new Card("Dire Giant", "Flight", "Move Armies: 5", 2),
+      new Card("Dire Ogre", "Flight", "Move Armies: 5", 2),
+      new Card("Forest Gnome", "Flight", "Move Armies: 5", 2),
+      new Card("Forest Tree Town", "Flight", "Move Armies: 5", 2),
+      new Card("Lake", "Flight", "Move Armies: 5", 2),
+      new Card("Night Village", "Flight", "Move Armies: 5", 2),
+      new Card("Noble Hills", "Flight", "Move Armies: 5", 2),
+      new Card("Noble Unicorn", "Flight", "Move Armies: 5", 2),
+      new Card("Arcane Manticore", "Flight", "Move Armies: 5", 3),
+      new Card("Arcane Sphinx", "Flight", "Move Armies: 5", 3),
+      new Card("Arcane Temple", "Flight", "Move Armies: 5", 3),
+      new Card("Mountain Dwarf", "Flight", "Move Armies: 5", 3),
+      new Card("Mountain Treasury", "Flight", "Move Armies: 5", 3),
+      new Card("Castle", "Flight", "Move Armies: 5", 4),
+      new Card("Castle 2", "Flight", "Move Armies: 5", 4),
+
 };
 
 // Empty Constructor
@@ -247,35 +266,26 @@ Card* Deck::getTopCard() {
 
 // Allows users to draw card then place it in the Hand.
 void Deck::draw(Hand* aHand) {
-    vector<int> indices;
+    int emptyIndex = -1;
     for (int i = 0; i < 6; i++) {
         if (aHand->getCard(i) == NULL) {
-            indices.push_back(i);
+            emptyIndex = i;
+            break;
         }
     }
-    if (indices.size() == 0) {
+    if (emptyIndex == -1) {
         cout << "No space for new cards in hand. \n";
     }
     else {
-        cout << "The available positions are: \n";
-        for (int i = 0; i < indices.size(); i++) {
-            cout << indices[i] << " ";
-        }
-        cout << endl;
-        cout << "Please enter the position for the card: ";
-        bool incorrect = true;
-        int position;
-        do {
-            std::cin >> position;
-            if (aHand->getCard(position) != NULL || position > 5) {
-                cout << "Incorrect input, please try again. \n";
-            }
-            else {
-                incorrect = false;
-            }
-        } while (incorrect);
+        aHand->setCard(getTopCard(), emptyIndex);
+    }
+}
 
-        aHand->setCard(getTopCard(), position);
+void Deck::fillHand(Hand* aHand) {
+    for (int i = 0; i < 6; i++) {
+        if (aHand->getCard(i) == NULL) {
+            aHand->setCard(getTopCard(), i);
+        }
     }
 }
 
@@ -290,6 +300,7 @@ void Deck::filterDeck(int playerCount) {
 }
 
 void Deck::shuffleDeck() {
+    std::srand(std::time(0));
     std::random_shuffle(std::begin(listOfCards), std::end(listOfCards) );
 }
 

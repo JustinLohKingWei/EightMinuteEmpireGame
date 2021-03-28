@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Player/Player.h"
 #include "BidingFacility/Bid.h"
+#include "Card/Card.h"
 
 int main() {
 	//TODO : Implement Driver of Part 2
@@ -107,21 +108,16 @@ int main() {
     cout << "Winner is " << winner.getFirstName() << " With Bidding Amount :" << winnerAmount << endl;
     winner.getBidingFacility()->putCoins();
 
+    // Card Shuffling and filling of deck.
     Deck* deck = new Deck;
-    cout << "Normal Deck" << endl;
-    for (int i = 0; i < deck->getListOfCards().size(); i++) {
-        cout <<  deck->getListOfCards()[i]->getName() << endl;
-    }
-    cout << "Filtered Deck" << endl;
     deck->filterDeck(playernum);
-    for (int i = 0; i < deck->getListOfCards().size(); i++) {
-        cout << deck->getListOfCards()[i]->getName() << endl;
-    }
-    cout << "Shhuffled Deck" << endl;
     deck->shuffleDeck();
-    for (int i = 0; i < deck->getListOfCards().size(); i++) {
-        cout << deck->getListOfCards()[i]->getName() << endl;
-    }
+    Hand* hand = new Hand;
+    deck->fillHand(hand);
+    for (int i = 0; i < 6; i++) {
+        hand->details();
+    }   
+
 
 	return 0;
 }

@@ -53,6 +53,7 @@ class Deck {
         ~Deck();
         friend ostream& operator << (ostream& out, const Deck& d);
         void draw(Hand* aHand);
+        void fillHand(Hand* aHand);
         Card* getTopCard();
         std::vector<Card*> getListOfCards();
         void filterDeck(int playerNumber);
