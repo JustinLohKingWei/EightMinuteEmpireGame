@@ -1,5 +1,4 @@
-#ifndef CARD_H
-#define CARD_H
+#pragma once
 #include <string>
 #include <iostream>
 #include <vector>
@@ -63,4 +62,3 @@ class Deck {
         static std::vector<Card*> listOfCards;
     };
 
-#endif //CARD_H

@@ -1,7 +1,5 @@
-#ifndef PLAYER_CPP
-#define PLAYER_CPP
 
-#include "Player.h";
+#include "Player.h"
 
 	//Default constructor
 	Player::Player() {
@@ -255,4 +253,3 @@
 	 bool playerGoods::getIsPlaced() {
 		 return isPlaced;
 	 }
-#endif
