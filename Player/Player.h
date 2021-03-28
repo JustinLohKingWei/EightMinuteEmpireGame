@@ -50,7 +50,7 @@ public:
 	friend istream& operator >> (istream& in, Player& aPlayer);
 	bool PayCoin(int payableAmount, char type);
 	void PlaceNewArmies(int numberOfArmies, region* aRegion);
-	void MoveArmies(region* from, region* to, int numberOfArmiesToMove);
+	void MoveArmies(int numberOfArmiesToMove);
 	void MoveOverLand();
 	void MoveOverWater();
 	void BuildCity(region* where);

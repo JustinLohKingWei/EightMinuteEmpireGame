@@ -54,11 +54,11 @@
 	}
 
 	ostream& operator << (ostream& out, const Army& anArmy) {
-		out << "Army at " << anArmy.aRegion << ", isPlaced: " << anArmy.isPlaced << endl;
+		out << "Army at " << anArmy.aRegion->name << ", isPlaced: " << anArmy.isPlaced << endl;
 		return out;
 	}
 	
-	City::City() {}
+	//City::City() {}
 
 	City::City(const City& b) {
 		this->aRegion = b.aRegion;
@@ -134,15 +134,16 @@
 		}
 	}
 
-	void Player::MoveArmies(region* from, region* to, int numberOfArmiesToMove) {
+	void Player::MoveArmies(int numberOfArmiesToMove) {
 		cout << " executing MoveArmies()..." << endl;
 		int counter = 0;
+		cout << "displaying armies available..." << endl;
+		int index = 0;
+		for (Army* armyPiece : getListOfArmy()) {
+			cout <<"Army # " << index++ << " " << *armyPiece << endl;//Displaying available armies
+		}
+		
 
-		/*for (int i = 0; i < listOfArmy.size(); i++) {
-			if (*(listOfArmy.at(i))->getRegion()->name == from->name) {
-
-			}
-		}*/
 	}
 
 	void Player::MoveOverLand() {
