@@ -27,10 +27,10 @@
     <ClCompile Include="..\BidingFacility\bid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Part5.cpp">
+    <ClCompile Include="..\Game\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Game\Game.cpp">
+    <ClCompile Include="..\Part6.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

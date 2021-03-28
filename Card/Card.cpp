@@ -98,8 +98,9 @@ int Card::getMaxPlayerCount() {
 
 // Empty Constructor
 Hand::Hand() {
+    cardsInHand;
     for (int i = 0; i < 6; i++) {
-        cardsInHand[i] = NULL;
+        cardsInHand.push_back(NULL);
     }
 }
 
