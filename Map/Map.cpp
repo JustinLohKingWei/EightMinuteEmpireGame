@@ -16,7 +16,7 @@ game_map::game_map(game_map* copy) // TODO
 		{
 			m_map.emplace(x); // emplace is a deep copy
 		}
-		cout << "\n" << "Map named : " << map_name << " copied!" << endl;
+		//cout << "\n" << "Map named : " << map_name << " copied!" << endl;
 	}
 	else // world map copy, only top level copies, bottom level links to original sub graphs, copy sub graphs with above!
 	{
@@ -32,7 +32,7 @@ game_map::game_map(game_map* copy) // TODO
 		{
 			m_map.emplace(x); // emplace is a deep copy
 		}
-		cout << "\n" << "Map named : " << map_name << " copied!" << endl;
+		//cout << "\n" << "Map named : " << map_name << " copied!" << endl;
 	}
 }
 
@@ -70,7 +70,7 @@ game_map::game_map(string map_shape_, game_map* tile1_, game_map* tile2_, game_m
 			{
 				add_route(itr_1->second->name, itr_2->second->name);
 				add_route(itr_2->second->name, itr_1->second->name);
-				cout << "\n" << "Map named : " << map_name << " created" << endl;
+				//cout << "\n" << "Map named : " << map_name << " created" << endl;
 			}
 		}
 	}
@@ -90,7 +90,7 @@ game_map::game_map(string map_shape_, game_map* tile1_, game_map* tile2_, game_m
 			{
 				add_route(itr_1->second->name, itr_2->second->name);
 				add_route(itr_2->second->name, itr_1->second->name);
-				cout << "\n" << "Map named : " << map_name << " created" << endl;
+				//cout << "\n" << "Map named : " << map_name << " created" << endl;
 			}
 	}
 	else
@@ -145,7 +145,7 @@ game_map::game_map(string map_shape_, game_map* tile1_, game_map* tile2_, game_m
 				{
 					add_route(itr_1->second->name, itr_2->second->name);
 					add_route(itr_2->second->name, itr_1->second->name);
-					cout << "\n" << "Map named : " << map_name << " created" << endl;
+					//cout << "\n" << "Map named : " << map_name << " created" << endl;
 				}
 			}
 		}
@@ -164,11 +164,11 @@ game_map::~game_map() // destruct all types maps // TODO
 		{
 			if (x.second != nullptr)
 			{
-				cout << "Not world map" << endl;
+				//cout << "Not world map" << endl;
 				delete x.second;
 			}
 		  }
-		cout << "\n" << "Map named : " << map_name << " deleted!" << endl;
+		//cout << "\n" << "Map named : " << map_name << " deleted!" << endl;
 	}
 	else // world map destruct, leaves sub graphs intact
 	{
@@ -180,7 +180,7 @@ game_map::~game_map() // destruct all types maps // TODO
 		{
 			x.second = nullptr;
 		}
-		cout << "\n" << "Map named : " << map_name << " deleted!" << endl;
+		//cout << "\n" << "Map named : " << map_name << " deleted!" << endl;
 	}
 }
 
@@ -194,7 +194,7 @@ void game_map::add_region(const string& name)
 		m_map[name] = r;
 		return;
 	}
-	cout << "The region " << name << " already exists!" << endl;
+	//cout << "The region " << name << " already exists!" << endl;
 }
 
 void game_map::add_connection_region(const string& name, region_connection direction) // replace add_region when region has a outside connection!!!
@@ -212,7 +212,7 @@ void game_map::add_connection_region(const string& name, region_connection direc
 	{
 		c_map[direction] = itr->second; // some regions have double outside connections
 	}
-	cout << "The region " << name << " already exists!" << endl;
+	//cout << "The region " << name << " already exists!" << endl;
 }
 
 // adapted from graph slides from class
@@ -295,7 +295,7 @@ void game_map::populateTile(string tileName) {
 		{
 			string s = "C Shape Island Region " + to_string(i + 1);
 			this->add_region(s);
-			cout << "\n Added a new area has been added: " << s << "." << endl;
+			//cout << "\n Added a new area has been added: " << s << "." << endl;
 		}
 
 		// edges are initilized left to right, top to bottom, but they can be done in any way
@@ -312,14 +312,14 @@ void game_map::populateTile(string tileName) {
 		this->add_route("C Shape Island Region 5", "C Shape Island Region 2");
 	}
 	else if (tileName.compare("Three Islands")) {
-		cout << "\n\nThree Islands map tile has been created." << endl;
+		//cout << "\n\nThree Islands map tile has been created." << endl;
 
 		// initialize "tile2" the right tile as depected on the first page of the rules
 		for (auto i = 0; i < 3; ++i)
 		{
 			string s = "Three Islands Region " + to_string(i + 1);
 			this->add_region(s);
-			cout << "\n Added a new area has been added: " << s << "." << endl;
+			//cout << "\n Added a new area has been added: " << s << "." << endl;
 		}
 
 		// edges are initilized left to right, top to bottom, but they can be done in any way
@@ -330,14 +330,14 @@ void game_map::populateTile(string tileName) {
 		this->add_route("Three Islands Region 3", "Three Islands Region 2");
 	}
 	else if (tileName.compare("Stone Pillars Islands")) {
-		cout << "\n\nStone Pillars Island map tile has been created." << endl;
+		//cout << "\n\nStone Pillars Island map tile has been created." << endl;
 
 		// initialize "tile3" the left tile as depected on the first page of the rules
 		for (auto i = 0; i < 5; ++i)
 		{
 			string s = "Stone Pillars Island Region " + to_string(i + 1);
 			this->add_region(s);
-			cout << "\n Added a new area has been added: " << s << "." << endl;
+			//cout << "\n Added a new area has been added: " << s << "." << endl;
 		}
 
 		// edges are initilized left to right, bottom to top, but they can be done in any way
@@ -355,14 +355,14 @@ void game_map::populateTile(string tileName) {
 		this->add_route("Stone Pillars Island Region 5", "Stone Pillars Island Region 4");
 	}
 	else if (tileName.compare("Valcano Island")) {
-		cout << "\n\nValcano Island Island map tile has been created." << endl;
+		//cout << "\n\nValcano Island Island map tile has been created." << endl;
 
 		// initialize "tile4" the top tile as depected on the first page of the rules
 		for (auto i = 0; i < 7; ++i)
 		{
 			string s = "Valcano Island Region " + to_string(i + 1);
 			this->add_region(s);
-			cout << "\n Added a new area has been added: " << s << "." << endl;
+			//cout << "\n Added a new area has been added: " << s << "." << endl;
 		}
 
 		// edges are initilized left to right, top to bottom, but they can be done in any way
