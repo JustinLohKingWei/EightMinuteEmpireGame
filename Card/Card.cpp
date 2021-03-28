@@ -142,7 +142,7 @@ void Hand::details(int index){
 
 // Displays current hand.
 void Hand::viewHand(){
-    for (int i = 0; i<5; i++){
+    for (int i = 0; i<6; i++){
         if (getCard(i) != NULL){
             cout << "Index " << i << " ";
             details(i);
@@ -191,38 +191,38 @@ void Hand::setCard(Card* newCard, int index){
 
 vector<Card*> Deck::listOfCards = {//list of cards
       new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 2),
-      new Card("Ancient Spirit Tree", "Flight", "Move Armies: 5", 2),
-      new Card("Cursed Banshee", "Flight", "Move Armies: 5", 2),
-      new Card("Cursed King", "Flight", "Move Armies: 5", 2),
-      new Card("Cursed Tower", "Flight", "Move Armies: 5", 2),
-      new Card("Dire Eye", "Flight", "Move Armies: 5", 2),
-      new Card("Forest Elf", "Flight", "Move Armies: 5", 2),
-      new Card("Forest Goblin", "Flight", "Move Armies: 5", 2),
-      new Card("Graveyard", "Flight", "Move Armies: 5", 2),
-      new Card("Night Hydra", "Flight", "Move Armies: 5", 2),
-      new Card("Night Wizard", "Flight", "Move Armies: 5", 2),
-      new Card("Noble Knight", "Flight", "Move Armies: 5", 2),
-      new Card("Stronghold", "Flight", "Move Armies: 5", 2),
-      new Card("Ancient Sage", "Flight", "Move Armies: 5", 2),
-      new Card("Ancient Woods", "Flight", "Move Armies: 5", 2),
+      new Card("Ancient Spirit Tree", "Elixers: 3", "Place Armies: 4", 2),
+      new Card("Cursed Banshee", "Elixers: 2", "Move Armies: 6", 2),
+      new Card("Cursed King", "Elixers: 1", "Place Armies: 3 OR Move Armies: 4", 2),
+      new Card("Cursed Tower", "+1 VP Per Flight", "Build City", 2),
+      new Card("Dire Eye", "Flight", "Place Armies: 4", 2),
+      new Card("Forest Elf", "+1 Army", "Place Armies: 3 OR Move Armies: 2", 2),
+      new Card("Forest Pixie", "+1 Army", "Move Armies: 4", 2),
+      new Card("Graveyard", "+1 VP Per Cursed", "Place Armies: 2", 2),
+      new Card("Night Hydra", "+1 Army", "Move Armies: 5 AND Destroy Army", 2),
+      new Card("Night Wizard", "+1 VP Per Night", "Place Armies: 3 AND Destroy Army", 2),
+      new Card("Noble Knight", "+1 Move", "Place Armies: 4 AND Destroy Ar,u", 2),
+      new Card("Stronghold", "+1 VP Per Dire", "Build City", 2),
+      new Card("Ancient Sage", "+1 VP Per Ancient", "Move Armies: 3", 2),
+      new Card("Ancient Woods", "+1 Army", "Build City AND Place Armies: 1", 2),
       new Card("Cursed Gargoyles", "Flight", "Move Armies: 5", 2),
-      new Card("Cursed Mausoleum", "Flight", "Move Armies: 5", 2),
-      new Card("Dire Dragon", "Flight", "Move Armies: 5", 2),
-      new Card("Dire Giant", "Flight", "Move Armies: 5", 2),
-      new Card("Dire Ogre", "Flight", "Move Armies: 5", 2),
-      new Card("Forest Gnome", "Flight", "Move Armies: 5", 2),
-      new Card("Forest Tree Town", "Flight", "Move Armies: 5", 2),
-      new Card("Lake", "Flight", "Move Armies: 5", 2),
-      new Card("Night Village", "Flight", "Move Armies: 5", 2),
-      new Card("Noble Hills", "Flight", "Move Armies: 5", 2),
-      new Card("Noble Unicorn", "Flight", "Move Armies: 5", 2),
-      new Card("Arcane Manticore", "Flight", "Move Armies: 5", 3),
-      new Card("Arcane Sphinx", "Flight", "Move Armies: 5", 3),
-      new Card("Arcane Temple", "Flight", "Move Armies: 5", 3),
-      new Card("Mountain Dwarf", "Flight", "Move Armies: 5", 3),
-      new Card("Mountain Treasury", "Flight", "Move Armies: 5", 3),
-      new Card("Castle", "Flight", "Move Armies: 5", 4),
-      new Card("Castle 2", "Flight", "Move Armies: 5", 4),
+      new Card("Cursed Mausoleum", "+1 Move", "Build City", 2),
+      new Card("Dire Dragon", "Flight", "Place Armies: 3 AND Destroy Army", 2),
+      new Card("Dire Giant", "Immune to Attack", "Place Armies: 3 AND Destroy Army", 2),
+      new Card("Dire Ogre", "+1 VP Per 3 Coins", "Move Armies: 2", 2),
+      new Card("Forest Gnome", "Elixers: 3", "Move Armies: 2", 2),
+      new Card("Forest Tree Town", "+1 Move", "Build City", 2),
+      new Card("Lake", "+1 VP Per Forest", "Place Armies: 2 OR Move Armies: 3", 2),
+      new Card("Night Village", "+1 Army", "Build City", 2),
+      new Card("Noble Hills", "3 Noble cards = 4VP", "Place Armies: 3", 2),
+      new Card("Noble Unicorn", "+1 Move", "Move Armies: 4 AND Place Armies: 1", 2),
+      new Card("Arcane Manticore", "+1 Move", "Place Armies: 4 AND Destroy Army", 3),
+      new Card("Arcane Sphinx", "Flight", "Place Armies: 3 OR Move Armies: 4", 3),
+      new Card("Arcane Temple", "+1 VP Per Arcane", "Move Armies: 3", 3),
+      new Card("Mountain Dwarf", "2 Mountain = 3VP", "Place Armies: 2 AND Destroy Army", 3),
+      new Card("Mountain Treasury", "Elixers: 1 AND Coins: 2", "Move Armies: 3", 3),
+      new Card("Castle", "Elixers: 1", "Place Armies: 3 OR Build City", 4),
+      new Card("Castle 2", "Elixers: 1", "Move Armies: 3 AND Build City", 4),
 
 };
 
