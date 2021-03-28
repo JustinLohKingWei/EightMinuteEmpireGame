@@ -6,9 +6,10 @@
 #include <regex>
 #include <string>
 #include <vector>
-#include "player.h"
+#include "../Player/Player.h"
 
 using namespace std;
+class Player;
 
 enum region_connection { TOP, BOTTOM, LEFT, RIGHT };
 
@@ -53,7 +54,5 @@ public:
 	game_map(string, game_map*, game_map*, game_map*, game_map*); // create world map with 4 submaps
 	~game_map();
 
-private:
-	void populateTile(string);
 };
 
