@@ -11,33 +11,6 @@ int main() {
     string lName;
     string first, last;
 
-    vector<Card*>listOfCards = {//list of cards
-      new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 2),
-      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 2),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
-      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 2),
-      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 2),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
-      new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 2),
-      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 2),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
-      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 3),
-      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 3),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 3),
-      new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 4),
-      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 4),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 4),
-      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 2),
-      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 2),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2)
-    };
-    int cardsInEachHand = 0;
-    if (playernum == 2) {
-        cardsInEachHand = 4;
-    }
-    else {
-        cardsInEachHand = 2;
-    }
 	vector<Player*> players;		//Vector of players
     for (int i = 0; i < playernum; i++) {
         cout << "Please enter first name" << endl;
@@ -46,10 +19,11 @@ int main() {
         cin >> last;
         fName = string(first);
         lName = string(last);
-        vector<Card*>cardsInHand;
         fName = string(first);
         lName = string(last);
+        vector<Card*>cards;
         vector<region*>listOfRegions;
+/*
         vector<Army*> listOfArmies;
         vector<City*> listOfCities;
         for (int j = 0; j < listOfCards.size(); j++) {//Distributing cards
@@ -61,6 +35,11 @@ int main() {
         }
         listOfCards.erase(listOfCards.begin(), listOfCards.begin() + cardsInEachHand);
         Player* aPlayer = new Player(fName, lName, cardsInHand, listOfRegions, listOfArmies, listOfCities);//Creating player
+*/
+        vector<Army*>listOfArmies;
+        vector<City*>listOfCities;
+        Player* aPlayer = new Player(fName, lName, cards, listOfRegions, listOfArmies, listOfCities);//Creating player
+
         players.push_back(aPlayer);
     }
 
@@ -116,9 +95,8 @@ int main() {
     deck->shuffleDeck();
     Hand* hand = new Hand;
     deck->fillHand(hand);
-    for (int i = 0; i < 6; i++) {
-        hand->details(i);
-    }   
+
+    hand->viewHand();
 
 
 	return 0;
