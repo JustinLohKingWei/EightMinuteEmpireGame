@@ -4,6 +4,9 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <ranges>
+#include <algorithm>
+#include <random>
 using namespace std;
 
 // Empty Constructor
@@ -11,13 +14,15 @@ Card::Card() {
     name = "Card Name";
     good = "Card Good";
     action = "Card Action";
+    maxPlayerCount = 0;
 }
 
 //Constructor with Parameters
-Card::Card(std::string theName, std::string theGood, std::string theAction) {
+Card::Card(std::string theName, std::string theGood, std::string theAction, int playerCount) {
     name = theName;
     good = theGood;
     action = theAction;
+    maxPlayerCount = playerCount;
 }
 
 // Copy Constructor
@@ -25,6 +30,7 @@ Card::Card(const Card& c) {
     name = c.name;
     good = c.action;
     action = c.action;
+    maxPlayerCount = c.maxPlayerCount;
 }
 
 // Assignment Operator
@@ -34,6 +40,7 @@ Card& Card::operator = (const Card& card)
     name = card.name;
     good = card.action;
     action = card.action;
+    maxPlayerCount = card.maxPlayerCount;
     return *this;
 }
 
@@ -53,6 +60,8 @@ istream& operator >> (istream& in, Card& c)
     in >> c.good;
     cout << "Enter Card Action ";
     in >> c.action;
+    cout << "Enter Max Player Count ";
+    in >> c.maxPlayerCount;
     return in;
 }
 
@@ -63,7 +72,7 @@ void Card::showAction() {
 
 // Displays the good of a card.
 void Card::showGood() {
-    cout << "This card's action is: " << getGood() << "\n";
+    cout << "This card's good is: " << getGood() << "\n";
 }
 
 // Returns the name of a card.
@@ -79,6 +88,10 @@ std::string Card::getAction() {
 // Returns the good of card.
 std::string Card::getGood() {
     return good;
+}
+
+int Card::getMaxPlayerCount() {
+    return maxPlayerCount;
 }
 
 
@@ -173,19 +186,30 @@ void Hand::setCard(Card* newCard, int index){
     cardsInHand[index] = newCard;
 }
 
+vector<Card*> Deck::listOfCards = {//list of cards
+      new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 2),
+      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 2),
+      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
+      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 2),
+      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 2),
+      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
+      new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 2),
+      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 2),
+      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
+      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 3),
+      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 3),
+      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 3),
+      new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 4),
+      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 4),
+      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 4),
+      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 2),
+      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 2),
+      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2)
+};
+
 // Empty Constructor
 Deck::Deck() {
-    listOfCards = vector<Card*> {new Card("Ancient Phoenix", "Flight", "Move Armies: 5")};
-}
-
-// Parameterized Constructor
-Deck::Deck(vector<Card*> cardList) {
-    listOfCards = cardList;
-}
-
-// Copy Constructor
-Deck::Deck(const Deck& d) {
-    listOfCards = d.listOfCards;
+    
 }
 
 Deck::~Deck() {
@@ -253,6 +277,20 @@ void Deck::draw(Hand* aHand) {
 
         aHand->setCard(getTopCard(), position);
     }
+}
+
+void Deck::filterDeck(int playerCount) {
+    std::vector<Card*> resultListOfCards;
+    for (auto& c : listOfCards) {
+        if (c->getMaxPlayerCount() <= playerCount) {
+            resultListOfCards.push_back(c);
+        }
+    }
+    listOfCards = resultListOfCards;
+}
+
+void Deck::shuffleDeck() {
+    std::random_shuffle(std::begin(listOfCards), std::end(listOfCards) );
 }
 
 

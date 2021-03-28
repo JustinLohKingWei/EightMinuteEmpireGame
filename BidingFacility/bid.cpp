@@ -88,7 +88,7 @@ void Bid::pickUpCoins()
     {
         do
         {
-            while ((silverCoins + copperCoins) != 12)
+            while ((silverCoins + copperCoins) != 12 || (silverCoins > silverPile || copperCoins > copperPile))
             {
                 cout << "Two player game! Each Player selects 12 coins" << endl;
                 cout << "Enter amount of Silver coins   :" << Bid::silverPile << " remaining" << endl;
@@ -113,7 +113,7 @@ void Bid::pickUpCoins()
     {
         do
         {
-            while ((silverCoins + copperCoins) != 11)
+            while ((silverCoins + copperCoins) != 11 || (silverCoins > silverPile || copperCoins > copperPile))
             {
                 cout << "Three player game! Each Player selects 11 coins" << endl;
                 cout << "Enter amount of Silver coins   :" << Bid::silverPile << " remaining" << endl;
@@ -137,7 +137,7 @@ void Bid::pickUpCoins()
     {
         do
         {
-            while ((silverCoins + copperCoins) != 9)
+            while ((silverCoins + copperCoins) != 9 || (silverCoins > silverPile || copperCoins > copperPile))
             {
                 cout << "Four player game! Each Player selects 9 coins" << endl;
                 cout << "Enter amount of Silver coins   :" << Bid::silverPile << " remaining" << endl;
@@ -169,7 +169,7 @@ void Bid::pickUpCoins(int amount)
     cout << playerFirstName << " is picking up coins :" << endl;
         do
         {
-            while ((silverCoins + copperCoins) != amount)
+            while ((silverCoins + copperCoins) != amount|| (silverCoins > silverPile || copperCoins > copperPile))
             {
                 cout << "Two player game! Each Player selects "<< amount <<" coins" << endl;
                 cout << "Enter amount of Silver coins   :" << Bid::silverPile << " remaining" << endl;

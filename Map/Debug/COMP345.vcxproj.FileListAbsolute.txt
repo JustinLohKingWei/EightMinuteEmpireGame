@@ -1,2 +1,0 @@
-C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Debug\COMP345.exe
-C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Debug\COMP345.pdb
