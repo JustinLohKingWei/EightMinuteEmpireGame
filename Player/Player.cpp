@@ -71,7 +71,7 @@
 	
 	// A player pays a certain amount of coins of either copper ('c') or silver ('s') type    -Justin
 	bool Player::PayCoin(int payableAmount,char type) {
-		bool success;
+		bool success = false;
 		cout << " executing PayCoin()..." << endl;
 		bool isEnough = true;
 		if (type == 's' || type =='c'||payableAmount>0) {		//checks for valid input

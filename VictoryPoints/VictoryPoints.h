@@ -1,7 +1,7 @@
 // Modified from Tutorial #
 
 #include <map>
-#include "player.h"
+#include "../Player/Player.h"
 
 using namespace std;
 
