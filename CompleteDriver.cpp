@@ -106,6 +106,8 @@ int main() {
         Card* selectedCard = hand->exchange(cardPosition);
 
         // Insert Part 4 Here
+        selectedCard->getAction();
+
 
         // Part 5
         cout << "\n\nBEFORE SLIDING CARDS TO THE LEFT\n\n" << endl;
