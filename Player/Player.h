@@ -52,7 +52,7 @@ public:
 	bool PayCoin(int payableAmount, char type);
 	void PlaceNewArmies(int numberOfArmies, region* aRegion);
 	void MoveArmies(int numberOfArmiesToMove);
-	void MoveOverLand();
+	void MoveOverLand(vector<int> list,region*from);
 	void MoveOverWater();
 	void BuildCity(region* where);
 	bool DestroyArmy(vector<Player*>listOfPlayers, region* where, string target);
