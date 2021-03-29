@@ -1,8 +1,75 @@
-﻿  CompleteDriver.cpp
-C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\CompleteDriver.cpp(37,23): warning C4018: '<': signed/unsigned mismatch
-C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\CompleteDriver.cpp(41,23): warning C4018: '<': signed/unsigned mismatch
-C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\CompleteDriver.cpp(49,23): warning C4018: '<': signed/unsigned mismatch
-C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\CompleteDriver.cpp(69,27): warning C4018: '<': signed/unsigned mismatch
-C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\CompleteDriver.cpp(83,23): warning C4018: '<': signed/unsigned mismatch
-C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\CompleteDriver.cpp(95,20): warning C4554: '&': check operator precedence for possible error; use parentheses to clarify precedence
+﻿  Game.cpp
+  Map.cpp
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Player\Player.h(37,10): warning C4150: deletion of pointer to incomplete type 'region'; no destructor called
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Player\Player.h(9): message : see declaration of 'region'
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(58,33): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(62,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(66,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(70,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(74,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(78,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(116,33): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(116,61): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(120,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(120,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(124,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(124,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(128,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(128,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(132,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(132,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(136,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(136,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(140,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(140,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(144,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(144,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(148,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(148,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(152,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(152,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(156,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(156,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(160,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(160,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(164,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(164,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(168,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(168,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(172,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(172,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(176,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(176,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(180,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(180,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(184,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(184,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(188,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(188,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(192,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(192,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(196,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(196,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(200,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(200,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(204,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(204,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(208,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(208,66): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(212,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(217,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(222,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(227,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(232,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(237,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(242,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(247,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(252,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(257,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(262,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Map\Map.cpp(267,38): warning C4804: '<': unsafe use of type 'bool' in operation
+  Part5.cpp
+  Player.cpp
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Player\Player.cpp(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Generating Code...
   MapLoader.vcxproj -> C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\MapLoader\Debug\MapLoader.exe

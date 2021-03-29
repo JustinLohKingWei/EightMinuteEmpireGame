@@ -1,13 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\BidingFacility",
-    "\\Card",
-    "\\Game",
-    "\\Map",
-    "\\MapLoader",
-    "\\Player"
+    ""
   ],
-  "SelectedNode": "\\MapLoader\\MapLoader.sln",
+  "SelectedNode": "\\MapLoader.sln",
   "PreviewInSolutionExplorer": false
 }
