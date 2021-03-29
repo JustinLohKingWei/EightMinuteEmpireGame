@@ -145,7 +145,7 @@ void Hand::details(int index){
 // Displays current hand.
 void Hand::viewHand(){
 
-    for (int i = 0; i<6; i++){
+    for (int i = 0; i<6; i++){  
 
         if (getCard(i) != NULL){
             cout << "Index " << i << " ";
@@ -153,7 +153,7 @@ void Hand::viewHand(){
             cout << endl;
         }
         else{
-            cout << "Space " << i << "is empty" << endl;
+            cout << "Space " << i << " is empty " << endl;
         }
     }
 }
