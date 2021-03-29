@@ -73,7 +73,7 @@
 	
 	// A player pays a certain amount of coins of either copper ('c') or silver ('s') type    -Justin
 	bool Player::PayCoin(int payableAmount,char type) {
-		bool success;
+		bool success = false;
 		cout << " executing PayCoin()..." << endl;
 		bool isEnough = true;
 		if (type == 's' || type =='c'||payableAmount>0) {		//checks for valid input
@@ -96,6 +96,7 @@
 
 			if (isEnough) {														// allows payment if there are enough coins
 				this->getBidingFacility()->payCoins(payableAmount, type);
+				success = true;
 			}
 			else {																// denies payment if inadequate
 				cout << "Not enough coins to make this purchase!";
