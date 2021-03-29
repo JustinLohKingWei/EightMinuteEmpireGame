@@ -14,7 +14,10 @@ public:
 	int getNumOfPlayers();
 	Hand* getGameHand();
 	void setGameHand(Hand* aHand);
-	
+	bool getGameOver();
+	void setGameOver(bool value);
+	int getTurnNumber();
+
 
 
 private:
@@ -23,4 +26,5 @@ private:
 	int numOfPlayers;
 	int turnNumber;
 	Hand* theGameHand;
+	bool gameOver;
 };

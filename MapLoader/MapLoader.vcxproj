@@ -143,7 +143,7 @@
     <ClCompile Include="..\Card\Card.cpp" />
     <ClCompile Include="..\Game\Game.cpp" />
     <ClCompile Include="..\Map\Map.cpp" />
-    <ClCompile Include="..\Part6.cpp" />
+    <ClCompile Include="..\Part5.cpp" />
     <ClCompile Include="..\Player\Player.cpp" />
   </ItemGroup>
   <ItemGroup>

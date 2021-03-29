@@ -5,6 +5,7 @@ Game::Game() : theGameHand(), listOfPlayers() {
 	currentPlayer = 0;
 	numOfPlayers = 0;
 	turnNumber = 0;
+	gameOver = false;
 }
 
 Game::Game(vector<Player*> players) : listOfPlayers(players), theGameHand(){
@@ -12,6 +13,7 @@ Game::Game(vector<Player*> players) : listOfPlayers(players), theGameHand(){
 	currentPlayer = 0;
 	numOfPlayers = listOfPlayers.size();
 	turnNumber = 1;
+	gameOver = false;
 }
 
 Player* Game::getCurrentPlayer() {
@@ -19,7 +21,7 @@ Player* Game::getCurrentPlayer() {
 }
 
 void Game::nextPlayer() {
-	int currentPlayer = (++turnNumber + (numOfPlayers-1)) % numOfPlayers;
+	currentPlayer = (++turnNumber + (numOfPlayers-1)) % numOfPlayers;
 	cout << "Play has been passed to player #" << currentPlayer+1 <<
 		": " << listOfPlayers.at(currentPlayer)->getFirstName() << " "
 		<< listOfPlayers.at(currentPlayer)->getLastName()<< endl;
@@ -35,4 +37,16 @@ Hand* Game::getGameHand() {
 
 void Game::setGameHand(Hand* aHand) {
 	theGameHand = aHand;
+}
+
+bool Game::getGameOver() {
+	return gameOver;
+}
+
+void Game::setGameOver(bool value) {
+	gameOver = value;
+}
+
+int Game::getTurnNumber() {
+	return turnNumber;
 }
