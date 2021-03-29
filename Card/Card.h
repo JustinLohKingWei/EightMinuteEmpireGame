@@ -3,11 +3,7 @@
 #include <string>
 #include <vector>
 
-using namespace
-
-
-
-std;
+using namespace std;
 
 class Card {
     private:
@@ -66,4 +62,3 @@ class Deck {
     private:
         static std::vector<Card*> listOfCards;
     };
-

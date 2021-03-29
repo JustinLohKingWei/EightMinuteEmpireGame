@@ -11,40 +11,12 @@ int main()
 
     cout << "Start Game:" << endl;
 
-    int playernum = 2;
+    int playernum = 2;			//2 player game based on instrunctions given
     string fName;
     string lName;
     string first, last;
-    vector<Player*> players;//Vector of players
-    vector<Card*>listOfCards = {//list of cards
-         new Card("Ancient Phoenix", "Flight", "Move Armies: 5"),
-         new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3"),
-         new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2"),
-         new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1"),
-         new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City"),
-         new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2"),
-         new Card("Ancient Phoenix", "Flight", "Move Armies: 5"),
-         new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3"),
-         new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2"),
-         new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1"),
-         new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City"),
-         new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2"),
-         new Card("Ancient Phoenix", "Flight", "Move Armies: 5"),
-         new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3"),
-         new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2"),
-         new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1"),
-         new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City"),
-         new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2")
-    };
-    int cardsInEachHand = 0;
-    if (playernum == 2) {
-        cardsInEachHand = 4;
-    }
-    else {
-        cardsInEachHand = 2;
-    }
-    
 
+    vector<Player*> players;		//Vector of players
     for (int i = 0; i < playernum; i++) {
         cout << "Please enter first name" << endl;
         cin >> first;
@@ -52,30 +24,21 @@ int main()
         cin >> last;
         fName = string(first);
         lName = string(last);
-        vector<Card*>cardsInHand;
+        fName = string(first);
+        lName = string(last);
+        vector<Card*>cards;
         vector<region*>listOfRegions;
-        for (int j = 0; j < listOfCards.size(); j++) {//Distributing cards
-            if (j >= cardsInEachHand) {
-                break;
-            }
-            cardsInHand.push_back(listOfCards.at(j));
-            
-        }
-        listOfCards.erase(listOfCards.begin(), listOfCards.begin() + cardsInEachHand);
-        Player* aPlayer = new Player(fName, lName, cardsInHand, listOfRegions);//Creating player
+        vector<Army*>listOfArmies;
+        vector<City*>listOfCities;
+        Player* aPlayer = new Player(fName, lName, cards, listOfRegions, listOfArmies, listOfCities);//Creating player
         players.push_back(aPlayer);
-        
     }
-    Deck* theDeck = new Deck(listOfCards); // Creating new deck
-    //Testing if each player have the right amount of cards 
-    for (int i = 0; i < players.size(); i++) {
-        for (int j = 0; j < players.at(i)->getHand().size(); j++) {
-            cout << "============================="<< endl;
-            cout << players.at(i)->getHand().at(j)->getName() << endl;
-            players.at(i)->getHand().at(j)->showAction();
-            players.at(i)->getHand().at(j)->getGood();
-        }
-    }
+    // Creating new deck
+    Deck* deck = new Deck;
+    deck->filterDeck(playernum);
+    deck->shuffleDeck();
+    Hand* hand = new Hand;
+    deck->fillHand(hand);
 
     for (int i = 0; i < players.size(); i++) {
         (*(*players.at(i)).getBidingFacility()).pickUpCoins();
@@ -120,6 +83,30 @@ int main()
     cout << "Winner is "<< winner.getFirstName()<<" With Bidding Amount :"<< winnerAmount << endl;
     winner.getBidingFacility()->putCoins();
 
+    //Exchange Method
+    bool payCoin = false;
+    int cardPosition = -1;
+    cout << "This is the current hand: " << endl;
+    hand->viewHand();
+    cout << "Index 0-1 Costs 0 coins, 1-2 Costs 1 Coin, 2-3 Costs 2 Coins, 4-5 Costs 3 Coins" << endl;
+    while (!payCoin) {                                  // checks if player can pay for the card
+        cout << "Please enter the position for the card: ";
+        bool incorrect = true;
+        do {
+            std::cin >> cardPosition;
+            if (cardPosition < 0 || hand->getCard(cardPosition) == NULL || cardPosition > 5) {
+                cout << "Incorrect input, please try again. \n";
+            }
+            else {
+                incorrect = false;
+            }
+        } while (incorrect);
+        int cost = hand->getCost(cardPosition);
+        cout << "This card costs: " << cost << endl;
+        payCoin = players.at(0)->PayCoin(cost, 'c');       // enter card payment cost here
+    }
+    Card* selectedCard = hand->exchange(cardPosition);
+    deck->draw(hand);
 
     // Map Initialization
 

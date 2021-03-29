@@ -18,6 +18,7 @@ public:
 	void print_player_score(Player*);
 	void print_all_scores();
 	void reset_new_game();
+
 	int compute_score(Player*, game_map*);
 	static VPCounter* instance()
 	{
@@ -25,6 +26,7 @@ public:
 			s_instance = new VPCounter();
 		return s_instance;
 	}
+
 protected:
 	virtual ~VPCounter() {};
 };

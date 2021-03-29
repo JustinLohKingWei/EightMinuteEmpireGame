@@ -224,7 +224,7 @@ vector<Card*> Deck::listOfCards = {//list of cards
 
 // Empty Constructor
 Deck::Deck() {
-    
+
 }
 
 Deck::~Deck() {

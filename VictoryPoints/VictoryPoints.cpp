@@ -82,7 +82,7 @@ void VPCounter::reset_new_game()
 * (N/A Time limited) +1 VP for each Island. A Player controls an island if they control the most regions on that island.
 * Ignoring some cards with +1vp for each addition card of same type condition due to time constrains (Arcane, Ancient, Dire, Night)
 * Cursed Tower +1vp per flying ignored due to unsupported feature, to little time to implement.
-* 
+*
 */
 int VPCounter::compute_score(Player* player, game_map* w_map)
 {
@@ -92,7 +92,7 @@ int VPCounter::compute_score(Player* player, game_map* w_map)
 	int cursed_count = 0; // 5 max
 	int mountain_count = 0; // 2 max
 	int vp_counter = 0;
-	
+
 	if (w_map->map_name != "Copy of World Map" || w_map->map_name != "World Map")
 	{
 		std::cout << "Non World map passed to check_vp_conditions function!" << endl;
@@ -125,7 +125,7 @@ int VPCounter::compute_score(Player* player, game_map* w_map)
 	}
 	if (!player->get_my_list_of_used_cards().empty())
 	{
-		vector<Card*> card_temp = player->get_my_list_of_used_cards();		
+		vector<Card*> card_temp = player->get_my_list_of_used_cards();
 		for (auto* c_card: card_temp)
 		{
 			if (regex_match(c_card->getName(), regex("(Noble)(.*)")))
@@ -162,7 +162,6 @@ int VPCounter::compute_score(Player* player, game_map* w_map)
 			points_from_cards += 4;
 		}
 		points_from_cards += cursed_count;
-		
 	}
 	vp_counter = control_points + points_from_cards;
 	return vp_counter;
