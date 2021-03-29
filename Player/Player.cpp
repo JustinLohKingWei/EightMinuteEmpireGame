@@ -211,6 +211,10 @@
 	 void Player::setLastName(string l) {
 		 this->lastName = l;
 	 }
+	 vector<Card*> Player::get_my_list_of_used_cards() const
+	 {
+		 return myListOfCardsUsed;
+	 }
 	 void playerGoods::setRegion(region* aRegion) {
 			this->aRegion = aRegion;
 	 }

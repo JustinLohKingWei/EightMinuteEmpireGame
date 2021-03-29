@@ -11,8 +11,6 @@ region::~region()
 	{
 		x.second = nullptr;
 	}
-	std::cout << "\n"
-			  << "Region named : " << name << " deleted!" << endl;
 }
 
 int region::get_number_of_armies(Player *player)
@@ -29,7 +27,7 @@ int region::get_number_of_armies(Player *player)
 	return 0;
 }
 
-vector<pair<Player *, int>> region::get_occuping_armies()
+vector<pair<Player*, int >> region::get_occuping_armies()
 {
 	return occuping_armies;
 }
@@ -315,32 +313,40 @@ void region::set_player_with_most_armies()
 	}
 }
 
-void region::set_armies_to_region(Player *player, int armies)
+void region::update_armies_to_region(Player* player) // End of player's turn/End of Round
 {
-	pair<Player *, int> temp{player, armies};
-
-	if (occuping_armies.empty())
+	int armies = 0;
+	region* r_region = nullptr;
+	for (auto* p_region: player->getListOfArmy())
 	{
-		occuping_armies.push_back(temp);
-	}
-	else
-	{
-		for (auto &p : occuping_armies)
+		r_region = p_region->aRegion;
+		for (auto* count_region : player->getListOfArmy())
 		{
-			if (p.first->getFirstName() == player->getFirstName() && p.first->getLastName() == player->getLastName())
+			if (p_region->aRegion == count_region->aRegion)
 			{
-				p.second = armies;
+				armies++;
+			}
+		}
+		if (armies > 0)
+		{
+			if (occuping_armies.empty())
+			{
+				pair<Player*, int> temp(player, armies);
+				occuping_armies.emplace_back (temp);
 			}
 			else
 			{
-				if (occuping_armies.size() < 4)
+				for (auto& p_player : occuping_armies)
 				{
-					occuping_armies.push_back(temp);
-				}
-				else
-				{
-					std::cout << "Something went wrong in set_player_with_most_armies(), size 3!" << endl;
-					std::exit(-1);
+					if (p_player.first->getFirstName() == player->getFirstName() && p_player.first->getLastName() == player->getLastName())
+					{
+						p_player.second = armies;
+					}
+					else
+					{
+						std::cout << "The player could not be found!" << endl;
+						std::exit(-1);
+					}
 				}
 			}
 		}
@@ -368,8 +374,6 @@ game_map::game_map(game_map *copy) // TODO
 		{
 			m_map.emplace(x);
 		}
-		std::cout << "\n"
-				  << "Map named : " << map_name << " copied!" << endl;
 	}
 	else // world map copy, only top level copies, bottom level links to original sub graphs, copy sub graphs with above!
 	{
@@ -384,8 +388,6 @@ game_map::game_map(game_map *copy) // TODO
 		{
 			m_map.emplace(x); // emplace is a deep copy
 		}
-		std::cout << "\n"
-				  << "Map named : " << map_name << " copied!" << endl;
 	}
 }
 
@@ -423,8 +425,6 @@ game_map::game_map(string map_shape_, game_map *tile1_, game_map *tile2_, game_m
 			{
 				add_route(itr_1->second->name, itr_2->second->name);
 				add_route(itr_2->second->name, itr_1->second->name);
-				std::cout << "\n"
-						  << "Map named : " << map_name << " created" << endl;
 			}
 		}
 	}
@@ -444,8 +444,6 @@ game_map::game_map(string map_shape_, game_map *tile1_, game_map *tile2_, game_m
 			{
 				add_route(itr_1->second->name, itr_2->second->name);
 				add_route(itr_2->second->name, itr_1->second->name);
-				std::cout << "\n"
-						  << "Map named : " << map_name << " created" << endl;
 			}
 		}
 		else
@@ -501,8 +499,6 @@ game_map::game_map(string map_shape_, game_map *tile1_, game_map *tile2_, game_m
 				{
 					add_route(itr_1->second->name, itr_2->second->name);
 					add_route(itr_2->second->name, itr_1->second->name);
-					std::cout << "\n"
-							  << "Map named : " << map_name << " created" << endl;
 				}
 			}
 		}
@@ -526,8 +522,6 @@ game_map::~game_map()
 				delete x.second;
 			}
 		}
-		std::cout << "\n"
-				  << "Map named : " << map_name << " deleted!" << endl;
 	}
 	else
 	{
@@ -539,8 +533,6 @@ game_map::~game_map()
 		{
 			x.second = nullptr;
 		}
-		std::cout << "\n"
-				  << "Map named : " << map_name << " deleted!" << endl;
 	}
 }
 
@@ -607,8 +599,7 @@ void game_map::print_map()
 {
 	for (auto &x : m_map)
 	{
-		std::cout << "\n"
-				  << x.first << endl;
+		std::cout << "\n" << x.first << endl;
 	}
 }
 
@@ -616,8 +607,7 @@ void game_map::print_map_adjacency()
 {
 	for (auto &x : m_map)
 	{
-		std::cout << "\n"
-				  << x.first << " has the following adjacency: " << endl;
+		std::cout << "\n" << x.first << " has the following adjacency: " << endl;
 		for (auto &y : x.second->adj)
 		{
 			std::cout << y.first << endl;
@@ -644,6 +634,5 @@ void game_map::validate_map(game_map *my_map)
 			}
 		}
 	}
-	std::cout << "\nIf no errors are printed, consider the regional listings of the map to be valid!" << endl
-			  << endl;
+	std::cout << "\nIf no errors are printed, consider the regional listings of the map to be valid!" << endl << endl;
 }

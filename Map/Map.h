@@ -23,7 +23,7 @@ public:
 	~region();
 	int get_number_of_armies(Player*);
 	void set_player_with_most_armies();
-	void set_armies_to_region(Player*, int);
+	void update_armies_to_region(Player*);
 	vector<Player*> get_controlling_player();
 	vector<pair<Player*, int>> get_occuping_armies();
 private:

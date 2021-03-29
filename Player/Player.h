@@ -62,6 +62,7 @@ public:
 	void setListOfTerritories(vector<region*> list);
 	void setFirstName(string f);
 	void setLastName(string l);
+	vector<Card*> get_my_list_of_used_cards() const;
 	
 	//Card* getCard();
 	Bid* getBidingFacility();
