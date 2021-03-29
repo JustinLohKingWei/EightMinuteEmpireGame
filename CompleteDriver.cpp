@@ -92,7 +92,7 @@ int main() {
             bool incorrect = true;
             do {
                 std::cin >> cardPosition;
-                if (cardPosition < 0 || cardPosition > 5 || ((cardPosition <= 5 && cardPosition >=0) & hand->getCard(cardPosition) == NULL)) {
+                if (cardPosition < 0 || cardPosition > 5 || ((cardPosition <= 5 && cardPosition >=0) & (hand->getCard(cardPosition) == NULL))) {
                     cout << "Incorrect input, please try again. \n";
                 }
                 else {
@@ -107,7 +107,7 @@ int main() {
 
         // Insert Part 4 Here
         selectedCard->getAction();
-
+        
 
         // Part 5
         cout << "\n\nBEFORE SLIDING CARDS TO THE LEFT\n\n" << endl;
@@ -128,12 +128,14 @@ int main() {
         hand->viewHand();
 
         // Insert Part 6 Here
+
     }
     delete hand;
     delete deck;
-    for (int i = 0; i < players.size(); i++) {
-        delete players[i];
+    for (auto p : players)
+    {
+        delete p;
     }
-
+    players.clear();
     return 0;
 }
