@@ -1,0 +1,53 @@
+mapname: tile1
+
+region: tile1_region1
+region: tile1_region2
+region: tile1_region3
+region: tile1_region4
+
+connection_region: tile1_region1 TOP
+connection_region: tile1_region2 RIGHT
+connection_region: tile1_region3 BOTTOM
+connection_region: tile1_region4 LEFT
+
+route: tile1_region1 tile1_region2
+route: tile1_region2 tile1_region1
+route: tile1_region1 tile1_region4
+route: tile1_region4 tile1_region1
+route: tile1_region2 tile1_region3
+route: tile1_region3 tile1_region2
+route: tile1_region3 tile1_region4
+route: tile1_region4 tile1_region3
+
+
+mapname: tile2
+connection_region: tile2_region1 TOP
+connection_region: tile2_region2 RIGHT
+connection_region: tile2_region3 BOTTOM
+connection_region: tile2_region4 LEFT
+
+route: tile2_region1 tile2_region2
+route: tile2_region2 tile2_region1
+route: tile2_region1 tile2_region4
+route: tile2_region4 tile2_region1
+route: tile2_region2 tile2_region3
+route: tile2_region3 tile2_region2
+route: tile2_region3 tile2_region4
+route: tile2_region4 tile2_region3
+
+mapname: tile3
+connection_region: tile3_region1 TOP
+connection_region: tile3_region2 RIGHT
+connection_region: tile3_region3 BOTTOM
+connection_region: tile3_region4 LEFT
+
+route: tile3_region1 tile3_region2
+route: tile3_region2 tile3_region1
+route: tile3_region1 tile3_region4
+route: tile3_region4 tile3_region1
+route: tile3_region2 tile3_region3
+route: tile3_region3 tile3_region2
+route: tile3_region3 tile3_region4
+route: tile3_region4 tile3_region3
+
+world_map_shape: Long Rectangle

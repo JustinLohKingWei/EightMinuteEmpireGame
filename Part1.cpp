@@ -3,7 +3,6 @@
 #include "BidingFacility/Bid.h"
 #include "Map/Map.h"
 #include "MapLoader/MapLoader.h"
-
 using namespace std;
 
 int main()
@@ -110,7 +109,7 @@ int main()
 
     // Map Initialization
 
-    MapLoader* ml1(new MapLoader(string("../../../../Documents/GitHub/EightMinuteEmpireGame/MapLoader/UserMaps/ValidRectangle.txt")));  // may need editing per device
+    MapLoader* ml1 = new MapLoader("MapLoader/UserMaps/ValidRectangle.txt");  // may need editing per device
     cout << *ml1 << endl;
     delete ml1;
 

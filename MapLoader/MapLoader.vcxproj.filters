@@ -30,7 +30,10 @@
     <ClCompile Include="..\Game\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Part5.cpp">
+    <ClCompile Include="..\NewMapLoader\MapLoader2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NewMapLoader\MapLoaderDriver2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -48,6 +51,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Game\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NewMapLoader\MapLoader2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

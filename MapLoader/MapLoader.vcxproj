@@ -143,7 +143,8 @@
     <ClCompile Include="..\Card\Card.cpp" />
     <ClCompile Include="..\Game\Game.cpp" />
     <ClCompile Include="..\Map\Map.cpp" />
-    <ClCompile Include="..\Part5.cpp" />
+    <ClCompile Include="..\NewMapLoader\MapLoader2.cpp" />
+    <ClCompile Include="..\NewMapLoader\MapLoaderDriver2.cpp" />
     <ClCompile Include="..\Player\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="..\Card\Card.h" />
     <ClInclude Include="..\Game\Game.h" />
     <ClInclude Include="..\Map\Map.h" />
+    <ClInclude Include="..\NewMapLoader\MapLoader2.h" />
     <ClInclude Include="..\Player\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

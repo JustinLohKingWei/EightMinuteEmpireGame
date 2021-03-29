@@ -1,4 +1,4 @@
-﻿  Part5.cpp
-  Player.cpp
-  Generating Code...
+﻿  MapLoader2.cpp
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Player\Player.h(37,10): warning C4150: deletion of pointer to incomplete type 'region'; no destructor called
+C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\Player\Player.h(9): message : see declaration of 'region'
   MapLoader.vcxproj -> C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\MapLoader\Debug\MapLoader.exe

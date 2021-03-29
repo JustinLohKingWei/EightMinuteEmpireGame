@@ -6,8 +6,10 @@
     "\\Game",
     "\\Map",
     "\\MapLoader",
+    "\\MapLoader\\UserMaps",
+    "\\NewMapLoader",
     "\\Player"
   ],
-  "SelectedNode": "\\Part5.cpp",
+  "SelectedNode": "\\Map\\Map.cpp",
   "PreviewInSolutionExplorer": false
 }

@@ -13,6 +13,10 @@ public:
 	vector<string> tilesArray;
 	string mapShape;
 	game_map* world_map;
+	game_map* tile1;
+	game_map* tile2;
+	game_map* tile3;
+	game_map* tile4;
 	bool validity;
 	int numOfTiles;
 	void createMap();
