@@ -187,12 +187,17 @@ int main() {
 	Army* armyPiece1 = new Army();
 	armyPiece1->setRegion(tile4->m_map.at("Volcano Island Region 7"));
 	armiesList.push_back(armyPiece1);
+	regionsOwned.push_back(armyPiece1->getRegion());
+
 	Army* armyPiece2 = new Army();
 	armyPiece2->setRegion(tile4->m_map.at("Volcano Island Region 6"));
+	regionsOwned.push_back(armyPiece2->getRegion());
 	armiesList.push_back(armyPiece2);
+
 	Army* armyPiece3 = new Army();
 	armyPiece3->setRegion(tile4->m_map.at("Volcano Island Region 5"));
 	armiesList.push_back(armyPiece3);
+	regionsOwned.push_back(armyPiece3->getRegion());
 
 
 
