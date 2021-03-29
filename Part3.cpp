@@ -63,6 +63,10 @@ int main() {
             Card* selectedCard = hand->exchange(cardPosition);
             deck->draw(hand);
         }  
-    
+        delete hand;
+        delete deck;
+        for (int i = 0; i < players.size(); i++) {
+            delete players[i];
+        }
 	return 0;
 }

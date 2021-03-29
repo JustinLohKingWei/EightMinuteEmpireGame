@@ -128,6 +128,12 @@ int main() {
         hand->viewHand();
 
         // Insert Part 6 Here
+
+        delete hand;
+        delete deck;
+        for (int i = 0; i < players.size(); i++) {
+            delete players[i];
+        }
     }
 
     return 0;

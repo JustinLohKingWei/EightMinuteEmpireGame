@@ -86,6 +86,12 @@ int main() {
     cout << "Displaying Hand: " << endl;
     hand->viewHand();
 
+    delete hand;
+    delete deck;
+    for (int i = 0; i < players.size(); i++) {
+        delete players[i];
+    }
+
 
 	return 0;
 }
