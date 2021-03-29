@@ -1,3 +1,4 @@
+
 #ifndef PLAYER_CPP
 #define PLAYER_CPP
 
@@ -441,4 +442,5 @@ region* playerGoods::getRegion() {
 bool playerGoods::getIsPlaced() {
 	return isPlaced;
 }
+
 #endif

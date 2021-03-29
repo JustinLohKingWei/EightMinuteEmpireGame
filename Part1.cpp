@@ -112,6 +112,11 @@ int main()
 
     MapLoader* ml1(new MapLoader(string("../../../../Documents/GitHub/EightMinuteEmpireGame/MapLoader/UserMaps/ValidRectangle.txt")));  // may need editing per device
     cout << *ml1 << endl;
+    delete hand;
+    delete deck;
+    for (int i = 0; i < players.size(); i++) {
+        delete players[i];
+    }
     delete ml1;
 
 

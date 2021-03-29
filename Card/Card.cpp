@@ -145,7 +145,7 @@ void Hand::details(int index){
 // Displays current hand.
 void Hand::viewHand(){
 
-    for (int i = 0; i<6; i++){
+    for (int i = 0; i<6; i++){  
 
         if (getCard(i) != NULL){
             cout << "Index " << i << " ";
@@ -153,7 +153,7 @@ void Hand::viewHand(){
             cout << endl;
         }
         else{
-            cout << "Space " << i << "is empty" << endl;
+            cout << "Space " << i << " is empty " << endl;
         }
     }
 }
@@ -162,7 +162,7 @@ void Hand::viewHand(){
 Card* Hand::exchange(int index){
     cout << "You've used the following card for " << getCost(index) << ": \n";
     details(index);
-    Card* exchangedCard = cardsInHand[index];
+    Card* exchangedCard = new Card(*cardsInHand[index]);
     delete cardsInHand[index];
     setCard(NULL, index);
     return exchangedCard;
