@@ -30,7 +30,7 @@
     <ClCompile Include="..\Game\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Part6.cpp">
+    <ClCompile Include="..\Part5.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
