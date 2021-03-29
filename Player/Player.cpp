@@ -135,19 +135,93 @@
 	}
 
 	void Player::MoveArmies(int numberOfArmiesToMove) {
+		vector<int>adjList;
 		cout << " executing MoveArmies()..." << endl;
 		int counter = 0;
 		cout << "displaying armies available..." << endl;
 		int index = 0;
+		int adjacency = 0;
+		//bool selected = false;
+		string choice;
+		//int choiceOfMovement;
+		
 		for (Army* armyPiece : getListOfArmy()) {
-			cout <<"Army # " << index++ << " " << *armyPiece << endl;//Displaying available armies
+			cout <<"Army # " << index++ << " " << *armyPiece << "\n" <<endl;//Displaying available armies
+			
 		}
+		while(counter < numberOfArmiesToMove){
+			cout << "Displaying regions with owned player's army + adjacency" << endl;
+			for (region* aRegion : getListOfTerritories()) {
+				adjacency = 0;
+				map<string, region*>::iterator it = aRegion->adj.begin();
+				while (it != aRegion->adj.end()) {
+					region* current = it->second;
+					adjacency++;
+					adjList.push_back(adjacency);
+					cout << "\ncurrent region " << aRegion->name << " adjacent to: " << current->name << "( " << adjacency << " )" << endl;
+
+					it++;
+				}
+
+				cout << "Select an army to move from current region? Enter key : (Y/y)es (N/n)o" << endl;
+				cin >> choice;
+
+				if (choice == "Y" || choice == "y") {
+					/*if (adjacency == 1) {
+
+					}*/
+					MoveOverLand(adjList, aRegion);
+					counter++;
+				}
+
+				if (choice == "N" || choice == "n") {
+					continue;
+				}
+			}
+		}
+
+
 		
 
 	}
 
-	void Player::MoveOverLand() {
+	void Player::MoveOverLand(vector<int> list,region* from) {
+		int choice;
 		cout << " executing MoveOverLand()..." << endl;
+		cout << "\nSelect target adjacent region to move army" << endl;
+		cin >> choice;
+		int index = 0;
+		int counter = 0;
+		map<string, region*>::iterator it = from->adj.begin();
+		while (it != from->adj.end()) {
+			region* current = it->second;
+			for (Army* armyPiece : getListOfArmy()) {
+				if (index == choice - 1) {
+
+					if (armyPiece->getRegion()->name == from->name) {
+						armyPiece->setRegion(current);
+
+						
+						cout << "\nMoved an armyPiece from " << from->name << " to " << current->name << endl;
+
+						for (region* aRegion : getListOfTerritories()) {
+							if (aRegion->name == from->name) {
+								cout << "hello" << endl;
+								aRegion = nullptr;
+								break;
+
+							}
+							counter++;
+						}
+						return;
+					}
+
+				}
+
+			}
+			index++;
+			it++;
+		}
 	}
 
 	void Player::MoveOverWater() {
