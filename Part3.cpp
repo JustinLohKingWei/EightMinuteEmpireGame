@@ -43,6 +43,7 @@ int main() {
             int cardPosition = -1;
             cout << "This is the current hand: " << endl;
             hand->viewHand();
+            cout << "Index 0-1 Costs 0 coins, 1-2 Costs 1 Coin, 2-3 Costs 2 Coins, 4-5 Costs 3 Coins" << endl;
             while (!payCoin) {                                  // checks if player can pay for the card
                 cout << "Please enter the position for the card: ";
                 bool incorrect = true;
@@ -60,6 +61,7 @@ int main() {
                 payCoin = players.at(i)->PayCoin(cost, 'c');       // enter card payment cost here
             }
             Card* selectedCard = hand->exchange(cardPosition);
+            deck->draw(hand);
         }  
     
 	return 0;

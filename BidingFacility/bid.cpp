@@ -15,7 +15,7 @@ int Bid::numberOfPlayers = 0;
 
 //since requirements did not specify the initial amount of silver and copper coins respectively at game start
 //we shall assume the ratio of silver to copper is 1:2 from 36 coins.
-int Bid::copperPile = 24;              
+int Bid::copperPile = 56;              
 int Bid::silverPile = 12;
 
 // Empty constructor

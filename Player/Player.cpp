@@ -94,6 +94,7 @@
 
 			if (isEnough) {														// allows payment if there are enough coins
 				this->getBidingFacility()->payCoins(payableAmount, type);
+				success = true;
 			}
 			else {																// denies payment if inadequate
 				cout << "Not enough coins to make this purchase!";

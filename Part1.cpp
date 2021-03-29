@@ -26,9 +26,11 @@ int main()
         lName = string(last);
         fName = string(first);
         lName = string(last);
+        vector<Card*>cards;
         vector<region*>listOfRegions;
-
-        Player* aPlayer = new Player(fName, lName, nullptr, listOfRegions, nullptr, nullptr);//Creating player
+        vector<Army*>listOfArmies;
+        vector<City*>listOfCities;
+        Player* aPlayer = new Player(fName, lName, cards, listOfRegions, listOfArmies, listOfCities);//Creating player
         players.push_back(aPlayer);
     }
     // Creating new deck
@@ -37,16 +39,6 @@ int main()
     deck->shuffleDeck();
     Hand* hand = new Hand;
     deck->fillHand(hand);
-    hand->viewHand(); 
-    //Testing if each player have the right amount of cards 
-    /*for (int i = 0; i < players.size(); i++) {
-        for (int j = 0; j < players.at(i)->getHand().size(); j++) {
-            cout << "============================="<< endl;
-            cout << players.at(i)->getHand().at(j)->getName() << endl;
-            players.at(i)->getHand().at(j)->showAction();
-            players.at(i)->getHand().at(j)->getGood();
-        }
-    }*/
 
     for (int i = 0; i < players.size(); i++) {
         (*(*players.at(i)).getBidingFacility()).pickUpCoins();
@@ -91,6 +83,30 @@ int main()
     cout << "Winner is "<< winner.getFirstName()<<" With Bidding Amount :"<< winnerAmount << endl;
     winner.getBidingFacility()->putCoins();
 
+    //Exchange Method
+    bool payCoin = false;
+    int cardPosition = -1;
+    cout << "This is the current hand: " << endl;
+    hand->viewHand();
+    cout << "Index 0-1 Costs 0 coins, 1-2 Costs 1 Coin, 2-3 Costs 2 Coins, 4-5 Costs 3 Coins" << endl;
+    while (!payCoin) {                                  // checks if player can pay for the card
+        cout << "Please enter the position for the card: ";
+        bool incorrect = true;
+        do {
+            std::cin >> cardPosition;
+            if (cardPosition < 0 || hand->getCard(cardPosition) == NULL || cardPosition > 5) {
+                cout << "Incorrect input, please try again. \n";
+            }
+            else {
+                incorrect = false;
+            }
+        } while (incorrect);
+        int cost = hand->getCost(cardPosition);
+        cout << "This card costs: " << cost << endl;
+        payCoin = players.at(0)->PayCoin(cost, 'c');       // enter card payment cost here
+    }
+    Card* selectedCard = hand->exchange(cardPosition);
+    deck->draw(hand);
 
     // Map Initialization
 

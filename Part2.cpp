@@ -23,19 +23,6 @@ int main() {
         lName = string(last);
         vector<Card*>cards;
         vector<region*>listOfRegions;
-/*
-        vector<Army*> listOfArmies;
-        vector<City*> listOfCities;
-        for (int j = 0; j < listOfCards.size(); j++) {//Distributing cards
-            if (j >= cardsInEachHand) {
-                break;
-            }
-            cardsInHand.push_back(listOfCards.at(j));
-
-        }
-        listOfCards.erase(listOfCards.begin(), listOfCards.begin() + cardsInEachHand);
-        Player* aPlayer = new Player(fName, lName, cardsInHand, listOfRegions, listOfArmies, listOfCities);//Creating player
-*/
         vector<Army*>listOfArmies;
         vector<City*>listOfCities;
         Player* aPlayer = new Player(fName, lName, cards, listOfRegions, listOfArmies, listOfCities);//Creating player
@@ -96,6 +83,7 @@ int main() {
     Hand* hand = new Hand;
     deck->fillHand(hand);
 
+    cout << "Displaying Hand: " << endl;
     hand->viewHand();
 
 
