@@ -7,18 +7,16 @@ int main() {
     // Part 1
 
     int playernum = 2;			//2 player game based on instrunctions given
-    string fName;
-    string lName;
-    string first, last;
 
     vector<Player*> players;		//Vector of players
     for (int i = 0; i < playernum; i++) {
+        string fName;
+        string lName;
+        string first, last;
         cout << "Please enter first name" << endl;
         cin >> first;
         cout << "Please enter last name" << endl;
         cin >> last;
-        fName = string(first);
-        lName = string(last);
         fName = string(first);
         lName = string(last);
         vector<Card*>cards;
@@ -81,20 +79,20 @@ int main() {
     winner.getBidingFacility()->putCoins();
 
     cout << "Main Game Loop Begins" << endl; // (Part 3)
-
+    //(*players.at(i)).getFirstName()
     for (int i = 0; i < players.size(); i++) {
         cout << "Player " << i << " :" << (*players.at(i)).getFirstName() << "'s turn" << endl;
         bool payCoin = false;
         int cardPosition = -1;
         cout << "This is the current hand: " << endl;
         hand->viewHand();
-        cout << "Index 0-1 Costs 0 coins, 1-2 Costs 1 Coin, 2-3 Costs 2 Coins, 4-5 Costs 3 Coins" << endl;
+        cout << "Index 0 Costs 0 coins, 1-2 Costs 1 Coin, 3-4 Costs 2 Coins,5 Costs 3 Coins" << endl;
         while (!payCoin) {                                  // checks if player can pay for the card
             cout << "Please enter the position for the card: ";
             bool incorrect = true;
             do {
                 std::cin >> cardPosition;
-                if (cardPosition < 0 || hand->getCard(cardPosition) == NULL || cardPosition > 5) {
+                if (cardPosition < 0 || cardPosition > 5 || ((cardPosition <= 5 && cardPosition >=0) & hand->getCard(cardPosition) == NULL)) {
                     cout << "Incorrect input, please try again. \n";
                 }
                 else {
@@ -128,12 +126,11 @@ int main() {
         hand->viewHand();
 
         // Insert Part 6 Here
-
-        delete hand;
-        delete deck;
-        for (int i = 0; i < players.size(); i++) {
-            delete players[i];
-        }
+    }
+    delete hand;
+    delete deck;
+    for (int i = 0; i < players.size(); i++) {
+        delete players[i];
     }
 
     return 0;
