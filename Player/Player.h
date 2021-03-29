@@ -13,23 +13,23 @@ struct playerGoods {
 	void setRegion(region* aRegion);
 	region* getRegion();
 	void setPlaced(bool placed);
-	bool getIsPlaced(); 
+	bool getIsPlaced();
 
 	region* aRegion;
 	bool isPlaced;
 };
 
-class Army : public playerGoods{
+class Army : public playerGoods {
 public:
 	Army() { isPlaced = false; };
 	Army(const Army& b);
 	Army& operator =(const Army& e);
 	~Army() {  };
 	friend ostream& operator << (ostream& out, const Army& anArmy);
-	
+
 };
 
-class City : public playerGoods{
+class City : public playerGoods {
 public:
 	City() { isPlaced = false; };
 	City(const City& b);
@@ -42,9 +42,11 @@ public:
 class Player {
 public:
 	Player();
-	Player(string f, string l, vector<Card*>listOfCardsUsed, vector<region*> listOfRegions, vector<Army*> listOfArmies, vector<City*> listOfCities) : 
-		firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myListOfCardsUsed(listOfCardsUsed), listOfTerritories(listOfRegions), listOfArmy(listOfArmies), listOfCities(listOfCities) {};
-	Player(const Player &b);
+	Player(string f, string l, vector<Card*>listOfCardsUsed, vector<region*> listOfRegions, vector<Army*> listOfArmies, vector<City*> listOfCities) :
+		firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myListOfCardsUsed(listOfCardsUsed), listOfTerritories(listOfRegions), listOfArmy(listOfArmies), listOfCities(listOfCities) {
+		listOfPlayers.push_back(this);
+	};
+	Player(const Player& b);
 	Player& operator =(const Player& e);
 	~Player() {};//Destructor
 	friend ostream& operator << (ostream& out, const Player& aPlayer);
@@ -52,7 +54,7 @@ public:
 	bool PayCoin(int payableAmount, char type);
 	void PlaceNewArmies(int numberOfArmies, region* aRegion);
 	void MoveArmies(int numberOfArmiesToMove);
-	void MoveOverLand(vector<int> list,region*from);
+	void MoveOverLand(vector<int> list, region* from);
 	void MoveOverWater();
 	void BuildCity(region* where);
 	bool DestroyArmy(vector<Player*>listOfPlayers, region* where, string target);
@@ -63,7 +65,7 @@ public:
 	void setFirstName(string f);
 	void setLastName(string l);
 	vector<Card*> get_my_list_of_used_cards() const;
-	
+
 	//Card* getCard();
 	Bid* getBidingFacility();
 	vector<region*> getListOfTerritories();
@@ -71,8 +73,8 @@ public:
 	vector<City*> getListOfCities();
 	string getFirstName();
 	string getLastName();
-	
-	
+
+
 private:
 	vector<region*> listOfTerritories;
 	vector<City*> listOfCities;
@@ -80,10 +82,8 @@ private:
 	vector<Card*>myListOfCardsUsed;
 	Bid* myBidingFacility;
 	string firstName, lastName;
-	
-	
+	static vector<Player*>listOfPlayers;
+
 };
-
-
 
 
