@@ -4,5 +4,4 @@ C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\CompleteDriver.cpp(
 C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\CompleteDriver.cpp(49,23): warning C4018: '<': signed/unsigned mismatch
 C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\CompleteDriver.cpp(69,27): warning C4018: '<': signed/unsigned mismatch
 C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\CompleteDriver.cpp(83,23): warning C4018: '<': signed/unsigned mismatch
-C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\CompleteDriver.cpp(95,20): warning C4554: '&': check operator precedence for possible error; use parentheses to clarify precedence
   MapLoader.vcxproj -> C:\cpp_projects\Assignment 1 with Team\EightMinuteEmpireGame\MapLoader\Debug\MapLoader.exe

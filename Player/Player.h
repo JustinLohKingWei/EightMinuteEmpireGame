@@ -46,7 +46,7 @@ public:
 		firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myListOfCardsUsed(listOfCardsUsed), listOfTerritories(listOfRegions), listOfArmy(listOfArmies), listOfCities(listOfCities) {};
 	Player(const Player &b);
 	Player& operator =(const Player& e);
-	~Player() {delete myBidingFacility;};//Destructor
+	~Player() {};//Destructor
 	friend ostream& operator << (ostream& out, const Player& aPlayer);
 	friend istream& operator >> (istream& in, Player& aPlayer);
 	bool PayCoin(int payableAmount, char type);
