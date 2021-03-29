@@ -23,8 +23,8 @@ int main() {
         lName = string(last);
         vector<Card*>cards;
         vector<region*>listOfRegions;
-        vector<Army*>listOfArmies;
-        vector<City*>listOfCities;
+        vector<Army*>listOfArmies (18, new Army);
+        vector<City*>listOfCities(3, new City);
         Player* aPlayer = new Player(fName, lName, cards, listOfRegions, listOfArmies, listOfCities);//Creating player
 
         players.push_back(aPlayer);

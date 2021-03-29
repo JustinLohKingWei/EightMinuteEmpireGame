@@ -220,7 +220,7 @@ void Hand::slideCardsLeft() {
 
 }
 
-vector<Card*> Hand::getCards    InHand() {
+vector<Card*> Hand::getCardsInHand() {
     return cardsInHand;
 }
 
