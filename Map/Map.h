@@ -6,9 +6,10 @@
 #include <regex>
 #include <string>
 #include <vector>
-#include "player.h"
+#include "../Player/Player.h"
 
 using namespace std;
+class Player;
 
 enum region_connection { TOP, BOTTOM, LEFT, RIGHT };
 
@@ -22,7 +23,7 @@ public:
 	~region();
 	int get_number_of_armies(Player*);
 	void set_player_with_most_armies();
-	void set_armies_to_region(Player*, int);
+	void update_armies_to_region(Player*);
 	vector<Player*> get_controlling_player();
 	vector<pair<Player*, int>> get_occuping_armies();
 private:
@@ -53,7 +54,5 @@ public:
 	game_map(string, game_map*, game_map*, game_map*, game_map*); // create world map with 4 submaps
 	~game_map();
 
-private:
-	void populateTile(string);
 };
 

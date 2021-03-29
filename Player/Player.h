@@ -1,18 +1,19 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#pragma once
 #include <vector>
 #include <iostream>
-#include "../Map/Map.h";
+#include "../Map/Map.h"
 #include "../BidingFacility/Bid.h"
 #include "../Card/Card.h"
 using namespace std;
+
+class region;
 
 struct playerGoods {
 
 	void setRegion(region* aRegion);
 	region* getRegion();
 	void setPlaced(bool placed);
-	bool getIsPlaced();
+	bool getIsPlaced(); 
 
 	region* aRegion;
 	bool isPlaced;
@@ -23,7 +24,7 @@ public:
 	Army() { isPlaced = false; };
 	Army(const Army& b);
 	Army& operator =(const Army& e);
-	~Army() { delete aRegion; };
+	~Army() {  };
 	friend ostream& operator << (ostream& out, const Army& anArmy);
 	
 };
@@ -61,6 +62,7 @@ public:
 	void setListOfTerritories(vector<region*> list);
 	void setFirstName(string f);
 	void setLastName(string l);
+	vector<Card*> get_my_list_of_used_cards() const;
 	
 	//Card* getCard();
 	Bid* getBidingFacility();
@@ -85,4 +87,3 @@ private:
 
 
 
-#endif

@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MapLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Map\Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -30,14 +27,14 @@
     <ClCompile Include="..\BidingFacility\bid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\EightMinuteEmpireDriver.cpp">
+    <ClCompile Include="..\Game\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Part5.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MapLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Map\Map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -48,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\BidingFacility\Bid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Game\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

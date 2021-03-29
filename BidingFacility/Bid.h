@@ -1,6 +1,5 @@
 
-#ifndef BID_H
-#define BID_H
+#pragma once
 #include <vector>
 #include <string>
 #include <iostream>
@@ -37,4 +36,3 @@ public:
     int getCopperCoins();
     int getSilverCoins();
 };
-#endif

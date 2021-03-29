@@ -1,7 +1,8 @@
 // Modified from Tutorial #
+#pragma once
 
 #include <map>
-#include "player.h"
+#include "../Player/Player.h"
 
 using namespace std;
 
@@ -18,8 +19,8 @@ public:
 	void add_player(Player*);
 	void print_player_score(Player*);
 	void print_all_scores();
-	void reset_newgame();
-	void check_vp_conditions(Player* player);
+	void reset_new_game();
+	int check_vp_conditions(Player*, game_map*);
 	void end_of_game_vp_check();
 	static VPCounter* instance();
 protected:

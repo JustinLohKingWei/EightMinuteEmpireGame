@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Player/Player.h"
 #include "BidingFacility/Bid.h"
+#include "Card/Card.h"
 
 int main() {
 	//TODO : Implement Driver of Part 2
@@ -10,33 +11,6 @@ int main() {
     string lName;
     string first, last;
 
-    vector<Card*>listOfCards = {//list of cards
-      new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 2),
-      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 2),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
-      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 2),
-      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 2),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
-      new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 2),
-      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 2),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
-      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 3),
-      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 3),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 3),
-      new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 4),
-      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 4),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 4),
-      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 2),
-      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 2),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2)
-    };
-    int cardsInEachHand = 0;
-    if (playernum == 2) {
-        cardsInEachHand = 4;
-    }
-    else {
-        cardsInEachHand = 2;
-    }
 	vector<Player*> players;		//Vector of players
     for (int i = 0; i < playernum; i++) {
         cout << "Please enter first name" << endl;
@@ -45,19 +19,14 @@ int main() {
         cin >> last;
         fName = string(first);
         lName = string(last);
-        vector<Card*>cardsInHand;
         fName = string(first);
         lName = string(last);
+        vector<Card*>cards;
         vector<region*>listOfRegions;
-        for (int j = 0; j < listOfCards.size(); j++) {//Distributing cards
-            if (j >= cardsInEachHand) {
-                break;
-            }
-            cardsInHand.push_back(listOfCards.at(j));
+        vector<Army*>listOfArmies;
+        vector<City*>listOfCities;
+        Player* aPlayer = new Player(fName, lName, cards, listOfRegions, listOfArmies, listOfCities);//Creating player
 
-        }
-        listOfCards.erase(listOfCards.begin(), listOfCards.begin() + cardsInEachHand);
-        Player* aPlayer = new Player(fName, lName, cardsInHand, listOfRegions);//Creating player
         players.push_back(aPlayer);
     }
 
@@ -107,21 +76,16 @@ int main() {
     cout << "Winner is " << winner.getFirstName() << " With Bidding Amount :" << winnerAmount << endl;
     winner.getBidingFacility()->putCoins();
 
+    // Card Shuffling and filling of deck.
     Deck* deck = new Deck;
-    cout << "Normal Deck" << endl;
-    for (int i = 0; i < deck->getListOfCards().size(); i++) {
-        cout <<  deck->getListOfCards()[i]->getName() << endl;
-    }
-    cout << "Filtered Deck" << endl;
     deck->filterDeck(playernum);
-    for (int i = 0; i < deck->getListOfCards().size(); i++) {
-        cout << deck->getListOfCards()[i]->getName() << endl;
-    }
-    cout << "Shhuffled Deck" << endl;
     deck->shuffleDeck();
-    for (int i = 0; i < deck->getListOfCards().size(); i++) {
-        cout << deck->getListOfCards()[i]->getName() << endl;
-    }
+    Hand* hand = new Hand;
+    deck->fillHand(hand);
+
+    cout << "Displaying Hand: " << endl;
+    hand->viewHand();
+
 
 	return 0;
 }

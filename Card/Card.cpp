@@ -7,6 +7,7 @@
 #include <ranges>
 #include <algorithm>
 #include <random>
+#include <ctime>
 using namespace std;
 
 // Empty Constructor
@@ -97,15 +98,17 @@ int Card::getMaxPlayerCount() {
 
 // Empty Constructor
 Hand::Hand() {
+    cardsInHand;
     for (int i = 0; i < 6; i++) {
-        cardsInHand[i] = NULL;
+        cardsInHand.push_back(NULL);
     }
 }
 
 // Parameterized Constructor
-Hand::Hand(Card* newCardsInHand[]){
+Hand::Hand(vector<Card*> newCardsInHand){
+    cardsInHand;
     for (int i = 0; i < 6; i++) {
-        cardsInHand[i] = newCardsInHand[i];
+        cardsInHand.push_back(newCardsInHand.at(i));
     }
 }
 
@@ -141,12 +144,16 @@ void Hand::details(int index){
 
 // Displays current hand.
 void Hand::viewHand(){
-    for (int i = 0; i<5; i++){
+
+    for (int i = 0; i<6; i++){
+
         if (getCard(i) != NULL){
+            cout << "Index " << i << " ";
             details(i);
+            cout << endl;
         }
         else{
-            cout << "Space " << i << "is empty";
+            cout << "Space " << i << "is empty" << endl;
         }
     }
 }
@@ -156,6 +163,7 @@ Card* Hand::exchange(int index){
     cout << "You've used the following card for " << getCost(index) << ": \n";
     details(index);
     Card* exchangedCard = cardsInHand[index];
+    delete cardsInHand[index];
     setCard(NULL, index);
     return exchangedCard;
 }
@@ -186,30 +194,81 @@ void Hand::setCard(Card* newCard, int index){
     cardsInHand[index] = newCard;
 }
 
+// Re-arranges the array to push cards to the left
+void Hand::slideCardsLeft() {
+    // Check if card is missing from array
+    int emptyIndex = -1; // -1 signifies no empty index
+    for (int i = 0; i <= 5; i++) {
+        if (getCard(i) == NULL) {
+            emptyIndex = i;
+        }
+    }
+    // If card is missing, take every card to the right and bring it one index lower
+    if (emptyIndex != -1) {
+        int indexBeingReplaced = emptyIndex;
+        while (indexBeingReplaced < 5) {
+            cardsInHand.at(indexBeingReplaced) = cardsInHand.at(indexBeingReplaced+1);
+            indexBeingReplaced += 1;
+        }
+        setCard(NULL, indexBeingReplaced);
+    }
+    // If no card is missing
+    else {
+        cout << "All spaces are occupied. No cards to slide to the left" << endl;
+        cout << emptyIndex << endl;
+    }
+
+}
+
+vector<Card*> Hand::getCardsInHand() {
+    return cardsInHand;
+}
+
 vector<Card*> Deck::listOfCards = {//list of cards
       new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 2),
-      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 2),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
-      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 2),
-      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 2),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
-      new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 2),
-      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 2),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
-      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 3),
-      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 3),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 3),
-      new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 4),
-      new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 4),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 4),
-      new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 2),
-      new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 2),
-      new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2)
+      new Card("Ancient Spirit Tree", "Elixers: 3", "Place Armies: 4", 2),
+      new Card("Cursed Banshee", "Elixers: 2", "Move Armies: 6", 2),
+      new Card("Cursed King", "Elixers: 1", "Place Armies: 3 OR Move Armies: 4", 2),
+      new Card("Cursed Tower", "+1 VP Per Flight", "Build City", 2),
+      new Card("Dire Eye", "Flight", "Place Armies: 4", 2),
+      new Card("Forest Elf", "+1 Army", "Place Armies: 3 OR Move Armies: 2", 2),
+      new Card("Forest Pixie", "+1 Army", "Move Armies: 4", 2),
+      new Card("Graveyard", "+1 VP Per Cursed", "Place Armies: 2", 2),
+      new Card("Night Hydra", "+1 Army", "Move Armies: 5 AND Destroy Army", 2),
+      new Card("Night Wizard", "+1 VP Per Night", "Place Armies: 3 AND Destroy Army", 2),
+      new Card("Noble Knight", "+1 Move", "Place Armies: 4 AND Destroy Ar,u", 2),
+      new Card("Stronghold", "+1 VP Per Dire", "Build City", 2),
+      new Card("Ancient Sage", "+1 VP Per Ancient", "Move Armies: 3", 2),
+      new Card("Ancient Woods", "+1 Army", "Build City AND Place Armies: 1", 2),
+      new Card("Cursed Gargoyles", "Flight", "Move Armies: 5", 2),
+      new Card("Cursed Mausoleum", "+1 Move", "Build City", 2),
+      new Card("Dire Dragon", "Flight", "Place Armies: 3 AND Destroy Army", 2),
+      new Card("Dire Giant", "Immune to Attack", "Place Armies: 3 AND Destroy Army", 2),
+      new Card("Dire Ogre", "+1 VP Per 3 Coins", "Move Armies: 2", 2),
+      new Card("Forest Gnome", "Elixers: 3", "Move Armies: 2", 2),
+      new Card("Forest Tree Town", "+1 Move", "Build City", 2),
+      new Card("Lake", "+1 VP Per Forest", "Place Armies: 2 OR Move Armies: 3", 2),
+      new Card("Night Village", "+1 Army", "Build City", 2),
+      new Card("Noble Hills", "3 Noble cards = 4VP", "Place Armies: 3", 2),
+      new Card("Noble Unicorn", "+1 Move", "Move Armies: 4 AND Place Armies: 1", 2),
+      new Card("Arcane Manticore", "+1 Move", "Place Armies: 4 AND Destroy Army", 3),
+      new Card("Arcane Sphinx", "Flight", "Place Armies: 3 OR Move Armies: 4", 3),
+      new Card("Arcane Temple", "+1 VP Per Arcane", "Move Armies: 3", 3),
+      new Card("Mountain Dwarf", "2 Mountain = 3VP", "Place Armies: 2 AND Destroy Army", 3),
+      new Card("Mountain Treasury", "Elixers: 1 AND Coins: 2", "Move Armies: 3", 3),
+      new Card("Castle", "Elixers: 1", "Place Armies: 3 OR Build City", 4),
+      new Card("Castle 2", "Elixers: 1", "Move Armies: 3 AND Build City", 4),
+
 };
 
 // Empty Constructor
 Deck::Deck() {
     
+}
+
+// Parameterized constructor
+Deck::Deck(vector<Card*> cardList) {
+    listOfCards = cardList;
 }
 
 Deck::~Deck() {
@@ -247,35 +306,26 @@ Card* Deck::getTopCard() {
 
 // Allows users to draw card then place it in the Hand.
 void Deck::draw(Hand* aHand) {
-    vector<int> indices;
+    int emptyIndex = -1;
     for (int i = 0; i < 6; i++) {
         if (aHand->getCard(i) == NULL) {
-            indices.push_back(i);
+            emptyIndex = i;
+            break;
         }
     }
-    if (indices.size() == 0) {
+    if (emptyIndex == -1) {
         cout << "No space for new cards in hand. \n";
     }
     else {
-        cout << "The available positions are: \n";
-        for (int i = 0; i < indices.size(); i++) {
-            cout << indices[i] << " ";
-        }
-        cout << endl;
-        cout << "Please enter the position for the card: ";
-        bool incorrect = true;
-        int position;
-        do {
-            std::cin >> position;
-            if (aHand->getCard(position) != NULL || position > 5) {
-                cout << "Incorrect input, please try again. \n";
-            }
-            else {
-                incorrect = false;
-            }
-        } while (incorrect);
+        aHand->setCard(getTopCard(), emptyIndex);
+    }
+}
 
-        aHand->setCard(getTopCard(), position);
+void Deck::fillHand(Hand* aHand) {
+    for (int i = 0; i < 6; i++) {
+        if (aHand->getCard(i) == NULL) {
+            aHand->setCard(getTopCard(), i);
+        }
     }
 }
 
@@ -290,6 +340,7 @@ void Deck::filterDeck(int playerCount) {
 }
 
 void Deck::shuffleDeck() {
+    std::srand(std::time(0));
     std::random_shuffle(std::begin(listOfCards), std::end(listOfCards) );
 }
 
