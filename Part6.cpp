@@ -51,6 +51,8 @@ int main() {
         lName = string(last);
         vector<Card*>cardsInHand;
         vector<region*>listOfRegions;
+        vector<Army*>listOfArmies;
+        vector<City*>listOfCities;
         for (int j = 0; j < listOfCards.size(); j++) {//Distributing cards
             if (j >= cardsInEachHand) {
                 break;
@@ -59,7 +61,7 @@ int main() {
 
         }
         listOfCards.erase(listOfCards.begin(), listOfCards.begin() + cardsInEachHand);
-        Player* aPlayer = new Player(fName, lName, cardsInHand, listOfRegions);//Creating player
+        Player* aPlayer = new Player(fName, lName, cardsInHand, listOfRegions, listOfArmies, listOfCities);
         players.push_back(aPlayer);
 
     }
