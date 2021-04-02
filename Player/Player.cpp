@@ -400,6 +400,10 @@ void Player::setFirstName(string f) {
 void Player::setLastName(string l) {
 	this->lastName = l;
 }
+vector<Card*> Player::get_my_list_of_used_cards() const
+{
+	return vector<Card*>();
+}
 void playerGoods::setRegion(region* aRegion) {
 	this->aRegion = aRegion;
 }
@@ -442,5 +446,8 @@ region* playerGoods::getRegion() {
 bool playerGoods::getIsPlaced() {
 	return isPlaced;
 }
+
+
+vector<Player*> Player:: listOfPlayers;
 
 #endif

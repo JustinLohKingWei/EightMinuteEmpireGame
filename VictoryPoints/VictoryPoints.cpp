@@ -2,6 +2,7 @@
 #include <regex>
 #include "VictoryPoints.h"
 #include "../Map/Map.h"
+#include "../Player/Player.h"
 
 void VPCounter::change_score(Player* player, int new_score)
 {

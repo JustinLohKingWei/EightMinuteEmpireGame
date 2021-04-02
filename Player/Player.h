@@ -74,6 +74,8 @@ public:
 	string getFirstName();
 	string getLastName();
 
+	
+
 
 private:
 	vector<region*> listOfTerritories;
@@ -83,7 +85,6 @@ private:
 	Bid* myBidingFacility;
 	string firstName, lastName;
 	static vector<Player*>listOfPlayers;
-
 };
 
 
