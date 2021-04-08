@@ -34,4 +34,13 @@ bld/
 
 # NUNIT
 
-.exe
+*.exe
+*.tlog
+*.sqlite
+*.obj
+*.DB
+*.db
+*.ilk
+*.pdb
+*.idb
+*.ipch
