@@ -141,13 +141,15 @@
   <ItemGroup>
     <ClCompile Include="..\BidingFacility\bid.cpp" />
     <ClCompile Include="..\Card\Card.cpp" />
+    <ClCompile Include="..\CompleteDriver.cpp" />
+    <ClCompile Include="..\Game\Game.cpp" />
     <ClCompile Include="..\Map\Map.cpp" />
     <ClCompile Include="..\Player\Player.cpp" />
-    <ClCompile Include="..\Player\PlayerDriver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\BidingFacility\Bid.h" />
     <ClInclude Include="..\Card\Card.h" />
+    <ClInclude Include="..\Game\Game.h" />
     <ClInclude Include="..\Map\Map.h" />
     <ClInclude Include="..\Player\Player.h" />
   </ItemGroup>
