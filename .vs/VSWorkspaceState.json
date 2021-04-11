@@ -6,8 +6,9 @@
     "\\Game",
     "\\Map",
     "\\MapLoader",
-    "\\Player"
+    "\\Player",
+    "\\PlayerStrategies"
   ],
-  "SelectedNode": "\\MapLoader\\MapLoader.sln",
+  "SelectedNode": "\\A2MainDriver.cpp",
   "PreviewInSolutionExplorer": false
 }
