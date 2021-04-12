@@ -14,7 +14,7 @@ public:
 class GreedyComputerStrategy : public Strategy
 {
 public:
-	void playTurn();
+	void playTurn(Hand* GameHand);
 };
 
 class HumanStrategy : public Strategy {
