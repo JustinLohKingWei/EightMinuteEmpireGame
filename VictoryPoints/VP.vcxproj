@@ -65,6 +65,17 @@
   <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\BidingFacility\bid.cpp" />
+    <ClCompile Include="..\Card\Card.cpp" />
+    <ClCompile Include="..\PlayerStrategiesDriver.cpp" />
+    <ClCompile Include="..\PlayerStrategies\PlayerStrategies.cpp" />
+    <ClCompile Include="..\Player\Player.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\BidingFacility\Bid.h" />
+    <ClInclude Include="..\Card\Card.h" />
+    <ClInclude Include="..\PlayerStrategies\PlayerStrategies.h" />
+    <ClInclude Include="..\Player\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -182,6 +182,9 @@ int Hand::getCost(int index){
     else if (index == 5){
         return 3;
     }
+    else {
+        return -1;
+    }
 }
 
 // Returns a card.

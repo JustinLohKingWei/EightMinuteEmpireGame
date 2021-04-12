@@ -1,10 +1,6 @@
 #include "Player.h";
 
 //Default constructor
-Player::Player() {
-
-}
-//Parameterized constructor
 //Player::Player(string f, string l, Card* aCard, vector<region*> listOfRegions, vector<Army*> listOfArmies) : firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myCard(aCard), listOfTerritories(listOfRegions), listOfArmy(listOfArmies) { this->coins = 0; }
 //Copy constructor
 Player::Player(const Player& b) {
@@ -14,6 +10,7 @@ Player::Player(const Player& b) {
 	this->myBidingFacility = b.myBidingFacility;
 	this->myListOfCardsUsed = b.myListOfCardsUsed;
 	this->listOfArmy = b.listOfArmy;
+	this->strategy = b.strategy;
 
 }
 //Assignment operator
@@ -431,6 +428,17 @@ string Player::getLastName() {
 	return lastName;
 }
 
+
+void Player::setStrategy(Strategy* newStrategy)
+{
+	this->strategy = newStrategy;
+}
+
+void Player::executeStrategy(Hand *aGameHand)
+{
+	this->strategy->playTurn(aGameHand);
+}
+
 region* playerGoods::getRegion() {
 	return aRegion;
 }
@@ -439,4 +447,3 @@ bool playerGoods::getIsPlaced() {
 	return isPlaced;
 }
 
-#endif

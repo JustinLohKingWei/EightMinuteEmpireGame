@@ -4,8 +4,10 @@
 #include "../Map/Map.h"
 #include "../BidingFacility/Bid.h"
 #include "../Card/Card.h"
+#include "../PlayerStrategies/PlayerStrategies.h"
 using namespace std;
 
+class Strategy;
 class region;
 
 struct playerGoods {
@@ -42,9 +44,9 @@ public:
 class Player {
 public:
 	Player();
-	Player(string f, string l, vector<Card*>listOfCardsUsed, vector<region*> listOfRegions, vector<Army*> listOfArmies, vector<City*> listOfCities) :
-		firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myListOfCardsUsed(listOfCardsUsed), listOfTerritories(listOfRegions), listOfArmy(listOfArmies), listOfCities(listOfCities) {
-		listOfPlayers.push_back(this);
+	Player(string f, string l, vector<Card*>listOfCardsUsed, vector<region*> listOfRegions, vector<Army*> listOfArmies, vector<City*> listOfCities, Strategy* initStrategy) :
+		firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myListOfCardsUsed(listOfCardsUsed), listOfTerritories(listOfRegions), listOfArmy(listOfArmies), listOfCities(listOfCities), strategy(initStrategy) {
+		//listOfPlayers.push_back(this);
 	};
 	Player(const Player& b);
 	Player& operator =(const Player& e);
@@ -74,15 +76,21 @@ public:
 	string getFirstName();
 	string getLastName();
 
+	void setStrategy(Strategy* newStrategy);
+	void executeStrategy(Hand *aGameHand);
+
+
 
 private:
+	Strategy* strategy;
+
 	vector<region*> listOfTerritories;
 	vector<City*> listOfCities;
 	vector<Army*> listOfArmy;
 	vector<Card*>myListOfCardsUsed;
 	Bid* myBidingFacility;
 	string firstName, lastName;
-	static vector<Player*>listOfPlayers;
+	vector<Player*>listOfPlayers;
 
 };
 

@@ -1,14 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\BidingFacility",
-    "\\Card",
-    "\\Game",
-    "\\Map",
-    "\\MapLoader",
-    "\\Player",
-    "\\PlayerStrategies"
+    ""
   ],
-  "SelectedNode": "\\A2MainDriver.cpp",
+  "SelectedNode": "\\VP.sln",
   "PreviewInSolutionExplorer": false
 }
