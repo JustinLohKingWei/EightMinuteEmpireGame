@@ -1,3 +1,4 @@
+
 #include <vector>
 #include <regex>
 #include "VictoryPoints.h"
@@ -172,4 +173,3 @@ VPCounter* VPCounter::instance()
 		s_instance = new VPCounter();
 	return s_instance;
 }
-

@@ -15,7 +15,7 @@ int Bid::numberOfPlayers = 0;
 
 //since requirements did not specify the initial amount of silver and copper coins respectively at game start
 //we shall assume the ratio of silver to copper is 1:2 from 36 coins.
-int Bid::copperPile = 56;              
+int Bid::copperPile = 24;              
 int Bid::silverPile = 12;
 
 // Empty constructor
@@ -164,36 +164,32 @@ void Bid::pickUpCoins()
 }
 
 //  overloading of pickupcoins() which allows a custom amount of coins to be picked up
-void Bid::pickUpCoins(int amount)
+void Bid::pickUpCoins(int amount) 
 {
-    int silverCoinsInput = 0;
-    int copperCoinsInput = 0;
     cout << playerFirstName << " is picking up coins :" << endl;
-    do
-    {
-        while ((silverCoinsInput + copperCoinsInput) != amount || (silverCoinsInput > silverPile || copperCoinsInput > copperPile))
+        do
         {
-            cout << "Two player game! Each Player selects " << amount << " coins" << endl;
-            cout << "Enter amount of Silver coins   :" << Bid::silverPile << " remaining" << endl;
-            cin >> silverCoinsInput;
-            cout << "Enter amount of Copper coins   :" << Bid::copperPile << " remaining" << endl;
-            cin >> copperCoinsInput;
-            if ((silverCoinsInput + copperCoinsInput) != amount)
+            while ((silverCoins + copperCoins) != amount|| (silverCoins > silverPile || copperCoins > copperPile))
             {
-                cout << "You must select " << amount << " coins! Try again." << endl;
+                cout << "Two player game! Each Player selects "<< amount <<" coins" << endl;
+                cout << "Enter amount of Silver coins   :" << Bid::silverPile << " remaining" << endl;
+                cin >> silverCoins;
+                cout << "Enter amount of Copper coins   :" << Bid::copperPile << " remaining" << endl;
+                cin >> copperCoins;
+                if ((silverCoins + copperCoins) != amount)
+                {
+                    cout << "You must select "<< amount <<" coins! Try again." << endl;
+                }
+                if (silverCoins > silverPile || copperCoins > copperPile)
+                {
+                    cout << "Not enough coins in pile. Try again." << endl;
+                }
             }
-            if (silverCoinsInput > silverPile || copperCoinsInput > copperPile)
-            {
-                cout << "Not enough coins in pile. Try again." << endl;
-            }
-        }
-    } while (silverCoinsInput > silverPile || copperCoinsInput > copperPile);
+        } while (silverCoins > silverPile || copperCoins > copperPile);
 
-    silverPile = silverPile - silverCoinsInput;
-    copperPile = copperPile - copperCoinsInput;
-    silverCoins = silverCoinsInput;
-    copperCoins = copperCoinsInput;
-
+        silverPile = silverPile - silverCoins;
+        copperPile = copperPile - copperCoins;
+   
 }
 
 //Method to allow a player to bid an amount of coins based on the coins they have 

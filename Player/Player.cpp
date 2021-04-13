@@ -1,7 +1,3 @@
-
-#ifndef PLAYER_CPP
-#define PLAYER_CPP
-
 #include "Player.h";
 
 //Default constructor
