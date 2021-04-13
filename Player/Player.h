@@ -1,3 +1,4 @@
+
 #pragma once
 #include <vector>
 #include <iostream>
@@ -74,7 +75,6 @@ public:
 	string getFirstName();
 	string getLastName();
 
-
 private:
 	vector<region*> listOfTerritories;
 	vector<City*> listOfCities;
@@ -83,7 +83,4 @@ private:
 	Bid* myBidingFacility;
 	string firstName, lastName;
 	static vector<Player*>listOfPlayers;
-
 };
-
-
