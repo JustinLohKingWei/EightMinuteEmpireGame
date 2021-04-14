@@ -14,15 +14,18 @@ struct playerGoods {
 	void setRegion(region* aRegion);
 	region* getRegion();
 	void setPlaced(bool placed);
-	bool getIsPlaced();
+	
+	string fname;
+	string lname;
 
+	void setOwner(string fname, string lname) { this->fname = fname; this->lname = lname; }
 	region* aRegion;
 	bool isPlaced;
 };
 
 class Army : public playerGoods {
 public:
-	Army() { isPlaced = false; };
+	Army() { aRegion = 0;  isPlaced = false; };
 	Army(const Army& b);
 	Army& operator =(const Army& e);
 	~Army() {  };
@@ -32,7 +35,7 @@ public:
 
 class City : public playerGoods {
 public:
-	City() { isPlaced = false; };
+	City() { aRegion = 0; isPlaced = false; };
 	City(const City& b);
 	City& operator =(const City& e);
 	~City() { delete aRegion; };
@@ -53,12 +56,12 @@ public:
 	friend ostream& operator << (ostream& out, const Player& aPlayer);
 	friend istream& operator >> (istream& in, Player& aPlayer);
 	bool PayCoin(int payableAmount, char type);
-	void PlaceNewArmies(int numberOfArmies, region* aRegion);
+	void PlaceNewArmies(int numberOfArmies);
 	void MoveArmies(int numberOfArmiesToMove);
 	void MoveOverLand(vector<int> list, region* from);
 	void MoveOverWater();
-	void BuildCity(region* where);
-	bool DestroyArmy(vector<Player*>listOfPlayers, region* where, string target);
+	void BuildCity(int numberOfCities);
+	bool DestroyArmy(int numberToDestroy);
 	void andOr(Card* currentCard);
 	//void setCardUsed(Card* aCard);
 	void setBidingFacility(Bid* aBidingFacility);
@@ -77,8 +80,8 @@ public:
 
 private:
 	vector<region*> listOfTerritories;
-	vector<City*> listOfCities;
-	vector<Army*> listOfArmy;
+	vector<City*> listOfCities;//10
+	vector<Army*> listOfArmy;//18
 	vector<Card*>myListOfCardsUsed;
 	Bid* myBidingFacility;
 	string firstName, lastName;

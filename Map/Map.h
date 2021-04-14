@@ -26,6 +26,7 @@ public:
 	void update_armies_to_region(Player*);
 	vector<Player*> get_controlling_player();
 	vector<pair<Player*, int>> get_occuping_armies();
+	
 private:
 	vector<pair<Player*, int>> occuping_armies;
 	vector<Player*> controlling_player;
