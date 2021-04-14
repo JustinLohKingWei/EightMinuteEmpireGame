@@ -16,22 +16,22 @@ int main() {
     vector<Card*>listOfCards = {//list of cards
          new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 2),
          new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 2),
-         new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
+         new Card("Forest Elf", "+1 Army", "Place Army: 3 OR Move Armies: 2", 2),
          new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 2),
-         new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 2),
-         new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
+         new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City: 1", 2),
+         new Card("Forest Elf", "+1 Army", "Place Army: 3 OR Move Armies: 2", 2),
          new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 2),
          new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 2),
-         new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
+         new Card("Forest Elf", "+1 Army", "Place Army: 3 OR Move Armies: 2", 2),
          new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 2),
-         new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 2),
-         new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
+         new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City: 1", 2),
+         new Card("Forest Elf", "+1 Army", "Place Army: 3 OR Move Armies: 2", 2),
          new Card("Ancient Phoenix", "Flight", "Move Armies: 5", 2),
          new Card("Arcane Temple", "+1VP per Arcane", "Move Armies: 3", 2),
-         new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2),
+         new Card("Forest Elf", "+1 Army", "Place Army: 3 OR Move Armies: 2", 2),
          new Card("Night Hydra", "+1 Army", "Move Armies: 5 OR Destroy Army: 1", 2),
-         new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City", 2),
-         new Card("Forest Elf", "+1 Army", "Place 3 Army OR Move Armies: 2", 2)
+         new Card("Castle", "+1 Elixer", "Move Armies: 3 AND Build City: 1", 2),
+         new Card("Forest Elf", "+1 Army", "Place Army: 3 OR Move Armies: 2", 2)
     };
     int cardsInEachHand = 0;
     if (playernum == 2) {
