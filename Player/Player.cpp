@@ -145,11 +145,17 @@ void Player::PlaceNewArmies(int numberOfArmies) {//Handling placing in multiple 
 				cout << "Invalid number of armies to place" << endl;
 				continue;
 			}
-			cout << listOfTerritories.at(indexChoice)->name << "test"<<endl;
+			
 			for (Army* x : listOfArmy) {
 				if (x->getRegion() == nullptr && armyCounter < numChoice) {
 					x->setRegion(listOfTerritories.at(indexChoice));
 					cout << "Placed new army at " << listOfTerritories.at(indexChoice)->name << endl;
+					//Updating region data
+					x->getRegion()->update_armies_to_region(this);
+					for (const pair<Player*, int>& data : x->getRegion()->get_occuping_armies()) {
+						cout << "Player: " << *(data.first) << "numOfArmies at this region: " << data.second << endl;
+					}
+
 					armyCounter++;
 				}
 				
@@ -245,8 +251,8 @@ void Player::MoveOverLand(vector<int> list, region* from) {
 			}
 
 		}
-		index++;
-		it++;
+index++;
+it++;
 	}
 }
 
@@ -256,7 +262,7 @@ void Player::MoveOverWater() {
 
 void Player::BuildCity(int numberOfCities) {
 	cout << "executing BuildCity()..." << endl;
-	
+
 	region* current = 0;
 	int regionSelect = 0;
 	int numPlaced = numberOfCities;
@@ -268,16 +274,16 @@ void Player::BuildCity(int numberOfCities) {
 			if (current != a->getRegion() && a->getRegion() != nullptr) {
 				cout << a->getRegion()->name << "(" << regionSelect << ")" << endl;
 			}
-			
-			else if(current == a->getRegion() || a->getRegion() == nullptr){
+
+			else if (current == a->getRegion() || a->getRegion() == nullptr) {
 				regionSelect++;
 				continue;
 			}
 			regionSelect++;
 			current = a->getRegion();
-			
+
 		}
-		
+
 		cout << "Select region to add city:" << endl;
 		cin >> regionSelect;
 
@@ -292,13 +298,13 @@ void Player::BuildCity(int numberOfCities) {
 
 		region* where = listOfArmy.at(regionSelect)->getRegion();
 		for (City* c : listOfCities) {
-			
+
 			if (c->getRegion() == nullptr && cityCounter < numChoice) {
 				cout << "City built at " << where->name << endl;
 				c->setRegion(where);
 				cityCounter++;
 			}
-			
+
 		}
 		numPlaced -= cityCounter;
 		cityCounter = 0;
@@ -307,42 +313,58 @@ void Player::BuildCity(int numberOfCities) {
 }
 //Maybe static player array?
 bool Player::DestroyArmy(int numberToDestroy) {
-	//cout << "executing DestroyArmy()..." << endl;
-	//bool isAtRegion = false;
-	//for (Army* armyPiece : getListOfArmy()) {
-	//	if (armyPiece->getRegion()->name == where->name) {//If current player has an army at the specified region
-	//		isAtRegion = true;
-	//	}
-	//}
-	//if (isAtRegion == false) {//If current player does not have any army at specified region, do nothing
-	//	return false;
-	//}
-	//else {
-	//	for (Player* aPlayer : listOfPlayers) {
-
-	//		if (aPlayer->getFirstName() == target) {
-	//			for (Army* armyPiece : aPlayer->listOfArmy) {
-
-	//				if (armyPiece->getRegion() == where) {
-	//					delete armyPiece;
-	//					break;
-	//				}
-
-	//			}
-	//		}
-	//	}
-	//}
+	int remainingToDestroy = numberToDestroy;
+	int regionTargetIndex = 0;
 	region* current = 0;
+
+	for (region* x : listOfTerritories) {
+		cout << "(" << regionTargetIndex << ") " << x->name << endl;
+		regionTargetIndex++;
+	}
 	cout << "Your armies are currently at: " << endl;
 	for (Army* myArmy : listOfArmy) {
 		if (current != myArmy->getRegion() && myArmy->getRegion() != nullptr) {
 			cout << myArmy->getRegion()->name << endl;
-			cout << "Checking for ennemies..." << endl;
-			int size = myArmy->getRegion()->get_occuping_armies().size();
-			for (int i = 0; i < size; i++) {
-				cout << "Player "<<myArmy->getRegion()->get_occuping_armies().at(i).first << endl;
-				cout << "with " << myArmy->getRegion()->get_occuping_armies().at(i).second << "armies" << endl;
+			cout << "=======================" << endl;
+			cout << "Checking for ennemy armies at current region...\n" << endl;
+
+			int playerIndex = 0;
+			for (Player* aPlayer : listOfPlayers) {
+				if (aPlayer == this) {
+					playerIndex++;
+					continue;
+				}
+				myArmy->getRegion()->update_armies_to_region(aPlayer);
+				cout << "(" << playerIndex << ")" << *aPlayer << "Number of armies at this region: " << myArmy->getRegion()->get_number_of_armies(aPlayer) << endl;
+				playerIndex++;
 			}
+			cout << "" << endl;
+
+			cout << "Select a player on your region to destroy army:" << endl;
+			int playerTarget;
+			cin >> playerTarget;
+
+			cout << "You have targeted: " << *listOfPlayers.at(playerTarget) << endl;
+
+			cout << "How many armies do you wish to destroy on that region?" << endl;
+
+			int armyNumToDestroy;
+			cin >> armyNumToDestroy;
+
+			if ((armyNumToDestroy > numberToDestroy) || (remainingToDestroy - armyNumToDestroy) < 0 || armyNumToDestroy <= 0){
+
+				cout << "Invalid number of armies to destroy" << endl;
+				continue;
+			}
+
+			
+			for (auto* army : listOfPlayers.at(playerTarget)->getListOfArmy()) {
+				if (army->getRegion() == myArmy->getRegion() && remainingToDestroy > armyNumToDestroy) {
+					delete army;
+				}
+				
+			}
+			remainingToDestroy -= armyNumToDestroy;
 			current = myArmy->getRegion();
 		}
 	}
