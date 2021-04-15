@@ -79,6 +79,9 @@ public:
 	string getFirstName();
 	string getLastName();
 
+
+	//MVC implementation methods
+
 private:
 	vector<region*> listOfTerritories;
 	vector<City*> listOfCities;//10

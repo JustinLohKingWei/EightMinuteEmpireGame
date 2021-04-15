@@ -25,7 +25,7 @@ void GameMessageBoard::Display(){
 
     //int stat1 = _subject.getStat1();
 
-  //cout<<stat1;
+    //cout<<stat1;
 
 };
 
