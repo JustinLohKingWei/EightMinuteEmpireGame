@@ -1,3 +1,4 @@
+#pragma once
 #include"./Player/Player.h";
 #include"GameObservers.h";
 

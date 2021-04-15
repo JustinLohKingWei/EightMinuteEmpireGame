@@ -1,7 +1,8 @@
+#pragma once
 class GameObservers             // observer class
 {
 public:
-    ~GameObservers();
+    virtual ~GameObservers();
     virtual void Update()=0;
 
 protected:

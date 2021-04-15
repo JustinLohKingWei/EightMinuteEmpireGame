@@ -5,6 +5,7 @@
 #include "../Map/Map.h"
 #include "../BidingFacility/Bid.h"
 #include "../Card/Card.h"
+#include"../GameObservers/Subject.h"
 using namespace std;
 
 class region;
@@ -40,7 +41,7 @@ public:
 
 };
 
-class Player {
+class Player : public Subject {
 public:
 	Player();
 	Player(string f, string l, vector<Card*>listOfCardsUsed, vector<region*> listOfRegions, vector<Army*> listOfArmies, vector<City*> listOfCities) :
