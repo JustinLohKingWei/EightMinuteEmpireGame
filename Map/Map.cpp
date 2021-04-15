@@ -355,7 +355,7 @@ void region::update_armies_to_region(Player* player) // End of player's turn/End
 					std::exit(-1);
 				}
 			//}
-		}
+		}//Change
 	}
 }
 
