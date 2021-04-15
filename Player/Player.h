@@ -77,7 +77,7 @@ public:
 	vector<City*> getListOfCities();
 	string getFirstName();
 	string getLastName();
-
+	static vector<Player*>listOfPlayers;
 private:
 	vector<region*> listOfTerritories;
 	vector<City*> listOfCities;//10
@@ -85,5 +85,5 @@ private:
 	vector<Card*>myListOfCardsUsed;
 	Bid* myBidingFacility;
 	string firstName, lastName;
-	static vector<Player*>listOfPlayers;
+	
 };

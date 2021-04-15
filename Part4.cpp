@@ -221,6 +221,10 @@ int main() {
 
 	Army* armyPiece4 = new Army();
 	armiesList.push_back(armyPiece4);
+	for (int i = 0; i < 6; i++) {
+		Army* x = new Army();
+		armiesList.push_back(x);
+	}
 	//region starting = tileX.m_map.at(XYZ)
 	//Add region to list of regions
 
@@ -241,16 +245,25 @@ int main() {
 	c->setOwner("Ligma", "Balls");
 	ennemyArmyList.push_back(c);
 	ennemyRegions.push_back(c->getRegion());
+	
+	for (int i = 0; i < 6; i++) {
+		Army* x = new Army();
+		ennemyArmyList.push_back(x);
+	}
 
 	Player* aPlayer = new Player("Alpha", "Beta", cardsUsed, regionsOwned, armiesList, citiesList);
+	
 	Player* bPlayer = new Player("Ligma", "Balls", ennemyCards, ennemyRegions, ennemyArmyList, ennemyCityList);
+
+	//Player* cPlayer = new Player("Legron", "Balls", ennemyCards, ennemyRegions, ennemyArmyList, ennemyCityList);
 	/*aPlayer->MoveArmies(3);
 	aPlayer->BuildCity(tile4->m_map.at("Volcano Island Region 7"));
 	aPlayer->PayCoin(2, 's');*/
 	//aPlayer->PlaceNewArmies(3);
 	//aPlayer->BuildCity(3);
-
+	
 	aPlayer->DestroyArmy(5);
+	//aPlayer->PlaceNewArmies(3);
 	Card* test = new Card("Night Hydra", "+1 Army", "Move Armies: 5 AND Destroy Army: 2", 2);
 	aPlayer->andOr(test);
 	

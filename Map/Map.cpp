@@ -22,7 +22,7 @@ int region::get_number_of_armies(Player *player)
 			return p.second;
 		}
 	}
-	std::cout << "The player could not be found!" << endl;
+	std::cout << "The player could not be found!2" << endl;
 	std::exit(-1);
 	return 0;
 }
@@ -317,38 +317,44 @@ void region::update_armies_to_region(Player* player) // End of player's turn/End
 {
 	int armies = 0;
 	region* r_region = nullptr;
+	int pIndex = 0;
+	int countIndex = 0;
+	//cout << *player << endl;
 	for (auto* p_region: player->getListOfArmy())
 	{
 		r_region = p_region->aRegion;
-		for (auto* count_region : player->getListOfArmy())
-		{
-			if (p_region->aRegion == count_region->aRegion)
-			{
-				armies++;
-			}
+	
+		if (this == r_region) {
+			armies++;
 		}
+
 		if (armies > 0)
 		{
-			if (occuping_armies.empty())
-			{
+			/*if (occuping_armies.empty())
+			{*/
+				//cout << "helloooooo" << endl;
 				pair<Player*, int> temp(player, armies);
-				occuping_armies.emplace_back (temp);
-			}
+				occuping_armies.push_back (temp);
+			/*}
 			else
-			{
+			{*/
+				bool found = false;
 				for (auto& p_player : occuping_armies)
 				{
+					//cout << "!!!!!!!!!!!!!" << *p_player.first << endl;
 					if (p_player.first->getFirstName() == player->getFirstName() && p_player.first->getLastName() == player->getLastName())
 					{
 						p_player.second = armies;
+						found = true;
 					}
-					else
-					{
-						std::cout << "The player could not be found!" << endl;
-						std::exit(-1);
-					}
+					
+					
 				}
-			}
+				if (!found) {
+					std::cout << "The player could not be found!1" << endl;
+					std::exit(-1);
+				}
+			//}
 		}
 	}
 }
