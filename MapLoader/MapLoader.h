@@ -12,7 +12,7 @@ public:
 	string inputFileName;
 	vector<string> tilesArray;
 	string mapShape;
-	game_map* world_map;
+	GameMap* world_map;
 	bool validity;
 	int numOfTiles;
 	void createMap();

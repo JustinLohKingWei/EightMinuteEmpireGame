@@ -5,7 +5,7 @@ Player::Player() {
 
 }
 //Parameterized constructor
-//Player::Player(string f, string l, Card* aCard, vector<region*> listOfRegions, vector<Army*> listOfArmies) : firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myCard(aCard), listOfTerritories(listOfRegions), listOfArmy(listOfArmies) { this->coins = 0; }
+//Player::Player(string f, string l, Card* aCard, vector<Region*> listOfRegions, vector<Army*> listOfArmies) : firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myCard(aCard), listOfTerritories(listOfRegions), listOfArmy(listOfArmies) { this->coins = 0; }
 //Copy constructor
 Player::Player(const Player& b) {
 	this->firstName = b.firstName;
@@ -51,7 +51,7 @@ Army& Army::operator =(const Army& e) {
 }
 
 ostream& operator << (ostream& out, const Army& anArmy) {
-	out << "Army at " << anArmy.aRegion->name << ", isPlaced: " << anArmy.isPlaced << endl;
+	out << "Army at " << anArmy.aRegion->name_ << ", isPlaced: " << anArmy.isPlaced << endl;
 	return out;
 }
 
@@ -108,20 +108,20 @@ bool Player::PayCoin(int payableAmount, char type) {
 	return success;
 }
 
-void Player::PlaceNewArmies(int numberOfArmies, region* aRegion) {//Handling placing in multiple regions in the driver
+void Player::PlaceNewArmies(int numberOfArmies, Region* aRegion) {//Handling placing in multiple regions in the driver
 	//cout << " executing PlaceNewArmies()..." << endl;
 	int counter = 0;
 	for (Army* armyPiece : getListOfArmy()) {
 
 		if (!armyPiece->getIsPlaced() && counter < numberOfArmies && listOfCities.size() == 0) {
-			armyPiece->setRegion(aRegion);//Starting region
+			armyPiece->setRegion(aRegion);//Starting Region
 			armyPiece->setPlaced(true);
 			counter++;
 		}
 		else {
 			for (City* cityPiece : getListOfCities()) {
-				//Placing on a region where player has city
-				if (cityPiece->getRegion()->name == aRegion->name && !armyPiece->getIsPlaced() && counter < numberOfArmies) {
+				//Placing on a Region where player has city
+				if (cityPiece->getRegion()->name_ == aRegion->name_ && !armyPiece->getIsPlaced() && counter < numberOfArmies) {
 					armyPiece->setRegion(aRegion);
 					armyPiece->setPlaced(true);
 					cityPiece->setPlaced(true);
@@ -149,19 +149,19 @@ void Player::MoveArmies(int numberOfArmiesToMove) {
 	}
 	while (counter < numberOfArmiesToMove) {
 		cout << "Displaying regions with owned player's army + adjacency" << endl;
-		for (region* aRegion : getListOfTerritories()) {
+		for (Region* aRegion : getListOfTerritories()) {
 			adjacency = 0;
-			map<string, region*>::iterator it = aRegion->adj.begin();
-			while (it != aRegion->adj.end()) {
-				region* current = it->second;
+			map<string, Region*>::iterator it = aRegion->adj_.begin();
+			while (it != aRegion->adj_.end()) {
+				Region* current = it->second;
 				adjacency++;
 				adjList.push_back(adjacency);
-				cout << "\ncurrent region " << aRegion->name << " adjacent to: " << current->name << "( " << adjacency << " )" << endl;
+				cout << "\ncurrent Region " << aRegion->name_ << " adjacent to: " << current->name_ << "( " << adjacency << " )" << endl;
 
 				it++;
 			}
 
-			cout << "Select an army to move from current region? Enter key : (Y/y)es (N/n)o" << endl;
+			cout << "Select an army to move from current Region? Enter key : (Y/y)es (N/n)o" << endl;
 			cin >> choice;
 
 			if (choice == "Y" || choice == "y") {
@@ -183,27 +183,27 @@ void Player::MoveArmies(int numberOfArmiesToMove) {
 
 }
 
-void Player::MoveOverLand(vector<int> list, region* from) {
+void Player::MoveOverLand(vector<int> list, Region* from) {
 	int choice;
 	cout << " executing MoveOverLand()..." << endl;
-	cout << "\nSelect target adjacent region to move army" << endl;
+	cout << "\nSelect target adjacent Region to move army" << endl;
 	cin >> choice;
 	int index = 0;
 	int counter = 0;
-	map<string, region*>::iterator it = from->adj.begin();
-	while (it != from->adj.end()) {
-		region* current = it->second;
+	map<string, Region*>::iterator it = from->adj_.begin();
+	while (it != from->adj_.end()) {
+		Region* current = it->second;
 		for (Army* armyPiece : getListOfArmy()) {
 			if (index == choice - 1) {
 
-				if (armyPiece->getRegion()->name == from->name) {
+				if (armyPiece->getRegion()->name_ == from->name_) {
 					armyPiece->setRegion(current);
 
 
-					cout << "\nMoved an armyPiece from " << from->name << " to " << current->name << endl;
+					cout << "\nMoved an armyPiece from " << from->name_ << " to " << current->name_ << endl;
 
-					for (region* aRegion : getListOfTerritories()) {
-						if (aRegion->name == from->name) {
+					for (Region* aRegion : getListOfTerritories()) {
+						if (aRegion->name_ == from->name_) {
 							cout << "hello" << endl;
 							aRegion = nullptr;
 							break;
@@ -226,7 +226,7 @@ void Player::MoveOverWater() {
 
 }
 
-void Player::BuildCity(region* where) {
+void Player::BuildCity(Region* where) {
 	cout << " executing BuildCity()..." << endl;
 	for (City* cityPiece : getListOfCities()) {
 		if (cityPiece->getIsPlaced() == false) {
@@ -237,15 +237,15 @@ void Player::BuildCity(region* where) {
 	}
 }
 //Maybe static player array?
-bool Player::DestroyArmy(vector<Player*>listOfPlayers, region* where, string target) {
+bool Player::DestroyArmy(vector<Player*>listOfPlayers, Region* where, string target) {
 	cout << " executing DestroyArmy()..." << endl;
 	bool isAtRegion = false;
 	for (Army* armyPiece : getListOfArmy()) {
-		if (armyPiece->getRegion()->name == where->name) {//If current player has an army at the specified region
+		if (armyPiece->getRegion()->name_ == where->name_) {//If current player has an army at the specified Region
 			isAtRegion = true;
 		}
 	}
-	if (isAtRegion == false) {//If current player does not have any army at specified region, do nothing
+	if (isAtRegion == false) {//If current player does not have any army at specified Region, do nothing
 		return false;
 	}
 	else {
@@ -290,7 +290,7 @@ void Player::andOr(Card* current) {
 
 				for (City* aCity : getListOfCities()) {
 					if (aCity->getIsPlaced()) {
-						cout << "Place new army at this region? (Y/y)es/(N/n)o : " << aCity->getRegion()->name << endl;
+						cout << "Place new army at this Region? (Y/y)es/(N/n)o : " << aCity->getRegion()->name_ << endl;
 						cin >> choiceOfRegion;
 						if (choiceOfRegion == "Y" || choiceOfRegion == "y") {
 							PlaceNewArmies(amountOfFirstAction, aCity->getRegion());
@@ -310,7 +310,7 @@ void Player::andOr(Card* current) {
 			else if (action1 == "Build") {
 				for (Army* anArmy : getListOfArmy()) {
 					if (anArmy->getIsPlaced()) {
-						cout << "Place new city at this region? (Y/y)es/(N/n)o : " << anArmy->getRegion()->name << endl;
+						cout << "Place new city at this Region? (Y/y)es/(N/n)o : " << anArmy->getRegion()->name_ << endl;
 						cin >> choiceOfRegion;
 						if (choiceOfRegion == "Y" || choiceOfRegion == "y") {
 							BuildCity(anArmy->getRegion());
@@ -327,12 +327,12 @@ void Player::andOr(Card* current) {
 				string choiceToDestroy;
 				for (Army* anArmy : getListOfArmy()) {
 					if (anArmy->getIsPlaced()) {
-						cout << "Destroy army at this region? (Y/y)es/(N/n)o : " << anArmy->getRegion()->name << endl;
+						cout << "Destroy army at this Region? (Y/y)es/(N/n)o : " << anArmy->getRegion()->name_ << endl;
 						cin >> choiceToDestroy;
 						if (choiceToDestroy == "Y" || choiceToDestroy == "y") {
 							for (Player* aPlayer : listOfPlayers) {
 								for (Army* bArmy : aPlayer->getListOfArmy()) {
-									if (bArmy->getIsPlaced() && bArmy->getRegion()->name == anArmy->getRegion()->name) {
+									if (bArmy->getIsPlaced() && bArmy->getRegion()->name_ == anArmy->getRegion()->name_) {
 										DestroyArmy(listOfPlayers, bArmy->getRegion(), aPlayer->getFirstName());
 									}
 								}
@@ -387,7 +387,7 @@ void Player::setBidingFacility(Bid* aBidingFacilty) {
 	this->myBidingFacility = aBidingFacilty;
 }
 
-void Player::setListOfTerritories(vector<region*> list) {
+void Player::setListOfTerritories(vector<Region*> list) {
 	this->listOfTerritories = list;
 }
 void Player::setFirstName(string f) {
@@ -396,7 +396,7 @@ void Player::setFirstName(string f) {
 void Player::setLastName(string l) {
 	this->lastName = l;
 }
-void playerGoods::setRegion(region* aRegion) {
+void playerGoods::setRegion(Region* aRegion) {
 	this->aRegion = aRegion;
 }
 void playerGoods::setPlaced(bool placed) {
@@ -411,7 +411,7 @@ Bid* Player::getBidingFacility() {
 	return myBidingFacility;
 }
 
-vector<region*> Player::getListOfTerritories() {
+vector<Region*> Player::getListOfTerritories() {
 	return listOfTerritories;
 }
 
@@ -431,7 +431,7 @@ string Player::getLastName() {
 	return lastName;
 }
 
-region* playerGoods::getRegion() {
+Region* playerGoods::getRegion() {
 	return aRegion;
 }
 

@@ -6,16 +6,16 @@
 #include "../Card/Card.h"
 using namespace std;
 
-class region;
+class Region;
 
 struct playerGoods {
 
-	void setRegion(region* aRegion);
-	region* getRegion();
+	void setRegion(Region* aRegion);
+	Region* getRegion();
 	void setPlaced(bool placed);
 	bool getIsPlaced();
 
-	region* aRegion;
+	Region* aRegion;
 	bool isPlaced;
 };
 
@@ -42,7 +42,7 @@ public:
 class Player {
 public:
 	Player();
-	Player(string f, string l, vector<Card*>listOfCardsUsed, vector<region*> listOfRegions, vector<Army*> listOfArmies, vector<City*> listOfCities) :
+	Player(string f, string l, vector<Card*>listOfCardsUsed, vector<Region*> listOfRegions, vector<Army*> listOfArmies, vector<City*> listOfCities) :
 		firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myListOfCardsUsed(listOfCardsUsed), listOfTerritories(listOfRegions), listOfArmy(listOfArmies), listOfCities(listOfCities) {
 		listOfPlayers.push_back(this);
 	};
@@ -52,23 +52,23 @@ public:
 	friend ostream& operator << (ostream& out, const Player& aPlayer);
 	friend istream& operator >> (istream& in, Player& aPlayer);
 	bool PayCoin(int payableAmount, char type);
-	void PlaceNewArmies(int numberOfArmies, region* aRegion);
+	void PlaceNewArmies(int numberOfArmies, Region* aRegion);
 	void MoveArmies(int numberOfArmiesToMove);
-	void MoveOverLand(vector<int> list, region* from);
+	void MoveOverLand(vector<int> list, Region* from);
 	void MoveOverWater();
-	void BuildCity(region* where);
-	bool DestroyArmy(vector<Player*>listOfPlayers, region* where, string target);
+	void BuildCity(Region* where);
+	bool DestroyArmy(vector<Player*>listOfPlayers, Region* where, string target);
 	void andOr(Card* currentCard);
 	//void setCardUsed(Card* aCard);
 	void setBidingFacility(Bid* aBidingFacility);
-	void setListOfTerritories(vector<region*> list);
+	void setListOfTerritories(vector<Region*> list);
 	void setFirstName(string f);
 	void setLastName(string l);
 	vector<Card*> get_my_list_of_used_cards() const;
 
 	//Card* getCard();
 	Bid* getBidingFacility();
-	vector<region*> getListOfTerritories();
+	vector<Region*> getListOfTerritories();
 	vector<Army*> getListOfArmy();
 	vector<City*> getListOfCities();
 	string getFirstName();
@@ -76,7 +76,7 @@ public:
 
 
 private:
-	vector<region*> listOfTerritories;
+	vector<Region*> listOfTerritories;
 	vector<City*> listOfCities;
 	vector<Army*> listOfArmy;
 	vector<Card*>myListOfCardsUsed;

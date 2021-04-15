@@ -7,7 +7,7 @@ using namespace std;
 #include "MapLoader.h"
 
 MapLoader::MapLoader() : inputFileName(string()), tilesArray(vector<string>()), mapShape(string()), 
-	world_map(new game_map(string("World Map"))), numOfTiles(int()), validity(false)
+	world_map(new GameMap(string("World Map"))), numOfTiles(int()), validity(false)
 {
 
 }
@@ -25,7 +25,7 @@ MapLoader& MapLoader::operator=(const MapLoader &mapLoader)
 }
 
 MapLoader::MapLoader(string fileWithMap) : inputFileName(fileWithMap), tilesArray(vector<string>()), 
-	mapShape(string()), numOfTiles(int()), world_map(new game_map(string("World Map"))), validity(false)
+	mapShape(string()), numOfTiles(int()), world_map(new GameMap(string("World Map"))), validity(false)
 {
 	bool validFile = this->readFile();
 	if (!validFile) {
@@ -53,28 +53,28 @@ MapLoader::~MapLoader() {
 
 // Instantiates a tile 
 void MapLoader::createMap() {
-	vector<game_map*> tiles= vector<game_map*>();
+	vector<GameMap*> tiles= vector<GameMap*>();
 	// was initialized at construction, want to delete and replace with proper map
 	delete this->world_map;
 	// populates tiles vector
 	for (int i = 0; i < numOfTiles; i++) {
-		tiles.push_back(new game_map(tilesArray.at(i)));
+		tiles.push_back(new GameMap(tilesArray.at(i)));
 	}
 
 	// constructs the world map object
 	if (mapShape == string("Rectangle")) {
-		this->world_map = new game_map(mapShape,tiles[0], tiles[1], tiles[2], tiles[3]);
+		this->world_map = new GameMap(mapShape,tiles[0], tiles[1], tiles[2], tiles[3]);
 	}
 	else if (mapShape == string("Long Rectangle")) {
-		this->world_map = new game_map(mapShape,tiles[0], tiles[1], tiles[2]);
+		this->world_map = new GameMap(mapShape,tiles[0], tiles[1], tiles[2]);
 	}
 	else if (mapShape == string("LShape")) {
-		this->world_map = new game_map(mapShape, tiles[0], tiles[1], tiles[2]);
+		this->world_map = new GameMap(mapShape, tiles[0], tiles[1], tiles[2]);
 	}
 
 
 
-	for (game_map* index : tiles) {
+	for (GameMap* index : tiles) {
 		delete index;
 	}
 }

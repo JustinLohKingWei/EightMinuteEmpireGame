@@ -75,13 +75,13 @@ void VPCounter::reset_new_game()
 
 /**
 * List of VP increasing conditions tracked via counter:
-* +1 VP for each region. Control of a region counts if a players has the most armies (cities included) on a region, same amount of armies means no one controls the region
+* +1 VP for each Region. Control of a Region counts if a players has the most armies (cities included) on a Region, same amount of armies means no one controls the Region
 * (N/A Time limited) +1 VP for each Island. A Player controls an island if they control the most regions on that island.
 * Ignoring some cards with +1vp for each addition card of same type condition due to time constrains (Arcane, Ancient, Dire, Night)
 * Cursed Tower +1vp per flying ignored due to unsupported feature, to little time to implement.
 * 
 */
-int VPCounter::check_vp_conditions(Player* player, game_map* w_map)
+int VPCounter::check_vp_conditions(Player* player, GameMap* w_map)
 {
 	int control_points = 0;
 	int points_from_cards = 0;
@@ -97,7 +97,7 @@ int VPCounter::check_vp_conditions(Player* player, game_map* w_map)
 	}
 	else
 	{
-		game_map::v_map search_regions = w_map->m_map;
+		GameMap::v_map search_regions = w_map->m_map;
 		for (auto r_region: search_regions)
 		{
 			vector<Player*> v_player = r_region.second->get_controlling_player();
