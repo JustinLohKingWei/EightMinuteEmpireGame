@@ -20,7 +20,7 @@ public:
 	void print_player_score(Player*);
 	void print_all_scores();
 	void reset_new_game();
-	int check_vp_conditions(Player*, game_map*);
+	int check_vp_conditions(Player*, GameMap*);
 	void end_of_game_vp_check();
 	static VPCounter* instance();
 protected:
