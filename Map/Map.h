@@ -34,8 +34,10 @@ public:
 	int get_number_of_armies(Player*);
 	void set_player_with_most_armies();
 	void update_armies_to_region(Player*);
-	vector<Player*> get_controlling_player() const;
-	vector<pair<Player*, int>> get_occupying_armies();	
+
+	vector<Player*> get_controlling_player();
+	vector<pair<Player*, int>> get_occuping_armies();
+	
 private:
 	vector<pair<Player*, int>> occupying_armies_;
 	vector<Player*> controlling_player_;

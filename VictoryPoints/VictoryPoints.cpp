@@ -1,7 +1,9 @@
+
 #include <vector>
 #include <regex>
 #include "VictoryPoints.h"
 #include "../Map/Map.h"
+#include "../Player/Player.h"
 
 void VPCounter::change_score(Player* player, int new_score)
 {
@@ -171,4 +173,3 @@ VPCounter* VPCounter::instance()
 		s_instance = new VPCounter();
 	return s_instance;
 }
-
