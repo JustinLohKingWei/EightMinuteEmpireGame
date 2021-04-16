@@ -15,12 +15,13 @@ Region::Region(string& s) : name_(move(s)) {}
 
 Region::~Region()
 {
-	for (auto& [x, y] : adj_)
+	for (auto& x : adj_)
 	{
-		y.first = nullptr;
+		x.second.first = nullptr;
 	}
 }
 
+#ifdef PLAYER_H
 int Region::get_number_of_armies(Player *player)
 {
 	for (auto &p : occupying_armies_)
@@ -32,12 +33,6 @@ int Region::get_number_of_armies(Player *player)
 	}
 	std::cout << "The player could not be found!" << endl;
 	std::exit(-1);
-	return 0;
-}
-
-vector<pair<Player*, int >> Region::get_occuping_armies()
-{
-	return occupying_armies_;
 }
 
 void Region::set_player_with_most_armies()
@@ -324,59 +319,47 @@ void Region::set_player_with_most_armies()
 void Region::update_armies_to_region(Player* player) // End of player's turn/End of Round
 {
 	int armies = 0;
-	Region* r_region = nullptr;
-	int pIndex = 0;
-	int countIndex = 0;
-	//cout << *player << endl;
 	for (auto* p_region: player->getListOfArmy())
 	{
-		r_region = p_region->aRegion;
-	
-		if (this == r_region) {
-			armies++;
+		Region *r_region = nullptr;
+		for (auto* count_region : player->getListOfArmy())
+		{
+			if (p_region->aRegion == count_region->aRegion)
+			{
+				armies++;
+			}
 		}
-
 		if (armies > 0)
 		{
-			/*if (occuping_armies.empty())
-			{*/
-				//cout << "helloooooo" << endl;
+			if (occupying_armies_.empty())
+			{
 				pair<Player*, int> temp(player, armies);
-				occupying_armies_.push_back (temp);
-			/*}
+				occupying_armies_.emplace_back (temp);
+			}
 			else
-			{*/
-				bool found = false;
+			{
 				for (auto& p_player : occupying_armies_)
 				{
-					//cout << "!!!!!!!!!!!!!" << *p_player.first << endl;
 					if (p_player.first->getFirstName() == player->getFirstName() && p_player.first->getLastName() == player->getLastName())
 					{
 						p_player.second = armies;
-						found = true;
 					}
-					
-					
+					else
+					{
+						std::cout << "The player could not be found!" << endl;
+						std::exit(-1);
+					}
 				}
-				if (!found) {
-					std::cout << "The player could not be found!1" << endl;
-					std::exit(-1);
-				}
-			//}
-		}//Change
+			}
+		}
 	}
-}
-
-vector<Player *> Region::get_controlling_player()
-{
-	return controlling_player_;
 }
 
 void Region::add_controlling_player(Player *player)
 {
 	controlling_player_.push_back(player);
 }
-
+#endif PLAYER_H
 //=======================================================================================================
 
 MapTile::MapTile()
@@ -384,7 +367,7 @@ MapTile::MapTile()
 	tile_name = " ";
 }
 
-MapTile::MapTile(string& s) : tile_name(move(s)) {}
+MapTile::MapTile(string s) : tile_name(move(s)) {}
 
 MapTile::MapTile(MapTile& copy)
 {
@@ -401,63 +384,63 @@ MapTile& MapTile::operator=(MapTile const& copy)
 	return *this;
 }
 
-MapTile::~MapTile()
-{
-	for(auto [x, y] : m_map_)
-	{
-		delete y;
-		y = nullptr;
-	}
-}
+//MapTile::~MapTile()
+//{
+//	for(auto x : m_map_)
+//	{
+//		x.second = nullptr;
+//	}
+//	for(auto x: c_regions_)
+//	{
+//		x.second = nullptr;
+//	}
+//}
 
 // adapted from graph slides from class
-void MapTile::add_region(string& name)
+void MapTile::add_region(string name)
 {
 	const auto itr = m_map_.find(name);
-	if ( itr == m_map_.end())
+	if (itr == m_map_.end())
 	{
 		auto* r = new Region(name);
-		m_map_[name] = r;
-		return;
-	}
-	std::cout << "The Region " << name << " already exists!" << endl;
-}
-
-void MapTile::add_connection_region(string& name, region_connection direction) // replace add_region when Region has a outside connection!!!
-{
-	const auto itr = m_map_.find(name);
-	if ( itr == m_map_.end())
-	{
-		auto* r = new Region(name);
-		m_map_[name] = r;
-		c_regions_[direction] = r;
+		m_map_.emplace(r->get_name(), r);
 	}
 	else
 	{
-		c_regions_[direction] = itr->second; // some regions have double outside connections
+		std::cout << "The Region " << name << " already exists!" << endl;
+	}
+}
+
+void MapTile::add_connection_region(string name, region_connection direction) // replace add_region when Region has a outside connection!!!
+{
+	const auto itr = m_map_.find(name);
+	if (itr == m_map_.end())
+	{
+		auto* r = new Region(name);
+		m_map_.emplace(r->get_name(), r);
+		c_regions_.emplace(direction, r);
+	}
+	else
+	{
+		c_regions_.emplace(direction, m_map_[name]);
 	}
 }
 
 // adapted from graph slides from class
-void MapTile::add_route(string& start, string& end, enum route_type type)
+void MapTile::add_route(string start, string end, route_type type)
 {
 	const auto itr_s = m_map_.find(start);
 	const auto itr_e = m_map_.find(end);
+	const auto itr_end = m_map_.end();
 
-	if ( itr_s == m_map_.end() || itr_e == m_map_.end())
+	if (itr_s == itr_end || itr_e == itr_end)
 	{
 		std::cout << "\nThe starting and/or ending Region does not exists!" << endl;
 	}
 	else
-	{	
-		if (itr_s->second->get_adjacency().find(start) == m_map_[start]->get_adjacency().end())
-		{
-			m_map_[start]->get_adjacency().insert(make_pair(end, make_pair(m_map_[end], type)));
-		}
-		if (itr_e->second->get_adjacency().find(end) == m_map_[end]->get_adjacency().end())
-		{
-			m_map_[end]->get_adjacency().insert(make_pair(start, make_pair(m_map_[start], type)));
-		}
+	{
+		m_map_[start]->get_adjacency().insert(make_pair(end, make_pair(this->get_map()[end], type)));
+		m_map_[end]->get_adjacency().insert(make_pair(start, make_pair(this->get_map()[start], type)));
 	}
 }
 
@@ -467,18 +450,18 @@ bool MapTile::validate()
 	// this will also finds connections from a Region to itself
 
 	std::cout << "\nStarting map Validation ...";
-	bool check = true;
 	
 	// check back and fourth connections
-	for (auto& [m_name, m_pointer] : m_map_)
+	
+	for (auto& x : m_map_)
 	{
-		for (auto& [p_name, p_pair]: m_pointer->get_adjacency())
+		for (auto& y: x.second->get_adjacency())
 		{
-			if(p_pair.first->get_adjacency().find(m_name) == p_pair.first->get_adjacency().end())
+			if(y.second.first->get_adjacency().find(x.first) == y.second.first->get_adjacency().end())
 			{
-				cout << "\nERROR: Could not find back and fourth connection between the regions " << m_name << " and " << p_name << endl;
+				cout << "\nERROR: Could not find back and fourth connection between the regions " << x.first << " and " << y.first << endl;
 				cout << "MapTile is validate!" << endl;
-				check = false;
+				return false;
 			}
 		}
 	}
@@ -487,13 +470,13 @@ bool MapTile::validate()
 	{
 		cout << "\nERROR: The connection_regions data is of incorrect size: " << c_regions_.size() << endl;
 		cout << "MapTile is validate!" << endl;
-		check = false;
+		return false;
 	}
 
 	// TODO
 	// BFS connection search
 	
-	return check;
+	return true;
 }
 
 //=======================================================================================================
@@ -503,10 +486,10 @@ WorldMap::WorldMap()
 	m_shape = L_SHAPE;
 }
 
-WorldMap::WorldMap(const enum map_shape shape, MapTile& t1, MapTile& t2, MapTile& t3) : m_shape(shape)
+WorldMap::WorldMap(const map_shape shape, MapTile& t1, MapTile& t2, MapTile& t3) : m_shape(shape)
 {
-	if (t1.validate() && t2.validate() && t3.validate())
-	{
+	//if (t1.validate() && t2.validate() && t3.validate())
+	//{
 		for (auto& x : t1.get_map())
 		{
 			m_map.insert(x);
@@ -521,47 +504,38 @@ WorldMap::WorldMap(const enum map_shape shape, MapTile& t1, MapTile& t2, MapTile
 		{
 			m_map.insert(x);
 		}
-	}
-	else
-	{
-		cout << "\nERROR: A MapTile is invalidate!" << endl;
-		exit(-1);
-	}
-	
+	//}
+	//else
+	//{
+	//	cout << "\nERROR: A MapTile is invalidate!" << endl;
+	//	exit(-1);
+	//}
+		
 	if (shape == LONG_RECTANGLE)
 	{
-		auto itr_1 = t1.get_connections().find(RIGHT);
-		auto itr_2 = t2.get_connections().find(LEFT);
-
-		if (itr_1 != t1.get_connections().end() && itr_2 != t2.get_connections().end())
+		if (t1.get_connections()[RIGHT] != nullptr && t2.get_connections()[LEFT] != nullptr)
 		{
-			add_route(itr_1->second->get_name(), itr_2->second->get_name(), WATER);
-			add_route(itr_2->second->get_name(), itr_1->second->get_name(), WATER);
-			itr_1 = t2.get_connections().find(RIGHT);
-			itr_2 = t3.get_connections().find(LEFT);
+			add_route(t1.get_connections()[RIGHT]->get_name(), t2.get_connections()[LEFT]->get_name(), WATER);
+			add_route(t2.get_connections()[LEFT]->get_name(), t1.get_connections()[RIGHT]->get_name(), WATER);
 
-			if (itr_1 != t2.get_connections().end() && itr_2 != t3.get_connections().end())
+			if (t2.get_connections()[RIGHT] != nullptr && t3.get_connections()[LEFT] != nullptr)
 			{
-				add_route(itr_1->second->get_name(), itr_2->second->get_name(), WATER);
-				add_route(itr_2->second->get_name(), itr_1->second->get_name(), WATER);
+				add_route(t2.get_connections()[RIGHT]->get_name(), t3.get_connections()[LEFT]->get_name(), WATER);
+				add_route(t3.get_connections()[LEFT]->get_name(), t2.get_connections()[RIGHT]->get_name(), WATER);
 			}
 		}
 	}
 	else if (shape == L_SHAPE)
 	{
-		auto itr_1 = t1.get_connections().find(BOTTOM);
-		auto itr_2 = t2.get_connections().find(TOP);
-
-		if (itr_1 != t1.get_connections().end() && itr_2 != t2.get_connections().end())
+		if (t1.get_connections()[BOTTOM] != nullptr && t2.get_connections()[TOP] != nullptr)
 		{
-			add_route(itr_1->second->get_name(), itr_2->second->get_name(), WATER);
-			add_route(itr_2->second->get_name(), itr_1->second->get_name(), WATER);
-			itr_1 = t2.get_connections().find(RIGHT);
-			itr_2 = t3.get_connections().find(LEFT);
-			if (itr_1 != t2.get_connections().end() && itr_2 != t3.get_connections().end())
+			add_route(t1.get_connections()[BOTTOM]->get_name(), t2.get_connections()[TOP]->get_name(), WATER);
+			add_route(t2.get_connections()[TOP]->get_name(), t1.get_connections()[BOTTOM]->get_name(), WATER);
+			
+			if (t2.get_connections()[RIGHT] != nullptr && t3.get_connections()[LEFT] != nullptr)
 			{
-				add_route(itr_1->second->get_name(), itr_2->second->get_name(), WATER);
-				add_route(itr_2->second->get_name(), itr_1->second->get_name(), WATER);
+				add_route(t2.get_connections()[RIGHT]->get_name(), t3.get_connections()[LEFT]->get_name(), WATER);
+				add_route(t3.get_connections()[LEFT]->get_name(), t2.get_connections()[RIGHT]->get_name(), WATER);
 			}
 		}
 	}
@@ -572,10 +546,10 @@ WorldMap::WorldMap(const enum map_shape shape, MapTile& t1, MapTile& t2, MapTile
 	}
 }
 
-WorldMap::WorldMap(const enum map_shape shape, MapTile &t1, MapTile &t2, MapTile &t3, MapTile &t4) :  m_shape(shape)
+WorldMap::WorldMap(const map_shape shape, MapTile &t1, MapTile &t2, MapTile &t3, MapTile &t4) :  m_shape(shape)
 {
-	if (t1.validate() && t2.validate() && t3.validate() && t4.validate())
-	{
+	//if (t1.validate() && t2.validate() && t3.validate() && t4.validate())
+	//{
 		for (auto& x : t1.get_map())
 		{
 			m_map.insert(x);
@@ -595,29 +569,28 @@ WorldMap::WorldMap(const enum map_shape shape, MapTile &t1, MapTile &t2, MapTile
 		{
 			m_map.insert(x);
 		}
-	}
+	//}
+	//else
+	//{
+	//	cout << "\nERROR: A MapTile is invalidate!" << endl;
+	//	exit(-1);
+	//}
+	
 	if (shape == RECTANGLE)
 	{
-		auto itr_1 = t1.get_connections().find(RIGHT);
-		auto itr_2 = t2.get_connections().find(LEFT);
-		if (itr_1 != t1.get_connections().end() && itr_2 != t2.get_connections().end())
+		if (t1.get_connections()[RIGHT] != nullptr && t2.get_connections()[LEFT] != nullptr)
 		{
-			add_route(itr_1->second->get_name(), itr_2->second->get_name(), WATER);
-			add_route(itr_2->second->get_name(), itr_1->second->get_name(), WATER);
-			itr_1 = t2.get_connections().find(RIGHT);
-			itr_2 = t3.get_connections().find(LEFT);
-
-			if (itr_1 != t2.get_connections().end() && itr_2 != t3.get_connections().end())
+			add_route(t1.get_connections()[RIGHT]->get_name(), t2.get_connections()[LEFT]->get_name(), WATER);
+			add_route(t2.get_connections()[LEFT]->get_name(), t1.get_connections()[RIGHT]->get_name(), WATER);
+			if (t2.get_connections()[RIGHT] != nullptr && t3.get_connections()[LEFT] != nullptr)
 			{
-				add_route(itr_1->second->get_name(), itr_2->second->get_name(), WATER);
-				add_route(itr_2->second->get_name(), itr_1->second->get_name(), WATER);
-				itr_1 = t3.get_connections().find(RIGHT);
-				itr_2 = t4.get_connections().find(LEFT);
+				add_route(t2.get_connections()[RIGHT]->get_name(), t3.get_connections()[LEFT]->get_name(), WATER);
+				add_route(t3.get_connections()[LEFT]->get_name(), t2.get_connections()[RIGHT]->get_name(), WATER);
 
-				if (itr_1 != t3.get_connections().end() && itr_2 != t4.get_connections().end())
+				if (t3.get_connections()[RIGHT] != nullptr && t4.get_connections()[LEFT] != nullptr)
 				{
-					add_route(itr_1->second->get_name(), itr_2->second->get_name(), WATER);
-					add_route(itr_2->second->get_name(), itr_1->second->get_name(), WATER);
+					add_route(t3.get_connections()[RIGHT]->get_name(), t4.get_connections()[LEFT]->get_name(), WATER);
+					add_route(t4.get_connections()[LEFT]->get_name(), t3.get_connections()[RIGHT]->get_name(), WATER);
 				}
 			}
 		}
@@ -633,12 +606,12 @@ WorldMap::~WorldMap()
 {
 	for (auto &x : m_map)
 	{
-		if (x.second != nullptr)
-		{
-			std::cout << "Not world map" << endl;
-			delete x.second;
-		}
+		delete x.second;
 	}
+	tile1_ = nullptr;
+	tile2_ = nullptr;
+	tile3_ = nullptr;
+	tile4_ = nullptr;
 }
 
 // TODO
@@ -666,24 +639,19 @@ WorldMap::~WorldMap()
 //}
 
 // adapted from graph slides from class
-void WorldMap::add_route(string& start, string& end, enum route_type type)
+void WorldMap::add_route(string start, string end, route_type type)
 {
 	const auto itr_s = m_map.find(start);
 	const auto itr_e = m_map.find(end);
+
 	if ( itr_s == m_map.end() || itr_e == m_map.end())
 	{
 		std::cout << "\nThe starting and/or ending Region does not exists!" << endl;
 	}
 	else
 	{
-		if (itr_s->second->get_adjacency().find(start) == m_map[start]->get_adjacency().end())
-		{
-			m_map[start]->get_adjacency().insert(make_pair(end, make_pair(m_map[end], type)));
-		}
-		if (itr_e->second->get_adjacency().find(end) == m_map[end]->get_adjacency().end())
-		{
-			m_map[end]->get_adjacency().insert(make_pair(start, make_pair(m_map[start], type)));
-		}
+		m_map[start]->get_adjacency().insert(make_pair(end, make_pair(m_map[end], type)));
+		m_map[end]->get_adjacency().insert(make_pair(start, make_pair(m_map[start], type)));
 	}
 }
 
@@ -692,7 +660,7 @@ bool WorldMap::validate()
 	// check that regional to and from connections are present in both regions
 	// this will also finds connections from a Region to itself
 
-	std::cout << "\nStarting map Validation ...";
+	//std::cout << "\nStarting map Validation ...";
 
 	if ((get_tile1()->validate()&& get_tile2()->validate() && get_tile3()->validate() && get_tile4()->validate()) == false)
 	{
