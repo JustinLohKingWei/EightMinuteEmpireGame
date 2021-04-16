@@ -1,4 +1,4 @@
--#include <iostream>
+#include <iostream>
 #include "Player/Player.h"
 #include "BidingFacility/Bid.h"
 #include "Map/Map.h"
@@ -27,7 +27,7 @@ int main()
         fName = string(first);
         lName = string(last);
         vector<Card*>cards;
-        vector<region*>listOfRegions;
+        vector<Region*>listOfRegions;
         vector<Army*>listOfArmies;
         vector<City*>listOfCities;
         Player* aPlayer = new Player(fName, lName, cards, listOfRegions, listOfArmies, listOfCities);//Creating player

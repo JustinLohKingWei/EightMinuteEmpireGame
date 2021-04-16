@@ -5,6 +5,7 @@
 #include "../Map/Map.h"
 #include "../BidingFacility/Bid.h"
 #include "../Card/Card.h"
+#include "../GameObservers/Subject.h";
 using namespace std;
 
 class Region;
@@ -43,7 +44,7 @@ public:
 
 };
 
-class Player {
+class Player : public Subject {
 public:
 	Player();
 	Player(string f, string l, vector<Card*>listOfCardsUsed, vector<Region*> listOfRegions, vector<Army*> listOfArmies, vector<City*> listOfCities) :
@@ -78,6 +79,9 @@ public:
 	string getFirstName();
 	string getLastName();
 	static vector<Player*>listOfPlayers;
+
+	//MVC methods
+
 private:
 	vector<Region*> listOfTerritories;
 	vector<City*> listOfCities;//10
