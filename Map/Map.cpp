@@ -15,7 +15,7 @@ Region::Region(string& s) : name_(move(s)) {}
 
 Region::~Region()
 {
-	for (auto & [x, y] : adj_)
+	for (auto& [x, y] : adj_)
 	{
 		y.first = nullptr;
 	}
@@ -35,7 +35,7 @@ int Region::get_number_of_armies(Player *player)
 	return 0;
 }
 
-vector<pair<Player*, int >> Region::get_occupying_armies()
+vector<pair<Player*, int >> Region::get_occuping_armies()
 {
 	return occupying_armies_;
 }
@@ -321,10 +321,10 @@ void Region::set_player_with_most_armies()
 	}
 }
 
-void region::update_armies_to_region(Player* player) // End of player's turn/End of Round
+void Region::update_armies_to_region(Player* player) // End of player's turn/End of Round
 {
 	int armies = 0;
-	region* r_region = nullptr;
+	Region* r_region = nullptr;
 	int pIndex = 0;
 	int countIndex = 0;
 	//cout << *player << endl;
@@ -342,12 +342,12 @@ void region::update_armies_to_region(Player* player) // End of player's turn/End
 			{*/
 				//cout << "helloooooo" << endl;
 				pair<Player*, int> temp(player, armies);
-				occuping_armies.push_back (temp);
+				occupying_armies_.push_back (temp);
 			/*}
 			else
 			{*/
 				bool found = false;
-				for (auto& p_player : occuping_armies)
+				for (auto& p_player : occupying_armies_)
 				{
 					//cout << "!!!!!!!!!!!!!" << *p_player.first << endl;
 					if (p_player.first->getFirstName() == player->getFirstName() && p_player.first->getLastName() == player->getLastName())
@@ -367,7 +367,7 @@ void region::update_armies_to_region(Player* player) // End of player's turn/End
 	}
 }
 
-vector<Player *> Region::get_controlling_player() const
+vector<Player *> Region::get_controlling_player()
 {
 	return controlling_player_;
 }
@@ -413,7 +413,8 @@ MapTile::~MapTile()
 // adapted from graph slides from class
 void MapTile::add_region(string& name)
 {
-	if (const auto itr = m_map_.find(name); itr == m_map_.end())
+	const auto itr = m_map_.find(name);
+	if ( itr == m_map_.end())
 	{
 		auto* r = new Region(name);
 		m_map_[name] = r;
@@ -424,7 +425,8 @@ void MapTile::add_region(string& name)
 
 void MapTile::add_connection_region(string& name, region_connection direction) // replace add_region when Region has a outside connection!!!
 {
-	if (const auto itr = m_map_.find(name); itr == m_map_.end())
+	const auto itr = m_map_.find(name);
+	if ( itr == m_map_.end())
 	{
 		auto* r = new Region(name);
 		m_map_[name] = r;
@@ -440,8 +442,9 @@ void MapTile::add_connection_region(string& name, region_connection direction) /
 void MapTile::add_route(string& start, string& end, enum route_type type)
 {
 	const auto itr_s = m_map_.find(start);
+	const auto itr_e = m_map_.find(end);
 
-	if (const auto itr_e = m_map_.find(end); itr_s == m_map_.end() || itr_e == m_map_.end())
+	if ( itr_s == m_map_.end() || itr_e == m_map_.end())
 	{
 		std::cout << "\nThe starting and/or ending Region does not exists!" << endl;
 	}
@@ -666,8 +669,8 @@ WorldMap::~WorldMap()
 void WorldMap::add_route(string& start, string& end, enum route_type type)
 {
 	const auto itr_s = m_map.find(start);
-
-	if (const auto itr_e = m_map.find(end); itr_s == m_map.end() || itr_e == m_map.end())
+	const auto itr_e = m_map.find(end);
+	if ( itr_s == m_map.end() || itr_e == m_map.end())
 	{
 		std::cout << "\nThe starting and/or ending Region does not exists!" << endl;
 	}
