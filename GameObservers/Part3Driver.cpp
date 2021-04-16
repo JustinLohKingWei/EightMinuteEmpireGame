@@ -1,4 +1,4 @@
-#include "./Player/Player.h";
+#include "../Player/Player.h";
 #include "GameMessageBoard.h"
 #include <iostream>
 using std::cout;

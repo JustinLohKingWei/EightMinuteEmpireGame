@@ -1,5 +1,5 @@
 #pragma once
-#include "./Player/Player.h";
+#include "../Player/Player.h";
 #include "GameObservers.h";
 
 class GameMessageBoard : public GameObservers //concrete observers
