@@ -24,8 +24,10 @@ void GameMessageBoard::Display(){
     //TODO DISPLAY STATS HERE
 
     //int stat1 = _subject.getStat1();
+    string name = _subject->getFirstName();
+    int coins = _subject->getBidingFacility()->getCopperCoins();
 
-    //cout<<stat1;
+    cout<<name<<"      "<<endl;
 
 };
 
