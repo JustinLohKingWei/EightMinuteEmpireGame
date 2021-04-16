@@ -562,6 +562,16 @@ Region* playerGoods::getRegion() {
 	return aRegion;
 }
 
+//MVC Methods
+int Player::getNoOfVictoryPoints() {
+		
+}
+int Player::getNoOfArmies() {
+	return listOfArmy.size();
+}
+int Player::getNoOfRegions() {
+	return listOfTerritories.size();
+}
 
 
 

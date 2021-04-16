@@ -26,8 +26,10 @@ void GameMessageBoard::Display(){
     //int stat1 = _subject.getStat1();
     string name = _subject->getFirstName();
     int coins = _subject->getBidingFacility()->getCopperCoins();
+    int noOfArmies = _subject->getNoOfArmies();
+    int noOfRegions = _subject->getNoOfRegions();
 
-    cout<<name<<"      "<<endl;
+    cout<<name<<"   ||  "<<noOfArmies<< " armies   ||  "<<noOfRegions<<" Regions   ||  "<<coins<<"coins  ||     "<<endl;
 
 };
 

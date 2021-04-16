@@ -81,6 +81,9 @@ public:
 	static vector<Player*>listOfPlayers;
 
 	//MVC methods
+	int getNoOfVictoryPoints();
+	int getNoOfArmies();
+	int getNoOfRegions();
 
 private:
 	vector<Region*> listOfTerritories;
