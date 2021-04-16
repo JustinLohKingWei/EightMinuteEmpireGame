@@ -180,14 +180,14 @@ int main() {
 
 	vector<Card*>cardsUsed;
 	vector<Card*>ennemyCards;
-	vector<region*>regionsOwned;
-	vector<region*>ennemyRegions;
+	vector<Region*>regionsOwned;
+	vector<Region*>ennemyRegions;
 	vector<Army*>armiesList;
 	vector<Army*>ennemyArmyList;
 	vector<City*>citiesList;
 	vector<City*>ennemyCityList;
 
-	vector<region*>playersRegions;
+	vector<Region*>playersRegions;
 	for (int i = 0; i < 10; i++) {
 		City* newCity = new City();
 		citiesList.push_back(newCity);
