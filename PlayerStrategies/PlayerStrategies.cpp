@@ -22,18 +22,19 @@ void GreedyComputerStrategy::playTurn(Hand *gameHand) {
 		string orDelim = " OR ";
 		string buildDelim = "Build City";
 		string destroyDelim = "Destroy Army";
-		// parse actions to see if any of them are of interest
+		// parse actions to see if any of them are of interest 
 		if (currentCard.getAction().size() > 0) {
 			string fullAction = currentCard.getAction();
-			if (fullAction.find(buildDelim)) {
+			if (fullAction.find(buildDelim) != string::npos) {
 				buildingCards.push_back(i);
 			}
-			else if (fullAction.find(destroyDelim)) {
+			if (fullAction.find(destroyDelim) != string::npos) {
 				destroyingCards.push_back(i);
 			}
-			else {
+			if (fullAction.find(buildDelim) == string::npos && fullAction.find(destroyDelim) == string::npos) {
 				otherCards.push_back(i);
 			}
+			
 			//if (fullAction.find(andDelim)!=string::npos) {// 2 actions (AND)
 			//	// Action before AND
 			//	string action1 = fullAction.substr(0, fullAction.find(andDelim));
@@ -49,6 +50,17 @@ void GreedyComputerStrategy::playTurn(Hand *gameHand) {
 			//else { // card only has 1 action
 			//}
 		}
+		for (int index : buildingCards) {
+			cout << "Building card: " <<  index << endl;
+		}
+		for (int index : destroyingCards) {
+			cout << "Destroy card: " <<  index << endl;
+		}
+		for (int index : otherCards) {
+			cout << "Other card: " <<  index << endl;
+		}
+
+
 	}
 
 	//make decision based on cards in hand
