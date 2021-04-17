@@ -425,6 +425,8 @@ void MapTile::add_connection_region(string name, region_connection direction) //
 		c_regions_.emplace(direction, m_map_[name]);
 	}
 }
+#endif PLAYER_H
+//=======================================================================================================
 
 // adapted from graph slides from class
 void MapTile::add_route(string start, string end, route_type type)
