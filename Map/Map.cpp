@@ -1,8 +1,8 @@
 #include <algorithm>
 #include "Map.h"
-
 using namespace std;
 
+class Player;
 //=======================================================================================================
 
 Region::Region()

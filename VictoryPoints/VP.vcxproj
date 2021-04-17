@@ -67,6 +67,9 @@
   <ItemGroup>
     <ClCompile Include="..\BidingFacility\bid.cpp" />
     <ClCompile Include="..\Card\Card.cpp" />
+    <ClCompile Include="..\GameObservers\GameMessageBoard.cpp" />
+    <ClCompile Include="..\GameObservers\GameObservers.cpp" />
+    <ClCompile Include="..\GameObservers\Subject.cpp" />
     <ClCompile Include="..\PlayerStrategiesDriver.cpp" />
     <ClCompile Include="..\PlayerStrategies\PlayerStrategies.cpp" />
     <ClCompile Include="..\Player\Player.cpp" />
@@ -74,6 +77,9 @@
   <ItemGroup>
     <ClInclude Include="..\BidingFacility\Bid.h" />
     <ClInclude Include="..\Card\Card.h" />
+    <ClInclude Include="..\GameObservers\GameMessageBoard.h" />
+    <ClInclude Include="..\GameObservers\GameObservers.h" />
+    <ClInclude Include="..\GameObservers\Subject.h" />
     <ClInclude Include="..\PlayerStrategies\PlayerStrategies.h" />
     <ClInclude Include="..\Player\Player.h" />
   </ItemGroup>

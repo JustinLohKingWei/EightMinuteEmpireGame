@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\PlayerStrategies",
+    "\\VictoryPoints"
   ],
-  "SelectedNode": "\\VP.sln",
+  "SelectedNode": "\\VictoryPoints\\VP.sln",
   "PreviewInSolutionExplorer": false
 }

@@ -21,7 +21,7 @@ int main() {
     fName = string(first);
     lName = string(last);
     vector<Card*>cards;
-    vector<region*>listOfRegions;
+    vector<Region*>listOfRegions;
     vector<Army*>listOfArmies(18, new Army);
     vector<City*>listOfCities(3, new City);
 

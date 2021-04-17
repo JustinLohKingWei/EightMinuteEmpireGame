@@ -570,7 +570,7 @@ void Player::executeStrategy(Hand *aGameHand)
 	this->strategy->playTurn(aGameHand);
 }
 
-region* playerGoods::getRegion() {
+Region* playerGoods::getRegion() {
 	return aRegion;
 }
 
