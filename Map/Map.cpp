@@ -21,7 +21,7 @@ Region::~Region()
 	}
 }
 
-#ifdef PLAYER_H
+//#ifdef PLAYER_H
 int Region::get_number_of_armies(Player *player)
 {
 	for (auto &p : occupying_armies_)
@@ -315,51 +315,49 @@ void Region::set_player_with_most_armies()
 		std::exit(-1);
 	}
 }
-
+//DO NOT CHANGE THIS CODE 
 void Region::update_armies_to_region(Player* player) // End of player's turn/End of Round
 {
 	int armies = 0;
+	Region *r_region = nullptr;
 	for (auto* p_region: player->getListOfArmy())
 	{
-		Region *r_region = nullptr;
-		for (auto* count_region : player->getListOfArmy())
-		{
-			if (p_region->aRegion == count_region->aRegion)
-			{
-				armies++;
-			}
+		
+		r_region = p_region->getRegion();
+		if (this == r_region) {
+			armies++;
 		}
 		if (armies > 0)
 		{
-			if (occupying_armies_.empty())
+			pair<Player*, int> temp(player, armies);
+			occupying_armies_.emplace_back (temp);
+			
+			bool found = false;
+			for (auto& p_player : occupying_armies_)
 			{
-				pair<Player*, int> temp(player, armies);
-				occupying_armies_.emplace_back (temp);
-			}
-			else
-			{
-				for (auto& p_player : occupying_armies_)
+				
+				if (p_player.first->getFirstName() == player->getFirstName() && p_player.first->getLastName() == player->getLastName())
 				{
-					if (p_player.first->getFirstName() == player->getFirstName() && p_player.first->getLastName() == player->getLastName())
-					{
-						p_player.second = armies;
-					}
-					else
-					{
-						std::cout << "The player could not be found!" << endl;
-						std::exit(-1);
-					}
+					p_player.second = armies;
+					found = true;
 				}
+				
+			}
+			if(!found)
+			{
+				std::cout << "The player could not be found!" << endl;
+				std::exit(-1);
 			}
 		}
 	}
 }
 
+
 void Region::add_controlling_player(Player *player)
 {
 	controlling_player_.push_back(player);
 }
-#endif PLAYER_H
+//#endif PLAYER_H
 //=======================================================================================================
 
 MapTile::MapTile()
