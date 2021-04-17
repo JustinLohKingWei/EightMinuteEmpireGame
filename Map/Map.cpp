@@ -48,7 +48,7 @@ void Region::set_player_with_most_armies()
 		}
 		else if (occupying_armies_[0].second > occupying_armies_[1].second)
 		{
-			add_controlling_player(occuping_armies[0].first);
+			add_controlling_player(occupying_armies_[0].first);
 		}
 		else // equal army numbers
 		{
@@ -196,107 +196,107 @@ void Region::set_player_with_most_armies()
 		{
 			add_controlling_player(occupying_armies_[0].first);
 		}
-		else if (occuping_armies[2].second < occuping_armies[1].second < occuping_armies[3].second < occuping_armies[0].second)
+		else if (occupying_armies_[2].second < occupying_armies_[1].second < occupying_armies_[3].second < occupying_armies_[0].second)
 		{
-			add_controlling_player(occuping_armies[0].first);
+			add_controlling_player(occupying_armies_[0].first);
 		}
-		else if (occuping_armies[1].second < occuping_armies[2].second < occuping_armies[3].second < occuping_armies[0].second)
+		else if (occupying_armies_[1].second < occupying_armies_[2].second < occupying_armies_[3].second < occupying_armies_[0].second)
 		{
-			add_controlling_player(occuping_armies[0].first);
+			add_controlling_player(occupying_armies_[0].first);
 		}
-		else if (occuping_armies[1].second < occuping_armies[3].second < occuping_armies[2].second < occuping_armies[0].second)
+		else if (occupying_armies_[1].second < occupying_armies_[3].second < occupying_armies_[2].second < occupying_armies_[0].second)
 		{
-			add_controlling_player(occuping_armies[0].first);
+			add_controlling_player(occupying_armies_[0].first);
 		}
-		else if (occuping_armies[3].second < occuping_armies[1].second < occuping_armies[2].second < occuping_armies[0].second)
+		else if (occupying_armies_[3].second < occupying_armies_[1].second < occupying_armies_[2].second < occupying_armies_[0].second)
 		{
-			add_controlling_player(occuping_armies[0].first);
+			add_controlling_player(occupying_armies_[0].first);
 		}
-		else if (occuping_armies[0].second < occuping_armies[1].second < occuping_armies[2].second == occuping_armies[3].second)
+		else if (occupying_armies_[0].second < occupying_armies_[1].second < occupying_armies_[2].second == occupying_armies_[3].second)
 		{
-			add_controlling_player(occuping_armies[3].first);
-			add_controlling_player(occuping_armies[2].first);
+			add_controlling_player(occupying_armies_[3].first);
+			add_controlling_player(occupying_armies_[2].first);
 		}
-		else if (occuping_armies[1].second < occuping_armies[0].second < occuping_armies[2].second == occuping_armies[3].second)
+		else if (occupying_armies_[1].second < occupying_armies_[0].second < occupying_armies_[2].second == occupying_armies_[3].second)
 		{
-			add_controlling_player(occuping_armies[3].first);
-			add_controlling_player(occuping_armies[2].first);
+			add_controlling_player(occupying_armies_[3].first);
+			add_controlling_player(occupying_armies_[2].first);
 		}
-		else if (occuping_armies[2].second < occuping_armies[0].second < occuping_armies[1].second == occuping_armies[3].second)
+		else if (occupying_armies_[2].second < occupying_armies_[0].second < occupying_armies_[1].second == occupying_armies_[3].second)
 		{
-			add_controlling_player(occuping_armies[3].first);
-			add_controlling_player(occuping_armies[1].first);
+			add_controlling_player(occupying_armies_[3].first);
+			add_controlling_player(occupying_armies_[1].first);
 		}
-		else if (occuping_armies[0].second < occuping_armies[2].second < occuping_armies[1].second == occuping_armies[3].second)
+		else if (occupying_armies_[0].second < occupying_armies_[2].second < occupying_armies_[1].second == occupying_armies_[3].second)
 		{
-			add_controlling_player(occuping_armies[3].first);
-			add_controlling_player(occuping_armies[1].first);
+			add_controlling_player(occupying_armies_[3].first);
+			add_controlling_player(occupying_armies_[1].first);
 		}
-		else if (occuping_armies[2].second < occuping_armies[1].second < occuping_armies[0].second == occuping_armies[3].second)
+		else if (occupying_armies_[2].second < occupying_armies_[1].second < occupying_armies_[0].second == occupying_armies_[3].second)
 		{
-			add_controlling_player(occuping_armies[3].first);
-			add_controlling_player(occuping_armies[1].first);
+			add_controlling_player(occupying_armies_[3].first);
+			add_controlling_player(occupying_armies_[1].first);
 		}
-		else if (occuping_armies[1].second < occuping_armies[2].second < occuping_armies[0].second == occuping_armies[3].second)
+		else if (occupying_armies_[1].second < occupying_armies_[2].second < occupying_armies_[0].second == occupying_armies_[3].second)
 		{
-			add_controlling_player(occuping_armies[3].first);
-			add_controlling_player(occuping_armies[1].first);
+			add_controlling_player(occupying_armies_[3].first);
+			add_controlling_player(occupying_armies_[1].first);
 		}
-		else if (occuping_armies[2].second < occuping_armies[0].second < occuping_armies[1].second == occuping_armies[2].second)
+		else if (occupying_armies_[2].second < occupying_armies_[0].second < occupying_armies_[1].second == occupying_armies_[2].second)
 		{
-			add_controlling_player(occuping_armies[2].first);
-			add_controlling_player(occuping_armies[1].first);
+			add_controlling_player(occupying_armies_[2].first);
+			add_controlling_player(occupying_armies_[1].first);
 		}
-		else if (occuping_armies[0].second < occuping_armies[2].second < occuping_armies[1].second == occuping_armies[2].second)
+		else if (occupying_armies_[0].second < occupying_armies_[2].second < occupying_armies_[1].second == occupying_armies_[2].second)
 		{
-			add_controlling_player(occuping_armies[2].first);
-			add_controlling_player(occuping_armies[1].first);
+			add_controlling_player(occupying_armies_[2].first);
+			add_controlling_player(occupying_armies_[1].first);
 		}
-		else if (occuping_armies[2].second < occuping_armies[1].second < occuping_armies[0].second == occuping_armies[2].second)
+		else if (occupying_armies_[2].second < occupying_armies_[1].second < occupying_armies_[0].second == occupying_armies_[2].second)
 		{
-			add_controlling_player(occuping_armies[2].first);
-			add_controlling_player(occuping_armies[0].first);
+			add_controlling_player(occupying_armies_[2].first);
+			add_controlling_player(occupying_armies_[0].first);
 		}
-		else if (occuping_armies[1].second < occuping_armies[2].second < occuping_armies[0].second == occuping_armies[2].second)
+		else if (occupying_armies_[1].second < occupying_armies_[2].second < occupying_armies_[0].second == occupying_armies_[2].second)
 		{
-			add_controlling_player(occuping_armies[2].first);
-			add_controlling_player(occuping_armies[0].first);
+			add_controlling_player(occupying_armies_[2].first);
+			add_controlling_player(occupying_armies_[0].first);
 		}
-		else if (occuping_armies[2].second < occuping_armies[3].second < occuping_armies[0].second == occuping_armies[1].second)
+		else if (occupying_armies_[2].second < occupying_armies_[3].second < occupying_armies_[0].second == occupying_armies_[1].second)
 		{
-			add_controlling_player(occuping_armies[1].first);
-			add_controlling_player(occuping_armies[0].first);
+			add_controlling_player(occupying_armies_[1].first);
+			add_controlling_player(occupying_armies_[0].first);
 		}
-		else if (occuping_armies[3].second < occuping_armies[2].second < occuping_armies[0].second == occuping_armies[1].second)
+		else if (occupying_armies_[3].second < occupying_armies_[2].second < occupying_armies_[0].second == occupying_armies_[1].second)
 		{
-			add_controlling_player(occuping_armies[1].first);
-			add_controlling_player(occuping_armies[0].first);
+			add_controlling_player(occupying_armies_[1].first);
+			add_controlling_player(occupying_armies_[0].first);
 		}
-		else if (occuping_armies[0].second < occuping_armies[1].second == occuping_armies[2].second == occuping_armies[3].second)
+		else if (occupying_armies_[0].second < occupying_armies_[1].second == occupying_armies_[2].second == occupying_armies_[3].second)
 		{
-			add_controlling_player(occuping_armies[3].first);
-			add_controlling_player(occuping_armies[2].first);
-			add_controlling_player(occuping_armies[1].first);
+			add_controlling_player(occupying_armies_[3].first);
+			add_controlling_player(occupying_armies_[2].first);
+			add_controlling_player(occupying_armies_[1].first);
 		}
-		else if (occuping_armies[1].second < occuping_armies[0].second == occuping_armies[2].second == occuping_armies[3].second)
+		else if (occupying_armies_[1].second < occupying_armies_[0].second == occupying_armies_[2].second == occupying_armies_[3].second)
 		{
-			add_controlling_player(occuping_armies[3].first);
-			add_controlling_player(occuping_armies[2].first);
-			add_controlling_player(occuping_armies[0].first);
+			add_controlling_player(occupying_armies_[3].first);
+			add_controlling_player(occupying_armies_[2].first);
+			add_controlling_player(occupying_armies_[0].first);
 		}
-		else if (occuping_armies[2].second < occuping_armies[1].second == occuping_armies[0].second == occuping_armies[3].second)
+		else if (occupying_armies_[2].second < occupying_armies_[1].second == occupying_armies_[0].second == occupying_armies_[3].second)
 		{
-			add_controlling_player(occuping_armies[3].first);
-			add_controlling_player(occuping_armies[0].first);
-			add_controlling_player(occuping_armies[1].first);
+			add_controlling_player(occupying_armies_[3].first);
+			add_controlling_player(occupying_armies_[0].first);
+			add_controlling_player(occupying_armies_[1].first);
 		}
-		else if (occuping_armies[3].second < occuping_armies[1].second == occuping_armies[2].second == occuping_armies[0].second)
+		else if (occupying_armies_[3].second < occupying_armies_[1].second == occupying_armies_[2].second == occupying_armies_[0].second)
 		{
-			add_controlling_player(occuping_armies[0].first);
-			add_controlling_player(occuping_armies[2].first);
-			add_controlling_player(occuping_armies[1].first);
+			add_controlling_player(occupying_armies_[0].first);
+			add_controlling_player(occupying_armies_[2].first);
+			add_controlling_player(occupying_armies_[1].first);
 		}
-		else if (occuping_armies[0].second == occuping_armies[1].second == occuping_armies[2].second == occuping_armies[3].second)
+		else if (occupying_armies_[0].second == occupying_armies_[1].second == occupying_armies_[2].second == occupying_armies_[3].second)
 		{
 			add_controlling_player(occupying_armies_[3].first);
 			add_controlling_player(occupying_armies_[2].first);
@@ -329,21 +329,21 @@ void Region::update_armies_to_region(Player* player) // End of player's turn/End
 				armies++;
 			}
 		}
-		}
 		if (armies > 0)
+		{
 			if (occupying_armies_.empty())
 			{
-				//cout << "helloooooo" << endl;
+				pair<Player*, int> temp(player, armies);
 				occupying_armies_.emplace_back (temp);
 			}
-			/*}
+			else
 			{
 				for (auto& p_player : occupying_armies_)
 				{
-					//cout << "!!!!!!!!!!!!!" << *p_player.first << endl;
 					if (p_player.first->getFirstName() == player->getFirstName() && p_player.first->getLastName() == player->getLastName())
 					{
-						found = true;
+						p_player.second = armies;
+					}
 					else
 					{
 						std::cout << "The player could not be found!" << endl;
@@ -395,7 +395,7 @@ MapTile& MapTile::operator=(MapTile const& copy)
 //		x.second = nullptr;
 //	}
 //}
-		y = nullptr;
+
 // adapted from graph slides from class
 void MapTile::add_region(string name)
 {
@@ -410,7 +410,7 @@ void MapTile::add_region(string name)
 		std::cout << "The Region " << name << " already exists!" << endl;
 	}
 }
-	}
+
 void MapTile::add_connection_region(string name, region_connection direction) // replace add_region when Region has a outside connection!!!
 {
 	const auto itr = m_map_.find(name);
@@ -424,15 +424,15 @@ void MapTile::add_connection_region(string name, region_connection direction) //
 	{
 		c_regions_.emplace(direction, m_map_[name]);
 	}
-	{
-		c_regions_[direction] = itr->second; // some regions have double outside connections
+}
+
 // adapted from graph slides from class
 void MapTile::add_route(string start, string end, route_type type)
 {
 	const auto itr_s = m_map_.find(start);
 	const auto itr_e = m_map_.find(end);
 	const auto itr_end = m_map_.end();
-void MapTile::add_route(string& start, string& end, enum route_type type)
+
 	if (itr_s == itr_end || itr_e == itr_end)
 	{
 		std::cout << "\nThe starting and/or ending Region does not exists!" << endl;
@@ -465,7 +465,7 @@ bool MapTile::validate()
 			}
 		}
 	}
-		{
+
 	if (c_regions_.size() != 4)
 	{
 		cout << "\nERROR: The connection_regions data is of incorrect size: " << c_regions_.size() << endl;
@@ -484,8 +484,8 @@ bool MapTile::validate()
 WorldMap::WorldMap()
 {
 	m_shape = L_SHAPE;
-	
-	return check;
+}
+
 WorldMap::WorldMap(const map_shape shape, MapTile& t1, MapTile& t2, MapTile& t3) : m_shape(shape)
 {
 	//if (t1.validate() && t2.validate() && t3.validate())
@@ -499,7 +499,7 @@ WorldMap::WorldMap(const map_shape shape, MapTile& t1, MapTile& t2, MapTile& t3)
 		{
 			m_map.insert(x);
 		}
-		for (auto& x : t1.get_map())
+
 		for (auto& x : t3.get_map())
 		{
 			m_map.insert(x);
@@ -512,28 +512,28 @@ WorldMap::WorldMap(const map_shape shape, MapTile& t1, MapTile& t2, MapTile& t3)
 	//}
 		
 	if (shape == LONG_RECTANGLE)
-		}
+	{
 		if (t1.get_connections()[RIGHT] != nullptr && t2.get_connections()[LEFT] != nullptr)
-		exit(-1);
+		{
 			add_route(t1.get_connections()[RIGHT]->get_name(), t2.get_connections()[LEFT]->get_name(), WATER);
 			add_route(t2.get_connections()[LEFT]->get_name(), t1.get_connections()[RIGHT]->get_name(), WATER);
-		auto itr_1 = t1.get_connections().find(RIGHT);
-			if (t2.get_connections()[RIGHT] != nullptr && t3.get_connections()[LEFT] != nullptr)
 
+			if (t2.get_connections()[RIGHT] != nullptr && t3.get_connections()[LEFT] != nullptr)
+			{
 				add_route(t2.get_connections()[RIGHT]->get_name(), t3.get_connections()[LEFT]->get_name(), WATER);
 				add_route(t3.get_connections()[LEFT]->get_name(), t2.get_connections()[RIGHT]->get_name(), WATER);
-			add_route(itr_1->second->get_name(), itr_2->second->get_name(), WATER);
-			add_route(itr_2->second->get_name(), itr_1->second->get_name(), WATER);
-			itr_1 = t2.get_connections().find(RIGHT);
+			}
+		}
+	}
 	else if (shape == L_SHAPE)
-
+	{
 		if (t1.get_connections()[BOTTOM] != nullptr && t2.get_connections()[TOP] != nullptr)
 		{
 			add_route(t1.get_connections()[BOTTOM]->get_name(), t2.get_connections()[TOP]->get_name(), WATER);
 			add_route(t2.get_connections()[TOP]->get_name(), t1.get_connections()[BOTTOM]->get_name(), WATER);
 			
 			if (t2.get_connections()[RIGHT] != nullptr && t3.get_connections()[LEFT] != nullptr)
-		auto itr_2 = t2.get_connections().find(TOP);
+			{
 				add_route(t2.get_connections()[RIGHT]->get_name(), t3.get_connections()[LEFT]->get_name(), WATER);
 				add_route(t3.get_connections()[LEFT]->get_name(), t2.get_connections()[RIGHT]->get_name(), WATER);
 			}
@@ -542,10 +542,10 @@ WorldMap::WorldMap(const map_shape shape, MapTile& t1, MapTile& t2, MapTile& t3)
 	else
 	{
 		std::cout << "ERROR: The connection regions have not been set up in the sub graphs!" << endl;
-			{
-				add_route(itr_1->second->get_name(), itr_2->second->get_name(), WATER);
-				add_route(itr_2->second->get_name(), itr_1->second->get_name(), WATER);
-			}
+		std::exit(-1);
+	}
+}
+
 WorldMap::WorldMap(const map_shape shape, MapTile &t1, MapTile &t2, MapTile &t3, MapTile &t4) :  m_shape(shape)
 {
 	//if (t1.validate() && t2.validate() && t3.validate() && t4.validate())
@@ -559,12 +559,12 @@ WorldMap::WorldMap(const map_shape shape, MapTile &t1, MapTile &t2, MapTile &t3,
 		{
 			m_map.insert(x);
 		}
-		for (auto& x : t1.get_map())
+
 		for (auto& x : t3.get_map())
 		{
 			m_map.insert(x);
 		}
-	for (auto &x : tile2_->m_map)
+
 		for (auto& x : t4.get_map())
 		{
 			m_map.insert(x);
@@ -577,31 +577,31 @@ WorldMap::WorldMap(const map_shape shape, MapTile &t1, MapTile &t2, MapTile &t3,
 	//}
 	
 	if (shape == RECTANGLE)
-		m_map.insert(x);
+	{
 		if (t1.get_connections()[RIGHT] != nullptr && t2.get_connections()[LEFT] != nullptr)
 		{
 			add_route(t1.get_connections()[RIGHT]->get_name(), t2.get_connections()[LEFT]->get_name(), WATER);
 			add_route(t2.get_connections()[LEFT]->get_name(), t1.get_connections()[RIGHT]->get_name(), WATER);
 			if (t2.get_connections()[RIGHT] != nullptr && t3.get_connections()[LEFT] != nullptr)
-		auto itr_2 = t2.get_connections().find(LEFT);
+			{
 				add_route(t2.get_connections()[RIGHT]->get_name(), t3.get_connections()[LEFT]->get_name(), WATER);
 				add_route(t3.get_connections()[LEFT]->get_name(), t2.get_connections()[RIGHT]->get_name(), WATER);
-			itr_1 = t2.get_connections().find(RIGHT);
-				if (t3.get_connections()[RIGHT] != nullptr && t4.get_connections()[LEFT] != nullptr)
 
+				if (t3.get_connections()[RIGHT] != nullptr && t4.get_connections()[LEFT] != nullptr)
+				{
 					add_route(t3.get_connections()[RIGHT]->get_name(), t4.get_connections()[LEFT]->get_name(), WATER);
 					add_route(t4.get_connections()[LEFT]->get_name(), t3.get_connections()[RIGHT]->get_name(), WATER);
-				add_route(itr_1->second->get_name(), itr_2->second->get_name(), WATER);
-				add_route(itr_2->second->get_name(), itr_1->second->get_name(), WATER);
-				itr_1 = t3.get_connections().find(RIGHT);
-				itr_2 = t4.get_connections().find(LEFT);
-
-				if (itr_1 != t3.get_connections().end() && itr_2 != t4.get_connections().end())
-		std::cout << "ERROR: The connection regions have not been set up in the sub graphs!" << endl;
-					add_route(itr_1->second->get_name(), itr_2->second->get_name(), WATER);
-					add_route(itr_2->second->get_name(), itr_1->second->get_name(), WATER);
 				}
 			}
+		}
+	}
+	else
+	{
+		std::cout << "ERROR: The connection regions have not been set up in the sub graphs!" << endl;
+		std::exit(-1);
+	}
+}
+
 WorldMap::~WorldMap()
 {
 	for (auto &x : m_map)
@@ -612,11 +612,11 @@ WorldMap::~WorldMap()
 	tile2_ = nullptr;
 	tile3_ = nullptr;
 	tile4_ = nullptr;
-{
-	for (auto &x : m_map)
+}
+
 // TODO
 // Stream operator
-			std::cout << "Not world map" << endl;
+
 //void MapTile&::print_map()
 //{
 //	for (auto &x : m_map)
@@ -637,35 +637,35 @@ WorldMap::~WorldMap()
 //		std::cout << endl;
 //	}
 //}
-		c_map[direction] = r;
-		return;
+
+// adapted from graph slides from class
 void WorldMap::add_route(string start, string end, route_type type)
-	else
+{
 	const auto itr_s = m_map.find(start);
 	const auto itr_e = m_map.find(end);
-		c_map[direction] = itr->second; // some regions have double outside connections
+
 	if ( itr_s == m_map.end() || itr_e == m_map.end())
-	std::cout << "The region " << name << " already exists!" << endl;
+	{
 		std::cout << "\nThe starting and/or ending Region does not exists!" << endl;
-// adapted from graph slides from class
-void WorldMap::add_route(string& start, string& end, enum route_type type)
-{
+	}
+	else
+	{
 		m_map[start]->get_adjacency().insert(make_pair(end, make_pair(m_map[end], type)));
 		m_map[end]->get_adjacency().insert(make_pair(start, make_pair(m_map[start], type)));
 	}
 }
-		{
+
 bool WorldMap::validate()
-		}
-		if (itr_e->second->get_adjacency().find(end) == m_map[end]->get_adjacency().end())
+{
+	// check that regional to and from connections are present in both regions
 	// this will also finds connections from a Region to itself
-			m_map[end]->get_adjacency().insert(make_pair(start, make_pair(m_map[start], type)));
-		}
-	}
+
+	//std::cout << "\nStarting map Validation ...";
+
 	if ((get_tile1()->validate()&& get_tile2()->validate() && get_tile3()->validate() && get_tile4()->validate()) == false)
 	{
 		return false;
-	{
+	}
 
 	// TODO
 	// shape check
@@ -674,13 +674,4 @@ bool WorldMap::validate()
 	// connection check
 	
 	return true;
-		{
-			if (x.first != y.first) // != Suggested by clang-tidy
-			{
-				std::cout << "\nERROR: The regions " << x.first << " and " << y.first << " do not appear to have mutual connections!";
-				std::cout << "\nThe map is invalid!" << endl;
-			}
-		}
-	}
-	std::cout << "\nIf no errors are printed, consider the regional listings of the map to be valid!" << endl << endl;
 }

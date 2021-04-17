@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{b146dcc7-6e84-48ef-82e6-018e18aebe83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{b2462690-54ee-473f-81df-c25a5b4cf9f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapFiles">
+      <UniqueIdentifier>{a716970d-0c91-4e51-84f8-6ff90c603250}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{a9ffd556-ea05-4bba-95a2-4832f48b169c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\MapLoader\MapLoader.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Player\Player.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="VictoryPoints.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Map\Map.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Game\Game.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Card\Card.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BidingFacility\Bid.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\MapLoader\MapLoader.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Player\Player.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="VictoryPoints.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Map\Map.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Game\Game.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Card\Card.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BidingFacility\bid.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="TestSource.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\MapLoader\UserMaps\DuplicateIslands.txt">
+      <Filter>MapFiles</Filter>
+    </Text>
+    <Text Include="..\MapLoader\UserMaps\EmptyLine.txt">
+      <Filter>MapFiles</Filter>
+    </Text>
+    <Text Include="..\MapLoader\UserMaps\InvalidLongRectangle.txt">
+      <Filter>MapFiles</Filter>
+    </Text>
+    <Text Include="..\MapLoader\UserMaps\InvalidLShape.txt">
+      <Filter>MapFiles</Filter>
+    </Text>
+    <Text Include="..\MapLoader\UserMaps\InvalidRectangle.txt">
+      <Filter>MapFiles</Filter>
+    </Text>
+    <Text Include="..\MapLoader\UserMaps\InvalidShape.txt">
+      <Filter>MapFiles</Filter>
+    </Text>
+    <Text Include="..\MapLoader\UserMaps\ValidLongRectangle.txt">
+      <Filter>MapFiles</Filter>
+    </Text>
+    <Text Include="..\MapLoader\UserMaps\ValidLShape.txt">
+      <Filter>MapFiles</Filter>
+    </Text>
+    <Text Include="..\MapLoader\UserMaps\ValidRectangle.txt">
+      <Filter>MapFiles</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\.gitignore">
+      <Filter>Resource</Filter>
+    </None>
+  </ItemGroup>
+</Project>
