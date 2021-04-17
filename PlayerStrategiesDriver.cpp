@@ -25,9 +25,9 @@ int main() {
     vector<Army*>listOfArmies(18, new Army);
     vector<City*>listOfCities(3, new City);
 
-    Strategy* mod = new ModerateComputerStrategy();
+    Strategy* greedyStrat = new GreedyComputerStrategy();
 	Player* player1 = new Player(fName, lName, cards, listOfRegions, listOfArmies, 
-        listOfCities, mod);//Creating player
+        listOfCities, greedyStrat);//Creating player
 	(*player1).executeStrategy(hand);
 
     cout << "Please enter first name" << endl;

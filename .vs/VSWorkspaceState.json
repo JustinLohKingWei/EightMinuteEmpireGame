@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Player",
+    "\\PlayerStrategies"
   ],
-  "SelectedNode": "\\VP.sln",
+  "SelectedNode": "\\A2MainDriver.cpp",
   "PreviewInSolutionExplorer": false
 }
