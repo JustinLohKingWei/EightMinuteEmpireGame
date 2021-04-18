@@ -5,7 +5,7 @@
 #include "../BidingFacility/Bid.h"
 #include "../Card/Card.h"
 #include "../GameObservers/Subject.h";
-//#include "../PlayerStrategies/PlayerStrategies.h"
+#include "../PlayerStrategies/PlayerStrategies.h"
 using namespace std;
 
 class Region;
@@ -48,8 +48,8 @@ public:
 class Player : public Subject {
 public:
 	Player();
-	Player(string f, string l, vector<Card*>listOfCardsUsed, vector<Region*> listOfRegions, vector<Army*> listOfArmies, vector<City*> listOfCities/*, Strategy* initStrategy*/) :
-		firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myListOfCardsUsed(listOfCardsUsed), listOfTerritories(listOfRegions), listOfArmy(listOfArmies), listOfCities(listOfCities)/*, strategy(initStrategy)*/ {
+	Player(string f, string l, vector<Card*>listOfCardsUsed, vector<Region*> listOfRegions, vector<Army*> listOfArmies, vector<City*> listOfCities, Strategy* initStrategy) :
+		firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myListOfCardsUsed(listOfCardsUsed), listOfTerritories(listOfRegions), listOfArmy(listOfArmies), listOfCities(listOfCities), strategy(initStrategy) {
 		listOfPlayers.push_back(this);
 	};
 	Player(const Player& b);
@@ -61,7 +61,7 @@ public:
 	void PlaceNewArmies(int numberOfArmies);
 	void MoveArmies(int numberOfArmiesToMove);
 	void MoveOverLand(Region* from, Region* to);
-	void MoveOverWater();
+	void MoveOverWater(Region* from, Region* to);
 	void BuildCity(int numberOfCities);
 	bool DestroyArmy(int numberToDestroy);
 	void andOr(Card* currentCard);
@@ -87,10 +87,10 @@ public:
 	int getNoOfRegions();
 
 	// Strategy methods
-	/*void setStrategy(Strategy* newStrategy);
-	void executeStrategy(Hand* aGameHand);*/
+	void setStrategy(Strategy* newStrategy);
+	void executeStrategy(Hand* aGameHand);
 private:
-	//Strategy* strategy;
+	Strategy* strategy;
 	vector<Region*> listOfTerritories;
 	vector<City*> listOfCities;//10
 	vector<Army*> listOfArmy;//18
@@ -99,3 +99,4 @@ private:
 	string firstName, lastName;
 	
 };
+
