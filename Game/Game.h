@@ -19,7 +19,9 @@ public:
 	void setGameOver(bool value);
 	int getTurnNumber();
 	void initializeDeck();
-	void initalizeHand();
+	void initializeHand();
+	void biddingPhase();
+	void initializePlayers();
 
 
 

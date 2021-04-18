@@ -2,17 +2,17 @@
 #include "Card/Card.h"
 #include "PlayerStrategies/PlayerStrategies.h"
 #include "BidingFacility/Bid.h"
+#include "Game/Game.h"
 int main() {
-	Deck* deck = new Deck();
-	deck->filterDeck(2);
-	deck->shuffleDeck();
-	Hand* hand = new Hand();
-	deck->fillHand(hand);
-
+    Game* gameInstance = new Game();
+    gameInstance->initializePlayers();
+    gameInstance->biddingPhase();
+    gameInstance->initializeDeck();
+    gameInstance->initializeHand();
     string fName;
     string lName;
     string first, last;
-    hand->viewHand();
+    gameInstance->getGameHand()->viewHand();
 
     cout << "Please enter first name" << endl;
     cin >> first;
@@ -32,7 +32,7 @@ int main() {
     Player* player2 = new Player(fName, lName, cards, listOfRegions, listOfArmies,
         listOfCities, greedyStrat2);//Creating player
     (*(*player1).getBidingFacility()).pickUpCoins();
-	(*player1).executeStrategy(hand, player1->getBidingFacility());
+	(*player1).executeStrategy(gameInstance->getGameHand(), player1->getBidingFacility());
     cout << "hello" << endl;
     cin >> first;
 
