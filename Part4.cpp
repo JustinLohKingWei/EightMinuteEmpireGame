@@ -202,14 +202,14 @@ int main() {
 	}
 
 	Army* armyPiece1 = new Army();
-	armyPiece1->setRegion(tile4->get_map().at("Volcano Island Region 7"));
+	armyPiece1->setRegion(tile4->m_map_.at("Volcano Island Region 7"));
 	armyPiece1->setOwner("Alpha", "Beta");
 	armiesList.push_back(armyPiece1);
 	regionsOwned.push_back(armyPiece1->getRegion());
 
 	
 	Army* armyPiece2 = new Army();
-	armyPiece2->setRegion(tile4->get_map().at("Volcano Island Region 7"));
+	armyPiece2->setRegion(tile4->m_map_.at("Volcano Island Region 7"));
 	armyPiece2->setOwner("Alpha", "Beta");
 	regionsOwned.push_back(armyPiece2->getRegion());
 	armiesList.push_back(armyPiece2);
@@ -217,7 +217,7 @@ int main() {
 
 
 	Army* armyPiece3 = new Army();
-	armyPiece3->setRegion(tile4->get_map().at("Volcano Island Region 5"));
+	armyPiece3->setRegion(tile4->m_map_.at("Volcano Island Region 5"));
 	armyPiece3->setOwner("Alpha", "Beta");
 	armiesList.push_back(armyPiece3);
 	regionsOwned.push_back(armyPiece3->getRegion());
@@ -232,19 +232,19 @@ int main() {
 	//Add region to list of regions
 
 	Army* a = new Army();
-	a->setRegion(tile4->get_map().at("Volcano Island Region 7"));
+	a->setRegion(tile4->m_map_.at("Volcano Island Region 7"));
 	a->setOwner("Ligma", "Balls");
 	ennemyArmyList.push_back(a);
 	ennemyRegions.push_back(a->getRegion());
 
 	Army* b = new Army();
-	b->setRegion(tile4->get_map().at("Volcano Island Region 7"));
+	b->setRegion(tile4->m_map_.at("Volcano Island Region 7"));
 	b->setOwner("Ligma", "Balls");
 	ennemyArmyList.push_back(b);
 	ennemyRegions.push_back(b->getRegion());
 
 	Army* c = new Army();
-	c->setRegion(tile4->get_map().at("Volcano Island Region 5"));
+	c->setRegion(tile4->m_map_.at("Volcano Island Region 5"));
 	c->setOwner("Ligma", "Balls");
 	ennemyArmyList.push_back(c);
 	ennemyRegions.push_back(c->getRegion());
@@ -265,8 +265,9 @@ int main() {
 	//aPlayer->PlaceNewArmies(3);
 	//aPlayer->BuildCity(3);
 	
-	aPlayer->DestroyArmy(5);
+	//aPlayer->DestroyArmy(5);
 	//aPlayer->PlaceNewArmies(3);
+	aPlayer->MoveArmies(3);
 	Card* test = new Card("Night Hydra", "+1 Army", "Move Armies: 5 AND Destroy Army: 2", 2);
 	aPlayer->andOr(test);
 	

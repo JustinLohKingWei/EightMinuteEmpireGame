@@ -16,9 +16,10 @@ Region::~Region()
 	}
 }
 
-#ifdef PLAYER_H
+//#ifdef PLAYER_H
 int Region::get_number_of_armies(Player *player)
 {
+	
 	for (auto &p : occupying_armies_)
 	{
 		if (p.first->getFirstName() == player->getFirstName() && p.first->getLastName() == player->getLastName())
@@ -26,9 +27,51 @@ int Region::get_number_of_armies(Player *player)
 			return p.second;
 		}
 	}
-	std::cout << "The player could not be found!" << endl;
-	std::exit(-1);
+	if (occupying_armies_.empty()) {
+		return 0;
+	}
+	else {
+		std::cout << "The player could not be found!2" << endl;
+		std::exit(-1);
+	}
 }
+//PLEASE DO NOT CHANGE THIS CODE
+void Region::update_armies_to_region(Player* player) // End of player's turn/End of Round
+{
+	int armies = 0;
+	bool found = false;
+	for (auto* p_region: player->getListOfArmy())
+	{
+		Region *r_region = nullptr;
+		r_region = p_region->aRegion;
+		
+		if (this == r_region)
+		{
+			armies++;
+		}
+		
+		if (armies > 0)
+		{
+			pair<Player*, int>temp(player, armies);
+			occupying_armies_.push_back(temp);
+			
+			for (auto& p_player : occupying_armies_)
+			{
+				if (p_player.first->getFirstName() == player->getFirstName() && p_player.first->getLastName() == player->getLastName())
+				{
+					p_player.second = armies;
+					found = true;
+					break;
+				}
+			}
+			if (found == false) {
+				std::cout << "The player could not be found!1" << endl;
+				std::exit(-1);
+			}
+		}
+	}
+}
+
 
 void Region::set_player_with_most_armies()
 {
@@ -311,49 +354,11 @@ void Region::set_player_with_most_armies()
 	}
 }
 
-void Region::update_armies_to_region(Player* player) // End of player's turn/End of Round
-{
-	int armies = 0;
-	for (auto* p_region: player->getListOfArmy())
-	{
-		Region *r_region = nullptr;
-		for (auto* count_region : player->getListOfArmy())
-		{
-			if (p_region->aRegion == count_region->aRegion)
-			{
-				armies++;
-			}
-		}
-		if (armies > 0)
-		{
-			if (occupying_armies_.empty())
-			{
-				occupying_armies_.insert(make_pair(player, armies));
-			}
-			else
-			{
-				for (auto& p_player : occupying_armies_)
-				{
-					if (p_player.first->getFirstName() == player->getFirstName() && p_player.first->getLastName() == player->getLastName())
-					{
-						p_player.second = armies;
-					}
-					else
-					{
-						std::cout << "The player could not be found!" << endl;
-						std::exit(-1);
-					}
-				}
-			}
-		}
-	}
-}
-
 void Region::add_controlling_player(Player *player)
 {
 	controlling_player_.push_back(player);
 }
-#endif
+//#endif
 
 void Region::add_adjacency(string s, Region* r)
 {
@@ -389,9 +394,9 @@ void MapTile::add_region(string name)
 	{
 		auto* r = new Region(name);
 		m_map_.insert(make_pair(r->get_name(), r));
-#ifdef MAPDEBUG
+//#ifdef MAPDEBUG
 		cout << "The Region " << name << " has been created!" << endl;
-#endif
+//#endif
 		
 	}
 	else
@@ -408,16 +413,16 @@ void MapTile::add_connection_region(string name, region_connection direction) //
 		auto* r = new Region(name);
 		m_map_.insert(make_pair(r->get_name(), r));
 		c_regions_.insert(make_pair(direction, r));
-#ifdef MAPDEBUG
+//#ifdef MAPDEBUG
 		cout << "The Region " << name << " has been created!" << endl;
-#endif
+//#endif
 	}
 	else
 	{
 		c_regions_.insert(make_pair(direction, m_map_[name]));
-#ifdef MAPDEBUG
+//#ifdef MAPDEBUG
 		cout << "\nThe Region " << name << " has been created!" << endl;
-#endif
+//#endif
 	}
 }
 
@@ -430,9 +435,9 @@ void MapTile::add_route(string start, string end, route_type type)
 	const auto itr_e = m_map_.find(end);
 	const auto itr_end = m_map_.end();
 
-#ifdef MAPDEBUG
+//#ifdef MAPDEBUG
 	cout << "\nTrying to add the Route from " << start << " to " << end << "!" << endl;
-#endif
+//#endif
 	
 	if (itr_s == itr_end || itr_e == itr_end)
 	{
@@ -445,9 +450,9 @@ void MapTile::add_route(string start, string end, route_type type)
 		m_route_.insert(make_pair(m_map_[start], make_pair(m_map_[end], type)));
 		m_route_.insert(make_pair(m_map_[end], make_pair(m_map_[start], type)));
 		
-#ifdef MAPDEBUG
+//#ifdef MAPDEBUG
 		cout << "\nThe Route from " << start << " to " << end << " has been created!" << endl;
-#endif
+//#endif
 	}
 }
 
@@ -672,9 +677,9 @@ void WorldMap::add_route(string start, string end, route_type type)
 	const auto itr_s = m_map.find(start);
 	const auto itr_e = m_map.find(end);
 
-#ifdef MAPDEBUG
+//#ifdef MAPDEBUG
 	cout << "\nTrying to add the Route from " << start << " to " << end << "!" << endl;
-#endif
+//#endif
 	
 	if ( itr_s == m_map.end() || itr_e == m_map.end())
 	{
@@ -685,9 +690,9 @@ void WorldMap::add_route(string start, string end, route_type type)
 		m_map[end]->adj_.insert(make_pair(start, m_map[start]));
 		m_route.insert(make_pair(m_map[start],make_pair(m_map[end], type)));
 		m_route.insert(make_pair(m_map[end], make_pair(m_map[start], type)));
-#ifdef MAPDEBUG
+//#ifdef MAPDEBUG
 		cout << "\nThe Route from " << start << " to " << end << " has been created!" << endl;
-#endif
+//#endif
 	}
 }
 
