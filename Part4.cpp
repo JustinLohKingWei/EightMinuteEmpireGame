@@ -253,10 +253,11 @@ int main() {
 		Army* x = new Army();
 		ennemyArmyList.push_back(x);
 	}
-
-	Player* aPlayer = new Player("Alpha", "Beta", cardsUsed, regionsOwned, armiesList, citiesList);
+	Strategy* human = new ModerateComputerStrategy();
+	Strategy* greedy = new GreedyComputerStrategy();
+	Player* aPlayer = new Player("Alpha", "Beta", cardsUsed, regionsOwned, armiesList, citiesList, human);
 	
-	Player* bPlayer = new Player("Ligma", "Balls", ennemyCards, ennemyRegions, ennemyArmyList, ennemyCityList);
+	Player* bPlayer = new Player("Ligma", "Balls", ennemyCards, ennemyRegions, ennemyArmyList, ennemyCityList, greedy);
 
 	//Player* cPlayer = new Player("Legron", "Balls", ennemyCards, ennemyRegions, ennemyArmyList, ennemyCityList);
 	/*aPlayer->MoveArmies(3);
@@ -267,7 +268,7 @@ int main() {
 	
 	//aPlayer->DestroyArmy(5);
 	//aPlayer->PlaceNewArmies(3);
-	aPlayer->MoveArmies(3);
+	//aPlayer->MoveArmies(3);
 	Card* test = new Card("Night Hydra", "+1 Army", "Move Armies: 5 AND Destroy Army: 2", 2);
 	aPlayer->andOr(test);
 	

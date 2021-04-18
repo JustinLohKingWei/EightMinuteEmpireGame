@@ -61,8 +61,8 @@ public:
 	bool PayCoin(int payableAmount, char type);
 	void PlaceNewArmies(int numberOfArmies);
 	void MoveArmies(int numberOfArmiesToMove);
-	void MoveOverLand(vector<int> list, Region* from);
-	void MoveOverWater();
+	void MoveOverLand(Region* from, Region* to);
+	void MoveOverWater(Region* from, Region* to);
 	void BuildCity(int numberOfCities);
 	bool DestroyArmy(int numberToDestroy);
 	void andOr(Card* currentCard);
@@ -90,7 +90,7 @@ public:
 
 	// Strategy methods
 	void setStrategy(Strategy* newStrategy);
-	void executeStrategy(Hand* aGameHand);
+	void executeStrategy(Hand* aGameHand, Bid* biddingFacility);
 private:
 	Strategy* strategy;
 	vector<Region*> listOfTerritories;
