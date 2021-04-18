@@ -85,7 +85,7 @@ public:
 
 	// Strategy methods
 	void setStrategy(Strategy* newStrategy);
-	void executeStrategy(Hand* aGameHand);
+	void executeStrategy(Hand* aGameHand, Bid* biddingFacility);
 private:
 	Strategy* strategy;
 	vector<Region*> listOfTerritories;

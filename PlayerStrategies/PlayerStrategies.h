@@ -8,7 +8,7 @@ class Hand;
 
 class Strategy {
 public:
-	virtual void playTurn(Hand * aGameHand)  = 0;
+	virtual void playTurn(Hand * aGameHand, Bid* biddingFacility)  = 0;
 
 };
 
@@ -16,15 +16,15 @@ public:
 class GreedyComputerStrategy : public Strategy
 {
 public:
-	void playTurn(Hand* GameHand);
+	void playTurn(Hand* GameHand, Bid* biddingFacility);
 };
 
 class HumanStrategy : public Strategy {
 public:
-	void playTurn(Hand* GameHand);
+	void playTurn(Hand* GameHand, Bid* biddingFacility);
 };
 
 class ModerateComputerStrategy : public Strategy {
 public:
-	void playTurn(Hand *aGameHand);
+	void playTurn(Hand *aGameHand, Bid* biddingFacility);
 };
