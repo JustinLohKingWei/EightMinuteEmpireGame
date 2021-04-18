@@ -15,19 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\MapLoader\MapLoader.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\Player\Player.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="VictoryPoints.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Map\Map.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\Game.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\Card\Card.h">
@@ -36,21 +24,13 @@
     <ClInclude Include="..\BidingFacility\Bid.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\PlayerStrategies\PlayerStrategies.h" />
+    <ClInclude Include="..\GameObservers\GameMessageBoard.h" />
+    <ClInclude Include="..\GameObservers\GameObservers.h" />
+    <ClInclude Include="..\GameObservers\Subject.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\MapLoader\MapLoader.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\Player\Player.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="VictoryPoints.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Map\Map.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Game\Game.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="..\Card\Card.cpp">
@@ -59,42 +39,10 @@
     <ClCompile Include="..\BidingFacility\bid.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="TestSource.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\MapLoader\UserMaps\DuplicateIslands.txt">
-      <Filter>MapFiles</Filter>
-    </Text>
-    <Text Include="..\MapLoader\UserMaps\EmptyLine.txt">
-      <Filter>MapFiles</Filter>
-    </Text>
-    <Text Include="..\MapLoader\UserMaps\InvalidLongRectangle.txt">
-      <Filter>MapFiles</Filter>
-    </Text>
-    <Text Include="..\MapLoader\UserMaps\InvalidLShape.txt">
-      <Filter>MapFiles</Filter>
-    </Text>
-    <Text Include="..\MapLoader\UserMaps\InvalidRectangle.txt">
-      <Filter>MapFiles</Filter>
-    </Text>
-    <Text Include="..\MapLoader\UserMaps\InvalidShape.txt">
-      <Filter>MapFiles</Filter>
-    </Text>
-    <Text Include="..\MapLoader\UserMaps\ValidLongRectangle.txt">
-      <Filter>MapFiles</Filter>
-    </Text>
-    <Text Include="..\MapLoader\UserMaps\ValidLShape.txt">
-      <Filter>MapFiles</Filter>
-    </Text>
-    <Text Include="..\MapLoader\UserMaps\ValidRectangle.txt">
-      <Filter>MapFiles</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\.gitignore">
-      <Filter>Resource</Filter>
-    </None>
+    <ClCompile Include="..\PlayerStrategiesDriver.cpp" />
+    <ClCompile Include="..\PlayerStrategies\PlayerStrategies.cpp" />
+    <ClCompile Include="..\GameObservers\GameMessageBoard.cpp" />
+    <ClCompile Include="..\GameObservers\GameObservers.cpp" />
+    <ClCompile Include="..\GameObservers\Subject.cpp" />
   </ItemGroup>
 </Project>

@@ -1,10 +1,13 @@
 #include <algorithm>
 #include "Map.h"
 
+
 #include <iostream>
+
 
 using namespace std;
 
+class Player;
 //=======================================================================================================
 Region::Region(string s) : name_(move(s)) {}
 
