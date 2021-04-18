@@ -3,7 +3,7 @@
 #include "PlayerStrategies/PlayerStrategies.h"
 #include "BidingFacility/Bid.h"
 int main() {
-	Deck* deck = new Deck;
+	Deck* deck = new Deck();
 	deck->filterDeck(2);
 	deck->shuffleDeck();
 	Hand* hand = new Hand();
@@ -28,12 +28,14 @@ int main() {
     Strategy* greedyStrat = new GreedyComputerStrategy();
 	Player* player1 = new Player(fName, lName, cards, listOfRegions, listOfArmies, 
         listOfCities, greedyStrat);//Creating player
-	(*player1).executeStrategy(hand);
-
-    cout << "Please enter first name" << endl;
+    Strategy* greedyStrat2 = new GreedyComputerStrategy();
+    Player* player2 = new Player(fName, lName, cards, listOfRegions, listOfArmies,
+        listOfCities, greedyStrat2);//Creating player
+    (*(*player1).getBidingFacility()).pickUpCoins();
+	(*player1).executeStrategy(hand, player1->getBidingFacility());
+    cout << "hello" << endl;
     cin >> first;
-    cout << "Please enter last name" << endl;
-    cin >> last;
+
 
 	return 0;
 }
