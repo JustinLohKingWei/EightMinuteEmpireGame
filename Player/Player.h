@@ -79,6 +79,7 @@ public:
 	string getFirstName();
 	string getLastName();
 	static vector<Player*>listOfPlayers;
+	void useCard(Card* card, int cardPosition, int playerNumber);
 
 	//MVC methods
 

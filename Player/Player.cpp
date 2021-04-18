@@ -99,6 +99,7 @@ bool Player::PayCoin(int payableAmount, char type) {
 			cout << "Not enough coins to make this purchase!" << endl;
 			success = false;
 		}
+		// TODO: Replace this with a call to the GameMessageBoard
 		cout << "After payment , " << this->getFirstName() << " has " << this->getBidingFacility()->getSilverCoins() << " silver coins, and has " << this->getBidingFacility()->getCopperCoins() << " copper coins." << endl;
 	}
 	else {
@@ -118,6 +119,7 @@ void Player::PlaceNewArmies(int numberOfArmies) {//Handling placing in multiple 
 				x->setRegion(listOfTerritories.at(0));
 				numPlaced++;
 			}
+			// TODO: Notify game message board about placed army location.
 		}
 	}
 	else {
@@ -149,6 +151,7 @@ void Player::PlaceNewArmies(int numberOfArmies) {//Handling placing in multiple 
 			for (Army* x : listOfArmy) {
 				if (x->getRegion() == nullptr && armyCounter < numChoice) {
 					x->setRegion(listOfTerritories.at(indexChoice));
+					// TODO: Notify game message board about placed army location.
 					cout << "Placed new army at " << listOfTerritories.at(indexChoice)->get_name() << endl;
 					armyCounter++;
 				}
@@ -294,6 +297,7 @@ void Player::BuildCity(int numberOfCities) {
 		for (City* c : listOfCities) {
 			
 			if (c->getRegion() == nullptr && cityCounter < numChoice) {
+				// TODO: Notify game message board about placed city location.
 				cout << "City built at " << where->get_name() << endl;
 				c->setRegion(where);
 				cityCounter++;
@@ -322,7 +326,7 @@ bool Player::DestroyArmy(int numberToDestroy) {
 		if (current != myArmy->getRegion() && myArmy->getRegion() != nullptr) {
 			cout << myArmy->getRegion()->get_name() << endl;
 			cout << "=======================" << endl;
-			cout << "Checking for ennemy armies at current Region...\n" << endl;
+			cout << "Checking for enemy armies at current Region...\n" << endl;
 
 			int playerIndex = 0;
 			for (Player* aPlayer : listOfPlayers) {
@@ -357,6 +361,7 @@ bool Player::DestroyArmy(int numberToDestroy) {
 			for (auto* army : listOfPlayers.at(playerTarget)->getListOfArmy()) {
 				if (army->getRegion() == myArmy->getRegion() && remainingToDestroy > armyNumToDestroy) {
 					delete army;
+					// TODO: Notify game message board about deleted army location.
 				}
 
 			}
@@ -369,7 +374,6 @@ bool Player::DestroyArmy(int numberToDestroy) {
 
 	return true;
 }
-
 void Player::andOr(Card* current) {
 	string delim1 = "AND";
 	string delim2 = "OR";
@@ -422,8 +426,6 @@ void Player::andOr(Card* current) {
 		else if (action2 == actions[3]) {
 
 		}
-		
-		
 
 	}
 	else if (current->getAction().find(delim2) && current->getAction().find(delim2) != string::npos) {
@@ -560,6 +562,10 @@ string Player::getLastName() {
 
 Region* playerGoods::getRegion() {
 	return aRegion;
+}
+
+void Player::useCard(Card* card, int cardPosition, int playerNumber) {
+	// observer-->notifyCardPlayer(card, cardPosition, playerNumber);
 }
 
 
