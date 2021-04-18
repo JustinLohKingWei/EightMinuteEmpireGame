@@ -191,7 +191,7 @@ void Player::MoveArmies(int numberOfArmiesToMove) {
 			if (aPlayer == this) {
 				continue;
 			}
-			for (Region* x : listOfTerritories) {
+			for (Region* x : aPlayer->listOfTerritories) {
 				cout << x->get_name() << endl;
 				x->update_armies_to_region(aPlayer);
 				int numArmies = x->get_number_of_armies(aPlayer);
@@ -222,6 +222,7 @@ void Player::MoveArmies(int numberOfArmiesToMove) {
 			if (adjIndex == regionChoice) {
 				to = x.second;
 			}
+			adjIndex++;
 		}
 		if (to != nullptr) {
 			cout << "You have targeted " << to->get_name() << " to move pieces" << endl;
@@ -247,11 +248,21 @@ void Player::MoveArmies(int numberOfArmiesToMove) {
 				if (numA == 0) {
 					listOfTerritories.push_back(to);
 				}
-				MoveOverLand(from, to);
-
+				string ToIslandName = to->get_name().substr(0, to->get_name().find("Region"));
+				string FromIslandName = from->get_name().substr(0, from->get_name().find("Region"));
+				if (ToIslandName == FromIslandName) {
+					MoveOverLand(from, to);
+				}
+				else {
+					MoveOverWater(from, to);
+					return;
+				}
 				moveCounter++;
 			}
 			numCurrent -= moveChoice;
+		}
+		else {
+			cout << "To is NULL" << endl;
 		}
 	}
 }
@@ -272,8 +283,20 @@ void Player::MoveOverLand(Region* from, Region* to) {
 	}
 }
 
-void Player::MoveOverWater() {
+void Player::MoveOverWater(Region* from, Region* to) {
+	cout << "Moving over water..." << endl;
 
+	Region* current = 0;
+	for (Army* a : listOfArmy) {
+		current = a->getRegion();
+		if (current == from && current != nullptr) {
+			a->setRegion(nullptr);
+			a->setRegion(to);
+			cout << "Armypiece moved from " << current->get_name() << " to " << a->getRegion()->get_name() << endl;
+			return;
+		}
+
+	}
 }
 
 void Player::BuildCity(int numberOfCities) {
@@ -426,24 +449,25 @@ void Player::andOr(Card* current) {
 			PlaceNewArmies(amountOfFirstAction);
 		}
 		else if (action1 == actions[1]) {
+			MoveArmies(amountOfFirstAction);
 		}
 		else if (action1 == actions[2]) {
 			BuildCity(amountOfFirstAction);
 		}
 		else if (action1 == actions[3]) {
-
+			DestroyArmy(amountOfFirstAction);
 		}
 		if (action2 == actions[0]) {
 			PlaceNewArmies(amountOfSecondAction);
 		}
 		else if (action2 == actions[1]) {
-
+			MoveArmies(amountOfSecondAction);
 		}
 		else if (action2 == actions[2]) {
 			BuildCity(amountOfSecondAction);
 		}
 		else if (action2 == actions[3]) {
-
+			DestroyArmy(amountOfSecondAction);
 		}
 		
 		
@@ -478,41 +502,49 @@ void Player::andOr(Card* current) {
 		if (action1 == actions[0] && actionChoice == 1) {
 			//Place army
 			cout << "Place armies" << endl;
+			PlaceNewArmies(amountOfFirstAction);
 			return;
 		}
 		else if (action1 == actions[1] && actionChoice == 1) {
 			//Move armies
 			cout << "Move armies" << endl;
+			MoveArmies(amountOfFirstAction);
 			return;
 		}
 		else if (action1 == actions[2] && actionChoice == 1) {
 			//Build army
 			cout << "Build city" << endl;
+			BuildCity(amountOfFirstAction);
 			return;
 		}
 		else if (action1 == actions[3] && actionChoice == 1) {
 			//Destroy army
 			cout << "Destroy army" << endl;
+			DestroyArmy(amountOfFirstAction);
 			return;
 		}
 		else if (action2 == actions[0] && actionChoice == 2) {
 			//Place army
 			cout << "Place armies" << endl;
+			PlaceNewArmies(amountOfSecondAction);
 			return;
 		}
 		else if (action2 == actions[1] && actionChoice == 2) {
 			//Move armies
 			cout << "Move armies" << endl;
+			MoveArmies(amountOfSecondAction);
 			return;
 		}
 		else if (action2 == actions[2] && actionChoice == 2) {
 			//Build army
 			cout << "Build city" << endl;
+			BuildCity(amountOfSecondAction);
 			return;
 		}
 		else if (action2 == actions[3] && actionChoice == 2) {
 			//Destroy army
 			cout << "Destroy army" << endl;
+			DestroyArmy(amountOfSecondAction);
 			return;
 		}
 	}

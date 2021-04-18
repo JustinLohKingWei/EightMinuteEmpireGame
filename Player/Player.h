@@ -60,8 +60,8 @@ public:
 	bool PayCoin(int payableAmount, char type);
 	void PlaceNewArmies(int numberOfArmies);
 	void MoveArmies(int numberOfArmiesToMove);
-	void MoveOverLand(vector<int> list, Region* from);
-	void MoveOverWater();
+	void MoveOverLand(Region* from, Region* to);
+	void MoveOverWater(Region* from, Region* to);
 	void BuildCity(int numberOfCities);
 	bool DestroyArmy(int numberToDestroy);
 	void andOr(Card* currentCard);
