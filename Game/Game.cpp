@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game() : theGameHand(), listOfPlayers() {
+Game::Game() : theGameHand(new Hand()), listOfPlayers(new vector<Player*> players) {
 	cout << "Default game created" << endl;
 	currentPlayer = 0;
 	numOfPlayers = 0;
@@ -49,4 +49,15 @@ void Game::setGameOver(bool value) {
 
 int Game::getTurnNumber() {
 	return turnNumber;
+}
+
+void Game::initializeDeck()
+{
+	gameDeck = new Deck();
+	gameDeck->filterDeck(numOfPlayers);
+	gameDeck->shuffleDeck();
+}
+
+void Game::initalizeHand() {
+	gameDeck->fillHand(theGameHand);
 }

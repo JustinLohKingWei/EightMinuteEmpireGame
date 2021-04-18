@@ -28,6 +28,10 @@
     <ClInclude Include="..\GameObservers\GameMessageBoard.h" />
     <ClInclude Include="..\GameObservers\GameObservers.h" />
     <ClInclude Include="..\GameObservers\Subject.h" />
+    <ClInclude Include="..\Map\Map.h" />
+    <ClInclude Include="..\Game\Game.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Player\Player.cpp">
@@ -44,5 +48,9 @@
     <ClCompile Include="..\GameObservers\GameMessageBoard.cpp" />
     <ClCompile Include="..\GameObservers\GameObservers.cpp" />
     <ClCompile Include="..\GameObservers\Subject.cpp" />
+    <ClCompile Include="..\Map\Map.cpp" />
+    <ClCompile Include="..\Game\Game.cpp">
+      <Filter>Headers</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
