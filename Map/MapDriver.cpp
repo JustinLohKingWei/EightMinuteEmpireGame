@@ -13,6 +13,7 @@
 #endif
 
 #include <iostream>
+#include "../Player/Player.h"
 #include "Map.h"
 
 using namespace std;
@@ -22,7 +23,7 @@ int main()
 #ifdef MY_DEBUG
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
-
+	
 	auto *tile1 = new MapTile("C Shape Island");
 	cout << "\nC Shape Island map tile has been created." << endl;
 
@@ -196,8 +197,8 @@ int main()
 	// they could easily be combined into a "World Map" for game play with little effort and adding the last few connections between the Islands
 	auto *world_map = new WorldMap(RECTANGLE, *tile1, *tile2, *tile3, *tile4);
 
-	//world_map->print_map();
-	//world_map->print_map_adjacency();
+	world_map->print_world_map();
+	world_map->print_world_adjacency_map();
 
 	//WorldMap::validate_map(world_map);
 
@@ -207,9 +208,9 @@ int main()
 	delete tile2;
 	delete tile1;
 
-	#ifdef MY_DEBUG
+#ifdef MY_DEBUG
 	_CrtDumpMemoryLeaks(); // call before exit if debug is enabled
-	#endif
+#endif
 	
 	return 0;
 }

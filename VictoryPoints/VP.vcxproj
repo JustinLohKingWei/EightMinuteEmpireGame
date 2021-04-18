@@ -65,37 +65,27 @@
   <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\BidingFacility\Bid.h" />
-    <ClInclude Include="..\Card\Card.h" />
-    <ClInclude Include="..\Game\Game.h" />
-    <ClInclude Include="..\MapLoader\MapLoader.h" />
-    <ClInclude Include="..\Map\Map.h" />
-    <ClInclude Include="..\Player\Player.h" />
-    <ClInclude Include="VictoryPoints.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\BidingFacility\bid.cpp" />
     <ClCompile Include="..\Card\Card.cpp" />
+    <ClCompile Include="..\GameObservers\GameMessageBoard.cpp" />
+    <ClCompile Include="..\GameObservers\GameObservers.cpp" />
+    <ClCompile Include="..\GameObservers\Subject.cpp" />
     <ClCompile Include="..\Game\Game.cpp" />
-    <ClCompile Include="..\MapLoader\MapLoader.cpp" />
     <ClCompile Include="..\Map\Map.cpp" />
+    <ClCompile Include="..\PlayerStrategiesDriver.cpp" />
+    <ClCompile Include="..\PlayerStrategies\PlayerStrategies.cpp" />
     <ClCompile Include="..\Player\Player.cpp" />
-    <ClCompile Include="TestSource.cpp" />
-    <ClCompile Include="VictoryPoints.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\MapLoader\UserMaps\DuplicateIslands.txt" />
-    <Text Include="..\MapLoader\UserMaps\EmptyLine.txt" />
-    <Text Include="..\MapLoader\UserMaps\InvalidLongRectangle.txt" />
-    <Text Include="..\MapLoader\UserMaps\InvalidLShape.txt" />
-    <Text Include="..\MapLoader\UserMaps\InvalidRectangle.txt" />
-    <Text Include="..\MapLoader\UserMaps\InvalidShape.txt" />
-    <Text Include="..\MapLoader\UserMaps\ValidLongRectangle.txt" />
-    <Text Include="..\MapLoader\UserMaps\ValidLShape.txt" />
-    <Text Include="..\MapLoader\UserMaps\ValidRectangle.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\.gitignore" />
+    <ClInclude Include="..\BidingFacility\Bid.h" />
+    <ClInclude Include="..\Card\Card.h" />
+    <ClInclude Include="..\GameObservers\GameMessageBoard.h" />
+    <ClInclude Include="..\GameObservers\GameObservers.h" />
+    <ClInclude Include="..\GameObservers\Subject.h" />
+    <ClInclude Include="..\Game\Game.h" />
+    <ClInclude Include="..\Map\Map.h" />
+    <ClInclude Include="..\PlayerStrategies\PlayerStrategies.h" />
+    <ClInclude Include="..\Player\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

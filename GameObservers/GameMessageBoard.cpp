@@ -11,11 +11,14 @@ GameMessageBoard::GameMessageBoard(Player *p)
   _subject->Attach(this);
 };
 
-GameMessageBoard::GameMessageBoard()
+GameMessageBoard::~GameMessageBoard()
 {
   _subject->Detach(this);
 };
-
+GameMessageBoard::GameMessageBoard()
+{
+    _subject = nullptr;
+};
 void GameMessageBoard::Update()
 {
   Display();
