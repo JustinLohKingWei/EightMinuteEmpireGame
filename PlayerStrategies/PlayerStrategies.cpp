@@ -1,5 +1,5 @@
 #include "PlayerStrategies.h"
-
+#include <stdlib.h>
 /*
 	Steps in making a decision
 	1. Check cards in hand (looking for building or destroying)
@@ -69,19 +69,93 @@ void GreedyComputerStrategy::playTurn(Hand *gameHand) {
 }
 
 // controls a region in which it just needs to occupy it with more armies than the opponent
+/*
+1. Check card in hand
+2. Check place new armies->place in region with ennemy(make sure it has more than the ennemy)->if no ennemies place armies in empty region(i.e. region with 0 armies)->else place in region with most armies
+3. Move armies to region->if adj region has ennemy (move there)->else move anywhere
+4. Choose randomly otherwise
+*/
 void ModerateComputerStrategy::playTurn(Hand* gameHand) {
 	// check cards in hand
+	vector<int>placingArmiesCards;//interest cards 
+	vector<int>movingArmiesCards;
+	vector<int>otherCards;
 	vector<Card*> cardsInHand = (*gameHand).getCardsInHand();
+
+	cout << "SELECTING CARDS OF INTEREST\n" << endl;
 	for (int i = 0; i < cardsInHand.size();i++) {
 		Card currentCard = *(cardsInHand.at(i));
 
 		// read all cards and choose the ones that have to do with controlling a region
 		// controlling a region = having more armies in a given region
-		if (currentCard.getAction() != "") {
-			cout << currentCard.getAction() << endl;
+
+		if (currentCard.getAction().find_first_of("Place Army")){
+			cout << "Card with action of primary interest: "<< currentCard.getAction() << endl;
+			placingArmiesCards.push_back(i);
+		}
+		else if (currentCard.getAction().find_first_of("Move Armies")) {
+			cout << "Card with action of secondary interest: " << currentCard.getAction() << endl;
+			movingArmiesCards.push_back(i);
+		}
+		else {
+			cout << "Adding misc cards" << endl;
+			otherCards.push_back(i);
+		}
+
+	}
+	if (placingArmiesCards.size() == 0) {
+		if (movingArmiesCards.size() == 0) {
+			//Generate index of misc card
+			int randomOtherCardIndex = rand() % otherCards.size();
+			int amount = 0;
+			Card* current = cardsInHand.at(otherCards.at(randomOtherCardIndex));
+			//Process actions
+			string action = current->getAction();
+
+			if (action.find("AND") || action.find("OR")) {
+				Player::listOfPlayers.at(2)->andOr(current); //TO BE OVERLOADED
+			}
+			else if (action.find("Build City")) {
+				amount = std::stoi(action.substr(action.find(":") + 1));
+				Player::listOfPlayers.at(2)->BuildCity(amount);
+			}
+			else if (action.find("Destroy Army")) {
+				amount = std::stoi(action.substr(action.find(":") + 1));
+				Player::listOfPlayers.at(2)->DestroyArmy(amount);
+			}
+		}
+		else {
+			
+			int randomMovingCardIndex = rand() % movingArmiesCards.size();
+			int amount = 0;
+			Card* current = cardsInHand.at(movingArmiesCards.at(randomMovingCardIndex));
+
+			string action = current->getAction();
+
+			if (action.find("AND") || action.find("OR")) {
+				Player::listOfPlayers.at(2)->andOr(current);
+			}
+			else {
+				amount = std::stoi(action.substr(action.find(":") + 1));
+				Player::listOfPlayers.at(2)->MoveArmies(amount);
+			}	
+		}
+	
+	}
+	else {
+		int randomPlacingCardIndex = rand() % placingArmiesCards.size();
+		int amount = 0;
+		Card* current = cardsInHand.at(movingArmiesCards.at(randomPlacingCardIndex));
+
+		string action = current->getAction();
+		if (action.find("AND") || action.find("OR")) {
+			Player::listOfPlayers.at(2)->andOr(current);
+		}
+		else {
+			amount = std::stoi(action.substr(action.find(":") + 1));
+			Player::listOfPlayers.at(2)->PlaceNewArmies(amount);
 		}
 	}
-
 	//make decision based on cards in hand
 
 
