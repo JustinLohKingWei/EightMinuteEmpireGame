@@ -23,6 +23,7 @@ void GameMessageBoard::Update()
 {
   Display();
 };
+
 void GameMessageBoard::Display(){
     //TODO DISPLAY STATS HERE
 
@@ -33,8 +34,16 @@ void GameMessageBoard::Display(){
     int noOfRegions = _subject->getNoOfRegions();
 
     cout<<name<<"   ||  "<<noOfArmies<< " armies   ||  "<<noOfRegions<<" Regions   ||  "<<coins<<"coins  ||     "<<endl;
-
 };
+
+void GameMessageBoard::notifyCardPlayed(Card* card, int cardPosition, int playerNumber, int cost) {
+    cout << "GAME: Player " << playerNumber << " selects card #" << cardPosition << ". It costs " << cost << " coins." << endl;
+    cout << "GAME: This card's action is: " << card->getAction() << endl;
+}
+
+void GameMessageBoard::updateEvent(string playerName, string msg) {
+    cout << "GAME: Player " << playerName << " : " << msg << endl;
+}
 
 void GameMessageBoard::SetSubject(Player *p)
 {

@@ -13,6 +13,7 @@ public:
     virtual void Attach(GameObservers *o);
     virtual void Detach(GameObservers *o);
     virtual void Notify();
+    virtual void notifyEvent(string playerName, string msg);
     Subject();
     ~Subject();
 
