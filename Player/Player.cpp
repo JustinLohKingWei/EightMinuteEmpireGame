@@ -14,7 +14,8 @@ Player::Player(const Player& b) {
 	this->myBidingFacility = b.myBidingFacility;
 	this->myListOfCardsUsed = b.myListOfCardsUsed;
 	this->listOfArmy = b.listOfArmy;
-	//this->strategy = b.strategy;
+	this->strategy = b.strategy;
+
 
 }
 //Assignment operator
@@ -583,15 +584,16 @@ string Player::getLastName() {
 }
 
 
-//void Player::setStrategy(Strategy* newStrategy)
-//{
-//	this->strategy = newStrategy;
-//}
-//
-//void Player::executeStrategy(Hand *aGameHand)
-//{
-//	this->strategy->playTurn(aGameHand);
-//}
+
+void Player::setStrategy(Strategy* newStrategy)
+{
+	this->strategy = newStrategy;
+}
+
+void Player::executeStrategy(Hand *aGameHand)
+{
+	this->strategy->playTurn(aGameHand);
+}
 
 Region* playerGoods::getRegion() {
 	return aRegion;

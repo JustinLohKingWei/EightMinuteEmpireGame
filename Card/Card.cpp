@@ -182,6 +182,9 @@ int Hand::getCost(int index){
     else if (index == 5){
         return 3;
     }
+    else {
+        return -1;
+    }
 }
 
 // Returns a card.
@@ -236,7 +239,7 @@ vector<Card*> Deck::listOfCards = {//list of cards
       new Card("Graveyard", "+1 VP Per Cursed", "Place Armies: 2", 2),
       new Card("Night Hydra", "+1 Army", "Move Armies: 5 AND Destroy Army", 2),
       new Card("Night Wizard", "+1 VP Per Night", "Place Armies: 3 AND Destroy Army", 2),
-      new Card("Noble Knight", "+1 Move", "Place Armies: 4 AND Destroy Ar,u", 2),
+      new Card("Noble Knight", "+1 Move", "Place Armies: 4 AND Destroy Army", 2),
       new Card("Stronghold", "+1 VP Per Dire", "Build City", 2),
       new Card("Ancient Sage", "+1 VP Per Ancient", "Move Armies: 3", 2),
       new Card("Ancient Woods", "+1 Army", "Build City AND Place Armies: 1", 2),
