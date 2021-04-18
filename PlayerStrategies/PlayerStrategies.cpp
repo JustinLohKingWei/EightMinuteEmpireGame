@@ -7,33 +7,40 @@
 	3. If no opportunity to destroy, but opportunity to build -> pick up build card
 	4. If no such cards / opportunities, random pick card that player can afford
 */
-void GreedyComputerStrategy::playTurn(Hand *gameHand) {
+void GreedyComputerStrategy::playTurn(Hand *gameHand, Bid* biddingFacility) {
 	// check cards in hand
 	vector<Card*> cardsInHand = (*gameHand).getCardsInHand();
+	int currentCoins = biddingFacility->getCopperCoins();
+	vector<int> buildingCards;
+	vector<int> destroyingCards;
+	vector<int> otherCards;
+	string andDelim = " AND ";
+	string orDelim = " OR ";
+	string buildDelim = "Build City";
+	string destroyDelim = "Destroy Army";
 	for (int i = 0; i < cardsInHand.size(); i++) {
 		Card currentCard = *(cardsInHand.at(i));
 
+		if (gameHand->getCost(i) > currentCoins) {
+			continue;
+		}
 
 		// holds cards that may be of interest
-		vector<int> buildingCards;
-		vector<int> destroyingCards;
-		vector<int> otherCards;
-		string andDelim = " AND ";
-		string orDelim = " OR ";
-		string buildDelim = "Build City";
-		string destroyDelim = "Destroy Army";
+		
 		// parse actions to see if any of them are of interest 
 		if (currentCard.getAction().size() > 0) {
-			string fullAction = currentCard.getAction();
-			if (fullAction.find(buildDelim) != string::npos) {
-				buildingCards.push_back(i);
-			}
-			if (fullAction.find(destroyDelim) != string::npos) {
-				destroyingCards.push_back(i);
-			}
-			if (fullAction.find(buildDelim) == string::npos && fullAction.find(destroyDelim) == string::npos) {
-				otherCards.push_back(i);
-			}
+			
+				
+				string fullAction = currentCard.getAction();
+				if (fullAction.find(buildDelim) != string::npos) {
+					buildingCards.push_back(i);
+				}
+				if (fullAction.find(destroyDelim) != string::npos) {
+					destroyingCards.push_back(i);
+				}
+				if (fullAction.find(buildDelim) == string::npos && fullAction.find(destroyDelim) == string::npos) {
+					otherCards.push_back(i);
+				}
 			
 			//if (fullAction.find(andDelim)!=string::npos) {// 2 actions (AND)
 			//	// Action before AND
@@ -50,21 +57,41 @@ void GreedyComputerStrategy::playTurn(Hand *gameHand) {
 			//else { // card only has 1 action
 			//}
 		}
-		for (int index : buildingCards) {
-			cout << "Building card: " <<  index << endl;
-		}
-		for (int index : destroyingCards) {
-			cout << "Destroy card: " <<  index << endl;
-		}
-		for (int index : otherCards) {
-			cout << "Other card: " <<  index << endl;
-		}
-
+		
+	}
+	for (int index : buildingCards) {
+		cout << "Building card: " << index << endl;
+	}
+	for (int index : destroyingCards) {
+		cout << "Destroy card: " << index << endl;
+	}
+	for (int index : otherCards) {
+		cout << "Other card: " << index << endl;
+	}
+	int numOfRandom = otherCards.size();
+	int randomIndex = rand() % numOfRandom;
+	cout << numOfRandom << endl;
+	//make decision based on cards in hand (all affordable cards)
+	//1. If you have destroying cards, check if you can destroy
+	//2. If you have building cards, build a city
+	//3. If you have none of the above, RNG an "other" card
+	
+	// check if armies to destroy
+	if (destroyingCards.size() > 0) {
+		// if destroyarmy works, continue
+		
+		// if none, move to next decision
+	} 
+	if (buildingCards.size() > 0) {
+		// build city
+	}
+	// play a random card
+	else {
+		int numOfRandom = otherCards.size();
+		int randomIndex = rand() % numOfRandom;
+		// choose vector at to play card
 
 	}
-
-	//make decision based on cards in hand
-
 
 }
 
@@ -75,7 +102,7 @@ void GreedyComputerStrategy::playTurn(Hand *gameHand) {
 3. Move armies to region->if adj region has ennemy (move there)->else move anywhere
 4. Choose randomly otherwise
 */
-void ModerateComputerStrategy::playTurn(Hand* gameHand) {
+void ModerateComputerStrategy::playTurn(Hand* gameHand, Bid* biddingFacility) {
 	// check cards in hand
 	vector<int>placingArmiesCards;//interest cards 
 	vector<int>movingArmiesCards;

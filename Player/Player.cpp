@@ -620,9 +620,9 @@ void Player::setStrategy(Strategy* newStrategy)
 	this->strategy = newStrategy;
 }
 
-void Player::executeStrategy(Hand *aGameHand)
+void Player::executeStrategy(Hand *aGameHand, Bid* biddingFacility)
 {
-	this->strategy->playTurn(aGameHand);
+	this->strategy->playTurn(aGameHand, biddingFacility);
 }
 
 Region* playerGoods::getRegion() {
