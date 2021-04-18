@@ -5,9 +5,11 @@
 #include "../BidingFacility/Bid.h"
 #include "../Card/Card.h"
 #include "../GameObservers/Subject.h";
+//#include "../PlayerStrategies/PlayerStrategies.h"
 using namespace std;
 
 class Region;
+class Strategy;
 
 struct playerGoods {
 
@@ -46,8 +48,8 @@ public:
 class Player : public Subject {
 public:
 	Player();
-	Player(string f, string l, vector<Card*>listOfCardsUsed, vector<Region*> listOfRegions, vector<Army*> listOfArmies, vector<City*> listOfCities) :
-		firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myListOfCardsUsed(listOfCardsUsed), listOfTerritories(listOfRegions), listOfArmy(listOfArmies), listOfCities(listOfCities) {
+	Player(string f, string l, vector<Card*>listOfCardsUsed, vector<Region*> listOfRegions, vector<Army*> listOfArmies, vector<City*> listOfCities/*, Strategy* initStrategy*/) :
+		firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myListOfCardsUsed(listOfCardsUsed), listOfTerritories(listOfRegions), listOfArmy(listOfArmies), listOfCities(listOfCities)/*, strategy(initStrategy)*/ {
 		listOfPlayers.push_back(this);
 	};
 	Player(const Player& b);
@@ -58,7 +60,7 @@ public:
 	bool PayCoin(int payableAmount, char type);
 	void PlaceNewArmies(int numberOfArmies);
 	void MoveArmies(int numberOfArmiesToMove);
-	void MoveOverLand(vector<int> list, Region* from);
+	void MoveOverLand(Region* from, Region* to);
 	void MoveOverWater();
 	void BuildCity(int numberOfCities);
 	bool DestroyArmy(int numberToDestroy);
@@ -81,7 +83,11 @@ public:
 
 	//MVC methods
 
+	// Strategy methods
+	/*void setStrategy(Strategy* newStrategy);
+	void executeStrategy(Hand* aGameHand);*/
 private:
+	//Strategy* strategy;
 	vector<Region*> listOfTerritories;
 	vector<City*> listOfCities;//10
 	vector<Army*> listOfArmy;//18

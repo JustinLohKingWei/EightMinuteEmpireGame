@@ -37,7 +37,7 @@ public:
 
 	void add_adjacency(string, Region*);
 	
-#ifdef PLAYER_H
+//#ifdef PLAYER_H
 	vector<Player*> get_controlling_player() const { return controlling_player_; };
 	vector<pair<Player*, int>> get_occupying_armies() const { return occupying_armies_; };
 
@@ -45,18 +45,19 @@ public:
 	int get_number_of_armies(Player*);
 	void set_player_with_most_armies();
 	void update_armies_to_region(Player*);
-#endif
+//#endif
 	adjacency adj_;
+
 private:
-#ifdef PLAYER_H
+//#ifdef PLAYER_H
 	vector<pair<Player*, int>> occupying_armies_;
 	vector<Player*> controlling_player_;
-#endif
+//#endif
 	string name_;
 	// Function
-#ifdef PLAYER_H
+//#ifdef PLAYER_H
 	void add_controlling_player(Player*);
-#endif
+//#endif
 };
 
 class MapTile
