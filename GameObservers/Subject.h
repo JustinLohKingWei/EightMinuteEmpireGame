@@ -2,10 +2,9 @@
 #include "GameObservers.h" //subject
 #include <list>
 using namespace std;
+using std::list;
 
-//Needs to have a forward reference due to
-//circular reference between Observer and Subject
-class GameObservers;
+//class GameObservers;
 
 class Subject
 {
@@ -17,5 +16,5 @@ public:
     ~Subject();
 
 private:
-    list<GameObservers *> *_gameObservers;
+   static list<GameObservers *> *_gameObservers;
 };
