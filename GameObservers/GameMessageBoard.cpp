@@ -36,7 +36,7 @@ void GameMessageBoard::Display(){
     cout<<name<<"   ||  "<<noOfArmies<< " armies   ||  "<<noOfRegions<<" Regions   ||  "<<coins<<"coins  ||     "<<endl;
 };
 
-void GameMessageBoard::notifyCardPlayed(Card* card, int cardPosition, int playerNumber, int cost) {
+void GameMessageBoard::displayCard(Card* card, int cardPosition, int playerNumber, int cost) {
     cout << "GAME: Player " << playerNumber << " selects card #" << cardPosition << ". It costs " << cost << " coins." << endl;
     cout << "GAME: This card's action is: " << card->getAction() << endl;
 }

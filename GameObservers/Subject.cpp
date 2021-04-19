@@ -30,3 +30,9 @@ void Subject::notifyEvent(string playerName, string msg) {
     for (; i != _gameObservers->end(); ++i)
         (*i)->updateEvent(playerName, msg);
 };
+
+void Subject::notifyCard(Card* card, int cardPosition, int playerNumber) {
+    list<GameObservers*>::iterator i = _gameObservers->begin();
+    for (; i != _gameObservers->end(); ++i)
+        (*i)->displayCard(Card * card, int cardPosition, int playerNumber);
+};

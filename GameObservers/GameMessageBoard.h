@@ -13,8 +13,8 @@ public:
     void Update();
     void Display();
     void SetSubject(Player *);
-    void notifyCardPlayed(Card* card, int cardPosition, int playerNumber, int cost);
     void updateEvent(string playerName, string msg);
+    void displayCard(Card* card, int cardPosition, int playerNumber, int cost);
 
 private:
     Player *_subject;
