@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game() : theGameHand(new Hand()), listOfPlayers(), gameDeck(new Deck()) {
+Game::Game() : theGameHand(new Hand()) {
 	cout << "Default game created" << endl;
 	currentPlayer = 0;
 	numOfPlayers = 2;

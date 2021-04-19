@@ -1,15 +1,14 @@
-#include "../Player/Player.h";
-#include "GameMessageBoard.h"
-#include <iostream>
-using std::cout;
-using std::endl;
+#include <vector>
+#include "VictoryPoints.h"
+#include "../Player/Player.h"
+#include "../Card/Card.h"
+#include "../Map/Map.h"
+#include "../MapLoader/MapLoader.h"
 
+using namespace std;
 
-int main(){
-    cout << "Testing Observer"<<endl;
-
-	//Hard coded map
-	cout << "****Initializing map****" << endl;
+int main()
+{
 	auto* tile1 = new MapTile("C Shape Island");
 	cout << "\nC Shape Island map tile has been created." << endl;
 
@@ -181,113 +180,95 @@ int main(){
 
 	// This is how I would normally like to construct the game map once all tiles are loaded from files and then selected and positioned
 	// they could easily be combined into a "World Map" for game play with little effort and adding the last few connections between the Islands
-	auto* world_map = new WorldMap(RECTANGLE, *tile1, *tile2, *tile3, *tile4);
+	auto* world_map = new WorldMap(RECTANGLE, tile1, tile2, tile3, tile4);
 
+	auto* p1 = new Player();
+	auto* p2 = new Player();
 
+	auto* deck = new Deck();
 
-	vector<Card*>cardsUsed;
-	vector<Card*>ennemyCards;
-	vector<Region*>regionsOwned;
-	vector<Region*>ennemyRegions;
-	vector<Army*>armiesList;
-	vector<Army*>ennemyArmyList;
-	vector<City*>citiesList;
-	vector<City*>ennemyCityList;
+	auto deck_of_cards = deck->getListOfCards();
 
-	vector<Region*>playersRegions;
-	for (int i = 0; i < 10; i++) {
-		City* newCity = new City();
-		citiesList.push_back(newCity);
+	//
+	vector<Card*> p1_card{ deck_of_cards.at(0), deck_of_cards.at(1), deck_of_cards.at(13), deck_of_cards.at(14) };
+	vector<Card*> p2_card{ deck_of_cards.at(10), deck_of_cards.at(9), deck_of_cards.at(30), deck_of_cards.at(29) };
+
+	p1->setListOfCardsUsed(p1_card);
+	p2->setListOfCardsUsed(p2_card);
+	
+	vector<Region*> p1_region { world_map->m_map["Stone Pillars Island Region 5"], world_map->m_map["Stone Pillars Island Region 4"] };
+	vector<Region*> p2_region { world_map->m_map["Stone Pillars Island Region 5"], world_map->m_map["Stone Pillars Island Region 4"] };
+
+	p1->setListOfRegions(p1_region);
+	p2->setListOfRegions(p2_region);
+
+	Army *a1 = new Army();
+	a1->setRegion(p1_region.at(0));
+	Army* a2 = new Army();
+	a1->setRegion(p1_region.at(1));
+	Army* a3 = new Army();
+	a1->setRegion(p1_region.at(0));
+	Army* a4 = new Army();
+	a1->setRegion(p1_region.at(1));
+
+	Army* a21 = new Army();
+	a21->setRegion(p2_region.at(0));
+	Army* a22 = new Army();
+	a22->setRegion(p2_region.at(1));
+	Army* a23 = new Army();
+	a23->setRegion(p2_region.at(0));
+	Army* a24 = new Army();
+	a24->setRegion(p2_region.at(1));
+	Army* a25 = new Army();
+	a25->setRegion(p2_region.at(0));
+	
+	vector<Army*> p1_army { a1, a2, a3, a4 };
+	vector<Army*> p2_army { a21, a22, a23, a24, a25 };
+
+	p1->setListOfArmies(p1_army);
+	p2->setListOfArmies(p2_army);
+
+	int counter = 0;
+	for (auto army : p1_army)
+	{
+		if(counter % 2 == 0)
+		{
+			army->setRegion(p1_region.at(0));
+		}
+		else
+		{
+			army->setRegion(p1_region.at(1));
+		}
+		counter++;
 	}
 
-	for (int i = 0; i < 10; i++) {
-		City* newCity = new City();
-		ennemyCityList.push_back(newCity);
+	counter = 0;
+	for (auto army : p2_army)
+	{
+		if (counter % 2 == 0)
+		{
+			army->setRegion(p2_region.at(0));
+		}
+		else
+		{
+			army->setRegion(p2_region.at(1));
+		}
+		counter++;
 	}
 
-	Army* armyPiece1 = new Army();
-	armyPiece1->setRegion(tile4->m_map_.at("Volcano Island Region 7"));
-	armyPiece1->setOwner("Alpha", "Beta");
-	armiesList.push_back(armyPiece1);
-	regionsOwned.push_back(armyPiece1->getRegion());
+	p1->setListOfArmies(p1_army);
+	p2->setListOfArmies(p2_army);
+	
+	auto* vp = new VPCounter();
 
+	int p1_score = vp->compute_score(p1, world_map);
+	int p2_score = vp->compute_score(p2, world_map);
 
-	Army* armyPiece2 = new Army();
-	armyPiece2->setRegion(tile4->m_map_.at("Volcano Island Region 7"));
-	armyPiece2->setOwner("Alpha", "Beta");
-	regionsOwned.push_back(armyPiece2->getRegion());
-	armiesList.push_back(armyPiece2);
-
-
-
-	Army* armyPiece3 = new Army();
-	armyPiece3->setRegion(tile4->m_map_.at("Volcano Island Region 5"));
-	armyPiece3->setOwner("Alpha", "Beta");
-	armiesList.push_back(armyPiece3);
-	regionsOwned.push_back(armyPiece3->getRegion());
-
-	Army* armyPiece4 = new Army();
-	armiesList.push_back(armyPiece4);
-	for (int i = 0; i < 6; i++) {
-		Army* x = new Army();
-		armiesList.push_back(x);
-	}
-	//region starting = tileX.m_map.at(XYZ)
-	//Add region to list of regions
-
-	Army* a = new Army();
-	a->setRegion(tile4->m_map_.at("Volcano Island Region 7"));
-	a->setOwner("Ligma", "Balls");
-	ennemyArmyList.push_back(a);
-	ennemyRegions.push_back(a->getRegion());
-
-	Army* b = new Army();
-	b->setRegion(tile4->m_map_.at("Volcano Island Region 7"));
-	b->setOwner("Ligma", "Balls");
-	ennemyArmyList.push_back(b);
-	ennemyRegions.push_back(b->getRegion());
-
-	Army* c = new Army();
-	c->setRegion(tile4->m_map_.at("Volcano Island Region 5"));
-	c->setOwner("Ligma", "Balls");
-	ennemyArmyList.push_back(c);
-	ennemyRegions.push_back(c->getRegion());
-
-	for (int i = 0; i < 6; i++) {
-		Army* x = new Army();
-		ennemyArmyList.push_back(x);
-	}
-	Strategy* human = new ModerateComputerStrategy();
-	Strategy* greedy = new GreedyComputerStrategy();
-	Player* aPlayer = new Player("Alpha", "Beta", cardsUsed, regionsOwned, armiesList, citiesList, human);
-
-	Player* bPlayer = new Player("Ligma", "Balls", ennemyCards, ennemyRegions, ennemyArmyList, ennemyCityList, greedy);
-
-	GameMessageBoard* g1 = new GameMessageBoard(aPlayer);
-	GameMessageBoard* g2 = new GameMessageBoard(bPlayer);
-
-
-
-
-	//Player* cPlayer = new Player("Legron", "Balls", ennemyCards, ennemyRegions, ennemyArmyList, ennemyCityList);
-	/*aPlayer->MoveArmies(3);
-	aPlayer->BuildCity(tile4->m_map.at("Volcano Island Region 7"));
-	aPlayer->PayCoin(2, 's');*/
-	aPlayer->PlaceNewArmies(3);
-	bPlayer->PlaceNewArmies(3);
-	//aPlayer->BuildCity(3);
-
-	//aPlayer->DestroyArmy(5);
-	//aPlayer->PlaceNewArmies(3);
-	//aPlayer->MoveArmies(3);
-	Card* test = new Card("Night Hydra", "+1 Army", "Move Armies: 5 AND Destroy Army: 2", 2);
-	//aPlayer->andOr(test);
-    
-
-    //delete map
-    delete world_map;
-    delete tile4;
-    delete tile3;
-    delete tile2;
-    delete tile1;
+	cout << "\nPlayer " << p1->getFirstName() << " " << p1->getLastName() << " : " << p1_score << endl;
+	cout << "\nPlayer " << p2->getFirstName() << " " << p2->getLastName() << " : " << p2_score << endl;
+	
+	
+	auto end_scores = vp->compute_score_end_of_game(world_map);
+	
+	return 0;
 }

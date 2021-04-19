@@ -1,7 +1,13 @@
 #pragma once
+
+#ifndef PLAYER_H
+#define PLAYER_H
+#endif
+
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <sstream>
 #include "../Map/Map.h"
 #include "../BidingFacility/Bid.h"
 #include "../Card/Card.h"
@@ -81,6 +87,12 @@ public:
 	vector<Card*> get_my_list_of_used_cards() const;
 	void placeNewArmy();
 
+	// setters (for debug)
+	void setListOfCardsUsed(vector<Card*>);
+	void setListOfRegions(vector<Region*>);
+	void setListOfArmies(vector<Army*>);
+	void setListOfCities(vector<City*>);
+	
 	//Card* getCard();
 	Bid* getBidingFacility();
 	vector<Region*> getListOfTerritories();
@@ -91,6 +103,9 @@ public:
 	static vector<Player*>listOfPlayers;
 	
 	//MVC methods
+	int getNoOfVictoryPoints();
+	int getNoOfArmies();
+	int getNoOfRegions();
 
 	// Strategy methods
 	void setStrategy(Strategy* newStrategy);

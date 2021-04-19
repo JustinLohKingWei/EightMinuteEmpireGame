@@ -1,13 +1,12 @@
 #include "Card.h"
-#ifndef CARD_CPP
-#define CARD_CPP
+
 #include <string>
 #include <iostream>
 #include <vector>
 #include <ranges>
 #include <algorithm>
 #include <random>
-#include <ctime>
+
 using namespace std;
 
 // Empty Constructor
@@ -19,7 +18,7 @@ Card::Card() {
 }
 
 //Constructor with Parameters
-Card::Card(std::string theName, std::string theGood, std::string theAction, int playerCount) {
+Card::Card(string theName, string theGood, string theAction, int playerCount) {
     name = theName;
     good = theGood;
     action = theAction;
@@ -76,17 +75,17 @@ void Card::showGood() {
 }
 
 // Returns the name of a card.
-std::string Card::getName() {
+string Card::getName() {
     return name;
 }
 
 // Returns the action of a card.
-std::string Card::getAction() {
+string Card::getAction() {
     return action;
 }
 
 // Returns the good of card.
-std::string Card::getGood() {
+string Card::getGood() {
     return good;
 }
 
@@ -294,7 +293,7 @@ ostream& operator <<(ostream& out, const Deck& d)
 
 
 // Returns the list of cards.
-std::vector<Card*> Deck::getListOfCards() {
+vector<Card*> Deck::getListOfCards() {
     return listOfCards;
 }
 
@@ -332,7 +331,7 @@ void Deck::fillHand(Hand* aHand) {
 }
 
 void Deck::filterDeck(int playerCount) {
-    std::vector<Card*> resultListOfCards;
+    vector<Card*> resultListOfCards;
     for (auto& c : listOfCards) {
         if (c->getMaxPlayerCount() <= playerCount) {
             resultListOfCards.push_back(c);
@@ -342,9 +341,9 @@ void Deck::filterDeck(int playerCount) {
 }
 
 void Deck::shuffleDeck() {
-    std::srand(std::time(0));
-    std::random_shuffle(std::begin(listOfCards), std::end(listOfCards) );
+	// previous version was an unimplemented template
+	// From: https://en.cppreference.com/w/cpp/algorithm/random_shuffle
+    std::random_device rd;
+    std::mt19937 g(rd());
+    shuffle(listOfCards.begin(), listOfCards.end(), g);
 }
-
-
-#endif CARD_CPP

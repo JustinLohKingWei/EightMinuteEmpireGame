@@ -1,6 +1,8 @@
 #pragma once
 #include "../Player/Player.h"
 #include "../Game/Game.h"
+#include "../BidingFacility//Bid.h"
+
 #include <iostream>
 using namespace std;
 
