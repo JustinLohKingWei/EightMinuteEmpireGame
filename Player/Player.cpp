@@ -602,6 +602,27 @@ vector<Card*> Player::get_my_list_of_used_cards() const
 {
 	return this->myListOfCardsUsed;
 }
+
+void Player::setListOfCardsUsed(vector<Card*> used_cards)
+{
+	this->myListOfCardsUsed = used_cards;
+}
+
+void Player::setListOfRegions(vector<Region*> region_list)
+{
+	this->listOfTerritories = region_list;
+}
+
+void Player::setListOfArmies(vector<Army*> army_list)
+{
+	this->listOfArmy = army_list;
+}
+
+void Player::setListOfCities(vector<City*> city_list)
+{
+	this->listOfCities = city_list;
+}
+
 void playerGoods::setRegion(Region* aRegion) {
 
 	this->aRegion = aRegion;

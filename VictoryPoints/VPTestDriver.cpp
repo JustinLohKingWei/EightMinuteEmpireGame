@@ -1,43 +1,28 @@
-//#define MY_DEBUG // uncomment for memory leak detection
-
-// partially from microsoft docs-> compile by using: cl /EHsc /W4 /D_DEBUG /MDd source.cpp
-// mostly from TA's extra slides and adapted to assignment for memory debug
-#ifdef MY_DEBUG
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
-
-#define new new (_NORMAL_BLOCK, __FILE__, __LINE__)
-// Replace _NORMAL_BLOCK with _CLIENT_BLOCK if you want the
-// allocations to be of _CLIENT_BLOCK type
-#endif
-
-#include <iostream>
+#include <vector>
+#include "VictoryPoints.h"
 #include "../Player/Player.h"
-#include "Map.h"
+#include "../Card/Card.h"
+#include "../Map/Map.h"
+#include "../MapLoader/MapLoader.h"
 
 using namespace std;
 
 int main()
 {
-#ifdef MY_DEBUG
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-#endif
-	
-	auto *tile1 = new MapTile("C Shape Island");
+	auto* tile1 = new MapTile("C Shape Island");
 	cout << "\nC Shape Island map tile has been created." << endl;
 
 	for (auto i = 0; i < 5; ++i)
 	{
 		string s = "C Shape Island Region " + to_string(i + 1);
-		
+
 		if (i == 1)
 		{
 			tile1->add_connection_region(s, BOTTOM);
 		}
 		else if (i == 2)
 		{
-			
+
 			tile1->add_connection_region(s, RIGHT);
 		}
 		else if (i == 3)
@@ -68,13 +53,13 @@ int main()
 	tile1->add_route("C Shape Island Region 5", "C Shape Island Region 4", LAND);
 	tile1->add_route("C Shape Island Region 5", "C Shape Island Region 2", WATER);
 
-	auto *tile2 = new MapTile("Three Islands");
+	auto* tile2 = new MapTile("Three Islands");
 	cout << "\n\nThree Islands map tile has been created." << endl;
 
 	for (auto i = 0; i < 3; ++i)
 	{
 		string s = "Three Islands Region " + to_string(i + 1);
-		if(i == 1)
+		if (i == 1)
 		{
 			tile2->add_connection_region(s, BOTTOM);
 			tile2->add_connection_region(s, RIGHT);
@@ -98,14 +83,14 @@ int main()
 	tile2->add_route("Three Islands Region 2", "Three Islands Region 3", WATER);
 	tile2->add_route("Three Islands Region 3", "Three Islands Region 2", WATER);
 
-	auto *tile3 = new MapTile("Stone Pillars Island");
+	auto* tile3 = new MapTile("Stone Pillars Island");
 	cout << "\n\nStone Pillars Island map tile has been created." << endl;
 
 	// initialize "tile3" the left tile as depicted on the first page of the rules
 	for (auto i = 0; i < 5; ++i)
 	{
 		string s = "Stone Pillars Island Region " + to_string(i + 1);
-		
+
 		if (i == 1)
 		{
 			tile3->add_connection_region(s, BOTTOM);
@@ -144,14 +129,14 @@ int main()
 	tile3->add_route("Stone Pillars Island Region 5", "Stone Pillars Island Region 3", LAND);
 	tile3->add_route("Stone Pillars Island Region 5", "Stone Pillars Island Region 4", LAND);
 
-	
-	auto *tile4 = new MapTile("Volcano Island");
+
+	auto* tile4 = new MapTile("Volcano Island");
 	cout << "\n\nVolcano Island Island map tile has been created." << endl;
 
 	for (auto i = 0; i < 7; ++i)
 	{
 		string s = "Volcano Island Region " + to_string(i + 1);
-		
+
 		if (i == 1)
 		{
 			tile4->add_connection_region(s, BOTTOM);
@@ -195,22 +180,95 @@ int main()
 
 	// This is how I would normally like to construct the game map once all tiles are loaded from files and then selected and positioned
 	// they could easily be combined into a "World Map" for game play with little effort and adding the last few connections between the Islands
-	auto *world_map = new WorldMap(RECTANGLE, *tile1, *tile2, *tile3, *tile4);
+	auto* world_map = new WorldMap(RECTANGLE, tile1, tile2, tile3, tile4);
 
-	world_map->print_world_map();
-	world_map->print_world_adjacency_map();
+	auto* p1 = new Player();
+	auto* p2 = new Player();
 
-	//WorldMap::validate_map(world_map);
+	auto* deck = new Deck();
 
-	delete world_map;
-	delete tile4;
-	delete tile3;
-	delete tile2;
-	delete tile1;
+	auto deck_of_cards = deck->getListOfCards();
 
-#ifdef MY_DEBUG
-	_CrtDumpMemoryLeaks(); // call before exit if debug is enabled
-#endif
+	//
+	vector<Card*> p1_card{ deck_of_cards.at(0), deck_of_cards.at(1), deck_of_cards.at(13), deck_of_cards.at(14) };
+	vector<Card*> p2_card{ deck_of_cards.at(10), deck_of_cards.at(9), deck_of_cards.at(30), deck_of_cards.at(29) };
+
+	p1->setListOfCardsUsed(p1_card);
+	p2->setListOfCardsUsed(p2_card);
+	
+	vector<Region*> p1_region { world_map->m_map["Stone Pillars Island Region 5"], world_map->m_map["Stone Pillars Island Region 4"] };
+	vector<Region*> p2_region { world_map->m_map["Stone Pillars Island Region 5"], world_map->m_map["Stone Pillars Island Region 4"] };
+
+	p1->setListOfRegions(p1_region);
+	p2->setListOfRegions(p2_region);
+
+	Army *a1 = new Army();
+	a1->setRegion(p1_region.at(0));
+	Army* a2 = new Army();
+	a1->setRegion(p1_region.at(1));
+	Army* a3 = new Army();
+	a1->setRegion(p1_region.at(0));
+	Army* a4 = new Army();
+	a1->setRegion(p1_region.at(1));
+
+	Army* a21 = new Army();
+	a21->setRegion(p2_region.at(0));
+	Army* a22 = new Army();
+	a22->setRegion(p2_region.at(1));
+	Army* a23 = new Army();
+	a23->setRegion(p2_region.at(0));
+	Army* a24 = new Army();
+	a24->setRegion(p2_region.at(1));
+	Army* a25 = new Army();
+	a25->setRegion(p2_region.at(0));
+	
+	vector<Army*> p1_army { a1, a2, a3, a4 };
+	vector<Army*> p2_army { a21, a22, a23, a24, a25 };
+
+	p1->setListOfArmies(p1_army);
+	p2->setListOfArmies(p2_army);
+
+	int counter = 0;
+	for (auto army : p1_army)
+	{
+		if(counter % 2 == 0)
+		{
+			army->setRegion(p1_region.at(0));
+		}
+		else
+		{
+			army->setRegion(p1_region.at(1));
+		}
+		counter++;
+	}
+
+	counter = 0;
+	for (auto army : p2_army)
+	{
+		if (counter % 2 == 0)
+		{
+			army->setRegion(p2_region.at(0));
+		}
+		else
+		{
+			army->setRegion(p2_region.at(1));
+		}
+		counter++;
+	}
+
+	p1->setListOfArmies(p1_army);
+	p2->setListOfArmies(p2_army);
+	
+	auto* vp = new VPCounter();
+
+	int p1_score = vp->compute_score(p1, world_map);
+	int p2_score = vp->compute_score(p2, world_map);
+
+	cout << "\nPlayer " << p1->getFirstName() << " " << p1->getLastName() << " : " << p1_score << endl;
+	cout << "\nPlayer " << p2->getFirstName() << " " << p2->getLastName() << " : " << p2_score << endl;
+	
+	
+	auto end_scores = vp->compute_score_end_of_game(world_map);
 	
 	return 0;
 }
