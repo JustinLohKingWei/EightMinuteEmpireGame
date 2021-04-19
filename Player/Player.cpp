@@ -72,7 +72,6 @@ ostream& operator << (ostream& out, const City& aCity) {
 // A player pays a certain amount of coins of either copper ('c') or silver ('s') type    -Justin
 bool Player::PayCoin(int payableAmount, char type) {
 	bool success = false;
-	cout << " executing PayCoin()..." << endl;
 	bool isEnough = true;
 	if (type == 's' || type == 'c' || payableAmount > 0) {		//checks for valid input
 		string coinType;
@@ -107,7 +106,7 @@ bool Player::PayCoin(int payableAmount, char type) {
 		this->notifyEvent(this->getFirstName(), message);
 	}
 	else {
-		cout << "Invalid input" << endl; 
+		cout << "Invalid input" << endl;
 		success = false;
 	}
 	cout << "TOUCHED OBSERVER" << endl;
@@ -115,11 +114,31 @@ bool Player::PayCoin(int payableAmount, char type) {
 	return success;
 }
 
-void Player::PlaceNewArmies(int numberOfArmies) {//Handling placing in multiple Regions in the driver
+
+// places army on a region (has to have a city or starting region)
+
+
+void Player::placeNewArmy(Region* aRegion)
+{
 	
+	for (Army* anArmy : listOfArmy) {
+		if (anArmy->getRegion() == nullptr) {
+			anArmy->setRegion(aRegion);
+		}
+	}
+	//false if can't place army (i.e. more than 18)
+	cout << "Can't place new armies, reached limit" << endl;
+}
+
+void Player::placeNewArmy() {
+
+}
+
+void Player::PlaceNewArmies(int numberOfArmies) {//Handling placing in multiple Regions in the driver
+
 	int numPlaced = 0;
 	if (listOfTerritories.size() == 1) {//Set at starting Region
-		
+
 		for (Army* x : listOfArmy) {
 			if (numPlaced < 4) {
 				x->setRegion(listOfTerritories.at(0));
@@ -151,6 +170,7 @@ void Player::PlaceNewArmies(int numberOfArmies) {//Handling placing in multiple 
 				cin >> indexChoice;
 
 				cout << "You have chosen to place armies at " << listOfTerritories.at(indexChoice)->get_name() << endl;
+
 
 				cout << "How many armies would you like to place?" << endl;
 
@@ -184,6 +204,7 @@ void Player::PlaceNewArmies(int numberOfArmies) {//Handling placing in multiple 
 				numChoice = numberOfArmies;
 			}
 
+
 			else if (this->getStrategy()->getType() == "Greedy") {
 				indexChoice = rand() % listOfTerritories.size();
 				numChoice = numberOfArmies;
@@ -192,7 +213,7 @@ void Player::PlaceNewArmies(int numberOfArmies) {//Handling placing in multiple 
 				cout << "Invalid number of armies to place" << endl;
 				continue;
 			}
-			//cout << listOfTerritories.at(indexChoice)->get_name() << "test"<<endl;
+
 			for (Army* x : listOfArmy) {
 				if (x->getRegion() == nullptr && armyCounter < numChoice) {
 					x->setRegion(listOfTerritories.at(indexChoice));
@@ -216,7 +237,7 @@ void Player::MoveArmies(int numberOfArmiesToMove) {
 	cout << "Your armies are currently at...\n" << endl;
 	int numCurrent = numberOfArmiesToMove;
 	Region* current = 0;
-	
+
 	while (numCurrent > 0) {
 		int RegionFromSelect = 0;
 		for (Army* myArmy : listOfArmy) {
@@ -290,7 +311,7 @@ void Player::MoveArmies(int numberOfArmiesToMove) {
 
 			int moveCounter = 0;
 			while (moveCounter < moveChoice) {
-				
+
 				to->update_armies_to_region(this);
 				int numA = to->get_number_of_armies(this);
 
@@ -325,7 +346,7 @@ void Player::MoveArmies(int numberOfArmiesToMove) {
 
 void Player::MoveOverLand(Region* from, Region* to) {
 	cout << "Moving over land..." << endl;
-	
+
 	Region* current = 0;
 	for (Army* a : listOfArmy) {
 		current = a->getRegion();
@@ -335,7 +356,7 @@ void Player::MoveOverLand(Region* from, Region* to) {
 			cout << "Armypiece moved from " << current->get_name() << " to " << a->getRegion()->get_name() << endl;
 			return;
 		}
-		
+
 	}
 }
 
@@ -355,9 +376,40 @@ void Player::MoveOverWater(Region* from, Region* to) {
 	}
 }
 
+// returns the list of regions where one can build a city
+vector<Region*> Player::canBuildCity() {
+	// keeps track of own unique regions with armies
+	vector<Region*> regionsWithArmies;
+	// look at your armies
+	for (Army* myArmy : listOfArmy) {
+		// checks if other players' armies are in our region
+		if (std::find(regionsWithArmies.begin(), regionsWithArmies.end(), myArmy->getRegion()) != regionsWithArmies.end()) {
+			regionsWithArmies.push_back(myArmy->getRegion());
+		}
+	}
+	if (regionsWithArmies.size() == 0) {
+		cout << "Cannot build any cities" << endl;
+	}
+
+	return regionsWithArmies;
+}
+
+
+// can only build where you have armies
+bool Player::buildCity(Region* buildRegion) {
+	for (City* c : listOfCities) {
+		if (c->getRegion() == nullptr) {
+			c->setRegion(buildRegion);
+			return true;
+		}
+	}
+	// can't build a city (too many cities built)
+	return false;
+}
+
 void Player::BuildCity(int numberOfCities) {
 	cout << "executing BuildCity()..." << endl;
-	
+
 	Region* current = 0;
 	int RegionSelect = 0;
 	int numPlaced = numberOfCities;
@@ -369,16 +421,16 @@ void Player::BuildCity(int numberOfCities) {
 			if (current != a->getRegion() && a->getRegion() != nullptr) {
 				cout << a->getRegion()->get_name() << "(" << RegionSelect << ")" << endl;
 			}
-			
-			else if(current == a->getRegion() || a->getRegion() == nullptr){
+
+			else if (current == a->getRegion() || a->getRegion() == nullptr) {
 				RegionSelect++;
 				continue;
 			}
 			RegionSelect++;
 			current = a->getRegion();
-			
+
 		}
-		
+
 		cout << "Select Region to add city:" << endl;
 		cin >> RegionSelect;
 
@@ -395,13 +447,13 @@ void Player::BuildCity(int numberOfCities) {
 
 		Region* where = listOfArmy.at(RegionSelect)->getRegion();
 		for (City* c : listOfCities) {
-			
+
 			if (c->getRegion() == nullptr && cityCounter < numChoice) {
 				cout << "City built at " << where->get_name() << endl;
 				c->setRegion(where);
 				cityCounter++;
 			}
-			
+
 
 		}
 		std::ostringstream oss;
@@ -415,7 +467,49 @@ void Player::BuildCity(int numberOfCities) {
 	cout << "TOUCHED OBSERVER" << endl;
 	Notify();
 }
-//Maybe static player array?
+
+/*
+	Conditions:
+	- army must be on same region as opposing army
+	Returns:
+	- possible armies to destroy
+*/
+vector<Army*> Player::canDestroyArmy() {
+	// keeps track of own unique regions with armies
+	vector<Region*> regionsWithArmies;
+	vector<Army*> destroyableArmies;
+	// look at your armies
+	for (Army* myArmy : listOfArmy) {
+		// checks if other players' armies are in our region
+		if (std::find(regionsWithArmies.begin(), regionsWithArmies.end(), myArmy->getRegion()) != regionsWithArmies.end()) {
+			regionsWithArmies.push_back(myArmy->getRegion());
+
+			for (Player* aPlayer : listOfPlayers) {
+				if (aPlayer == this) {
+					continue;
+				}
+
+				for (Army* enemyArmy : aPlayer->getListOfArmy()) {
+					if (enemyArmy->getRegion() == myArmy->getRegion()) {
+						destroyableArmies.push_back(enemyArmy);
+					}
+				}
+			}
+		}
+	}
+
+	if (destroyableArmies.size() == 0) {
+		cout << "Cannot destroy any armies" << endl;
+	}
+
+	return destroyableArmies;
+}
+
+void Player::destroyArmy(Army* enemyArmy) {
+	enemyArmy->setRegion(nullptr);
+}
+
+
 
 bool Player::DestroyArmy(int numberToDestroy) {
 	int remainingToDestroy = numberToDestroy;
@@ -462,11 +556,13 @@ bool Player::DestroyArmy(int numberToDestroy) {
 				continue;
 			}
 
-
+			// targets a player, and deletes an army that is in the same region
 			for (auto* army : listOfPlayers.at(playerTarget)->getListOfArmy()) {
 				
 				if (army->getRegion() == myArmy->getRegion() && remainingToDestroy > armyNumToDestroy) {
 
+
+					army->setRegion(nullptr);
 
 					// Notify GameMessageBoard of Event:
 					std::ostringstream oss;
@@ -474,7 +570,6 @@ bool Player::DestroyArmy(int numberToDestroy) {
 					string message = oss.str();
 					this->notifyEvent(this->getFirstName(), message);
 
-					army->setRegion(nullptr);
 
 				}
 
@@ -492,8 +587,7 @@ void Player::andOr(Card* current) {
 	string action2 = "";
 
 	string actions[] = { "Place Army", "Move Armies", "Build City", "Destroy Army" };
-	string choiceOfRegion;
-	if (current->getAction().find(delim1) && current->getAction().find(delim1)!= string::npos) {// AND
+	if (current->getAction().find(delim1) && current->getAction().find(delim1) != string::npos) {// AND
 		cout << "AND" << endl;
 		action1 = current->getAction().substr(0, current->getAction().find(delim1));
 		action2 = current->getAction().substr(current->getAction().find(delim1) + 4);
@@ -507,13 +601,14 @@ void Player::andOr(Card* current) {
 		cout << "amount 1 " << amountOfFirstAction << endl;
 
 		string amount2 = action2.substr(action2.find(":") + 1);
+		cout << amount2 << endl;
 		int amountOfSecondAction = std::stoi(amount2);
 
 		cout << "amount 2 " << amountOfSecondAction << endl;
-		
+
 		action1 = action1.substr(0, action1.find(":"));
 		action2 = action2.substr(0, action2.find(":"));
-		
+
 		if (action1 == actions[0]) {
 			PlaceNewArmies(amountOfFirstAction);
 		}
@@ -539,8 +634,10 @@ void Player::andOr(Card* current) {
 			DestroyArmy(amountOfSecondAction);
 		}
 
+
+
 	}
-	else if (current->getAction().find(delim2) && current->getAction().find(delim2) != string::npos) {
+	else if (current->getAction().find(delim2) && current->getAction().find(delim2) != string::npos) { // OR
 		cout << "OR" << endl;
 		action1 = current->getAction().substr(0, current->getAction().find(delim2));
 		action2 = current->getAction().substr(current->getAction().find(delim2) + 3);
@@ -685,6 +782,38 @@ void Player::andOr(Card* current) {
 			return;
 		}
 	}
+	//else { // no and or or
+	//	action1 = current->getAction();
+	//	string amount1 = action1.substr(current->getAction().find(":") + 1);
+	//	int amountOfFirstAction = std::stoi(amount1);
+	//	action1 = action1.substr(0, action1.find(":"));
+	//	if (action1 == actions[0]) {
+	//		//Place army
+	//		cout << "Place armies" << endl;
+	//		PlaceNewArmies(amountOfFirstAction);
+	//		return;
+	//	}
+	//	else if (action1 == actions[1]) {
+	//		//Move armies
+	//		cout << "Move armies" << endl;
+	//		MoveArmies(amountOfFirstAction);
+	//		return;
+	//	}
+	//	else if (action1 == actions[2]) {
+	//		//Build army
+	//		cout << "Build city" << endl;
+	//		BuildCity(amountOfFirstAction);
+	//		return;
+	//	}
+	//	else if (action1 == actions[3]) {
+	//		//Destroy army
+	//		cout << "Destroy army" << endl;
+	//		DestroyArmy(amountOfFirstAction);
+	//		return;
+	//	}
+
+
+	//}
 
 	cout << "TOUCHED OBSERVER" << endl;
 	Notify();
@@ -777,9 +906,9 @@ void Player::setStrategy(Strategy* newStrategy)
 	this->strategy = newStrategy;
 }
 
-void Player::executeStrategy(Hand *aGameHand, Bid* biddingFacility)
+void Player::executeStrategy(Hand* aGameHand, Bid* biddingFacility, Player* thisPlayer)
 {
-	this->strategy->playTurn(aGameHand, biddingFacility);
+	this->strategy->playTurn(aGameHand, biddingFacility, this);
 }
 
 Region* playerGoods::getRegion() {

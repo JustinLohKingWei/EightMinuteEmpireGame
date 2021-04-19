@@ -1,5 +1,6 @@
 #pragma once
 #include "../Player/Player.h"
+#include "../Game/Game.h"
 #include "../BidingFacility//Bid.h"
 
 #include <iostream>
@@ -9,8 +10,11 @@ class Hand;
 
 class Strategy {
 public:
-	virtual void playTurn(Hand * aGameHand, Bid* biddingFacility)  = 0;
+
 	string getType() { return type; }
+
+	virtual void playTurn(Hand * aGameHand, Bid* biddingFacility, Player* aPlayer)  = 0;
+
 
 	string type;
 };
@@ -19,9 +23,11 @@ public:
 class GreedyComputerStrategy : public Strategy
 {
 public:
+
 	GreedyComputerStrategy() { type = "Greedy"; }
-	void playTurn(Hand* GameHand, Bid* biddingFacility);
-	
+
+	void playTurn(Hand* GameHand, Bid* biddingFacility, Player* aPlayer);
+
 };
 
 class HumanStrategy : public Strategy {
