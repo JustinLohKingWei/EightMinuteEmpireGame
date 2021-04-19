@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Card",
+    "\\Game",
+    "\\Map",
+    "\\Player",
+    "\\PlayerStrategies"
   ],
-  "SelectedNode": "\\VP.sln",
+  "SelectedNode": "\\PlayerStrategiesDriver.cpp",
   "PreviewInSolutionExplorer": false
 }

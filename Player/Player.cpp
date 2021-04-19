@@ -109,6 +109,26 @@ bool Player::PayCoin(int payableAmount, char type) {
 	return success;
 }
 
+
+// places army on a region (has to have a city or starting region)
+
+
+void Player::placeNewArmy(Region* aRegion)
+{
+	
+	for (Army* anArmy : listOfArmy) {
+		if (anArmy->getRegion() == nullptr) {
+			anArmy->setRegion(aRegion);
+		}
+	}
+	//false if can't place army (i.e. more than 18)
+	cout << "Can't place new armies, reached limit" << endl;
+}
+
+void Player::placeNewArmy() {
+
+}
+
 void Player::PlaceNewArmies(int numberOfArmies) {//Handling placing in multiple Regions in the driver
 
 	int numPlaced = 0;
@@ -422,6 +442,8 @@ vector<Army*> Player::canDestroyArmy() {
 void Player::destroyArmy(Army* enemyArmy) {
 	enemyArmy->setRegion(nullptr);
 }
+
+
 
 bool Player::DestroyArmy(int numberToDestroy) {
 	int remainingToDestroy = numberToDestroy;

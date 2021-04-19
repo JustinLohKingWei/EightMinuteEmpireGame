@@ -10,11 +10,13 @@
 */
 void GreedyComputerStrategy::playTurn(Hand* gameHand, Bid* biddingFacility, Player* currentPlayer) {
 	// check cards in hand
-	cout << currentPlayer->getFirstName()  << " is playing."<< endl;
+	cout << currentPlayer->getFirstName() << " is playing." << endl;
 	vector<Card*> cardsInHand = (*gameHand).getCardsInHand();
 	int currentCoins = biddingFacility->getCopperCoins();
 	vector<int> buildingCards;
 	vector<int> destroyingCards;
+	vector<int> placeArmyCards;
+	vector<int> moveArmyCards;
 	vector<int> otherCards;
 	vector<int> andCards;
 	vector<int> orCards;
@@ -22,7 +24,9 @@ void GreedyComputerStrategy::playTurn(Hand* gameHand, Bid* biddingFacility, Play
 	string orDelim = " OR ";
 	string buildDelim = "Build City";
 	string destroyDelim = "Destroy Army";
-	
+	string placeDelim = "Place Armies";
+	string moveDelim = "Move Armies";
+
 	for (int i = 0; i < cardsInHand.size(); i++) {
 		Card currentCard = *(cardsInHand.at(i));
 
@@ -43,14 +47,11 @@ void GreedyComputerStrategy::playTurn(Hand* gameHand, Bid* biddingFacility, Play
 			if (fullAction.find(destroyDelim) != string::npos) {
 				destroyingCards.push_back(i);
 			}
-			if (fullAction.find(buildDelim) == string::npos && fullAction.find(destroyDelim) == string::npos) {
-				otherCards.push_back(i);
+			if (fullAction.find(placeDelim) != string::npos) {
+				placeArmyCards.push_back(i);
 			}
-			if (fullAction.find(andDelim) != string::npos) {
-				andCards.push_back(i);
-			}
-			if (fullAction.find(orDelim) != string::npos) {
-				orCards.push_back(i);
+			if (fullAction.find(moveDelim) != string::npos) {
+				moveArmyCards.push_back(i);
 			}
 
 			//if (fullAction.find(andDelim)!=string::npos) {// 2 actions (AND)
@@ -70,8 +71,8 @@ void GreedyComputerStrategy::playTurn(Hand* gameHand, Bid* biddingFacility, Play
 		}
 
 	}
-	
-	
+
+
 	//make decision based on cards in hand (all affordable cards)
 	//1. If you have destroying cards, check if you can destroy
 	//2. If you have building cards, build a city
@@ -111,8 +112,6 @@ void GreedyComputerStrategy::playTurn(Hand* gameHand, Bid* biddingFacility, Play
 			int numOfBuild = buildingCards.size();
 			int indexToPlay = buildingCards.at(rand() % numOfBuild);
 			Card* chosenCard = gameHand->getCard(indexToPlay);
-			currentPlayer->PayCoin(gameHand->getCost(indexToPlay), 'c');
-			currentPlayer->andOr(chosenCard);
 			gameHand->exchange(indexToPlay);
 
 			int numOfPossibleRegions = possibleBuildRegions.size();
@@ -122,12 +121,43 @@ void GreedyComputerStrategy::playTurn(Hand* gameHand, Bid* biddingFacility, Play
 			return;
 		}
 	}
-	// play a random card
-	int numOfRandom = otherCards.size();
-	int indexToPlay = otherCards.at(rand() % numOfRandom);
+	if (placeArmyCards.size() > 0) {
+		// choose a card first (need the value of the place army action)
+		int numOfPlaceArmy = placeArmyCards.size();
+		int indexToPlay = placeArmyCards.at(rand() % numOfPlaceArmy);
+		Card* chosenCard = gameHand->getCard(indexToPlay);
+
+		string action = chosenCard->getAction();
+		action = action.substr(action.find("Place Armies: "));
+		string numOfArmies = action.substr(string("Place Armies: ").size(), string("Place Armies: ").size() + 1);
+		int actionValue = std::stoi(numOfArmies);
+		vector<City*> listOfCities = currentPlayer->getListOfCities();
+		for (int i = 0; i < actionValue; i++) {
+			for (City* aCity : listOfCities) {
+				if (aCity->getRegion() != nullptr) {
+					currentPlayer->placeNewArmy(aCity->getRegion());
+					currentPlayer->PayCoin(gameHand->getCost(indexToPlay), 'c');
+					gameHand->exchange(indexToPlay);
+					return;
+				}
+				else {
+					currentPlayer->placeNewArmy();
+					currentPlayer->PayCoin(gameHand->getCost(indexToPlay), 'c');
+					gameHand->exchange(indexToPlay);
+					return;
+				}
+			}
+		}
+	}
+	// play a move card
+	int numOfMove = moveArmyCards.size();
+	int indexToPlay = moveArmyCards.at(rand() % numOfMove);
 	Card* chosenCard = gameHand->getCard(indexToPlay);
+	string action = chosenCard->getAction();
+	action = action.substr(action.find("Move Armies: "));
+	string numOfArmies = action.substr(string("Move Armies: ").size(), string("Move Armies: ").size() + 1);
+	int actionValue = std::stoi(numOfArmies);
 	currentPlayer->PayCoin(gameHand->getCost(indexToPlay), 'c');
-	currentPlayer->andOr(chosenCard);
 	gameHand->exchange(indexToPlay);
 	return;
 
