@@ -9,6 +9,7 @@ using std::list;
 class Subject
 {
 public:
+    static list<GameObservers*>* _gameObservers;
     virtual void Attach(GameObservers *o);
     virtual void Detach(GameObservers *o);
     virtual void Notify();
@@ -18,5 +19,5 @@ public:
     ~Subject();
 
 private:
-   static list<GameObservers *> *_gameObservers;
+
 };

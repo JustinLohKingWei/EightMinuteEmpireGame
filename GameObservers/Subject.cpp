@@ -3,6 +3,8 @@
 #include <iostream>
 using namespace std;
 
+list<GameObservers*>* Subject::_gameObservers = nullptr;
+
 Subject::Subject()
 {
     _gameObservers = new list<GameObservers *>;

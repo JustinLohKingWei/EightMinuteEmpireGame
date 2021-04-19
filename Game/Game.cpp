@@ -1,5 +1,4 @@
 #include "Game.h"
-static WorldMap* map;
 
 Game::Game() : theGameHand(new Hand()) {
 	cout << "Default game created" << endl;
@@ -281,9 +280,7 @@ void Game::biddingPhase() {
             }
         }
     }
-
 	cout << "Winning player: " << listOfPlayers.at(currentPlayer)->getFirstName() << endl;
-
 }
 
 void Game::initializePlayers() {

@@ -3,8 +3,10 @@
 #include <vector>
 #include "../Player/Player.h"
 #include "../Card/Card.h"
+#include "../Map/Map.h"
 using namespace std;
 class Player;
+class WorldMap;
 
 class Game {
 public:
@@ -34,6 +36,6 @@ private:
 	int turnNumber;
 	Hand* theGameHand;
 	Deck* gameDeck;
-	bool gameOver;
 	WorldMap* map;
+	bool gameOver;
 };
