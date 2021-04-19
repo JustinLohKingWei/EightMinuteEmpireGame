@@ -36,3 +36,5 @@ void Subject::notifyCard(Card* card, int cardPosition, int playerNumber) {
     for (; i != _gameObservers->end(); ++i)
         (*i)->displayCard(card, cardPosition, playerNumber);
 };
+
+list<GameObservers*>* Subject::_gameObservers = nullptr;

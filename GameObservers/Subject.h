@@ -1,4 +1,5 @@
 #pragma once
+
 #include "GameObservers.h" //subject
 #include "../Card/Card.h"
 #include <list>
@@ -18,6 +19,6 @@ public:
     Subject();
     ~Subject();
 
-private:
+
    static list<GameObservers *> *_gameObservers;
 };

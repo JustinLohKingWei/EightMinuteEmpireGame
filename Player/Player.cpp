@@ -780,7 +780,6 @@ void Player::andOr(Card* current) {
 			return;
 		}
 	}
-
 	Notify();
 }
 
