@@ -1,4 +1,9 @@
 #pragma once
+
+#ifndef PLAYER_H
+#define PLAYER_H
+#endif
+
 #include <vector>
 #include <iostream>
 #include "../Map/Map.h"
@@ -72,6 +77,12 @@ public:
 	void setLastName(string l);
 	vector<Card*> get_my_list_of_used_cards() const;
 
+	// setters (for debug)
+	void setListOfCardsUsed(vector<Card*>);
+	void setListOfRegions(vector<Region*>);
+	void setListOfArmies(vector<Army*>);
+	void setListOfCities(vector<City*>);
+	
 	//Card* getCard();
 	Bid* getBidingFacility();
 	vector<Region*> getListOfTerritories();
