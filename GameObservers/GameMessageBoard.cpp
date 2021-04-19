@@ -52,7 +52,7 @@ void GameMessageBoard::Display(){
         cout << name<<" has gained a region! They are Unstoppable !" << endl;
     }
     else if (noOfRegions < lastRegions) {
-        cout << name << " has lost control of a region!"<<name<< ,"please do not cry until the game is over" << endl;
+        cout << name << " has lost control of a region!"<<name<<"please do not cry until the game is over" << endl;
     }
     else {
         cout << name << " has neither lost or gained any regions." << endl;
