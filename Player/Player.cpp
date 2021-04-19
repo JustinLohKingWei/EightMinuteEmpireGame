@@ -228,7 +228,6 @@ void Player::PlaceNewArmies(int numberOfArmies) {//Handling placing in multiple 
 			numPlaced -= numChoice;
 		}
 	}
-	cout << "TOUCHED OBSERVER" << endl;
 	Notify();
 }
 
@@ -340,7 +339,6 @@ void Player::MoveArmies(int numberOfArmiesToMove) {
 			cout << "To is NULL" << endl;
 		}
 	}
-	cout << "TOUCHED OBSERVER" << endl;
 	Notify();
 }
 
@@ -464,8 +462,7 @@ void Player::BuildCity(int numberOfCities) {
 		numPlaced -= cityCounter;
 		cityCounter = 0;
 	}
-	cout << "TOUCHED OBSERVER" << endl;
-	Notify();
+	
 }
 
 /*
@@ -578,6 +575,7 @@ bool Player::DestroyArmy(int numberToDestroy) {
 			current = myArmy->getRegion();
 		}
 	}
+	Notify();
 	return true;
 }
 void Player::andOr(Card* current) {
@@ -782,8 +780,6 @@ void Player::andOr(Card* current) {
 			return;
 		}
 	}
-	
-	cout << "TOUCHED OBSERVER" << endl;
 	Notify();
 }
 
@@ -810,27 +806,6 @@ vector<Card*> Player::get_my_list_of_used_cards() const
 {
 	return this->myListOfCardsUsed;
 }
-
-void Player::setListOfCardsUsed(vector<Card*> used_cards)
-{
-	this->myListOfCardsUsed = used_cards;
-}
-
-void Player::setListOfRegions(vector<Region*> region_list)
-{
-	this->listOfTerritories = region_list;
-}
-
-void Player::setListOfArmies(vector<Army*> army_list)
-{
-	this->listOfArmy = army_list;
-}
-
-void Player::setListOfCities(vector<City*> city_list)
-{
-	this->listOfCities = city_list;
-}
-
 void playerGoods::setRegion(Region* aRegion) {
 
 	this->aRegion = aRegion;
@@ -895,6 +870,14 @@ int Player::getNoOfArmies() {
 }
 int Player::getNoOfRegions() {
 	return listOfTerritories.size();
+}
+
+int Player::getNoOfCards() {
+	return myListOfCardsUsed.size();
+}
+
+int Player::getNoOfCities() {
+	return listOfCities.size();
 }
 
 vector<Player*> Player::listOfPlayers;

@@ -112,6 +112,8 @@ public:
 	int getNoOfVictoryPoints();
 	int getNoOfArmies();
 	int getNoOfRegions();
+	int getNoOfCards();
+	int getNoOfCities();
 
 	// Strategy methods
 	void setStrategy(Strategy* newStrategy);
