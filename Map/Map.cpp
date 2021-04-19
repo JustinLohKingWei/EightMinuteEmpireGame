@@ -19,7 +19,7 @@ Region::~Region()
 	}
 }
 
-//#ifdef PLAYER_H
+#ifdef PLAYER_H
 int Region::get_number_of_armies(Player *player)
 {
 	
@@ -38,6 +38,26 @@ int Region::get_number_of_armies(Player *player)
 		std::exit(-1);
 	}
 }
+
+int Region::get_number_of_army_points(Player* player)
+{
+
+	for (auto& p : occupying_victory_points_)
+	{
+		if (p.first->getFirstName() == player->getFirstName() && p.first->getLastName() == player->getLastName())
+		{
+			return p.second;
+		}
+	}
+	if (occupying_victory_points_.empty()) {
+		return 0;
+	}
+	else {
+		std::cout << "The player could not be found!2" << endl;
+		std::exit(-1);
+	}
+}
+
 //PLEASE DO NOT CHANGE THIS CODE
 void Region::update_armies_to_region(Player* player) // End of player's turn/End of Round
 {
@@ -75,6 +95,44 @@ void Region::update_armies_to_region(Player* player) // End of player's turn/End
 	}
 }
 
+void Region::update_victory_points_to_region(Player* player) // End of player's turn/End of Round
+{
+	int armies = 0;
+	auto temp = player->getListOfArmy();
+	for (auto* army : temp)
+	{
+		if(army->getRegion() == this)
+		{
+			if(!occupying_armies_.empty())
+			{
+				occupying_armies_.emplace_back(make_pair(player, 1));
+			}
+			else
+			{
+				for (auto find_army: occupying_armies_)
+				{
+					if (find_army.first = player)
+					{
+						find_army.second++;
+					}
+				}
+			}
+		}
+		else
+		{
+			if(!occupying_armies_.empty())
+			{
+				for (auto find_army : occupying_armies_)
+				{
+					if (find_army.first = player)
+					{
+						find_army.second = 0;
+					}
+				}
+			}
+		}
+	}
+}
 
 void Region::set_player_with_most_armies()
 {
@@ -357,11 +415,298 @@ void Region::set_player_with_most_armies()
 	}
 }
 
+void Region::set_player_with_most_army_points()
+{
+	occupying_armies_.clear(); // reset be for use
+	vector<pair<Player*, int>> temp;
+
+	if (occupying_armies_.size() == 2) // number of players is 2 on the Region
+	{
+		if (occupying_armies_[0].second < occupying_armies_[1].second)
+		{
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[0].second > occupying_armies_[1].second)
+		{
+			add_controlling_victory_points(occupying_armies_[0].first);
+		}
+		else // equal army numbers
+		{
+			add_controlling_victory_points(occupying_armies_[0].first);
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+	}
+	else if (occupying_armies_.size() == 3) // number of players is 3 on the Region
+	{
+		if (occupying_armies_[0].second < occupying_armies_[1].second < occupying_armies_[2].second)
+		{
+			add_controlling_victory_points(occupying_armies_[2].first);
+		}
+		else if (occupying_armies_[1].second < occupying_armies_[0].second < occupying_armies_[2].second)
+		{
+			add_controlling_victory_points(occupying_armies_[2].first);
+		}
+		else if (occupying_armies_[0].second < occupying_armies_[2].second < occupying_armies_[1].second)
+		{
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[2].second < occupying_armies_[0].second < occupying_armies_[1].second)
+		{
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[2].second < occupying_armies_[1].second < occupying_armies_[0].second)
+		{
+			add_controlling_victory_points(occupying_armies_[0].first);
+		}
+		else if (occupying_armies_[1].second < occupying_armies_[2].second < occupying_armies_[0].second)
+		{
+			add_controlling_victory_points(occupying_armies_[0].first);
+		}
+		else if (occupying_armies_[0].second < occupying_armies_[1].second == occupying_armies_[2].second)
+		{
+			add_controlling_victory_points(occupying_armies_[2].first);
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[1].second < occupying_armies_[0].second == occupying_armies_[2].second)
+		{
+			add_controlling_victory_points(occupying_armies_[2].first);
+			add_controlling_victory_points(occupying_armies_[0].first);
+		}
+		else if (occupying_armies_[2].second < occupying_armies_[0].second == occupying_armies_[1].second)
+		{
+			add_controlling_victory_points(occupying_armies_[1].first);
+			add_controlling_victory_points(occupying_armies_[0].first);
+		}
+		else if (occupying_armies_[1].second < occupying_armies_[0].second == occupying_armies_[2].second)
+		{
+			add_controlling_victory_points(occupying_armies_[2].first);
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[0].second == occupying_armies_[1].second == occupying_armies_[2].second)
+		{
+			add_controlling_victory_points(occupying_armies_[2].first);
+			add_controlling_victory_points(occupying_armies_[1].first);
+			add_controlling_victory_points(occupying_armies_[0].first);
+		}
+		else
+		{
+			std::cout << "Something went wrong in set_player_with_most_armies(), size 3!" << endl;
+			std::exit(-1);
+		}
+	}
+	else if (occupying_armies_.size() == 4) // Why no for loop, because! that's why!
+	{
+		if (occupying_armies_[0].second < occupying_armies_[1].second < occupying_armies_[2].second < occupying_armies_[3].second)
+		{
+			add_controlling_victory_points(occupying_armies_[3].first);
+		}
+		else if (occupying_armies_[1].second < occupying_armies_[0].second < occupying_armies_[2].second < occupying_armies_[3].second)
+		{
+			add_controlling_victory_points(occupying_armies_[3].first);
+		}
+		else if (occupying_armies_[0].second < occupying_armies_[2].second < occupying_armies_[1].second < occupying_armies_[3].second)
+		{
+			add_controlling_victory_points(occupying_armies_[3].first);
+		}
+		else if (occupying_armies_[2].second < occupying_armies_[0].second < occupying_armies_[1].second < occupying_armies_[3].second)
+		{
+			add_controlling_victory_points(occupying_armies_[3].first);
+		}
+		else if (occupying_armies_[2].second < occupying_armies_[1].second < occupying_armies_[0].second < occupying_armies_[3].second)
+		{
+			add_controlling_victory_points(occupying_armies_[3].first);
+		}
+		else if (occupying_armies_[1].second < occupying_armies_[2].second < occupying_armies_[0].second < occupying_armies_[3].second)
+		{
+			add_controlling_victory_points(occupying_armies_[3].first);
+		}
+		else if (occupying_armies_[0].second < occupying_armies_[1].second < occupying_armies_[3].second < occupying_armies_[2].second)
+		{
+			add_controlling_victory_points(occupying_armies_[2].first);
+		}
+		else if (occupying_armies_[1].second < occupying_armies_[0].second < occupying_armies_[3].second < occupying_armies_[2].second)
+		{
+			add_controlling_victory_points(occupying_armies_[2].first);
+		}
+		else if (occupying_armies_[0].second < occupying_armies_[3].second < occupying_armies_[1].second < occupying_armies_[2].second)
+		{
+			add_controlling_victory_points(occupying_armies_[2].first);
+		}
+		else if (occupying_armies_[3].second < occupying_armies_[0].second < occupying_armies_[1].second < occupying_armies_[2].second)
+		{
+			add_controlling_victory_points(occupying_armies_[2].first);
+		}
+		else if (occupying_armies_[3].second < occupying_armies_[1].second < occupying_armies_[0].second < occupying_armies_[2].second)
+		{
+			add_controlling_victory_points(occupying_armies_[2].first);
+		}
+		else if (occupying_armies_[1].second < occupying_armies_[3].second < occupying_armies_[0].second < occupying_armies_[2].second)
+		{
+			add_controlling_victory_points(occupying_armies_[2].first);
+		}
+		else if (occupying_armies_[0].second < occupying_armies_[2].second < occupying_armies_[3].second < occupying_armies_[1].second)
+		{
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[2].second < occupying_armies_[0].second < occupying_armies_[3].second < occupying_armies_[1].second)
+		{
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[0].second < occupying_armies_[3].second < occupying_armies_[2].second < occupying_armies_[1].second)
+		{
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[3].second < occupying_armies_[0].second < occupying_armies_[2].second < occupying_armies_[1].second)
+		{
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[3].second < occupying_armies_[2].second < occupying_armies_[0].second < occupying_armies_[1].second)
+		{
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[2].second < occupying_armies_[3].second < occupying_armies_[0].second < occupying_armies_[1].second)
+		{
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[2].second < occupying_armies_[3].second < occupying_armies_[1].second < occupying_armies_[0].second)
+		{
+			add_controlling_victory_points(occupying_armies_[0].first);
+		}
+		else if (occupying_armies_[3].second < occupying_armies_[2].second < occupying_armies_[1].second < occupying_armies_[0].second)
+		{
+			add_controlling_victory_points(occupying_armies_[0].first);
+		}
+		else if (occupying_armies_[2].second < occupying_armies_[1].second < occupying_armies_[3].second < occupying_armies_[0].second)
+		{
+			add_controlling_victory_points(occupying_armies_[0].first);
+		}
+		else if (occupying_armies_[1].second < occupying_armies_[2].second < occupying_armies_[3].second < occupying_armies_[0].second)
+		{
+			add_controlling_victory_points(occupying_armies_[0].first);
+		}
+		else if (occupying_armies_[1].second < occupying_armies_[3].second < occupying_armies_[2].second < occupying_armies_[0].second)
+		{
+			add_controlling_victory_points(occupying_armies_[0].first);
+		}
+		else if (occupying_armies_[3].second < occupying_armies_[1].second < occupying_armies_[2].second < occupying_armies_[0].second)
+		{
+			add_controlling_victory_points(occupying_armies_[0].first);
+		}
+		else if (occupying_armies_[0].second < occupying_armies_[1].second < occupying_armies_[2].second == occupying_armies_[3].second)
+		{
+			add_controlling_victory_points(occupying_armies_[3].first);
+			add_controlling_victory_points(occupying_armies_[2].first);
+		}
+		else if (occupying_armies_[1].second < occupying_armies_[0].second < occupying_armies_[2].second == occupying_armies_[3].second)
+		{
+			add_controlling_victory_points(occupying_armies_[3].first);
+			add_controlling_victory_points(occupying_armies_[2].first);
+		}
+		else if (occupying_armies_[2].second < occupying_armies_[0].second < occupying_armies_[1].second == occupying_armies_[3].second)
+		{
+			add_controlling_victory_points(occupying_armies_[3].first);
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[0].second < occupying_armies_[2].second < occupying_armies_[1].second == occupying_armies_[3].second)
+		{
+			add_controlling_victory_points(occupying_armies_[3].first);
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[2].second < occupying_armies_[1].second < occupying_armies_[0].second == occupying_armies_[3].second)
+		{
+			add_controlling_victory_points(occupying_armies_[3].first);
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[1].second < occupying_armies_[2].second < occupying_armies_[0].second == occupying_armies_[3].second)
+		{
+			add_controlling_victory_points(occupying_armies_[3].first);
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[2].second < occupying_armies_[0].second < occupying_armies_[1].second == occupying_armies_[2].second)
+		{
+			add_controlling_victory_points(occupying_armies_[2].first);
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[0].second < occupying_armies_[2].second < occupying_armies_[1].second == occupying_armies_[2].second)
+		{
+			add_controlling_victory_points(occupying_armies_[2].first);
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[2].second < occupying_armies_[1].second < occupying_armies_[0].second == occupying_armies_[2].second)
+		{
+			add_controlling_victory_points(occupying_armies_[2].first);
+			add_controlling_victory_points(occupying_armies_[0].first);
+		}
+		else if (occupying_armies_[1].second < occupying_armies_[2].second < occupying_armies_[0].second == occupying_armies_[2].second)
+		{
+			add_controlling_victory_points(occupying_armies_[2].first);
+			add_controlling_victory_points(occupying_armies_[0].first);
+		}
+		else if (occupying_armies_[2].second < occupying_armies_[3].second < occupying_armies_[0].second == occupying_armies_[1].second)
+		{
+			add_controlling_victory_points(occupying_armies_[1].first);
+			add_controlling_victory_points(occupying_armies_[0].first);
+		}
+		else if (occupying_armies_[3].second < occupying_armies_[2].second < occupying_armies_[0].second == occupying_armies_[1].second)
+		{
+			add_controlling_victory_points(occupying_armies_[1].first);
+			add_controlling_victory_points(occupying_armies_[0].first);
+		}
+		else if (occupying_armies_[0].second < occupying_armies_[1].second == occupying_armies_[2].second == occupying_armies_[3].second)
+		{
+			add_controlling_victory_points(occupying_armies_[3].first);
+			add_controlling_victory_points(occupying_armies_[2].first);
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[1].second < occupying_armies_[0].second == occupying_armies_[2].second == occupying_armies_[3].second)
+		{
+			add_controlling_victory_points(occupying_armies_[3].first);
+			add_controlling_victory_points(occupying_armies_[2].first);
+			add_controlling_victory_points(occupying_armies_[0].first);
+		}
+		else if (occupying_armies_[2].second < occupying_armies_[1].second == occupying_armies_[0].second == occupying_armies_[3].second)
+		{
+			add_controlling_victory_points(occupying_armies_[3].first);
+			add_controlling_victory_points(occupying_armies_[0].first);
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[3].second < occupying_armies_[1].second == occupying_armies_[2].second == occupying_armies_[0].second)
+		{
+			add_controlling_victory_points(occupying_armies_[0].first);
+			add_controlling_victory_points(occupying_armies_[2].first);
+			add_controlling_victory_points(occupying_armies_[1].first);
+		}
+		else if (occupying_armies_[0].second == occupying_armies_[1].second == occupying_armies_[2].second == occupying_armies_[3].second)
+		{
+			add_controlling_victory_points(occupying_armies_[3].first);
+			add_controlling_victory_points(occupying_armies_[2].first);
+			add_controlling_victory_points(occupying_armies_[1].first);
+			add_controlling_victory_points(occupying_armies_[0].first);
+		}
+		else
+		{
+			std::cout << "Something went wrong in set_player_with_most_armies(), size 4!" << endl;
+			std::exit(-1);
+		}
+	}
+	else
+	{
+		std::cout << "Something went wrong in set_player_with_most_armies(), size unknown!" << endl;
+		std::exit(-1);
+	}
+}
+
+
 void Region::add_controlling_player(Player *player)
 {
 	controlling_player_.push_back(player);
 }
-//#endif
+
+void Region::add_controlling_victory_points(Player* player)
+{
+	controlling_victory_points_.push_back(player);
+}
+#endif
 
 void Region::add_adjacency(string s, Region* r)
 {
@@ -379,15 +724,17 @@ MapTile::MapTile(MapTile& copy)
 	this->tile_name = copy.tile_name;
 	this->m_map_ = copy.m_map_;
 	this->c_regions_ = copy.c_regions_;
+	this->num_regions = copy.get_region_num();
 }
 
-MapTile& MapTile::operator=(MapTile const& copy)
-{
-	this->tile_name = copy.tile_name;
-	this->m_map_ = copy.m_map_;
-	this->c_regions_ = copy.c_regions_;
-	return *this;
-}
+//MapTile& MapTile::operator=(MapTile const& copy)
+//{
+//	this->tile_name = copy.tile_name;
+//	this->m_map_ = copy.m_map_;
+//	this->c_regions_ = copy.c_regions_;
+//	this->num_regions = copy.get_region_num();
+//	return *this;
+//}
 
 // adapted from graph slides from class
 void MapTile::add_region(string name)
@@ -397,9 +744,10 @@ void MapTile::add_region(string name)
 	{
 		auto* r = new Region(name);
 		m_map_.insert(make_pair(r->get_name(), r));
-//#ifdef MAPDEBUG
+		this->add_to_region_num();
+#ifdef MAPDEBUG
 		cout << "The Region " << name << " has been created!" << endl;
-//#endif
+#endif
 		
 	}
 	else
@@ -416,16 +764,16 @@ void MapTile::add_connection_region(string name, region_connection direction) //
 		auto* r = new Region(name);
 		m_map_.insert(make_pair(r->get_name(), r));
 		c_regions_.insert(make_pair(direction, r));
-//#ifdef MAPDEBUG
+#ifdef MAPDEBUG
 		cout << "The Region " << name << " has been created!" << endl;
-//#endif
+#endif
 	}
 	else
 	{
 		c_regions_.insert(make_pair(direction, m_map_[name]));
-//#ifdef MAPDEBUG
+#ifdef MAPDEBUG
 		cout << "\nThe Region " << name << " has been created!" << endl;
-//#endif
+#endif
 	}
 }
 
@@ -438,9 +786,9 @@ void MapTile::add_route(string start, string end, route_type type)
 	const auto itr_e = m_map_.find(end);
 	const auto itr_end = m_map_.end();
 
-//#ifdef MAPDEBUG
+#ifdef MAPDEBUG
 	cout << "\nTrying to add the Route from " << start << " to " << end << "!" << endl;
-//#endif
+#endif
 	
 	if (itr_s == itr_end || itr_e == itr_end)
 	{
@@ -453,9 +801,9 @@ void MapTile::add_route(string start, string end, route_type type)
 		m_route_.insert(make_pair(m_map_[start], make_pair(m_map_[end], type)));
 		m_route_.insert(make_pair(m_map_[end], make_pair(m_map_[start], type)));
 		
-//#ifdef MAPDEBUG
+#ifdef MAPDEBUG
 		cout << "\nThe Route from " << start << " to " << end << " has been created!" << endl;
-//#endif
+#endif
 	}
 }
 
@@ -495,32 +843,33 @@ WorldMap::WorldMap()
 	m_shape = L_SHAPE;
 }
 
-WorldMap::WorldMap(const map_shape shape, MapTile& t1, MapTile& t2, MapTile& t3) : m_shape(shape)
+WorldMap::WorldMap(const map_shape shape, MapTile* t1, MapTile* t2, MapTile* t3) : m_shape(shape), tile1_(t1), tile2_(t2), tile3_(t3)
 {
-	if (t1.validate() && t2.validate() && t3.validate())
+	tile4_ = nullptr;
+	if (t1->validate() && t2->validate() && t3->validate())
 	{
-		for (auto& x : t1.m_map_)
+		for (auto& x : t1->m_map_)
 		{
 			m_map.insert(x);
 		}
-		for (auto& x : t2.m_map_)
+		for (auto& x : t2->m_map_)
 		{
 			m_map.insert(x);
 		}
-		for (auto& x : t3.m_map_)
+		for (auto& x : t3->m_map_)
 		{
 			m_map.insert(x);
 		}
-		
-		for (auto& x : t1.m_route_)
+
+		for (auto& x : t1->m_route_)
 		{
 			m_route.emplace(x);
 		}
-		for (auto& x : t2.m_route_)
+		for (auto& x : t2->m_route_)
 		{
 			m_route.emplace(x);
 		}
-		for (auto& x : t3.m_route_)
+		for (auto& x : t3->m_route_)
 		{
 			m_route.emplace(x);
 		}
@@ -530,32 +879,32 @@ WorldMap::WorldMap(const map_shape shape, MapTile& t1, MapTile& t2, MapTile& t3)
 		cout << "\nERROR: A MapTile is invalidate!" << endl;
 		exit(-1);
 	}
-		
+
 	if (shape == LONG_RECTANGLE)
 	{
-		if (t1.c_regions_[RIGHT] != nullptr && t2.c_regions_[LEFT] != nullptr)
+		if (t1->c_regions_[RIGHT] != nullptr && t2->c_regions_[LEFT] != nullptr)
 		{
-			add_route(t1.c_regions_[RIGHT]->get_name(), t2.c_regions_[LEFT]->get_name(), WATER);
-			add_route(t2.c_regions_[LEFT]->get_name(), t1.c_regions_[RIGHT]->get_name(), WATER);
+			add_route(t1->c_regions_[RIGHT]->get_name(), t2->c_regions_[LEFT]->get_name(), WATER);
+			add_route(t2->c_regions_[LEFT]->get_name(), t1->c_regions_[RIGHT]->get_name(), WATER);
 
-			if (t2.c_regions_[RIGHT] != nullptr && t3.c_regions_[LEFT] != nullptr)
+			if (t2->c_regions_[RIGHT] != nullptr && t3->c_regions_[LEFT] != nullptr)
 			{
-				add_route(t2.c_regions_[RIGHT]->get_name(), t3.c_regions_[LEFT]->get_name(), WATER);
-				add_route(t3.c_regions_[LEFT]->get_name(), t2.c_regions_[RIGHT]->get_name(), WATER);
+				add_route(t2->c_regions_[RIGHT]->get_name(), t3->c_regions_[LEFT]->get_name(), WATER);
+				add_route(t3->c_regions_[LEFT]->get_name(), t2->c_regions_[RIGHT]->get_name(), WATER);
 			}
 		}
 	}
 	else if (shape == L_SHAPE)
 	{
-		if (t1.c_regions_[BOTTOM] != nullptr && t2.c_regions_[TOP] != nullptr)
+		if (t1->c_regions_[BOTTOM] != nullptr && t2->c_regions_[TOP] != nullptr)
 		{
-			add_route(t1.c_regions_[BOTTOM]->get_name(), t2.c_regions_[TOP]->get_name(), WATER);
-			add_route(t2.c_regions_[TOP]->get_name(), t1.c_regions_[BOTTOM]->get_name(), WATER);
-			
-			if (t2.c_regions_[RIGHT] != nullptr && t3.c_regions_[LEFT] != nullptr)
+			add_route(t1->c_regions_[BOTTOM]->get_name(), t2->c_regions_[TOP]->get_name(), WATER);
+			add_route(t2->c_regions_[TOP]->get_name(), t1->c_regions_[BOTTOM]->get_name(), WATER);
+
+			if (t2->c_regions_[RIGHT] != nullptr && t3->c_regions_[LEFT] != nullptr)
 			{
-				add_route(t2.c_regions_[RIGHT]->get_name(), t3.c_regions_[LEFT]->get_name(), WATER);
-				add_route(t3.c_regions_[LEFT]->get_name(), t2.c_regions_[RIGHT]->get_name(), WATER);
+				add_route(t2->c_regions_[RIGHT]->get_name(), t3->c_regions_[LEFT]->get_name(), WATER);
+				add_route(t3->c_regions_[LEFT]->get_name(), t2->c_regions_[RIGHT]->get_name(), WATER);
 			}
 		}
 	}
@@ -566,40 +915,40 @@ WorldMap::WorldMap(const map_shape shape, MapTile& t1, MapTile& t2, MapTile& t3)
 	}
 }
 
-WorldMap::WorldMap(const map_shape shape, MapTile &t1, MapTile &t2, MapTile &t3, MapTile &t4) :  m_shape(shape)
+WorldMap::WorldMap(const map_shape shape, MapTile *t1, MapTile *t2, MapTile *t3, MapTile *t4) : m_shape(shape), tile1_(t1), tile2_(t2), tile3_(t3), tile4_(t4)
 {
-	if (t1.validate() && t2.validate() && t3.validate() && t4.validate())
+	if (t1->validate() && t2->validate() && t3->validate() && t4->validate())
 	{
-		for (auto& x : t1.m_map_)
+		for (auto& x : t1->m_map_)
 		{
 			m_map.insert(x);
 		}
-		for (auto& x : t2.m_map_)
+		for (auto& x : t2->m_map_)
 		{
 			m_map.insert(x);
 		}
-		for (auto& x : t3.m_map_)
+		for (auto& x : t3->m_map_)
 		{
 			m_map.insert(x);
 		}
-		for (auto& x : t4.m_map_)
+		for (auto& x : t4->m_map_)
 		{
 			m_map.insert(x);
 		}
 
-		for (auto& x : t1.m_route_)
+		for (auto& x : t1->m_route_)
 		{
 			m_route.emplace(x);
 		}
-		for (auto& x : t2.m_route_)
+		for (auto& x : t2->m_route_)
 		{
 			m_route.emplace(x);
 		}
-		for (auto& x : t3.m_route_)
+		for (auto& x : t3->m_route_)
 		{
 			m_route.emplace(x);
 		}
-		for (auto& x : t4.m_route_)
+		for (auto& x : t4->m_route_)
 		{
 			m_route.emplace(x);
 		}
@@ -611,19 +960,19 @@ WorldMap::WorldMap(const map_shape shape, MapTile &t1, MapTile &t2, MapTile &t3,
 	}
 	if (shape == RECTANGLE)
 	{
-		if (t1.c_regions_[RIGHT] != nullptr && t2.c_regions_[LEFT] != nullptr)
+		if (t1->c_regions_[RIGHT] != nullptr && t2->c_regions_[LEFT] != nullptr)
 		{
-			add_route(t1.c_regions_[RIGHT]->get_name(), t2.c_regions_[LEFT]->get_name(), WATER);
-			add_route(t2.c_regions_[LEFT]->get_name(), t1.c_regions_[RIGHT]->get_name(), WATER);
-			if (t2.c_regions_[RIGHT] != nullptr && t3.c_regions_[LEFT] != nullptr)
+			add_route(t1->c_regions_[RIGHT]->get_name(), t2->c_regions_[LEFT]->get_name(), WATER);
+			add_route(t2->c_regions_[LEFT]->get_name(), t1->c_regions_[RIGHT]->get_name(), WATER);
+			if (t2->c_regions_[RIGHT] != nullptr && t3->c_regions_[LEFT] != nullptr)
 			{
-				add_route(t2.c_regions_[RIGHT]->get_name(), t3.c_regions_[LEFT]->get_name(), WATER);
-				add_route(t3.c_regions_[LEFT]->get_name(), t2.c_regions_[RIGHT]->get_name(), WATER);
+				add_route(t2->c_regions_[RIGHT]->get_name(), t3->c_regions_[LEFT]->get_name(), WATER);
+				add_route(t3->c_regions_[LEFT]->get_name(), t2->c_regions_[RIGHT]->get_name(), WATER);
 
-				if (t3.c_regions_[RIGHT] != nullptr && t4.c_regions_[LEFT] != nullptr)
+				if (t3->c_regions_[RIGHT] != nullptr && t4->c_regions_[LEFT] != nullptr)
 				{
-					add_route(t3.c_regions_[RIGHT]->get_name(), t4.c_regions_[LEFT]->get_name(), WATER);
-					add_route(t4.c_regions_[LEFT]->get_name(), t3.c_regions_[RIGHT]->get_name(), WATER);
+					add_route(t3->c_regions_[RIGHT]->get_name(), t4->c_regions_[LEFT]->get_name(), WATER);
+					add_route(t4->c_regions_[LEFT]->get_name(), t3->c_regions_[RIGHT]->get_name(), WATER);
 				}
 			}
 		}
@@ -680,9 +1029,9 @@ void WorldMap::add_route(string start, string end, route_type type)
 	const auto itr_s = m_map.find(start);
 	const auto itr_e = m_map.find(end);
 
-//#ifdef MAPDEBUG
+#ifdef MAPDEBUG
 	cout << "\nTrying to add the Route from " << start << " to " << end << "!" << endl;
-//#endif
+#endif
 	
 	if ( itr_s == m_map.end() || itr_e == m_map.end())
 	{
@@ -693,9 +1042,9 @@ void WorldMap::add_route(string start, string end, route_type type)
 		m_map[end]->adj_.insert(make_pair(start, m_map[start]));
 		m_route.insert(make_pair(m_map[start],make_pair(m_map[end], type)));
 		m_route.insert(make_pair(m_map[end], make_pair(m_map[start], type)));
-//#ifdef MAPDEBUG
+#ifdef MAPDEBUG
 		cout << "\nThe Route from " << start << " to " << end << " has been created!" << endl;
-//#endif
+#endif
 	}
 }
 
@@ -706,7 +1055,7 @@ bool WorldMap::validate()
 
 	//std::cout << "\nStarting map Validation ...";
 
-	if ((get_tile1()->validate()&& get_tile2()->validate() && get_tile3()->validate() && get_tile4()->validate()) == false)
+	if ((tile1_->validate() && tile2_->validate() && tile3_->validate() && tile4_->validate()) == false)
 	{
 		return false;
 	}

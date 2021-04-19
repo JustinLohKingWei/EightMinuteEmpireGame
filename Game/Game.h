@@ -5,6 +5,7 @@ using namespace std;
 #include "../Player/Player.h"
 #include "../Card/Card.h"
 
+class Player;
 
 class Game {
 public:
@@ -23,7 +24,8 @@ public:
 	void initializeDeck();
 	void initalizeHand();
 	void initializeMap();
-
+	void biddingPhase();
+	void initializePlayers();
 
 
 private:

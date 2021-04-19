@@ -1,82 +1,14 @@
-#include "Game.h"
+#include <vector>
+#include "VictoryPoints.h"
+#include "../Player/Player.h"
+#include "../Card/Card.h"
+#include "../Map/Map.h"
+#include "../MapLoader/MapLoader.h"
 
-Game::Game() : theGameHand(new Hand()) {
-	cout << "Default game created" << endl;
-	currentPlayer = 0;
-	numOfPlayers = 2;
-	turnNumber = 0;
-	gameOver = false;
-}
+using namespace std;
 
-Game::Game(vector<Player*> players) : listOfPlayers(players), theGameHand(new Hand()), gameDeck(new Deck()){
-	cout << "Game with " << listOfPlayers.size() <<" players created" << endl;
-	currentPlayer = 0;
-	numOfPlayers = listOfPlayers.size();
-	turnNumber = 1;
-	gameOver = false;
-}
-
-Player* Game::getCurrentPlayer() {
-	return listOfPlayers.at(currentPlayer);
-}
-
-
-
-void Game::nextPlayer() {
-	currentPlayer = (++turnNumber + (numOfPlayers-1)) % numOfPlayers;
-
-	cout << "Play has been passed to player #" << currentPlayer+1 <<
-		": " << listOfPlayers.at(currentPlayer)->getFirstName() << " "
-		<< listOfPlayers.at(currentPlayer)->getLastName()<< endl;
-}
-
-int Game::getNumOfPlayers() {
-	return numOfPlayers;
-}
-
-Hand* Game::getGameHand() {
-	return theGameHand;
-}
-
-Deck* Game::getDeck() {
-	return gameDeck;
-}
-
-WorldMap* Game::getMap() {
-	return map;
-}
-
-void Game::setGameHand(Hand* aHand) {
-	theGameHand = aHand;
-}
-
-
-bool Game::getGameOver() {
-	return gameOver;
-}
-
-void Game::setGameOver(bool value) {
-	gameOver = value;
-}
-
-int Game::getTurnNumber() {
-	return turnNumber;
-}
-
-void Game::initializeDeck()
+int main()
 {
-	gameDeck = new Deck();
-	gameDeck->filterDeck(numOfPlayers);
-	gameDeck->shuffleDeck();
-}
-
-void Game::initializeHand() {
-	gameDeck->fillHand(theGameHand);
-}
-
-void Game::initializeMap() {
-	//Hard coded map
-	cout << "****Initializing map****" << endl;
 	auto* tile1 = new MapTile("C Shape Island");
 	cout << "\nC Shape Island map tile has been created." << endl;
 
@@ -248,62 +180,95 @@ void Game::initializeMap() {
 
 	// This is how I would normally like to construct the game map once all tiles are loaded from files and then selected and positioned
 	// they could easily be combined into a "World Map" for game play with little effort and adding the last few connections between the Islands
-	map = new WorldMap(RECTANGLE, *tile1, *tile2, *tile3, *tile4);
-}
+	auto* world_map = new WorldMap(RECTANGLE, tile1, tile2, tile3, tile4);
 
-void Game::biddingPhase() {
+	auto* p1 = new Player();
+	auto* p2 = new Player();
 
-	for (int i = 0; i < numOfPlayers; i++) {
-		(*(*listOfPlayers.at(i)).getBidingFacility()).pickUpCoins();
+	auto* deck = new Deck();
+
+	auto deck_of_cards = deck->getListOfCards();
+
+	//
+	vector<Card*> p1_card{ deck_of_cards.at(0), deck_of_cards.at(1), deck_of_cards.at(13), deck_of_cards.at(14) };
+	vector<Card*> p2_card{ deck_of_cards.at(10), deck_of_cards.at(9), deck_of_cards.at(30), deck_of_cards.at(29) };
+
+	p1->setListOfCardsUsed(p1_card);
+	p2->setListOfCardsUsed(p2_card);
+	
+	vector<Region*> p1_region { world_map->m_map["Stone Pillars Island Region 5"], world_map->m_map["Stone Pillars Island Region 4"] };
+	vector<Region*> p2_region { world_map->m_map["Stone Pillars Island Region 5"], world_map->m_map["Stone Pillars Island Region 4"] };
+
+	p1->setListOfRegions(p1_region);
+	p2->setListOfRegions(p2_region);
+
+	Army *a1 = new Army();
+	a1->setRegion(p1_region.at(0));
+	Army* a2 = new Army();
+	a1->setRegion(p1_region.at(1));
+	Army* a3 = new Army();
+	a1->setRegion(p1_region.at(0));
+	Army* a4 = new Army();
+	a1->setRegion(p1_region.at(1));
+
+	Army* a21 = new Army();
+	a21->setRegion(p2_region.at(0));
+	Army* a22 = new Army();
+	a22->setRegion(p2_region.at(1));
+	Army* a23 = new Army();
+	a23->setRegion(p2_region.at(0));
+	Army* a24 = new Army();
+	a24->setRegion(p2_region.at(1));
+	Army* a25 = new Army();
+	a25->setRegion(p2_region.at(0));
+	
+	vector<Army*> p1_army { a1, a2, a3, a4 };
+	vector<Army*> p2_army { a21, a22, a23, a24, a25 };
+
+	p1->setListOfArmies(p1_army);
+	p2->setListOfArmies(p2_army);
+
+	int counter = 0;
+	for (auto army : p1_army)
+	{
+		if(counter % 2 == 0)
+		{
+			army->setRegion(p1_region.at(0));
+		}
+		else
+		{
+			army->setRegion(p1_region.at(1));
+		}
+		counter++;
 	}
 
-	for (int i = 0; i < numOfPlayers; i++) {
-		(*(*listOfPlayers.at(i)).getBidingFacility()).bidCoins();
+	counter = 0;
+	for (auto army : p2_army)
+	{
+		if (counter % 2 == 0)
+		{
+			army->setRegion(p2_region.at(0));
+		}
+		else
+		{
+			army->setRegion(p2_region.at(1));
+		}
+		counter++;
 	}
 
-	int winnerAmount = 0;
-	Player winner;
-	// finds winner with largest alphabetical last name
-    for (int i = 0; i < listOfPlayers.size(); i++) {
-        (*(*listOfPlayers.at(i)).getBidingFacility()).displayBid();
-        if (winnerAmount < (*(*listOfPlayers.at(i)).getBidingFacility()).getBidAmount()) {
-			currentPlayer = i;
-            winner = *listOfPlayers.at(i);
-            winnerAmount = (*(*listOfPlayers.at(i)).getBidingFacility()).getBidAmount();
-        }
+	p1->setListOfArmies(p1_army);
+	p2->setListOfArmies(p2_army);
+	
+	auto* vp = new VPCounter();
 
-        if (winnerAmount == (*(*listOfPlayers.at(i)).getBidingFacility()).getBidAmount()) {
-            string a = winner.getLastName();
-            string b = (*listOfPlayers.at(i)).getLastName();
-            if (a > b) {
-				currentPlayer = i;
-                winner = *listOfPlayers.at(i);
-            }
-        }
-    }
+	int p1_score = vp->compute_score(p1, world_map);
+	int p2_score = vp->compute_score(p2, world_map);
 
-	cout << "Winning player: " << listOfPlayers.at(currentPlayer)->getFirstName() << endl;
-
-
-
-}
-
-void Game::initializePlayers() {
-	for (int i = 0; i < numOfPlayers; i++) {
-		string first, last, fName, lName;
-		cout << "Please enter first name" << endl;
-		cin >> first;
-		cout << "Please enter last name" << endl;
-		cin >> last;
-		fName = string(first);
-		lName = string(last);
-		fName = string(first);
-		lName = string(last);
-		vector<Card*>cards;
-    vector<Region*>listOfRegions;
-    vector<Army*>listOfArmies(18, new Army);
-    vector<City*>listOfCities(3, new City);
-		Player* aPlayer = new Player(fName, lName, cards, listOfRegions, listOfArmies, listOfCities, new GreedyComputerStrategy());//Creating player
-		listOfPlayers.push_back(aPlayer);
-	}
+	cout << "\nPlayer " << p1->getFirstName() << " " << p1->getLastName() << " : " << p1_score << endl;
+	cout << "\nPlayer " << p2->getFirstName() << " " << p2->getLastName() << " : " << p2_score << endl;
+	
+	
+	auto end_scores = vp->compute_score_end_of_game(world_map);
+	
+	return 0;
 }

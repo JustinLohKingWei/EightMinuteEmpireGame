@@ -1,13 +1,12 @@
 #include "Card.h"
-#ifndef CARD_CPP
-#define CARD_CPP
+
 #include <string>
 #include <iostream>
 #include <vector>
 #include <ranges>
 #include <algorithm>
 #include <random>
-#include <ctime>
+
 using namespace std;
 
 // Empty Constructor
@@ -19,7 +18,7 @@ Card::Card() {
 }
 
 //Constructor with Parameters
-Card::Card(std::string theName, std::string theGood, std::string theAction, int playerCount) {
+Card::Card(string theName, string theGood, string theAction, int playerCount) {
     name = theName;
     good = theGood;
     action = theAction;
@@ -37,7 +36,6 @@ Card::Card(const Card& c) {
 // Assignment Operator
 Card& Card::operator = (const Card& card)
 {
-    Card :: operator= (card);
     name = card.name;
     good = card.action;
     action = card.action;
@@ -77,17 +75,17 @@ void Card::showGood() {
 }
 
 // Returns the name of a card.
-std::string Card::getName() {
+string Card::getName() {
     return name;
 }
 
 // Returns the action of a card.
-std::string Card::getAction() {
+string Card::getAction() {
     return action;
 }
 
 // Returns the good of card.
-std::string Card::getGood() {
+string Card::getGood() {
     return good;
 }
 
@@ -232,35 +230,35 @@ vector<Card*> Deck::listOfCards = {//list of cards
       new Card("Ancient Spirit Tree", "Elixers: 3", "Place Armies: 4", 2),
       new Card("Cursed Banshee", "Elixers: 2", "Move Armies: 6", 2),
       new Card("Cursed King", "Elixers: 1", "Place Armies: 3 OR Move Armies: 4", 2),
-      new Card("Cursed Tower", "+1 VP Per Flight", "Build City", 2),
+      new Card("Cursed Tower", "+1 VP Per Flight", "Build City: 1", 2),
       new Card("Dire Eye", "Flight", "Place Armies: 4", 2),
       new Card("Forest Elf", "+1 Army", "Place Armies: 3 OR Move Armies: 2", 2),
       new Card("Forest Pixie", "+1 Army", "Move Armies: 4", 2),
       new Card("Graveyard", "+1 VP Per Cursed", "Place Armies: 2", 2),
-      new Card("Night Hydra", "+1 Army", "Move Armies: 5 AND Destroy Army", 2),
-      new Card("Night Wizard", "+1 VP Per Night", "Place Armies: 3 AND Destroy Army", 2),
-      new Card("Noble Knight", "+1 Move", "Place Armies: 4 AND Destroy Army", 2),
-      new Card("Stronghold", "+1 VP Per Dire", "Build City", 2),
+      new Card("Night Hydra", "+1 Army", "Move Armies: 5 AND Destroy Army: 1", 2),
+      new Card("Night Wizard", "+1 VP Per Night", "Place Armies: 3 AND Destroy Army: 1", 2),
+      new Card("Noble Knight", "+1 Move", "Place Armies: 4 AND Destroy Army: 1", 2),
+      new Card("Stronghold", "+1 VP Per Dire", "Build City: 1", 2),
       new Card("Ancient Sage", "+1 VP Per Ancient", "Move Armies: 3", 2),
-      new Card("Ancient Woods", "+1 Army", "Build City AND Place Armies: 1", 2),
+      new Card("Ancient Woods", "+1 Army", "Build City: 1 AND Place Armies: 1", 2),
       new Card("Cursed Gargoyles", "Flight", "Move Armies: 5", 2),
-      new Card("Cursed Mausoleum", "+1 Move", "Build City", 2),
-      new Card("Dire Dragon", "Flight", "Place Armies: 3 AND Destroy Army", 2),
-      new Card("Dire Giant", "Immune to Attack", "Place Armies: 3 AND Destroy Army", 2),
+      new Card("Cursed Mausoleum", "+1 Move", "Build City: 1", 2),
+      new Card("Dire Dragon", "Flight", "Place Armies: 3 AND Destroy Army: 1", 2),
+      new Card("Dire Giant", "Immune to Attack", "Place Armies: 3 AND Destroy Army: 1", 2),
       new Card("Dire Ogre", "+1 VP Per 3 Coins", "Move Armies: 2", 2),
       new Card("Forest Gnome", "Elixers: 3", "Move Armies: 2", 2),
-      new Card("Forest Tree Town", "+1 Move", "Build City", 2),
+      new Card("Forest Tree Town", "+1 Move", "Build City: 1", 2),
       new Card("Lake", "+1 VP Per Forest", "Place Armies: 2 OR Move Armies: 3", 2),
-      new Card("Night Village", "+1 Army", "Build City", 2),
+      new Card("Night Village", "+1 Army", "Build City: 1", 2),
       new Card("Noble Hills", "3 Noble cards = 4VP", "Place Armies: 3", 2),
       new Card("Noble Unicorn", "+1 Move", "Move Armies: 4 AND Place Armies: 1", 2),
-      new Card("Arcane Manticore", "+1 Move", "Place Armies: 4 AND Destroy Army", 3),
+      new Card("Arcane Manticore", "+1 Move", "Place Armies: 4 AND Destroy Army: 1", 3),
       new Card("Arcane Sphinx", "Flight", "Place Armies: 3 OR Move Armies: 4", 3),
       new Card("Arcane Temple", "+1 VP Per Arcane", "Move Armies: 3", 3),
-      new Card("Mountain Dwarf", "2 Mountain = 3VP", "Place Armies: 2 AND Destroy Army", 3),
+      new Card("Mountain Dwarf", "2 Mountain = 3VP", "Place Armies: 2 AND Destroy Army: 1", 3),
       new Card("Mountain Treasury", "Elixers: 1 AND Coins: 2", "Move Armies: 3", 3),
-      new Card("Castle", "Elixers: 1", "Place Armies: 3 OR Build City", 4),
-      new Card("Castle 2", "Elixers: 1", "Move Armies: 3 AND Build City", 4),
+      new Card("Castle", "Elixers: 1", "Place Armies: 3 OR Build City: 1", 4),
+      new Card("Castle 2", "Elixers: 1", "Move Armies: 3 AND Build City: 1", 4),
 
 };
 
@@ -295,7 +293,7 @@ ostream& operator <<(ostream& out, const Deck& d)
 
 
 // Returns the list of cards.
-std::vector<Card*> Deck::getListOfCards() {
+vector<Card*> Deck::getListOfCards() {
     return listOfCards;
 }
 
@@ -333,7 +331,7 @@ void Deck::fillHand(Hand* aHand) {
 }
 
 void Deck::filterDeck(int playerCount) {
-    std::vector<Card*> resultListOfCards;
+    vector<Card*> resultListOfCards;
     for (auto& c : listOfCards) {
         if (c->getMaxPlayerCount() <= playerCount) {
             resultListOfCards.push_back(c);
@@ -343,9 +341,9 @@ void Deck::filterDeck(int playerCount) {
 }
 
 void Deck::shuffleDeck() {
-    std::srand(std::time(0));
-    std::random_shuffle(std::begin(listOfCards), std::end(listOfCards) );
+	// previous version was an unimplemented template
+	// From: https://en.cppreference.com/w/cpp/algorithm/random_shuffle
+    std::random_device rd;
+    std::mt19937 g(rd());
+    shuffle(listOfCards.begin(), listOfCards.end(), g);
 }
-
-
-#endif CARD_CPP

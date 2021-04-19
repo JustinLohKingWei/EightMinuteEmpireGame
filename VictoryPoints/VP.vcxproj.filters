@@ -13,6 +13,9 @@
     <Filter Include="Resource">
       <UniqueIdentifier>{a9ffd556-ea05-4bba-95a2-4832f48b169c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Drivers">
+      <UniqueIdentifier>{8f90d52b-1aa3-45ec-8be5-bf4ebe6b4779}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Player\Player.h">
@@ -24,12 +27,28 @@
     <ClInclude Include="..\BidingFacility\Bid.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\PlayerStrategies\PlayerStrategies.h" />
-    <ClInclude Include="..\GameObservers\GameMessageBoard.h" />
-    <ClInclude Include="..\GameObservers\GameObservers.h" />
-    <ClInclude Include="..\GameObservers\Subject.h" />
-    <ClInclude Include="..\Map\Map.h" />
     <ClInclude Include="..\Game\Game.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameObservers\GameMessageBoard.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameObservers\GameObservers.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Map\Map.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerStrategies\PlayerStrategies.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameObservers\Subject.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="VictoryPoints.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MapLoader\MapLoader.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -43,14 +62,35 @@
     <ClCompile Include="..\BidingFacility\bid.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\PlayerStrategiesDriver.cpp" />
-    <ClCompile Include="..\PlayerStrategies\PlayerStrategies.cpp" />
-    <ClCompile Include="..\GameObservers\GameMessageBoard.cpp" />
-    <ClCompile Include="..\GameObservers\GameObservers.cpp" />
-    <ClCompile Include="..\GameObservers\Subject.cpp" />
-    <ClCompile Include="..\Map\Map.cpp" />
     <ClCompile Include="..\Game\Game.cpp">
-      <Filter>Headers</Filter>
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameObservers\GameMessageBoard.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameObservers\GameObservers.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Map\Map.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerStrategies\PlayerStrategies.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameObservers\Subject.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerStrategiesDriver.cpp">
+      <Filter>Drivers</Filter>
+    </ClCompile>
+    <ClCompile Include="VictoryPoints.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="VPTestDriver.cpp">
+      <Filter>Drivers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MapLoader\MapLoader.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
