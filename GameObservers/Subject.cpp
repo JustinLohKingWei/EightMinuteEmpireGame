@@ -38,3 +38,4 @@ void Subject::notifyCard(Card* card, int cardPosition, int playerNumber, int cos
     for (; i != _gameObservers->end(); ++i)
         (*i)->displayCard(card, cardPosition, playerNumber, cost);
 };
+

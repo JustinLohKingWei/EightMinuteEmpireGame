@@ -174,15 +174,24 @@ void GreedyComputerStrategy::playTurn(Hand* gameHand, Bid* biddingFacility, Play
 3. Move armies to region->if adj region has ennemy (move there)->else move anywhere
 4. Choose randomly otherwise
 */
-void ModerateComputerStrategy::playTurn(Hand* gameHand, Bid* biddingFacility) {
+void ModerateComputerStrategy::playTurn(Hand* gameHand, Bid* biddingFacility, Player* a) {
 	// check cards in hand
 	vector<int>placingArmiesCards;//interest cards 
 	vector<int>movingArmiesCards;
 	vector<int>otherCards;
 	vector<Card*> cardsInHand = (*gameHand).getCardsInHand();
+	int currentCoins = biddingFacility->getCopperCoins();
+
 
 	cout << "SELECTING CARDS OF INTEREST\n" << endl;
-	for (int i = 0; i < cardsInHand.size(); i++) {
+
+	for (int i = 0; i < cardsInHand.size();i++) {
+
+		if (gameHand->getCost(i) > currentCoins) {
+			continue;
+		}
+
+
 		Card currentCard = *(cardsInHand.at(i));
 
 		// read all cards and choose the ones that have to do with controlling a region
@@ -259,3 +268,63 @@ void ModerateComputerStrategy::playTurn(Hand* gameHand, Bid* biddingFacility) {
 
 
 }
+ void HumanStrategy::playTurn(Hand * gameHand, Bid* bid, Player* a) {
+	int affIndex = 0;
+	int currentCoins = bid->getCopperCoins();
+	int amount = 0;
+	vector<Card*> cardsInHand = (*gameHand).getCardsInHand();
+	cout << "Selecting a card from hand..." << endl;
+	vector<int> affordableCards;
+	
+	//check if can afford card
+	for (Card* x : cardsInHand) {
+		if (gameHand->getCost(affIndex) > currentCoins) {
+			affIndex++;
+			continue;
+		}
+		affordableCards.push_back(affIndex);
+		affIndex++;
+	}
+
+	cout << "Human choose a card to play..." << endl;
+
+	for (int x : affordableCards) {
+		cout << "(" << x << ")" << cardsInHand.at(x)->getAction() << " with cost " << gameHand->getCost(x) << endl;
+	}
+	int indexChoice;
+	cin >> indexChoice;
+
+	Card* current = cardsInHand.at(affordableCards.at(indexChoice));
+	string action = current->getAction();
+
+	if (action.find("AND") || action.find("OR")) {
+		Player::listOfPlayers.at(0)->andOr(current);
+	}
+	else {
+		amount = std::stoi(action.substr(action.find(":") + 1));
+		if (action == "Place Army") {
+			Player::listOfPlayers.at(0)->PlaceNewArmies(amount);
+		}
+		else if (action == "Move Armies") {
+			Player::listOfPlayers.at(0)->MoveArmies(amount);
+		}
+		else if (action == "Build City") {
+			Player::listOfPlayers.at(0)->BuildCity(amount);
+		}
+		else if (action == "Destroy Army") {
+			Player::listOfPlayers.at(0)->DestroyArmy(amount);
+		}
+	}
+
+	//pay card cost
+	Player::listOfPlayers.at(0)->PayCoin(gameHand->getCost(indexChoice), 'c');
+}
+ //TODO
+/*
+* Add isTurn bool to player (DONE)
+* Verify card cost payment (DONE)
+* Reimplement methods based on strat 
+* Check strat type
+* Test strat
+* Part 4
+*/

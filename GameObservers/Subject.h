@@ -1,5 +1,7 @@
 #pragma once
+
 #include "GameObservers.h" //subject
+#include "../Card/Card.h"
 #include <list>
 using namespace std;
 using std::list;

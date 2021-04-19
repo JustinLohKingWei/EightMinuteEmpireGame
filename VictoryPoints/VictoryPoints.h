@@ -5,6 +5,7 @@
 #include "../Player/Player.h"
 
 class Player;
+class WorldMap;
 
 class VPCounter
 {

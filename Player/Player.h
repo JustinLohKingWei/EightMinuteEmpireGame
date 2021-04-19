@@ -13,6 +13,8 @@
 #include "../Card/Card.h"
 #include "../GameObservers/Subject.h";
 #include "../PlayerStrategies/PlayerStrategies.h"
+#include "../VictoryPoints/VictoryPoints.h"
+
 using namespace std;
 
 class Region;
@@ -58,10 +60,14 @@ public:
 	Player(string f, string l, vector<Card*>listOfCardsUsed, vector<Region*> listOfRegions, vector<Army*> listOfArmies, vector<City*> listOfCities, Strategy* initStrategy) :
 		firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myListOfCardsUsed(listOfCardsUsed), listOfTerritories(listOfRegions), listOfArmy(listOfArmies), listOfCities(listOfCities), strategy(initStrategy) {
 		listOfPlayers.push_back(this);
+		
 	};
 	Player(const Player& b);
 	Player& operator =(const Player& e);
 	~Player() {};//Destructor
+
+	int current_vp;
+	
 	friend ostream& operator << (ostream& out, const Player& aPlayer);
 	friend istream& operator >> (istream& in, Player& aPlayer);
 	bool PayCoin(int payableAmount, char type);
@@ -101,15 +107,21 @@ public:
 	string getFirstName();
 	string getLastName();
 	static vector<Player*>listOfPlayers;
-	
+
 	//MVC methods
 	int getNoOfVictoryPoints();
 	int getNoOfArmies();
 	int getNoOfRegions();
+	int getNoOfCards();
+	int getNoOfCities();
 
 	// Strategy methods
 	void setStrategy(Strategy* newStrategy);
+
+	Strategy* getStrategy() { return strategy; }
+
 	void executeStrategy(Hand* aGameHand, Bid* biddingFacility, Player* thisPlayer);
+
 private:
 	Strategy* strategy;
 	vector<Region*> listOfTerritories;
