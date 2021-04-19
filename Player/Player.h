@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include <sstream>
 #include "../Map/Map.h"
 #include "../BidingFacility/Bid.h"
 #include "../Card/Card.h"
@@ -80,6 +81,7 @@ public:
 	string getFirstName();
 	string getLastName();
 	static vector<Player*>listOfPlayers;
+	void useCard(Card* card, int cardPosition, int playerNumber);
 
 	//MVC methods
 	int getNoOfVictoryPoints();
