@@ -1,6 +1,6 @@
 #pragma once
 #include "../Player/Player.h"
-
+#include "../Game/Game.h"
 #include <iostream>
 using namespace std;
 
@@ -8,7 +8,7 @@ class Hand;
 
 class Strategy {
 public:
-	virtual void playTurn(Hand * aGameHand, Bid* biddingFacility)  = 0;
+	virtual void playTurn(Hand * aGameHand, Bid* biddingFacility, Player* aPlayer)  = 0;
 
 };
 
@@ -16,7 +16,7 @@ public:
 class GreedyComputerStrategy : public Strategy
 {
 public:
-	void playTurn(Hand* GameHand, Bid* biddingFacility);
+	void playTurn(Hand* GameHand, Bid* biddingFacility, Player* aPlayer);
 };
 
 class HumanStrategy : public Strategy {

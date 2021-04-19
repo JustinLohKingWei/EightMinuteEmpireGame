@@ -20,6 +20,8 @@ Player* Game::getCurrentPlayer() {
 	return listOfPlayers.at(currentPlayer);
 }
 
+
+
 void Game::nextPlayer() {
 	currentPlayer = (++turnNumber + (numOfPlayers-1)) % numOfPlayers;
 	cout << "Play has been passed to player #" << currentPlayer+1 <<
@@ -35,9 +37,14 @@ Hand* Game::getGameHand() {
 	return theGameHand;
 }
 
+Deck* Game::getDeck() {
+	return gameDeck;
+}
+
 void Game::setGameHand(Hand* aHand) {
 	theGameHand = aHand;
 }
+
 
 bool Game::getGameOver() {
 	return gameOver;
@@ -93,7 +100,7 @@ void Game::biddingPhase() {
         }
     }
 
-	cout << "Winner index: " << listOfPlayers.at(currentPlayer)->getFirstName() << endl;
+	cout << "Winning player: " << listOfPlayers.at(currentPlayer)->getFirstName() << endl;
 
 
 
@@ -111,9 +118,9 @@ void Game::initializePlayers() {
 		fName = string(first);
 		lName = string(last);
 		vector<Card*>cards;
-		vector<Region*>listOfRegions;
-		vector<Army*>listOfArmies;
-		vector<City*>listOfCities;
+    vector<Region*>listOfRegions;
+    vector<Army*>listOfArmies(18, new Army);
+    vector<City*>listOfCities(3, new City);
 		Player* aPlayer = new Player(fName, lName, cards, listOfRegions, listOfArmies, listOfCities, new GreedyComputerStrategy());//Creating player
 		listOfPlayers.push_back(aPlayer);
 	}

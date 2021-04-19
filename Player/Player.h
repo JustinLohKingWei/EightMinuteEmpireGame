@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include "../Map/Map.h"
 #include "../BidingFacility/Bid.h"
 #include "../Card/Card.h"
@@ -58,13 +59,20 @@ public:
 	friend ostream& operator << (ostream& out, const Player& aPlayer);
 	friend istream& operator >> (istream& in, Player& aPlayer);
 	bool PayCoin(int payableAmount, char type);
+
+	// Card action-related methods
 	void PlaceNewArmies(int numberOfArmies);
 	void MoveArmies(int numberOfArmiesToMove);
 	void MoveOverLand(Region* from, Region* to);
 	void MoveOverWater(Region* from, Region* to);
+	vector<Region*> canBuildCity();
+	bool buildCity(Region*);
 	void BuildCity(int numberOfCities);
 	bool DestroyArmy(int numberToDestroy);
 	void andOr(Card* currentCard);
+	vector<Army*> canDestroyArmy();
+	void destroyArmy(Army*);
+
 	//void setCardUsed(Card* aCard);
 	void setBidingFacility(Bid* aBidingFacility);
 	void setListOfTerritories(vector<Region*> list);
@@ -80,12 +88,12 @@ public:
 	string getFirstName();
 	string getLastName();
 	static vector<Player*>listOfPlayers;
-
+	
 	//MVC methods
 
 	// Strategy methods
 	void setStrategy(Strategy* newStrategy);
-	void executeStrategy(Hand* aGameHand, Bid* biddingFacility);
+	void executeStrategy(Hand* aGameHand, Bid* biddingFacility, Player* thisPlayer);
 private:
 	Strategy* strategy;
 	vector<Region*> listOfTerritories;
