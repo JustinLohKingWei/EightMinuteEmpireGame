@@ -12,6 +12,8 @@
 #include "../Card/Card.h"
 #include "../GameObservers/Subject.h";
 #include "../PlayerStrategies/PlayerStrategies.h"
+#include "../VictoryPoints/VictoryPoints.h"
+
 using namespace std;
 
 class Region;
@@ -61,6 +63,9 @@ public:
 	Player(const Player& b);
 	Player& operator =(const Player& e);
 	~Player() {};//Destructor
+
+	int current_vp;
+	
 	friend ostream& operator << (ostream& out, const Player& aPlayer);
 	friend istream& operator >> (istream& in, Player& aPlayer);
 	bool PayCoin(int payableAmount, char type);
