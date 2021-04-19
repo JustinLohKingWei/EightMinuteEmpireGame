@@ -82,6 +82,9 @@ public:
 	static vector<Player*>listOfPlayers;
 
 	//MVC methods
+	int getNoOfVictoryPoints();
+	int getNoOfArmies();
+	int getNoOfRegions();
 
 	// Strategy methods
 	void setStrategy(Strategy* newStrategy);

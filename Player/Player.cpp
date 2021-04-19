@@ -107,6 +107,8 @@ bool Player::PayCoin(int payableAmount, char type) {
 		cout << "Invalid input" << endl; 
 		success = false;
 	}
+	cout << "TOUCHED OBSERVER" << endl;
+	Notify();
 	return success;
 }
 
@@ -159,7 +161,8 @@ void Player::PlaceNewArmies(int numberOfArmies) {//Handling placing in multiple 
 			numPlaced -= numChoice;
 		}
 	}
-
+	cout << "TOUCHED OBSERVER" << endl;
+	Notify();
 }
 
 void Player::MoveArmies(int numberOfArmiesToMove) {
@@ -265,6 +268,8 @@ void Player::MoveArmies(int numberOfArmiesToMove) {
 			cout << "To is NULL" << endl;
 		}
 	}
+	cout << "TOUCHED OBSERVER" << endl;
+	Notify();
 }
 
 void Player::MoveOverLand(Region* from, Region* to) {
@@ -349,7 +354,8 @@ void Player::BuildCity(int numberOfCities) {
 		numPlaced -= cityCounter;
 		cityCounter = 0;
 	}
-
+	cout << "TOUCHED OBSERVER" << endl;
+	Notify();
 }
 //Maybe static player array?
 
@@ -411,8 +417,8 @@ bool Player::DestroyArmy(int numberToDestroy) {
 		}
 	}
 
-
-
+	cout << "TOUCHED OBSERVER" << endl;
+	Notify();
 	return true;
 }
 
@@ -549,8 +555,8 @@ void Player::andOr(Card* current) {
 		}
 	}
 
-
-
+	cout << "TOUCHED OBSERVER" << endl;
+	Notify();
 }
 
 //Setters and getters
@@ -629,6 +635,16 @@ Region* playerGoods::getRegion() {
 	return aRegion;
 }
 
+//MVC Methods
+int Player::getNoOfVictoryPoints() {
+	return 0;
+}
+int Player::getNoOfArmies() {
+	return listOfArmy.size();
+}
+int Player::getNoOfRegions() {
+	return listOfTerritories.size();
+}
 
 
 

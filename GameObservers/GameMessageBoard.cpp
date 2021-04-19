@@ -25,12 +25,14 @@ void GameMessageBoard::Update()
 };
 void GameMessageBoard::Display(){
     //TODO DISPLAY STATS HERE
-
+    cout << "OBSERVER DISPLAY" << endl;
     //int stat1 = _subject.getStat1();
     string name = _subject->getFirstName();
     int coins = _subject->getBidingFacility()->getCopperCoins();
+    int noOfArmies = _subject->getNoOfArmies();
+    int noOfRegions = _subject->getNoOfRegions();
 
-    cout<<name<<"      "<<endl;
+    cout<<name<<"   ||  "<<noOfArmies<< " armies   ||  "<<noOfRegions<<" Regions   ||  "<<coins<<"coins  ||     "<<endl;
 
 };
 
