@@ -170,7 +170,7 @@ void GreedyComputerStrategy::playTurn(Hand* gameHand, Bid* biddingFacility, Play
 3. Move armies to region->if adj region has ennemy (move there)->else move anywhere
 4. Choose randomly otherwise
 */
-void ModerateComputerStrategy::playTurn(Hand* gameHand, Bid* biddingFacility) {
+void ModerateComputerStrategy::playTurn(Hand* gameHand, Bid* biddingFacility, Player* a) {
 	// check cards in hand
 	vector<int>placingArmiesCards;//interest cards 
 	vector<int>movingArmiesCards;
@@ -264,7 +264,7 @@ void ModerateComputerStrategy::playTurn(Hand* gameHand, Bid* biddingFacility) {
 
 
 }
- void HumanStrategy::playTurn(Hand * gameHand, Bid* bid) {
+ void HumanStrategy::playTurn(Hand * gameHand, Bid* bid, Player* a) {
 	int affIndex = 0;
 	int currentCoins = bid->getCopperCoins();
 	int amount = 0;

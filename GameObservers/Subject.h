@@ -1,4 +1,5 @@
 #pragma once
+
 #include "GameObservers.h" //subject
 #include <list>
 using namespace std;
@@ -17,6 +18,6 @@ public:
     Subject();
     ~Subject();
 
-private:
+
    static list<GameObservers *> *_gameObservers;
 };

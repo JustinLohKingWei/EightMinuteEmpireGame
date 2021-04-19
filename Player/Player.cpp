@@ -782,39 +782,7 @@ void Player::andOr(Card* current) {
 			return;
 		}
 	}
-	//else { // no and or or
-	//	action1 = current->getAction();
-	//	string amount1 = action1.substr(current->getAction().find(":") + 1);
-	//	int amountOfFirstAction = std::stoi(amount1);
-	//	action1 = action1.substr(0, action1.find(":"));
-	//	if (action1 == actions[0]) {
-	//		//Place army
-	//		cout << "Place armies" << endl;
-	//		PlaceNewArmies(amountOfFirstAction);
-	//		return;
-	//	}
-	//	else if (action1 == actions[1]) {
-	//		//Move armies
-	//		cout << "Move armies" << endl;
-	//		MoveArmies(amountOfFirstAction);
-	//		return;
-	//	}
-	//	else if (action1 == actions[2]) {
-	//		//Build army
-	//		cout << "Build city" << endl;
-	//		BuildCity(amountOfFirstAction);
-	//		return;
-	//	}
-	//	else if (action1 == actions[3]) {
-	//		//Destroy army
-	//		cout << "Destroy army" << endl;
-	//		DestroyArmy(amountOfFirstAction);
-	//		return;
-	//	}
-
-
-	//}
-
+	
 	cout << "TOUCHED OBSERVER" << endl;
 	Notify();
 }
