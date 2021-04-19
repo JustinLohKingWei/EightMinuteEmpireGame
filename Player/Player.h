@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include <sstream>
 #include "../Map/Map.h"
 #include "../BidingFacility/Bid.h"
@@ -64,19 +65,27 @@ public:
 	friend ostream& operator << (ostream& out, const Player& aPlayer);
 	friend istream& operator >> (istream& in, Player& aPlayer);
 	bool PayCoin(int payableAmount, char type);
+
+	// Card action-related methods
 	void PlaceNewArmies(int numberOfArmies);
 	void MoveArmies(int numberOfArmiesToMove);
 	void MoveOverLand(Region* from, Region* to);
 	void MoveOverWater(Region* from, Region* to);
+	vector<Region*> canBuildCity();
+	bool buildCity(Region*);
 	void BuildCity(int numberOfCities);
 	bool DestroyArmy(int numberToDestroy);
 	void andOr(Card* currentCard);
+	vector<Army*> canDestroyArmy();
+	void destroyArmy(Army*);
+	void placeNewArmy(Region*);
 	//void setCardUsed(Card* aCard);
 	void setBidingFacility(Bid* aBidingFacility);
 	void setListOfTerritories(vector<Region*> list);
 	void setFirstName(string f);
 	void setLastName(string l);
 	vector<Card*> get_my_list_of_used_cards() const;
+	void placeNewArmy();
 
 	// setters (for debug)
 	void setListOfCardsUsed(vector<Card*>);
@@ -92,8 +101,7 @@ public:
 	string getFirstName();
 	string getLastName();
 	static vector<Player*>listOfPlayers;
-	void useCard(Card* card, int cardPosition, int playerNumber);
-
+	
 	//MVC methods
 	int getNoOfVictoryPoints();
 	int getNoOfArmies();
@@ -101,7 +109,7 @@ public:
 
 	// Strategy methods
 	void setStrategy(Strategy* newStrategy);
-	void executeStrategy(Hand* aGameHand, Bid* biddingFacility);
+	void executeStrategy(Hand* aGameHand, Bid* biddingFacility, Player* thisPlayer);
 private:
 	Strategy* strategy;
 	vector<Region*> listOfTerritories;
@@ -110,6 +118,7 @@ private:
 	vector<Card*>myListOfCardsUsed;
 	Bid* myBidingFacility;
 	string firstName, lastName;
+
 	
 };
 
