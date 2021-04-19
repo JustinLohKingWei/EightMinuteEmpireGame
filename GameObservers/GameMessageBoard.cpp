@@ -26,7 +26,7 @@ void GameMessageBoard::Update()
 
 void GameMessageBoard::Display(){
     //TODO DISPLAY STATS HERE
-
+    cout << "OBSERVER DISPLAY" << endl;
     //int stat1 = _subject.getStat1();
     string name = _subject->getFirstName();
     int coins = _subject->getBidingFacility()->getCopperCoins();

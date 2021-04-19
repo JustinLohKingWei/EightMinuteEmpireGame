@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game() : theGameHand(new Hand()), listOfPlayers(new vector<Player*> players) {
+Game::Game() : theGameHand(new Hand()) {
 	cout << "Default game created" << endl;
 	currentPlayer = 0;
 	numOfPlayers = 0;
