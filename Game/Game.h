@@ -5,6 +5,7 @@ using namespace std;
 #include "../Player/Player.h"
 #include "../Card/Card.h"
 
+class Player;
 
 class Game {
 public:
@@ -14,12 +15,15 @@ public:
 	Player* getCurrentPlayer();
 	int getNumOfPlayers();
 	Hand* getGameHand();
+	Deck* getDeck();
 	void setGameHand(Hand* aHand);
 	bool getGameOver();
 	void setGameOver(bool value);
 	int getTurnNumber();
 	void initializeDeck();
-	void initalizeHand();
+	void initializeHand();
+	void biddingPhase();
+	void initializePlayers();
 
 
 

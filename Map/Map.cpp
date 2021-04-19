@@ -30,7 +30,7 @@ int Region::get_number_of_armies(Player *player)
 			return p.second;
 		}
 	}
-	if (occupying_armies_.empty()) {
+	if (occupying_armies_.size() == 0) {
 		return 0;
 	}
 	else {
