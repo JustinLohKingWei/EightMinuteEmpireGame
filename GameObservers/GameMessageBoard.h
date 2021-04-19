@@ -18,4 +18,8 @@ public:
 
 private:
     Player *_subject;
+    int lastCoins;
+    int lastArmies;
+    int lastRegions;
+    int lastCities;
 };
