@@ -3,8 +3,6 @@
 #include <iostream>
 using namespace std;
 
-list<GameObservers*>* Subject:: _gameObservers;
-
 Subject::Subject()
 {
     _gameObservers = new list<GameObservers *>;
@@ -36,5 +34,5 @@ void Subject::notifyEvent(string playerName, string msg) {
 void Subject::notifyCard(Card* card, int cardPosition, int playerNumber) {
     list<GameObservers*>::iterator i = _gameObservers->begin();
     for (; i != _gameObservers->end(); ++i)
-        (*i)->displayCard(Card * card, int cardPosition, int playerNumber);
+        (*i)->displayCard(card, cardPosition, playerNumber);
 };
