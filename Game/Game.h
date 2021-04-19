@@ -1,10 +1,9 @@
 #pragma once
 #include <iostream>
 #include <vector>
-using namespace std;
 #include "../Player/Player.h"
 #include "../Card/Card.h"
-
+using namespace std;
 class Player;
 
 class Game {
@@ -16,13 +15,13 @@ public:
 	int getNumOfPlayers();
 	Hand* getGameHand();
 	Deck* getDeck();
-	WorldMap* getMap();
+	//WorldMap* getMap();
 	void setGameHand(Hand* aHand);
 	bool getGameOver();
 	void setGameOver(bool value);
 	int getTurnNumber();
 	void initializeDeck();
-	void initalizeHand();
+	void initializeHand();
 	void initializeMap();
 	void biddingPhase();
 	void initializePlayers();
@@ -36,5 +35,5 @@ private:
 	Hand* theGameHand;
 	Deck* gameDeck;
 	bool gameOver;
-	static WorldMap* map;
+	WorldMap* map;
 };

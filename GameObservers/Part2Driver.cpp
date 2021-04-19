@@ -14,7 +14,7 @@ int main() {
 
 	Game* gameInstance = new Game();
 	gameInstance->initializeDeck();
-	gameInstance->initalizeHand();
+	gameInstance->initializeHand();
 	gameInstance->getGameHand()->viewHand();
 	for (int i = 0; i < 6; i++) {
 		cout << "===================\n===================\nTurn #" << gameInstance->getTurnNumber() << endl;

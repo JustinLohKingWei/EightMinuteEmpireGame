@@ -1,4 +1,5 @@
 #include "Game.h"
+static WorldMap* map;
 
 Game::Game() : theGameHand(new Hand()) {
 	cout << "Default game created" << endl;
@@ -21,7 +22,6 @@ Player* Game::getCurrentPlayer() {
 }
 
 
-
 void Game::nextPlayer() {
 	currentPlayer = (++turnNumber + (numOfPlayers-1)) % numOfPlayers;
 
@@ -42,9 +42,9 @@ Deck* Game::getDeck() {
 	return gameDeck;
 }
 
-WorldMap* Game::getMap() {
-	return map;
-}
+//WorldMap* Game::getMap() {
+//	return map;
+//}
 
 void Game::setGameHand(Hand* aHand) {
 	theGameHand = aHand;
@@ -248,7 +248,7 @@ void Game::initializeMap() {
 
 	// This is how I would normally like to construct the game map once all tiles are loaded from files and then selected and positioned
 	// they could easily be combined into a "World Map" for game play with little effort and adding the last few connections between the Islands
-	map = new WorldMap(RECTANGLE, *tile1, *tile2, *tile3, *tile4);
+	map = new WorldMap(RECTANGLE, tile1, tile2, tile3, tile4);
 }
 
 void Game::biddingPhase() {
@@ -283,8 +283,6 @@ void Game::biddingPhase() {
     }
 
 	cout << "Winning player: " << listOfPlayers.at(currentPlayer)->getFirstName() << endl;
-
-
 
 }
 
