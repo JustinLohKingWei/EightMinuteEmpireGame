@@ -57,6 +57,7 @@ public:
 	Player(string f, string l, vector<Card*>listOfCardsUsed, vector<Region*> listOfRegions, vector<Army*> listOfArmies, vector<City*> listOfCities, Strategy* initStrategy) :
 		firstName(f), lastName(l), myBidingFacility(new Bid(f, l)), myListOfCardsUsed(listOfCardsUsed), listOfTerritories(listOfRegions), listOfArmy(listOfArmies), listOfCities(listOfCities), strategy(initStrategy) {
 		listOfPlayers.push_back(this);
+		
 	};
 	Player(const Player& b);
 	Player& operator =(const Player& e);
@@ -92,7 +93,8 @@ public:
 	string getFirstName();
 	string getLastName();
 	static vector<Player*>listOfPlayers;
-	void useCard(Card* card, int cardPosition, int playerNumber);
+
+
 
 	//MVC methods
 	int getNoOfVictoryPoints();
@@ -101,6 +103,7 @@ public:
 
 	// Strategy methods
 	void setStrategy(Strategy* newStrategy);
+	Strategy* getStrategy() { return strategy; }
 	void executeStrategy(Hand* aGameHand, Bid* biddingFacility);
 private:
 	Strategy* strategy;
