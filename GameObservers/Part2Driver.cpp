@@ -13,6 +13,7 @@ int main() {
 	cout << "Testing Part 2 Observer" << endl;
 
 	Game* gameInstance = new Game();
+	gameInstance->initializePlayers();
 	gameInstance->initializeDeck();
 	gameInstance->initializeHand();
 	gameInstance->getGameHand()->viewHand();
