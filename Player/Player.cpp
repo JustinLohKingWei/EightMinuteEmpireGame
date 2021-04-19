@@ -858,9 +858,6 @@ Region* playerGoods::getRegion() {
 	return aRegion;
 }
 
-// MVC
-
-
 //MVC Methods Part 3
 int Player::getNoOfVictoryPoints() {
 	return 0;

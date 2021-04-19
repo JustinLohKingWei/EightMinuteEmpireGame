@@ -8,7 +8,7 @@ public:
     virtual ~GameObservers();
     virtual void Update()=0;
     virtual void updateEvent(string playerName, string msg) = 0;
-    virtual void displayCard(Card* card, int cardPosition, int playerNumber)=0;
+    virtual void displayCard(Card* card, int cardPosition, int playerNumber, int cost)=0;
 
 protected:
     GameObservers();

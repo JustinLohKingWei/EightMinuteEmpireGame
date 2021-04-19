@@ -141,6 +141,7 @@ void GreedyComputerStrategy::playTurn(Hand* gameHand, Bid* biddingFacility, Play
 					return;
 				}
 				else {
+
 					currentPlayer->placeNewArmy();
 					currentPlayer->PayCoin(gameHand->getCost(indexToPlay), 'c');
 					gameHand->exchange(indexToPlay);
@@ -151,6 +152,9 @@ void GreedyComputerStrategy::playTurn(Hand* gameHand, Bid* biddingFacility, Play
 	}
 	// play a move card
 	int numOfMove = moveArmyCards.size();
+	if (numOfMove <= 0) {
+		return;
+	}
 	int indexToPlay = moveArmyCards.at(rand() % numOfMove);
 	Card* chosenCard = gameHand->getCard(indexToPlay);
 	string action = chosenCard->getAction();
