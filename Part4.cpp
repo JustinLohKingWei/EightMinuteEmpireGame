@@ -177,7 +177,7 @@ int main() {
 
 	// This is how I would normally like to construct the game map once all tiles are loaded from files and then selected and positioned
 	// they could easily be combined into a "World Map" for game play with little effort and adding the last few connections between the Islands
-	auto* world_map = new WorldMap(RECTANGLE, *tile1, *tile2, *tile3, *tile4);
+	auto* world_map = new WorldMap(RECTANGLE, tile1, tile2, tile3, tile4);
 
 
 
@@ -266,11 +266,11 @@ int main() {
 	//aPlayer->PlaceNewArmies(3);
 	//aPlayer->BuildCity(3);
 	
-	//aPlayer->DestroyArmy(5);
+	aPlayer->DestroyArmy(5);
 	//aPlayer->PlaceNewArmies(3);
 	//aPlayer->MoveArmies(3);
 	Card* test = new Card("Night Hydra", "+1 Army", "Move Armies: 5 AND Destroy Army: 2", 2);
-	aPlayer->andOr(test);
+	//aPlayer->andOr(test);
 	
 	delete world_map;
 	delete tile4;

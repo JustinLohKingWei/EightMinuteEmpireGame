@@ -33,11 +33,11 @@ public:
 class HumanStrategy : public Strategy {
 public:
 	HumanStrategy() { type = "Human"; }
-	void playTurn(Hand* GameHand, Bid* biddingFacility);
+	void playTurn(Hand* GameHand, Bid* biddingFacility, Player* aPlayer);
 };
 
 class ModerateComputerStrategy : public Strategy {
 public:
 	ModerateComputerStrategy() { type = "Moderate"; }
-	void playTurn(Hand *aGameHand, Bid* biddingFacility);
+	void playTurn(Hand *aGameHand, Bid* biddingFacility, Player* aPlayer);
 };
