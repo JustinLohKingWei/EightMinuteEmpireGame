@@ -1,4 +1,4 @@
-#include "Player.h";
+ #include "Player.h";
 
 //Default constructor
 Player::Player() {
@@ -39,7 +39,6 @@ istream& operator >> (istream& in, Player& aPlayer) {
 	in >> aPlayer.lastName;
 	return in;
 }
-
 
 Army::Army(const Army& b) {
 	this->aRegion = b.aRegion;
@@ -92,21 +91,27 @@ bool Player::PayCoin(int payableAmount, char type) {
 
 		cout << this->getFirstName() << " has to pay " << payableAmount << " " << coinType << " coins" << endl;
 		cout << this->getFirstName() << " has " << this->getBidingFacility()->getSilverCoins() << " silver coins, and has " << this->getBidingFacility()->getCopperCoins() << " copper coins." << endl;
-
+		std::ostringstream oss;
 		if (isEnough) {														// allows payment if there are enough coins
 			this->getBidingFacility()->payCoins(payableAmount, type);
 			success = true;
+			oss << " was able to pay! ";
 		}
 		else {																// denies payment if inadequate
-			cout << "Not enough coins to make this purchase!" << endl;
+			oss << " was not able to pay! ";
 			success = false;
 		}
-		cout << "After payment , " << this->getFirstName() << " has " << this->getBidingFacility()->getSilverCoins() << " silver coins, and has " << this->getBidingFacility()->getCopperCoins() << " copper coins." << endl;
+		// Notify GameMessageBoard of Event:
+		oss << "They have " << this->getBidingFacility()->getSilverCoins() << " silver coins, and has " << this->getBidingFacility()->getCopperCoins() << " copper coins." << endl;
+		string message = oss.str();
+		this->notifyEvent(this->getFirstName(), message);
 	}
 	else {
 		cout << "Invalid input" << endl; 
 		success = false;
 	}
+	cout << "TOUCHED OBSERVER" << endl;
+	Notify();
 	return success;
 }
 
@@ -119,6 +124,11 @@ void Player::PlaceNewArmies(int numberOfArmies) {//Handling placing in multiple 
 			if (numPlaced < 4) {
 				x->setRegion(listOfTerritories.at(0));
 				numPlaced++;
+				// Notify GameMessageBoard of Event:
+				std::ostringstream oss;
+				oss << "has placed an army at region " << listOfTerritories.at(0)->get_name() << endl;
+				string message = oss.str();
+				this->notifyEvent(this->getFirstName(), message);
 			}
 		}
 	}
@@ -151,15 +161,19 @@ void Player::PlaceNewArmies(int numberOfArmies) {//Handling placing in multiple 
 			for (Army* x : listOfArmy) {
 				if (x->getRegion() == nullptr && armyCounter < numChoice) {
 					x->setRegion(listOfTerritories.at(indexChoice));
-					cout << "Placed new army at " << listOfTerritories.at(indexChoice)->get_name() << endl;
+					// Notify GameMessageBoard of Event:
+					std::ostringstream oss;
+					oss << "has placed an army at region " << listOfTerritories.at(indexChoice)->get_name() << endl;
+					string message = oss.str();
+					this->notifyEvent(this->getFirstName(), message);
 					armyCounter++;
 				}
-				
 			}
 			numPlaced -= numChoice;
 		}
 	}
-
+	cout << "TOUCHED OBSERVER" << endl;
+	Notify();
 }
 
 void Player::MoveArmies(int numberOfArmiesToMove) {
@@ -260,11 +274,18 @@ void Player::MoveArmies(int numberOfArmiesToMove) {
 				moveCounter++;
 			}
 			numCurrent -= moveChoice;
+			// Notify GameMessageBoard of Event:
+			std::ostringstream oss;
+			oss << "has moved" << moveChoice << " army piece(s) from region " << from->get_name() << " to " << to->get_name() << endl;
+			string message = oss.str();
+			this->notifyEvent(this->getFirstName(), message);
 		}
 		else {
 			cout << "To is NULL" << endl;
 		}
 	}
+	cout << "TOUCHED OBSERVER" << endl;
+	Notify();
 }
 
 void Player::MoveOverLand(Region* from, Region* to) {
@@ -346,10 +367,16 @@ void Player::BuildCity(int numberOfCities) {
 			
 
 		}
+		std::ostringstream oss;
+		// Notify GameMessageBoard of Event:
+		oss << "has placed" << cityCounter << " city piece(s) at region " << where->get_name() << endl;
+		string message = oss.str();
+		this->notifyEvent(this->getFirstName(), message);
 		numPlaced -= cityCounter;
 		cityCounter = 0;
 	}
-
+	cout << "TOUCHED OBSERVER" << endl;
+	Notify();
 }
 //Maybe static player array?
 
@@ -367,7 +394,7 @@ bool Player::DestroyArmy(int numberToDestroy) {
 		if (current != myArmy->getRegion() && myArmy->getRegion() != nullptr) {
 			cout << myArmy->getRegion()->get_name() << endl;
 			cout << "=======================" << endl;
-			cout << "Checking for ennemy armies at current Region...\n" << endl;
+			cout << "Checking for enemy armies at current Region...\n" << endl;
 
 			int playerIndex = 0;
 			for (Player* aPlayer : listOfPlayers) {
@@ -403,6 +430,11 @@ bool Player::DestroyArmy(int numberToDestroy) {
 				if (army->getRegion() == myArmy->getRegion() && remainingToDestroy > armyNumToDestroy) {
 					army = nullptr;
 					delete army;
+					// Notify GameMessageBoard of Event:
+					std::ostringstream oss;
+					oss << "has destroyed an army at region " << myArmy->getRegion()->get_name() << endl;
+					string message = oss.str();
+					this->notifyEvent(this->getFirstName(), message);
 				}
 
 			}
@@ -410,12 +442,8 @@ bool Player::DestroyArmy(int numberToDestroy) {
 			current = myArmy->getRegion();
 		}
 	}
-
-
-
 	return true;
 }
-
 void Player::andOr(Card* current) {
 	string delim1 = "AND";
 	string delim2 = "OR";
@@ -469,8 +497,6 @@ void Player::andOr(Card* current) {
 		else if (action2 == actions[3]) {
 			DestroyArmy(amountOfSecondAction);
 		}
-		
-		
 
 	}
 	else if (current->getAction().find(delim2) && current->getAction().find(delim2) != string::npos) {
@@ -549,8 +575,8 @@ void Player::andOr(Card* current) {
 		}
 	}
 
-
-
+	cout << "TOUCHED OBSERVER" << endl;
+	Notify();
 }
 
 //Setters and getters
@@ -576,6 +602,27 @@ vector<Card*> Player::get_my_list_of_used_cards() const
 {
 	return this->myListOfCardsUsed;
 }
+
+void Player::setListOfCardsUsed(vector<Card*> used_cards)
+{
+	this->myListOfCardsUsed = used_cards;
+}
+
+void Player::setListOfRegions(vector<Region*> region_list)
+{
+	this->listOfTerritories = region_list;
+}
+
+void Player::setListOfArmies(vector<Army*> army_list)
+{
+	this->listOfArmy = army_list;
+}
+
+void Player::setListOfCities(vector<City*> city_list)
+{
+	this->listOfCities = city_list;
+}
+
 void playerGoods::setRegion(Region* aRegion) {
 
 	this->aRegion = aRegion;
@@ -614,7 +661,6 @@ string Player::getLastName() {
 }
 
 
-
 void Player::setStrategy(Strategy* newStrategy)
 {
 	this->strategy = newStrategy;
@@ -629,8 +675,22 @@ Region* playerGoods::getRegion() {
 	return aRegion;
 }
 
+// MVC
+void Player::useCard(Card* card, int cardPosition, int playerNumber) {
+	// This method will notify the GameBoard about a card played.
+	// _gameObservers->notifyCardPlayed(card, cardPosition, playerNumber);
+}
 
-
+//MVC Methods Part 3
+int Player::getNoOfVictoryPoints() {
+	return 0;
+}
+int Player::getNoOfArmies() {
+	return listOfArmy.size();
+}
+int Player::getNoOfRegions() {
+	return listOfTerritories.size();
+}
 
 vector<Player*> Player::listOfPlayers;
 
