@@ -654,12 +654,6 @@ Region* playerGoods::getRegion() {
 	return aRegion;
 }
 
-// MVC
-void Player::useCard(Card* card, int cardPosition, int playerNumber) {
-	// This method will notify the GameBoard about a card played.
-	// _gameObservers->notifyCardPlayed(card, cardPosition, playerNumber);
-}
-
 //MVC Methods Part 3
 int Player::getNoOfVictoryPoints() {
 	return 0;

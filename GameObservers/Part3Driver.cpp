@@ -186,13 +186,13 @@ int main(){
 
 
 	vector<Card*>cardsUsed;
-	vector<Card*>ennemyCards;
+	vector<Card*>enemyCards;
 	vector<Region*>regionsOwned;
-	vector<Region*>ennemyRegions;
+	vector<Region*>enemyRegions;
 	vector<Army*>armiesList;
-	vector<Army*>ennemyArmyList;
+	vector<Army*>enemyArmyList;
 	vector<City*>citiesList;
-	vector<City*>ennemyCityList;
+	vector<City*>enemyCityList;
 
 	vector<Region*>playersRegions;
 	for (int i = 0; i < 10; i++) {
@@ -202,7 +202,7 @@ int main(){
 
 	for (int i = 0; i < 10; i++) {
 		City* newCity = new City();
-		ennemyCityList.push_back(newCity);
+		enemyCityList.push_back(newCity);
 	}
 
 	Army* armyPiece1 = new Army();
@@ -238,35 +238,33 @@ int main(){
 	Army* a = new Army();
 	a->setRegion(tile4->m_map_.at("Volcano Island Region 7"));
 	a->setOwner("Ligma", "Balls");
-	ennemyArmyList.push_back(a);
-	ennemyRegions.push_back(a->getRegion());
+	enemyArmyList.push_back(a);
+	enemyRegions.push_back(a->getRegion());
 
 	Army* b = new Army();
 	b->setRegion(tile4->m_map_.at("Volcano Island Region 7"));
 	b->setOwner("Ligma", "Balls");
-	ennemyArmyList.push_back(b);
-	ennemyRegions.push_back(b->getRegion());
+	enemyArmyList.push_back(b);
+	enemyRegions.push_back(b->getRegion());
 
 	Army* c = new Army();
 	c->setRegion(tile4->m_map_.at("Volcano Island Region 5"));
 	c->setOwner("Ligma", "Balls");
-	ennemyArmyList.push_back(c);
-	ennemyRegions.push_back(c->getRegion());
+	enemyArmyList.push_back(c);
+	enemyRegions.push_back(c->getRegion());
 
 	for (int i = 0; i < 6; i++) {
 		Army* x = new Army();
-		ennemyArmyList.push_back(x);
+		enemyArmyList.push_back(x);
 	}
 	Strategy* human = new ModerateComputerStrategy();
 	Strategy* greedy = new GreedyComputerStrategy();
 	Player* aPlayer = new Player("Alpha", "Beta", cardsUsed, regionsOwned, armiesList, citiesList, human);
 
-	Player* bPlayer = new Player("Ligma", "Balls", ennemyCards, ennemyRegions, ennemyArmyList, ennemyCityList, greedy);
+	Player* bPlayer = new Player("First", "Last", enemyCards, enemyRegions, enemyArmyList, enemyCityList, greedy);
 
 	GameMessageBoard* g1 = new GameMessageBoard(aPlayer);
 	GameMessageBoard* g2 = new GameMessageBoard(bPlayer);
-
-
 
 
 	//Player* cPlayer = new Player("Legron", "Balls", ennemyCards, ennemyRegions, ennemyArmyList, ennemyCityList);

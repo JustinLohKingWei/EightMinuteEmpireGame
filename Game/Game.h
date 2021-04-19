@@ -14,12 +14,15 @@ public:
 	Player* getCurrentPlayer();
 	int getNumOfPlayers();
 	Hand* getGameHand();
+	Deck* getDeck();
+	WorldMap* getMap();
 	void setGameHand(Hand* aHand);
 	bool getGameOver();
 	void setGameOver(bool value);
 	int getTurnNumber();
 	void initializeDeck();
 	void initalizeHand();
+	void initializeMap();
 
 
 
@@ -31,4 +34,5 @@ private:
 	Hand* theGameHand;
 	Deck* gameDeck;
 	bool gameOver;
+	static WorldMap* map;
 };
